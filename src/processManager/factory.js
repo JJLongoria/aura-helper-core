@@ -92,7 +92,7 @@ function sourceRetrievePackage(usernameOrAlias, packageFile, apiVersion, project
     command.addCommandArg('-x', packageFile);
     if (apiVersion)
         command.addCommandArg('--apiversion', apiVersion);
-    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '-1');
+    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '33');
     return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
 }
 
@@ -249,7 +249,7 @@ function query(usernameOrAlias, query, useToolingApi) {
 }
 
 function convertToSFDX(packageFolder, packageFile, targetFolder, apiVersion) {
-    let command = new Command('sfdx', 'force:mdapi:convert', true);
+    let command = new Command('sfdx', 'force:mdapi:convert', false);
     command.addCommandArg('force:mdapi:convert');
     command.addCommandArg('-r', packageFolder);
     command.addCommandArg('--manifest', packageFile);
@@ -259,14 +259,14 @@ function convertToSFDX(packageFolder, packageFile, targetFolder, apiVersion) {
     return command.toProcess().setMaxBuffer(BUFFER_SIZE);
 }
 
-function convertToMetadataAPI(packageFile, targetFolder, apiVersion) {
-    let command = new Command('sfdx', 'force:source:convert', true);
+function convertToMetadataAPI(packageFile, targetFolder, projectFolder) {
+    let command = new Command('sfdx', 'force:source:convert', false);
     command.addCommandArg('force:source:convert');
     command.addCommandArg('--manifest', packageFile);
     command.addCommandArg('-d', targetFolder);
-    if (apiVersion)
-        command.addCommandArg('--apiversion', apiVersion);
-    return command.toProcess().setMaxBuffer(BUFFER_SIZE);
+    command.addCommandArg('-r', projectFolder);
+    command.addCommandArg('--loglevel', 'trace');
+    return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
 }
 
 function createSFDXProject(projectName, projectFolder, template, namespace, withManifest) {

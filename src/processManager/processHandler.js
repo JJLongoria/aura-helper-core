@@ -13,6 +13,13 @@ function runProcess(process) {
                     stdOut += data;
                     break;
                 case ProcessEvent.ERR_OUT:
+                    if (data.toString().indexOf('[EACCES]') !== -1 || data.toString().indexOf('spawn cmd ENOENT') !== -1) {
+                        excludeError = true;
+                    } else if (!excludeError) {
+                        stdErr += data;
+                    }
+                    break;
+                case ProcessEvent.ERROR:
                     if (data.toString().indexOf('[EACCES]') !== -1) {
                         excludeError = true;
                     } else if (!excludeError) {
