@@ -1,0 +1,1 @@
+exports.XMLParser = require('./xmlParser');
