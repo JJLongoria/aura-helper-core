@@ -43,6 +43,8 @@ function listAuthOurgs() {
 }
 
 function listMetadataTypes(usernameOrAlias, apiVersion) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
     let command = new Command('sfdx', 'force:mdapi:describemetadata', true);
     command.addCommandArg('force:mdapi:describemetadata');
     command.addCommandArg('-u', usernameOrAlias);
@@ -52,6 +54,10 @@ function listMetadataTypes(usernameOrAlias, apiVersion) {
 }
 
 function describeMetadataType(usernameOrAlias, metadataType, folderName, apiVersion) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (metadataType === undefined)
+        throw new Error('metadataType is Required.');
     let command = new Command('sfdx', 'force:mdapi:listmetadata-' + metadataType, true);
     command.addCommandArg('force:mdapi:listmetadata');
     command.addCommandArg('-u', usernameOrAlias);
@@ -64,6 +70,8 @@ function describeMetadataType(usernameOrAlias, metadataType, folderName, apiVers
 }
 
 function listSObjects(usernameOrAlias, objectCategory, apiVersion) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
     if (!objectCategory)
         objectCategory = 'All';
     let command = new Command('sfdx', 'force:schema:sobject:list', true);
@@ -76,6 +84,10 @@ function listSObjects(usernameOrAlias, objectCategory, apiVersion) {
 }
 
 function getSObjectSchema(usernameOrAlias, sObject, apiVersion) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (sObject === undefined)
+        throw new Error('sObject is Required.');
     let command = new Command('sfdx', 'force:schema:sobject:describe-' + sObject, false);
     command.addCommandArg('force:schema:sobject:describe');
     command.addCommandArg('-u', usernameOrAlias);
@@ -85,7 +97,13 @@ function getSObjectSchema(usernameOrAlias, sObject, apiVersion) {
     return command.toProcess().setMaxBuffer(BUFFER_SIZE);
 }
 
-function sourceRetrievePackage(usernameOrAlias, packageFile, apiVersion, projectFolder, waitMinutes) {
+function sourceRetrievePackage(usernameOrAlias, packageFile, projectFolder, apiVersion, waitMinutes) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (packageFile === undefined)
+        throw new Error('packageFile is Required.');
+    if (projectFolder === undefined)
+        throw new Error('projectFolder is Required.');
     let command = new Command('sfdx', 'force:source:retrieve-package', true);
     command.addCommandArg('force:source:retrieve');
     command.addCommandArg('-u', usernameOrAlias);
@@ -97,6 +115,12 @@ function sourceRetrievePackage(usernameOrAlias, packageFile, apiVersion, project
 }
 
 function sourceValidatePackage(usernameOrAlias, packageFile, testLevel, runTests, apiVersion, projectFolder, waitMinutes) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (packageFile === undefined)
+        throw new Error('packageFile is Required.');
+    if (projectFolder === undefined)
+        throw new Error('projectFolder is Required.');
     let command = new Command('sfdx', 'force:source:deploy-validatePackage', true);
     command.addCommandArg('force:source:deploy');
     command.addCommandArg('-u', usernameOrAlias);
@@ -113,6 +137,12 @@ function sourceValidatePackage(usernameOrAlias, packageFile, testLevel, runTests
 }
 
 function sourceDeployPackage(usernameOrAlias, packageFile, testLevel, runTests, apiVersion, projectFolder, waitMinutes) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (packageFile === undefined)
+        throw new Error('packageFile is Required.');
+    if (projectFolder === undefined)
+        throw new Error('projectFolder is Required.');
     let command = new Command('sfdx', 'force:source:deploy-package', true);
     command.addCommandArg('force:source:deploy');
     command.addCommandArg('-u', usernameOrAlias);
@@ -128,17 +158,26 @@ function sourceDeployPackage(usernameOrAlias, packageFile, testLevel, runTests, 
 }
 
 function sourceQuickDeploy(usernameOrAlias, deployId, apiVersion, projectFolder) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (deployId === undefined)
+        throw new Error('deployId is Required.');
+    if (projectFolder === undefined)
+        throw new Error('projectFolder is Required.');
     let command = new Command('sfdx', 'force:source:deploy-quick', true);
     command.addCommandArg('force:source:deploy');
     command.addCommandArg('-u', usernameOrAlias);
     if (apiVersion)
         command.addCommandArg('--apiversion', apiVersion);
-    if (deployId)
-        command.addCommandArg('--validateddeployrequestid', deployId);
+    command.addCommandArg('--validateddeployrequestid', deployId);
     return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
 }
 
 function sourceDeployReport(usernameOrAlias, deployId, waitMinutes) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (deployId === undefined)
+        throw new Error('deployId is Required.');
     let command = new Command('sfdx', 'force:source:deploy:report', true);
     command.addCommandArg('force:source:deploy:report');
     command.addCommandArg('-u', usernameOrAlias);
@@ -148,6 +187,10 @@ function sourceDeployReport(usernameOrAlias, deployId, waitMinutes) {
 }
 
 function sourceCancelDeploy(usernameOrAlias, deployId, waitMinutes) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (deployId === undefined)
+        throw new Error('deployId is Required.');
     let command = new Command('sfdx', 'force:source:deploy:cancel', true);
     command.addCommandArg('force:source:deploy:cancel');
     command.addCommandArg('-u', usernameOrAlias);
@@ -157,6 +200,12 @@ function sourceCancelDeploy(usernameOrAlias, deployId, waitMinutes) {
 }
 
 function mdapiRetrievePackage(usernameOrAlias, packageFolder, apiVersion, targetDir, projectFolder, waitMinutes) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (packageFolder === undefined)
+        throw new Error('packageFolder is Required.');
+    if (projectFolder === undefined)
+        throw new Error('projectFolder is Required.');
     let command = new Command('sfdx', 'force:mdapi:retrieve-package', true);
     command.addCommandArg('force:mdapi:retrieve');
     command.addCommandArg('-u', usernameOrAlias);
@@ -164,11 +213,17 @@ function mdapiRetrievePackage(usernameOrAlias, packageFolder, apiVersion, target
     command.addCommandArg('-r', targetDir);
     if (apiVersion)
         command.addCommandArg('--apiversion', apiVersion);
-    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '-1');
+    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '33');
     return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
 }
 
 function mdapiValidatePackage(usernameOrAlias, packageFolder, testLevel, runTests, apiVersion, projectFolder, waitMinutes) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (packageFolder === undefined)
+        throw new Error('packageFolder is Required.');
+    if (projectFolder === undefined)
+        throw new Error('projectFolder is Required.');
     let command = new Command('sfdx', 'force:mdapi:deploy-validatePackage', true);
     command.addCommandArg('force:mdapi:deploy');
     command.addCommandArg('-u', usernameOrAlias);
@@ -180,11 +235,17 @@ function mdapiValidatePackage(usernameOrAlias, packageFolder, testLevel, runTest
         command.addCommandArg('--testlevel', testLevel);
     if (runTests)
         command.addCommandArg('--runtests', runTests);
-    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '-1');
+    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '33');
     return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
 }
 
 function mdapiDeployPackage(usernameOrAlias, packageFolder, testLevel, runTests, apiVersion, projectFolder, waitMinutes) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (packageFolder === undefined)
+        throw new Error('packageFolder is Required.');
+    if (projectFolder === undefined)
+        throw new Error('projectFolder is Required.');
     let command = new Command('sfdx', 'force:mdapi:deploy-package', true);
     command.addCommandArg('force:mdapi:deploy');
     command.addCommandArg('-u', usernameOrAlias);
@@ -195,11 +256,15 @@ function mdapiDeployPackage(usernameOrAlias, packageFolder, testLevel, runTests,
         command.addCommandArg('--testlevel', testLevel);
     if (runTests)
         command.addCommandArg('--runtests', runTests);
-    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '-1');
+    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '33');
     return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
 }
 
 function mdapiQuickDeploy(usernameOrAlias, deployId, apiVersion, projectFolder) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (deployId === undefined)
+        throw new Error('deployId is Required.');
     let command = new Command('sfdx', 'force:mdapi:deploy-quick', true);
     command.addCommandArg('force:mdapi:deploy');
     command.addCommandArg('-u', usernameOrAlias);
@@ -212,6 +277,12 @@ function mdapiQuickDeploy(usernameOrAlias, deployId, apiVersion, projectFolder) 
 }
 
 function mdapiRetrieveReport(usernameOrAlias, retrieveId, targetDir) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (retrieveId === undefined)
+        throw new Error('retrieveId is Required.');
+    if (targetDir === undefined)
+        throw new Error('targetDir is Required.');
     let command = new Command('sfdx', 'force:mdapi:retrieve:report', true);
     command.addCommandArg('force:mdapi:retrieve:report');
     command.addCommandArg('-u', usernameOrAlias);
@@ -221,24 +292,36 @@ function mdapiRetrieveReport(usernameOrAlias, retrieveId, targetDir) {
 }
 
 function mdapiDeployReport(usernameOrAlias, deployId, waitMinutes) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (deployId === undefined)
+        throw new Error('deployId is Required.');
     let command = new Command('sfdx', 'force:mdapi:deploy:report', true);
     command.addCommandArg('force:mdapi:deploy:report');
     command.addCommandArg('-u', usernameOrAlias);
     command.addCommandArg('-i', deployId);
-    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '-1');
+    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '33');
     return command.toProcess().setMaxBuffer(BUFFER_SIZE);
 }
 
 function mdapiCancelDeploy(usernameOrAlias, deployId, waitMinutes) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (deployId === undefined)
+        throw new Error('deployId is Required.');
     let command = new Command('sfdx', 'mdapi:deploy:cancel', true);
     command.addCommandArg('mdapi:deploy:cancel');
     command.addCommandArg('-u', usernameOrAlias);
     command.addCommandArg('-i', deployId);
-    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '-1');
+    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '33');
     return command.toProcess().setMaxBuffer(BUFFER_SIZE);
 }
 
 function query(usernameOrAlias, query, useToolingApi) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (query === undefined)
+        throw new Error('query is Required.');
     let command = new Command('sfdx', 'force:data:soql:query-' + query, true);
     command.addCommandArg('force:data:soql:query');
     command.addCommandArg('-u', usernameOrAlias);
@@ -249,6 +332,12 @@ function query(usernameOrAlias, query, useToolingApi) {
 }
 
 function convertToSFDX(packageFolder, packageFile, targetFolder, apiVersion) {
+    if (packageFolder === undefined)
+        throw new Error('packageFolder is Required.');
+    if (packageFile === undefined)
+        throw new Error('packageFile is Required.');
+    if (targetFolder === undefined)
+        throw new Error('targetFolder is Required.');
     let command = new Command('sfdx', 'force:mdapi:convert', false);
     command.addCommandArg('force:mdapi:convert');
     command.addCommandArg('-r', packageFolder);
@@ -260,6 +349,12 @@ function convertToSFDX(packageFolder, packageFile, targetFolder, apiVersion) {
 }
 
 function convertToMetadataAPI(packageFile, targetFolder, projectFolder) {
+    if (packageFile === undefined)
+        throw new Error('packageFile is Required.');
+    if (targetFolder === undefined)
+        throw new Error('targetFolder is Required.');
+    if (projectFolder === undefined)
+        throw new Error('projectFolder is Required.');
     let command = new Command('sfdx', 'force:source:convert', false);
     command.addCommandArg('force:source:convert');
     command.addCommandArg('--manifest', packageFile);
@@ -270,6 +365,10 @@ function convertToMetadataAPI(packageFile, targetFolder, projectFolder) {
 }
 
 function createSFDXProject(projectName, projectFolder, template, namespace, withManifest) {
+    if (projectName === undefined)
+        throw new Error('projectName is Required.');
+    if (projectFolder === undefined)
+        throw new Error('projectFolder is Required.');
     withManifest = (withManifest === undefined) ? true : withManifest;
     let command = new Command('sfdx', 'force:project:create-' + projectName, true);
     command.addCommandArg('force:project:create');
@@ -284,6 +383,10 @@ function createSFDXProject(projectName, projectFolder, template, namespace, with
 }
 
 function setAuthOrg(usernameOrAlias, projectFolder) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (projectFolder === undefined)
+        throw new Error('projectFolder is Required.');
     let command = new Command('sfdx', 'force:config:set-defaultusername', true);
     command.addCommandArg('force:config:set');
     command.addCommandArg('defaultusername=' + usernameOrAlias);
@@ -291,19 +394,28 @@ function setAuthOrg(usernameOrAlias, projectFolder) {
 }
 
 function exportTreeData(usernameOrAlias, query, prefix, outputPath) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (query === undefined)
+        throw new Error('query is Required.');
+    if (outputPath === undefined)
+        throw new Error('outputPath is Required.');
     let command = new Command('sfdx', 'force:data:tree:export-' + query, false);
     command.addCommandArg('force:data:tree:export');
     command.addCommandArg('-u', usernameOrAlias);
     command.addCommandArg('-q', query);
     if (prefix)
         command.addCommandArg('-x', prefix);
-    if (outputPath)
-        command.addCommandArg('-d', outputPath);
+    command.addCommandArg('-d', outputPath);
     command.addCommandArg('-p');
     return command.toProcess().setMaxBuffer(BUFFER_SIZE);
 }
 
 function importTreeData(usernameOrAlias, file) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (file === undefined)
+        throw new Error('file is Required.');
     let command = new Command('sfdx', 'force:data:tree:import-' + file, true);
     command.addCommandArg('force:data:tree:import');
     command.addCommandArg('-u', usernameOrAlias);
@@ -312,6 +424,12 @@ function importTreeData(usernameOrAlias, file) {
 }
 
 function bulkDelete(usernameOrAlias, csvFile, sobject) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (csvFile === undefined)
+        throw new Error('csvFile is Required.');
+    if (sobject === undefined)
+        throw new Error('sobject is Required.');
     let command = new Command('sfdx', 'force:data:bulk:delete-' + sobject, true);
     command.addCommandArg('force:data:bulk:delete');
     command.addCommandArg('-u', usernameOrAlias);
@@ -321,6 +439,10 @@ function bulkDelete(usernameOrAlias, csvFile, sobject) {
 }
 
 function executeApexAnonymous(usernameOrAlias, scriptFile) {
+    if (usernameOrAlias === undefined)
+        throw new Error('usernameOrAlias is Required.');
+    if (scriptFile === undefined)
+        throw new Error('scriptFile is Required.');
     let command = new Command('sfdx', 'force:apex:execute-' + scriptFile, false);
     command.addCommandArg('force:apex:execute');
     command.addCommandArg('-u', usernameOrAlias);
