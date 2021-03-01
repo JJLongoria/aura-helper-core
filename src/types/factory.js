@@ -129,8 +129,8 @@ class Factory {
             else if (line.indexOf('}') !== -1) {
                 bracketIndent--;
                 if (isOnRts) {
-                    if (rt.name)
-                        sObject.addRecordType(rt);
+                    if (rt.developerName)
+                        sObject.addRecordType(rt.developerName, rt);
                     rt = new RecordType();
                 }
                 if (isOnPicklistVal) {
@@ -174,8 +174,8 @@ class Factory {
                     isOnRts = true;
                 if (isOnRts && line.indexOf(']') !== -1 && line.indexOf('[') === -1) {
                     isOnRts = false;
-                    if (rt.name)
-                        sObject.addRecordType(rt);
+                    if (rt.developerName)
+                        sObject.addRecordType(rt.developerName, rt);
                     rt = new RecordType();
                 }
             }

@@ -1,5 +1,6 @@
 const SObject = require('../../../src/types/sObject');
 const SObjectField = require('../../../src/types/sObjectField');
+const RecordType = require('../../../src/types/recordType');
 
 describe('Testing ./src/types/sObject.js', () => {
     test('Testing instance', () => {
@@ -13,8 +14,9 @@ describe('Testing ./src/types/sObject.js', () => {
         sObject.setNamespace('ns');
         sObject.setQueryable(true);
         sObject.addField('name', new SObjectField('Name', 'Name', 'string', false));
-        sObject.addRecordType('recordType');
+        sObject.addRecordType('recordType', new RecordType('devName', 'name', false, false));
         sObject.getField('name');
+        sObject.getRecordType('devName');
         expect(sObject.name).toEqual('name');
         const sObject2 = new SObject(sObject);
         expect(sObject2.name).toEqual('name');
