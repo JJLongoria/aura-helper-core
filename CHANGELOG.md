@@ -5,3 +5,4 @@
 - Added Types libraries with all data types to use in @ah libraries, Aura Helper CLI and Aura Helper Extension
 - Added Process Manager libraries to handle all running process in @ah libraries, Aura Helper CLI and Aura Helper Extension
 - Added Language libraries to manage all language used in Salesforce and handled with @ah libraries, Aura Helper CLI and Aura Helper Extension
+- Added FileSystem libraries to manage file operations on @ah libraries, Aura Helper CLI and Aura Helper Extension
