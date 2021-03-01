@@ -34,6 +34,12 @@ class FileChecker{
     static isExists(filePath){
         return fs.existsSync(filePath);
     }
+    static isDirectory(filePath){
+        return FileChecker.isExists(filePath) && fs.statSync(filePath).isDirectory();
+    }
+    static isFile(filePath){
+        return FileChecker.isExists(filePath) && fs.statSync(filePath).isFile();
+    }
     static isSFDXRootPath(rootPath){
         return FileChecker.isExists(rootPath + '/sfdx-project.json') || FileChecker.isExists(rootPath + '/manifest/package.xml');
     }
