@@ -28,11 +28,20 @@ function runProcess(process) {
                     break;
                 case ProcessEvent.END:
                     if (stdErr.length > 0) {
-                        let result = (jsonResponse) ? JSON.parse(stdErr) : stdErr;
-                        rejected(result);
+                        try{
+                            let result = (jsonResponse) ? JSON.parse(stdErr) : stdErr;
+                            rejected(result);
+                        } catch(error){
+                            rejected(stdErr);
+                        }
+                        
                     } else {
-                        let result = (jsonResponse) ? JSON.parse(stdOut) : stdOut;
-                        resolve(result);
+                        try{
+                            let result = (jsonResponse) ? JSON.parse(stdOut) : stdOut;
+                            resolve(result);
+                        } catch(error){
+                            resolve(stdOut);
+                        }
                     }
                     break;
                 default:

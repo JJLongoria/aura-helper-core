@@ -5,7 +5,7 @@
   "description": "Core libraries for Aura Helper CLI, Aura Helper Extension and the rest of @ah libraries. Contain Util classes, Languages procesing classes, Aura Helper Datatypes, Process Manages and Utils values",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage --runInBand"
   },
   "keywords": [
     "Aura Helper Types",
@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "fast-xml-parser": "^3.18.0",
-    "he": "^1.2.0"
+    "he": "^1.2.0",
+    "unzipper": "^0.10.11"
   }
 }
