@@ -174,9 +174,16 @@ describe('Testing ./src/types/factory.js', () => {
         const metadataType = TypesFactory.createNotIncludedMetadataType('StandardValueSet');
         expect(metadataType.name).toEqual('StandardValueSet');
     });
-    test('Testing createMetadataFromJSONSchema()', () => {
+    test('Testing createSObjectFromJSONSchema()', () => {
         const data = fs.readFileSync('./test/assets/describeSObject.json', 'utf8');
-        const Sobject = TypesFactory.createMetadataFromJSONSchema(data);
+        const Sobject = TypesFactory.createSObjectFromJSONSchema(data);
         expect(Sobject.name).toEqual('Account');
+    });
+    test('Testing createMetadataTypesFromFileSystem()', () => {
+        const metadata = JSON.parse(fs.readFileSync('./test/assets/metadataTypes.json', 'utf8'));
+        const metadataDetails = TypesFactory.createMetadataDetails(metadata.result.metadataObjects);
+        const folderMetadataMap = TypesFactory.createFolderMetadataMap(metadataDetails);
+        const metadataTypes = TypesFactory.createMetadataTypesFromFileSystem(folderMetadataMap, './test/assets/SFDXProject');
+        expect(metadataTypes['CustomObject'].name).toEqual('CustomObject');
     });
 });
