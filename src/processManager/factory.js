@@ -108,7 +108,7 @@ function sourceValidatePackage(usernameOrAlias, packageFile, testLevel, runTests
         command.addCommandArg('--testlevel', testLevel);
     if (runTests)
         command.addCommandArg('--runtests', runTests);
-    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '-1');
+    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '33');
     return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
 }
 
@@ -123,11 +123,11 @@ function sourceDeployPackage(usernameOrAlias, packageFile, testLevel, runTests, 
         command.addCommandArg('--testlevel', testLevel);
     if (runTests)
         command.addCommandArg('--runtests', runTests);
-    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '-1');
+    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '33');
     return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
 }
 
-function sourceQuickDeploy(usernameOrAlias, deployId, apiVersion) {
+function sourceQuickDeploy(usernameOrAlias, deployId, apiVersion, projectFolder) {
     let command = new Command('sfdx', 'force:source:deploy-quick', true);
     command.addCommandArg('force:source:deploy');
     command.addCommandArg('-u', usernameOrAlias);
@@ -135,7 +135,7 @@ function sourceQuickDeploy(usernameOrAlias, deployId, apiVersion) {
         command.addCommandArg('--apiversion', apiVersion);
     if (deployId)
         command.addCommandArg('--validateddeployrequestid', deployId);
-    return command.toProcess().setMaxBuffer(BUFFER_SIZE);
+    return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
 }
 
 function sourceDeployReport(usernameOrAlias, deployId, waitMinutes) {
@@ -143,7 +143,7 @@ function sourceDeployReport(usernameOrAlias, deployId, waitMinutes) {
     command.addCommandArg('force:source:deploy:report');
     command.addCommandArg('-u', usernameOrAlias);
     command.addCommandArg('-i', deployId);
-    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '-1');
+    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '33');
     return command.toProcess().setMaxBuffer(BUFFER_SIZE);
 }
 
@@ -152,7 +152,7 @@ function sourceCancelDeploy(usernameOrAlias, deployId, waitMinutes) {
     command.addCommandArg('force:source:deploy:cancel');
     command.addCommandArg('-u', usernameOrAlias);
     command.addCommandArg('-i', deployId);
-    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '-1');
+    command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '33');
     return command.toProcess().setMaxBuffer(BUFFER_SIZE);
 }
 
@@ -162,7 +162,7 @@ function mdapiRetrievePackage(usernameOrAlias, packageFolder, apiVersion, target
     command.addCommandArg('-u', usernameOrAlias);
     command.addCommandArg('-d', packageFolder);
     command.addCommandArg('-r', targetDir);
-    if(apiVersion)
+    if (apiVersion)
         command.addCommandArg('--apiversion', apiVersion);
     command.addCommandArg('-w', (waitMinutes != undefined) ? waitMinutes.toString() : '-1');
     return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
@@ -199,7 +199,7 @@ function mdapiDeployPackage(usernameOrAlias, packageFolder, testLevel, runTests,
     return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
 }
 
-function mdapiQuickDeploy(usernameOrAlias, deployId, apiVersion) {
+function mdapiQuickDeploy(usernameOrAlias, deployId, apiVersion, projectFolder) {
     let command = new Command('sfdx', 'force:mdapi:deploy-quick', true);
     command.addCommandArg('force:mdapi:deploy');
     command.addCommandArg('-u', usernameOrAlias);
@@ -208,7 +208,7 @@ function mdapiQuickDeploy(usernameOrAlias, deployId, apiVersion) {
     if (deployId)
         command.addCommandArg('--validateddeployrequestid', deployId);
     command.addCommandArg('-w', '-1');
-    return command.toProcess().setMaxBuffer(BUFFER_SIZE);
+    return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
 }
 
 function mdapiRetrieveReport(usernameOrAlias, retrieveId, targetDir) {
