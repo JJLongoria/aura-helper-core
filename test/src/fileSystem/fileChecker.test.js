@@ -51,6 +51,16 @@ describe('Testing ./src/fileSystem/fileChecker.js', () => {
         expect(FileChecker.isExists('folder/permissionsets')).toBeFalsy();
         expect(FileChecker.isExists('./test')).toBeTruthy();
     });
+    test('Testing isDirectory()', () => {
+        expect(FileChecker.isDirectory('./test/assets')).toBeTruthy();
+        expect(FileChecker.isDirectory('./test/assetste')).toBeFalsy();
+        expect(FileChecker.isDirectory('./test/assets/describeSObject.json')).toBeFalsy();
+    });
+    test('Testing isFile()', () => {
+        expect(FileChecker.isFile('./test/assets')).toBeFalsy();
+        expect(FileChecker.isFile('./test/assetste')).toBeFalsy();
+        expect(FileChecker.isFile('./test/assets/describeSObject.json')).toBeTruthy();
+    });
     test('Testing isSFDXRootPath()', () => {
         expect(FileChecker.isSFDXRootPath('folder/permissionsets')).toBeFalsy();
         expect(FileChecker.isSFDXRootPath('./test/assets')).toBeTruthy();
