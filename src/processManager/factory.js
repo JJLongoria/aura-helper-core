@@ -311,21 +311,21 @@ function importTreeData(usernameOrAlias, file) {
     return command.toProcess().setMaxBuffer(BUFFER_SIZE);
 }
 
-function bulkDelete(usernameOrAlias, csvFile, sobject, projectFolder) {
+function bulkDelete(usernameOrAlias, csvFile, sobject) {
     let command = new Command('sfdx', 'force:data:bulk:delete-' + sobject, true);
     command.addCommandArg('force:data:bulk:delete');
     command.addCommandArg('-u', usernameOrAlias);
     command.addCommandArg('-f', csvFile);
     command.addCommandArg('-s', sobject);
-    return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
+    return command.toProcess().setMaxBuffer(BUFFER_SIZE);
 }
 
-function executeApexAnonymous(usernameOrAlias, scriptFile, projectFolder) {
+function executeApexAnonymous(usernameOrAlias, scriptFile) {
     let command = new Command('sfdx', 'force:apex:execute-' + scriptFile, false);
     command.addCommandArg('force:apex:execute');
     command.addCommandArg('-u', usernameOrAlias);
     command.addCommandArg('-f', scriptFile);
-    return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
+    return command.toProcess().setMaxBuffer(BUFFER_SIZE);
 }
 
 module.exports = {
