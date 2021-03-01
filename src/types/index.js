@@ -19,6 +19,7 @@ exports.RetrieveResult = require('./retrieveResult');
 exports.RetrieveWarning = require('./retrieveWarning');
 exports.RetrieveInboundFile = require('./retrieveInboundFile');
 exports.RetrievePackage = require('./retrievePackage');
+exports.SFDXProjectResult = require('./sfdxProjectResult');
 exports.SObject = require('./sObject');
 exports.SObjectField = require('./sObjectField');
 exports.StringXMLField = require('./stringXMLField');
