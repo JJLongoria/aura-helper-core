@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const StrUtils = require('../utils/strUtils');;
+const StrUtils = require('../utils/strUtils');
+const FileChecker = require('./fileChecker');
 
 class FileReader {
     static readDocument(document) {
@@ -25,10 +26,10 @@ class FileReader {
             let result = [];
             for (const contentPath of folderContent) {
                 let fullPath = folderPath + '/' + contentPath;
-                if (filters.onlyFolders && fs.lstatSync(fullPath).isDirectory()) {
+                if (filters.onlyFolders && FileChecker.isDirectory(fullPath)) {
                     result.push(contentPath);
                 } else if (filters.onlyFiles) {
-                    if (fs.lstatSync(fullPath).isFile()) {
+                    if (FileChecker.isFile(fullPath)) {
                         if (filters.extensions && filters.extensions.length > 0) {
                             if (filters.extensions.includes(path.extname(contentPath)))
                                 result.push(contentPath);
