@@ -1,4 +1,5 @@
 const SObjectField = require("./sObjectField");
+const RecordType = require("./recordType");
 
 class SObject {
     constructor(nameOrObject, label, labelPlural, keyPrefix, custom) {
@@ -23,7 +24,7 @@ class SObject {
             this.customSetting = false;
             this.namespace = '';
             this.fields = {};
-            this.recordTypes = [];
+            this.recordTypes = {};
         }
     }
 
@@ -70,9 +71,13 @@ class SObject {
         return new SObjectField(this.fields[name]);
     }
 
-    addRecordType(recordType) {
-        this.recordTypes.push(recordType);
+    addRecordType(devName, recordType) {
+        this.recordTypes[devName] = recordType;
         return this;
+    }
+
+    getRecordType(devName) {
+        return new RecordType(this.recordTypes[devName]);
     }
 }
 module.exports = SObject;
