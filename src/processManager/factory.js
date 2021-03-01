@@ -303,12 +303,12 @@ function exportTreeData(usernameOrAlias, query, prefix, outputPath) {
     return command.toProcess().setMaxBuffer(BUFFER_SIZE);
 }
 
-function importTreeData(usernameOrAlias, file, projectFolder) {
+function importTreeData(usernameOrAlias, file) {
     let command = new Command('sfdx', 'force:data:tree:import-' + file, true);
     command.addCommandArg('force:data:tree:import');
     command.addCommandArg('-u', usernameOrAlias);
     command.addCommandArg('-f', file);
-    return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
+    return command.toProcess().setMaxBuffer(BUFFER_SIZE);
 }
 
 function bulkDelete(usernameOrAlias, csvFile, sobject, projectFolder) {

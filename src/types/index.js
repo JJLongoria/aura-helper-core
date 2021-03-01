@@ -1,6 +1,7 @@
 exports.ArrayXMLField = require('./arrayXMLField');
 exports.AuthOrg = require('./AuthOrg');
 exports.BooleanXMLField = require('./booleanXMLField');
+exports.BulkStatus = require('./bulkStatus');
 exports.DateTimeXMLField = require('./dateTimeXMLField');
 exports.DeployStatus = require('./deployStatus');
 exports.DoubleXMLField = require('./doubleXMLField');
