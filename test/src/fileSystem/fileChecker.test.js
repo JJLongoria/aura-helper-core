@@ -13,6 +13,14 @@ describe('Testing ./src/fileSystem/fileChecker.js', () => {
         expect(FileChecker.isJavaScript('file.js')).toBeTruthy();
         expect(FileChecker.isJavaScript('file.jss')).toBeFalsy();
     });
+    test('Testing isAuraHelperJS()', () => {
+        expect(FileChecker.isAuraHelperJS('Helper.js')).toBeTruthy();
+        expect(FileChecker.isAuraHelperJS('Helpers.js')).toBeFalsy();
+    });
+    test('Testing isAuraControllerJS()', () => {
+        expect(FileChecker.isAuraControllerJS('Controller.js')).toBeTruthy();
+        expect(FileChecker.isAuraControllerJS('Controllers.js')).toBeFalsy();
+    });
     test('Testing isAuraDoc()', () => {
         expect(FileChecker.isAuraDoc('file.auradoc')).toBeTruthy();
         expect(FileChecker.isAuraDoc('file.auradocs')).toBeFalsy();
@@ -21,11 +29,33 @@ describe('Testing ./src/fileSystem/fileChecker.js', () => {
         expect(FileChecker.isAuraComponent('file.cmp')).toBeTruthy();
         expect(FileChecker.isAuraComponent('file.cmps')).toBeFalsy();
     });
+    test('Testing isAuraApplication()', () => {
+        expect(FileChecker.isAuraApplication('file.app')).toBeTruthy();
+        expect(FileChecker.isAuraApplication('file.apps')).toBeFalsy();
+    });
+    test('Testing isAuraEvent()', () => {
+        expect(FileChecker.isAuraEvent('file.evt')).toBeTruthy();
+        expect(FileChecker.isAuraEvent('file.evts')).toBeFalsy();
+    });
     test('Testing isAuraComponentFolder()', () => {
         expect(FileChecker.isAuraComponentFolder('folder/aura/')).toBeTruthy();
         expect(FileChecker.isAuraComponentFolder('folder\\aura\\')).toBeTruthy();
         expect(FileChecker.isAuraComponentFolder('folder/auras/')).toBeFalsy();
         expect(FileChecker.isAuraComponentFolder('folder\\auras\\')).toBeFalsy();
+    });
+    test('Testing isAuraFile()', () => {
+        expect(FileChecker.isAuraFile('folder/aura/file.evt')).toBeTruthy();
+        expect(FileChecker.isAuraFile('folder\\aura\\file.evt')).toBeTruthy();
+        expect(FileChecker.isAuraFile('folder/aura/file.app')).toBeTruthy();
+        expect(FileChecker.isAuraFile('folder\\aura\\file.app')).toBeTruthy();
+        expect(FileChecker.isAuraFile('folder/aura/file.cmp')).toBeTruthy();
+        expect(FileChecker.isAuraFile('folder\\aura\\file.cmp')).toBeTruthy();
+        expect(FileChecker.isAuraFile('folder/aura/file.evts')).toBeFalsy();
+        expect(FileChecker.isAuraFile('folder\\aura\\file.evts')).toBeFalsy();
+        expect(FileChecker.isAuraFile('folder/aura/file.apps')).toBeFalsy();
+        expect(FileChecker.isAuraFile('folder\\aura\\file.apps')).toBeFalsy();
+        expect(FileChecker.isAuraFile('folder/aura/file.cmps')).toBeFalsy();
+        expect(FileChecker.isAuraFile('folder\\aura\\file.cmps')).toBeFalsy();
     });
     test('Testing isProfile()', () => {
         expect(FileChecker.isProfile('file.profile-meta.xml')).toBeTruthy();

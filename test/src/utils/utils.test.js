@@ -1,11 +1,4 @@
 const Utils = require('../../../src/utils/utils');
-const MetadataType = require('../../../src/types/metadataType');
-const MetadataObject = require('../../../src/types/metadataObject');
-const MetadataItem = require('../../../src/types/metadataItem');
-const SObject = require('../../../src/types/sObject');
-const SObjectField = require('../../../src/types/sObjectField');
-const RecordType = require('../../../src/types/recordType');
-const PicklistValue = require('../../../src/types/picklistValue');
 
 describe('Testing ./src/utils/utils.js', () => {
     test('Testing forceArray()', () => {
@@ -16,46 +9,121 @@ describe('Testing ./src/utils/utils.js', () => {
         result = Utils.forceArray(undefined);
         expect(result).toEqual(undefined);
     });
-    test('Testing orderMetadata()', () => {
-        const metadata = {};
-        metadata['Workflow'] = new MetadataType('Workflow');
-        metadata['Workflow'].addChild('Account', new MetadataObject('Account'));
-        metadata['Workflow'].addChild('Case', new MetadataObject('Case'));
-        metadata['CustomField'] = new MetadataType('CustomField');
-        metadata['CustomField'].addChild('Account', new MetadataObject('Account'));
-        metadata['CustomField'].getChild('Account').addChild('Name', new MetadataItem('Name'));
-        metadata['CustomField'].getChild('Account').addChild('Id', new MetadataItem('Id'));
-        metadata['CustomField'].getChild('Account').addChild('FirstName', new MetadataItem('FirstName'));
-        metadata['CustomField'].addChild('Case', new MetadataObject('Case'));
-        metadata['CustomField'].getChild('Case').addChild('Subject', new MetadataItem('Subject'));
-        metadata['CustomField'].getChild('Case').addChild('Description', new MetadataItem('Description'));
-        metadata['CustomField'].getChild('Case').addChild('CaseNumber', new MetadataItem('CaseNumber'));
-        let orderedMetadata = Utils.orderMetadata(metadata);
-        let keys = Object.keys(orderedMetadata);
-        expect(keys[0]).toMatch('CustomField');
-        expect(keys[1]).toMatch('Workflow');
+    test('Testing clone()', () => {
+        expect(Utils.clone({ key: 'value' })).toEqual({ key: 'value' });
     });
-    test('Testing orderSObjects()', () => {
-        const sObjects = {};
-        sObjects['Case'] = new SObject('Case', 'Case', 'Cases', '500', false);
-        sObjects['Case'].addField('Subject', new SObjectField('Subject', 'Subject', 'string', false));
-        sObjects['Case'].addField('Description', new SObjectField('Description', 'Description', 'string', false));
-        sObjects['Case'].addField('CaseNumber', new SObjectField('CaseNumber', 'Case Number', 'string', false));
-        sObjects['Account'] = new SObject('Account', 'Account', 'Accounts', '001', false);
-        sObjects['Account'].addField('Zip', new SObjectField('Zip', 'Zip', 'string', false));
-        sObjects['Account'].addField('Acc__c', new SObjectField('Acc__c', 'Account', 'string', true));
-        sObjects['Account'].addField('Name', new SObjectField('Name', 'Name', 'string', false));
-        let orderedSObject = Utils.orderSObjects(sObjects);
-        let keys = Object.keys(orderedSObject);
-        expect(keys[0]).toMatch('Account');
-        expect(keys[1]).toMatch('Case');
-        let accFieldKeys = Object.keys(sObjects['Account'].fields);
-        expect(accFieldKeys[0]).toMatch('Acc__c');
-        expect(accFieldKeys[1]).toMatch('Name');
-        expect(accFieldKeys[2]).toMatch('Zip');
-        let caseFieldKeys = Object.keys(sObjects['Case'].fields);
-        expect(caseFieldKeys[0]).toMatch('CaseNumber');
-        expect(caseFieldKeys[1]).toMatch('Description');
-        expect(caseFieldKeys[2]).toMatch('Subject');
+    test('Testing isObject()', () => {
+        expect(Utils.isObject({ key: 'value' })).toBeTruthy();
+        expect(Utils.isObject([])).toBeFalsy();
+        expect(Utils.isObject(undefined)).toBeFalsy();
+    });
+    test('Testing isString()', () => {
+        expect(Utils.isString('test')).toBeTruthy();
+        expect(Utils.isString({ key: 'value' })).toBeFalsy();
+        expect(Utils.isString([])).toBeFalsy();
+        expect(Utils.isString(undefined)).toBeFalsy();
+    });
+    test('Testing isNumber()', () => {
+        expect(Utils.isNumber(5)).toBeTruthy();
+        expect(Utils.isNumber({ key: 'value' })).toBeFalsy();
+        expect(Utils.isNumber([])).toBeFalsy();
+        expect(Utils.isNumber(undefined)).toBeFalsy();
+    });
+    test('Testing isBigInt()', () => {
+        expect(Utils.isBigInt(BigInt(5))).toBeTruthy();
+        expect(Utils.isBigInt({ key: 'value' })).toBeFalsy();
+        expect(Utils.isBigInt([])).toBeFalsy();
+        expect(Utils.isBigInt(undefined)).toBeFalsy();
+    });
+    test('Testing isSymbol()', () => {
+        expect(Utils.isSymbol(Symbol('text'))).toBeTruthy();
+        expect(Utils.isSymbol({ key: 'value' })).toBeFalsy();
+        expect(Utils.isSymbol([])).toBeFalsy();
+        expect(Utils.isSymbol(undefined)).toBeFalsy();
+    });
+    test('Testing isBoolean()', () => {
+        expect(Utils.isBoolean(false)).toBeTruthy();
+        expect(Utils.isBoolean({ key: 'value' })).toBeFalsy();
+        expect(Utils.isBoolean([])).toBeFalsy();
+        expect(Utils.isBoolean(undefined)).toBeFalsy();
+    });
+    test('Testing isFunction()', () => {
+        expect(Utils.isFunction(function () { })).toBeTruthy();
+        expect(Utils.isFunction({ key: 'value' })).toBeFalsy();
+        expect(Utils.isFunction([])).toBeFalsy();
+        expect(Utils.isFunction(undefined)).toBeFalsy();
+    });
+    test('Testing isArray()', () => {
+        expect(Utils.isArray([])).toBeTruthy();
+        expect(Utils.isArray({ key: 'value' })).toBeFalsy();
+        expect(Utils.isArray('string')).toBeFalsy();
+        expect(Utils.isArray(undefined)).toBeFalsy();
+    });
+    test('Testing isNull()', () => {
+        expect(Utils.isNull(undefined)).toBeTruthy();
+        expect(Utils.isNull(null)).toBeTruthy();
+        expect(Utils.isNull({ key: 'value' })).toBeFalsy();
+        expect(Utils.isNull('string')).toBeFalsy();
+        expect(Utils.isNull([])).toBeFalsy();
+    });
+    test('Testing hasKeys()', () => {
+        expect(Utils.hasKeys(undefined)).toBeFalsy();
+        expect(Utils.hasKeys(null)).toBeFalsy();
+        expect(Utils.hasKeys({ key: 'value' })).toBeTruthy();
+        expect(Utils.hasKeys('string')).toBeFalsy();
+        expect(Utils.hasKeys([])).toBeFalsy();
+    });
+    test('Testing countKeys()', () => {
+        expect(Utils.countKeys({ key: 'value' })).toEqual(1);
+    });
+    test('Testing getFirstElement()', () => {
+        expect(Utils.getFirstElement({ key: 'value' })).toEqual('value');
+    });
+    test('Testing getLastElement()', () => {
+        expect(Utils.getLastElement({ key: 'value' })).toEqual('value');
+    });
+    test('Testing getCallbackFunction()', () => {
+        const func = function () {
+
+        };
+        expect(Utils.getCallbackFunction()).toEqual(undefined);
+        expect(Utils.getCallbackFunction([func])).toEqual(func);
+    });
+    test('Testing sort()', () => {
+        const data = [
+            {
+                key: 'value2',
+            },
+            {
+                key: 'value1',
+            },
+            {
+                key: 'Value1',
+            }
+        ];
+        expect(Utils.sort(data, ['key'], false)).toEqual([
+            {
+                key: 'value1',
+            },
+            {
+                key: 'Value1',
+            },
+            {
+                key: 'value2',
+            }
+        ]);
+        expect(Utils.sort(data, ['key'], true)).toEqual([
+            {
+                key: 'value1',
+            },
+            {
+                key: 'Value1',
+            },
+            {
+                key: 'value2',
+            },
+        ]);
+        expect(Utils.sort(['2', '3', '1'], undefined, true)).toEqual(['1', '2', '3']);
+        expect(Utils.sort(['2', '3', '1'], undefined, false)).toEqual(['1', '2', '3']);
     });
 });

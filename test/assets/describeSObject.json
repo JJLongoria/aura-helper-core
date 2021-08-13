@@ -5747,7 +5747,7 @@
     "lookupLayoutable": null,
     "mergeable": true,
     "mruEnabled": true,
-    "name": "Account",
+    "name": "acn__Account__c",
     "namedLayoutInfos": [],
     "networkScopeFieldName": null,
     "queryable": true,

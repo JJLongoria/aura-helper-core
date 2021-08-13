@@ -1,7 +1,9 @@
+const Utils = require('../utils/utils');
+
 class RetrievePackage {
 
     constructor(nameOrObject){
-        if(typeof nameOrObject === 'object'){
+        if(Utils.isObject(nameOrObject)){
             this.name = nameOrObject.name;
         } else {
             this.name = nameOrObject;

@@ -1,6 +1,8 @@
+const Utils = require('../utils/utils');
+
 class MetadataItem {
     constructor(nameOrObject, checked, path){
-        if (typeof nameOrObject === 'object') {
+        if (Utils.isObject(nameOrObject)) {
             this.name = nameOrObject.name;
             this.checked = nameOrObject.checked;
             this.path = nameOrObject.path;

@@ -3,8 +3,17 @@ const DataTypes = require('../values/datatypes');
 const Utils = require('../utils/utils');
 
 class ObjectXMLField extends XMLField {
-    constructor(key, label) {
-        super(key, label, DataTypes.OBJECT);
+    constructor(keyOrObject, label) {
+        super(keyOrObject, label, DataTypes.OBJECT);
+        if (Utils.isObject(keyOrObject)) {
+            this.fieldKey = keyOrObject.fieldKey;
+            this.sortOrder = keyOrObject.sortOrder;
+            this.fields = keyOrObject.fields;
+        } else {
+            this.fieldKey = undefined;
+            this.sortOrder = undefined;
+            this.fields = undefined;
+        }
     }
 
     setFieldKey(fieldKey) {

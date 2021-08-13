@@ -1,13 +1,14 @@
 const XMLField = require('./xmlField');
 const DataTypes = require('../values/datatypes');
 const DataValues = require('../values/dataValues');
+const Utils = require('../utils/utils');
 
 class StringXMLField extends XMLField {
-    constructor(key, label) {
-        super(key, label, DataTypes.STRING);
-        if(typeof key === 'object'){
-            this.default = key.default;
-            this.minLength = key.minLength;
+    constructor(keyOrObject, label) {
+        super(keyOrObject, label, DataTypes.STRING);
+        if(Utils.isObject(keyOrObject)){
+            this.default = keyOrObject.default;
+            this.minLength = keyOrObject.minLength;
         } else {
             this.default = DataValues.DEFAULT_TEXT;
             this.minLength = 0;

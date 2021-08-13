@@ -1,7 +1,9 @@
+const Utils = require('../utils/utils');
+
 class BulkStatus {
 
     constructor(idOrObject, jobId, state){
-        if(typeof idOrObject === 'object'){
+        if(Utils.isObject(idOrObject)){
             this.id = idOrObject.id;
             this.jobId = idOrObject.jobId;
             this.state = idOrObject.state;

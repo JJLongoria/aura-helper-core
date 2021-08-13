@@ -3,8 +3,17 @@ const Utils = require('../utils/utils');
 
 
 class NumberXMLField extends XMLField {
-    constructor(key, label, datatype) {
-        super(key, label, datatype);
+    constructor(keyOrObject, label, datatype) {
+        super(keyOrObject, label, datatype);
+        if (Utils.isObject(keyOrObject)) {
+            this.minValue = keyOrObject.minValue;
+            this.maxValue = keyOrObject.maxValue;
+            this.allowedValues = keyOrObject.allowedValues;
+        } else {
+            this.minValue = undefined;
+            this.maxValue = undefined;
+            this.allowedValues = undefined;
+        }
     }
 
     setMinValue(minValue) {

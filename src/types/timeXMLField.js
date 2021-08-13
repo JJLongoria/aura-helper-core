@@ -1,12 +1,15 @@
 const DateTimeXMLField = require('./dateTimeXMLField');
 const DataTypes = require('../values/datatypes');
+const Utils = require('../utils/utils');
 
 class TimeXMLField extends DateTimeXMLField {
-    constructor(key, label) {
-        super(key, label);
+    constructor(keyOrObject, label) {
+        super(keyOrObject, label);
         this.datatype = DataTypes.TIME;
-        if(typeof key === 'object'){
-            this.format = key.format;
+        if(Utils.isObject(keyOrObject)){
+            this.format = keyOrObject.format;
+        } else {
+            this.format = undefined;
         }
     }
 

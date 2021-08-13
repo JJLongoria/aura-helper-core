@@ -5,12 +5,12 @@ const Utils = require('../utils/utils');
 
 class EnumXMLField extends XMLField {
 
-    constructor(key, label) {
-        super(key, label, DataTypes.ENUM);
-        if(typeof key === 'object'){
-            this.multichoice = key.multichoice;
-            this.values = key.values;
-            this.default = key.default;
+    constructor(keyOrObject, label) {
+        super(keyOrObject, label, DataTypes.ENUM);
+        if(Utils.isObject(keyOrObject)){
+            this.multichoice = keyOrObject.multichoice;
+            this.values = keyOrObject.values;
+            this.default = keyOrObject.default;
         } else {
             this.default = DataValues.DEFAULT_TEXT;
         }

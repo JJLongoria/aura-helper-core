@@ -1,25 +1,28 @@
+const Utils = require('../utils/utils');
+
 class XMLField {
 
-    constructor(key, label, datatype) {
-        if (typeof key === 'object') {
-            this.key = key.key;
-            this.label = key.label;
-            this.datatype = key.datatype;
-            this.minApi = key.minApi;
-            this.maxApi = key.maxApi;
-            this.editable = key.editable;
-            this.merge = key.merge;
-            this.unique = key.unique;
-            this.required = key.required;
-            this.reserved = key.reserved;
-            this.separator = key.separator;
-            this.defaultValue = key.defaultValue;
-            this.metadataType = key.metadataType;
-            this.linkToSObjects = key.linkToSObjects;
-            this.fieldDependencies = key.fieldDependencies;
-            this.controlledFields = key.controlledFields;
+    constructor(keyOrObject, label, datatype) {
+        if (Utils.isObject(keyOrObject)) {
+            this.key = keyOrObject.key;
+            this.label = keyOrObject.label;
+            this.datatype = keyOrObject.datatype;
+            this.minApi = keyOrObject.minApi;
+            this.maxApi = keyOrObject.maxApi;
+            this.editable = keyOrObject.editable;
+            this.merge = keyOrObject.merge;
+            this.unique = keyOrObject.unique;
+            this.required = keyOrObject.required;
+            this.reserved = keyOrObject.reserved;
+            this.separator = keyOrObject.separator;
+            this.defaultValue = keyOrObject.defaultValue;
+            this.metadataType = keyOrObject.metadataType;
+            this.linkToSObjects = keyOrObject.linkToSObjects;
+            this.fieldDependencies = keyOrObject.fieldDependencies;
+            this.controlledFields = keyOrObject.controlledFields;
+            this.compress = keyOrObject.compress;
         } else {
-            this.key = key;
+            this.key = keyOrObject;
             this.label = label;
             this.datatype = datatype;
             this.minApi = 1;
@@ -29,6 +32,7 @@ class XMLField {
             this.unique = false;
             this.required = false;
             this.reserved = false;
+            this.compress = false;
         }
     }
 
@@ -116,6 +120,15 @@ class XMLField {
         if (this.maxApi != -1 && !controlledField.maxApi)
             controlledField.maxApi = this.maxApi;
         this.controlledFields.push(controlledField);
+        return this;
+    }
+
+    prepareValue(value){
+        return value;
+    }
+
+    setCompress(value){
+        this.compress = (value !== undefined) ? value : true;
         return this;
     }
 }

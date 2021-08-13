@@ -1,6 +1,8 @@
+const Utils = require('../utils/utils');
+
 class PicklistValue {
     constructor(nameOrObject, value, defaultValue, active) {
-        if (typeof nameOrObject === 'object') {
+        if (Utils.isObject(nameOrObject)) {
             this.label = nameOrObject.label;
             this.value = nameOrObject.value;
             this.defaultValue = nameOrObject.defaultValue;

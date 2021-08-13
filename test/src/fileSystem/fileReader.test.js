@@ -82,4 +82,13 @@ describe('Testing ./src/fileSystem/fileReader.js', () => {
         expect(files.length).toBeGreaterThan(0);
         done();
     });
+    test('Testing getAllFiles() with Error', async (done) => {
+        try{
+            let files = await FileReader.getAllFiles('./testasdsa', ['.json']);
+            expect(true).toBeFalsy();
+        } catch(error){
+            expect(error).toBeDefined();
+        }   
+        done();
+    });
 });
