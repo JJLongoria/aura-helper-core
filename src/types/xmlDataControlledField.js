@@ -1,14 +1,16 @@
+const Utils = require('../utils/utils');
+
 class XMLDataControlledField {
 
-    constructor(field, valueToCompare, valueToSet) {
-        if (typeof field === 'object') {
-            this.field = field.field;
-            this.valueToCompare = field.valueToCompare;
-            this.valueToSet = field.valueToSet;
-            this.minApi = field.minApi;
-            this.maxApi = field.maxApi;
+    constructor(fieldOrObject, valueToCompare, valueToSet) {
+        if (Utils.isObject(fieldOrObject)) {
+            this.field = fieldOrObject.field;
+            this.valueToCompare = fieldOrObject.valueToCompare;
+            this.valueToSet = fieldOrObject.valueToSet;
+            this.minApi = fieldOrObject.minApi;
+            this.maxApi = fieldOrObject.maxApi;
         } else {
-            this.field = field;
+            this.field = fieldOrObject;
             this.valueToCompare = valueToCompare;
             this.valueToSet = valueToSet;
         }

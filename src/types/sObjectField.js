@@ -10,12 +10,14 @@ class SObjectField {
             this.nillable = nameOrObject.nillable;
             this.picklistValues = nameOrObject.picklistValues;
             this.referenceTo = nameOrObject.referenceTo;
+            this.namespace = nameOrObject.namespace;
         } else {
             this.name = nameOrObject;
             this.label = label;
             this.type = type;
             this.custom = (custom !== undefined) ? custom : false;
             this.length = undefined;
+            this.namespace = undefined;
             this.relationshipName = undefined;
             this.nillable = true;
             this.picklistValues = [];
@@ -24,6 +26,13 @@ class SObjectField {
     }
 
     setName(name) {
+        let splits = name.split('__');
+        let namespace = undefined;
+        if (splits.length > 2) {
+            namespace = splits[0].trim();
+        }
+        if(namespace !== undefined)
+            this.namespace = namespace;
         this.name = name;
     }
 

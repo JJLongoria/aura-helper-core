@@ -1,9 +1,10 @@
 const SObjectField = require("./sObjectField");
 const RecordType = require("./recordType");
+const Utils = require('../utils/utils');
 
 class SObject {
     constructor(nameOrObject, label, labelPlural, keyPrefix, custom) {
-        if (typeof nameOrObject === 'object') {
+        if (Utils.isObject(nameOrObject)) {
             this.name = nameOrObject.name;
             this.label = nameOrObject.label;
             this.labelPlural = nameOrObject.labelPlural;
@@ -29,6 +30,13 @@ class SObject {
     }
 
     setName(name) {
+        let splits = name.split('__');
+        let namespace = undefined;
+        if (splits.length > 2) {
+            namespace = splits[0].trim();
+        }
+        if(namespace)
+            this.namespace = namespace;
         this.name = name;
     }
 

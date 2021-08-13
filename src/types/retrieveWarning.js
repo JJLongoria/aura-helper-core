@@ -1,7 +1,9 @@
+const Utils = require('../utils/utils');
+
 class RetrieveWarning {
 
     constructor(fileNameOrObject, problem){
-        if(typeof fileNameOrObject === 'object'){
+        if(Utils.isObject(fileNameOrObject)){
             this.fileName = fileNameOrObject.fileName;
             this.problem = fileNameOrObject.problem;
         } else {

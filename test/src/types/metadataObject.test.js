@@ -16,5 +16,6 @@ describe('Testing ./src/types/metadataObject.js', () => {
         expect(obj2.getChild('name').name).toEqual('test');
         expect(obj2.childsCount()).toEqual(1);
         expect(obj2.haveChilds()).toBeTruthy();
+        expect(obj2.allChildsChecked()).toBeFalsy();
     });
 });

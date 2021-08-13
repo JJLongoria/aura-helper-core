@@ -1,13 +1,35 @@
 {
   "name": "@ah/core",
   "productName": "Aura Helper Core Libraries",
+  "displayName": "Aura Helper Framework Core",
   "version": "1.0.0",
-  "description": "Core libraries for Aura Helper CLI, Aura Helper Extension and the rest of @ah libraries. Contain Util classes, Languages procesing classes, Aura Helper Datatypes, Process Manages and Utils values",
+  "description": "Core libraries for Aura Helper CLI, Aura Helper Extension and the rest of @ah libraries. Contain Util classes, Aura Helper Datatypes, Process Manages and Utils values",
   "main": "index.js",
   "scripts": {
+    "testDebug": "npm jest --coverage --runInBand --watch",
     "test": "jest --coverage --runInBand"
   },
   "keywords": [
+    "aura-helper-framework",
+    "aura helper framework",
+    "Aura Helper Framework",
+    "ah-framework",
+    "AH Framework",
+    "Aura Helper",
+    "aura-helper",
+    "AuraHelper Library",
+    "AuraHelper Libraries",
+    "AH",
+    "ah",
+    "Salesforce",
+    "Salesforce Metadata",
+    "Salesforce Apps",
+    "Salesforce XML",
+    "Salesforce Tools",
+    "Apex",
+    "force.com",
+    "DevOps",
+		"devops",
     "Aura Helper Types",
     "Aura Helper Core",
     "ah core",
@@ -17,24 +39,24 @@
     "ah-utils",
     "ah-process",
     "Aura Helper Utils",
-    "Aura Helper Types",
-    "Aura Helper",
-    "AuraHelper",
-    "aura-helper",
-    "aura-helper-cli",
-    "Aura Helper CLI",
-    "Aura Helper VSCode",
-    "Aura Helper Extension"
+    "Aura Helper Types"
   ],
   "author": "Juan José Longoria López (Kanko) <juanjoselongoria@gmail.com>",
-  "license": "MIT",
+  "license": "GPLv3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JJLongoria/aura-helper-core"
+  },
+  "bugs": {
+		"url": "https://github.com/JJLongoria/aura-helper-core/issues",
+		"email": "juanjoselongoria@gmail.com"
+	},
   "devDependencies": {
     "@types/jest": "^26.0.20",
     "jest": "^26.6.3"
   },
   "dependencies": {
-    "fast-xml-parser": "^3.18.0",
-    "he": "^1.2.0",
+    "fs-extra": "^9.1.0",
     "unzipper": "^0.10.11"
   }
 }

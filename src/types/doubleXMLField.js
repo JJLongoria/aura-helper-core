@@ -1,14 +1,22 @@
 const NumberXMLField = require('./numberXMLField');
 const DataTypes = require('../values/datatypes');
+const Utils = require('../utils/utils');
 
 class DoubleXMLField extends NumberXMLField {
-    constructor(key, label) {
-        super(key, label, DataTypes.DOUBLE);
-        if(typeof key === 'object'){
-            this.default = key.default;
+    constructor(keyOrObject, label) {
+        super(keyOrObject, label, DataTypes.DOUBLE);
+        if (Utils.isObject(keyOrObject)) {
+            this.default = keyOrObject.default;
         } else {
             this.default = 0.0;
         }
+    }
+
+    prepareValue(value) {
+        let strVal = '' + value;
+        if (strVal.indexOf('.') === -1)
+            strVal += '.0';
+        return strVal;
     }
 }
 module.exports = DoubleXMLField;

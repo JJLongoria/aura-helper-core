@@ -1,6 +1,8 @@
+const Utils = require('../utils/utils');
+
 class MetadataDetail {
     constructor(nameOrObject, directoryName, suffix, inFolder, metaFile) {
-        if (typeof nameOrObject === 'object') {
+        if (Utils.isObject(nameOrObject)) {
             this.directoryName = nameOrObject.directoryName;
             this.inFolder = nameOrObject.inFolder;
             this.metaFile = nameOrObject.metaFile;

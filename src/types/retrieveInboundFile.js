@@ -1,7 +1,9 @@
+const Utils = require('../utils/utils');
+
 class RetrieveInboundFile {
 
     constructor(nameOrObject, type, state, filePath){
-        if(typeof nameOrObject === 'object'){
+        if(Utils.isObject(nameOrObject)){
             this.fullName = nameOrObject.fullName;
             this.state = nameOrObject.state;
             this.type = nameOrObject.type;

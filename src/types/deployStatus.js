@@ -1,7 +1,9 @@
+const Utils = require('../utils/utils');
+
 class DeployStatus {
 
     constructor(objectOrId, status, done, success, zipFilePath){
-        if(typeof objectOrId === 'object'){
+        if(Utils.isObject(objectOrId)){
             this.id = objectOrId.id;
             this.status = objectOrId.status;
             this.done = objectOrId.done;

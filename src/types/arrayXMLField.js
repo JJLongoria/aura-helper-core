@@ -1,12 +1,13 @@
 const ObjectXMLField = require('./objectXMLField');
 const DataTypes = require('../values/datatypes');
+const Utils = require('../utils/utils');
 
 class ArrayXMLField extends ObjectXMLField {
-    constructor(key, label) {
-        super(key, label);
-        if(typeof key === 'object'){
-            this.maxItems = key.maxItems;
-            this.allowedValues = key.allowedValues;
+    constructor(keyOrObject, label) {
+        super(keyOrObject, label);
+        if(Utils.isObject(keyOrObject)){
+            this.maxItems = keyOrObject.maxItems;
+            this.allowedValues = keyOrObject.allowedValues;
         }
         this.datatype = DataTypes.ARRAY;
     }

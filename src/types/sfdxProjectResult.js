@@ -1,7 +1,9 @@
+const Utils = require('../utils/utils');
+
 class SFDXProjectResult {
 
     constructor(outputDirOrObject, created, rawOutput){
-        if(typeof outputDirOrObject === 'object'){
+        if(Utils.isObject(outputDirOrObject)){
             this.outputDir = outputDirOrObject.outputDir;
             this.created = outputDirOrObject.created;
             this.rawOutput = outputDirOrObject.rawOutput;

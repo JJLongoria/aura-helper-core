@@ -1,11 +1,12 @@
 const RetrieveInboundFile = require('./retrieveInboundFile');
 const RetrievePackage = require('./retrievePackage');
 const RetrieveWarning = require('./retrieveWarning');
+const Utils = require('../utils/utils');
 
 class RetrieveResult {
 
     constructor(inboundFilesOrObject, packages, warnings){
-        if(typeof inboundFilesOrObject === 'object' && !Array.isArray(inboundFilesOrObject)){
+        if(Utils.isObject(inboundFilesOrObject)){
             this.inboundFiles = inboundFilesOrObject.inboundFiles;
             this.packages = inboundFilesOrObject.packages;
             this.warnings = inboundFilesOrObject.warnings;

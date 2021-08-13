@@ -1,6 +1,8 @@
+const Utils = require('../utils/utils');
+
 class AuthOrg {
     constructor(aliasOrObject, username, orgId, instanceUrl, accessToken, oauthMethod) {
-        if (typeof aliasOrObject === 'object') {
+        if (Utils.isObject(aliasOrObject)) {
             this.alias = aliasOrObject.alias;
             this.username = aliasOrObject.username;
             this.orgId = aliasOrObject.orgId;

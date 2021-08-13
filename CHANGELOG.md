@@ -1,3 +1,5 @@
+# Change Log
+All notable changes to this project will be documented in this file.
 ## [1.0.0 - 02/02/2021]
 ### Added
 - Added Utils libraries with Validator, XMLUtils, StrUtils, OSUtils, MathUtils and Utils classes
