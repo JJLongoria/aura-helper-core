@@ -864,6 +864,27 @@ class ProcessFactory {
     }
 
     /**
+     * Method to create the GIT process to get list all tags
+     * @param {String} projectFolder Project folder path (Required)
+     * @param {String} [sortField] Sort field to sort tags (Optional)
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
+     */
+    static gitGetTags(projectFolder, sortField) {
+        if (Utils.isNull(projectFolder))
+            throw new DataRequiredException('projectFolder');
+        const command = new Command('git', 'git:tag', false);
+        command.addCommandArg('tag');
+        command.addCommandArg('-l');
+        command.addCommandArg('-n');
+        command.addCommandArg(!Utils.isNull(sortField) ? '--sort=' + sortField : undefined);
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
+    }
+
+    /**
      * Method to create the GIT process to get all branches data
      * @param {String} projectFolder Project folder path (Required)
      * 

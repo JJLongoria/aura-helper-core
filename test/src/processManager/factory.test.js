@@ -520,6 +520,16 @@ describe('Testing ./src/process/factory.js', () => {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });
+    test('Testing gitGetTags()', () => {
+        const process = ProcessFactory.gitGetTags('./', 'committerdate');
+        ProcessFactory.gitGetTags('./');
+        expect(process.name).toEqual('git:tag');
+        try {
+            ProcessFactory.gitGetConfig(undefined, 'committerdate');
+        } catch (error) {
+            expect(error.message).toMatch('projectFolder is Required.');
+        }
+    });
     test('Testing gitLog()', () => {
         const process = ProcessFactory.gitLog('./', 'medium');
         expect(process.name).toEqual('git:log--pretty');
