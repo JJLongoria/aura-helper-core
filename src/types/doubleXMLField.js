@@ -13,10 +13,18 @@ class DoubleXMLField extends NumberXMLField {
     }
 
     prepareValue(value) {
+        value = super.prepareValue(value);
         let strVal = '' + value;
         if (strVal.indexOf('.') === -1)
             strVal += '.0';
         return strVal;
+    }
+
+    transformValue(value) {
+        value = this.prepareValue(value);
+        if (value && Utils.isString(value))
+            value = parseFloat(value);
+        return value;
     }
 }
 module.exports = DoubleXMLField;

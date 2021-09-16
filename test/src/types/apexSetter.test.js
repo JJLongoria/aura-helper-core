@@ -11,16 +11,24 @@ describe('Testing ./src/types/apexSetter.js', () => {
         expect(apexSetter.getFirstChild()).toEqual(apexSetter.getAbosluteFirstChild());
         expect(apexSetter.getLastChild()).toEqual(apexSetter.getAbsoluteLastChild());
         apexSetter.addChild({
-            type: ApexNodeType.VARIABLE,
+            nodeType: ApexNodeType.VARIABLE,
             name: 'apexVar2'
         });
         apexSetter.addChild({
-            type: ApexNodeType.VARIABLE,
+            nodeType: ApexNodeType.VARIABLE,
             name: 'apexVar1'
         });
         apexSetter.addChild({
-            type: ApexNodeType.VARIABLE,
+            nodeType: ApexNodeType.VARIABLE,
             name: 'apexVar3'
+        });
+        apexSetter.addChild({
+            nodeType: ApexNodeType.SOQL,
+            name: 'query1'
+        });
+        apexSetter.addChild({
+            nodeType: ApexNodeType.SOQL,
+            name: 'query2'
         });
         expect(apexSetter.getFirstChild()).toEqual(apexSetter.getAbosluteFirstChild());
         expect(apexSetter.getLastChild()).toEqual(apexSetter.getAbsoluteLastChild());

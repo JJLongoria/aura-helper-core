@@ -29,7 +29,7 @@
     "Apex",
     "force.com",
     "DevOps",
-		"devops",
+    "devops",
     "Aura Helper Types",
     "Aura Helper Core",
     "ah core",
@@ -48,9 +48,9 @@
     "url": "https://github.com/JJLongoria/aura-helper-core"
   },
   "bugs": {
-		"url": "https://github.com/JJLongoria/aura-helper-core/issues",
-		"email": "juanjoselongoria@gmail.com"
-	},
+    "url": "https://github.com/JJLongoria/aura-helper-core/issues",
+    "email": "juanjoselongoria@gmail.com"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.20",
     "jest": "^26.6.3"

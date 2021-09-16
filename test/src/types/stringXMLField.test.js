@@ -9,7 +9,9 @@ describe('Testing ./src/types/stringXMLField.js', () => {
         field.setJSON(false);
         field.setBase64(false);
         field.setMinLength(10);
-        field.addMatchPattern('matchPattern');
+        field.transformValue(15);
+        field.addMatchPattern(/matchPattern/);
+        field.validate('matchPattern', 'fieldName');
         expect(field.key).toMatch('key');
         expect(field.label).toMatch('Label');
         expect(field.datatype).toMatch(DataTypes.STRING);

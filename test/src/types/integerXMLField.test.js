@@ -4,6 +4,8 @@ const DataTypes = require('../../../src/values/datatypes');
 describe('Testing ./src/types/integerXMLField.js', () => {
     test('Testing instance', () => {
         const field = new IntegerXMLField('key', 'Label');
+        expect(field.transformValue('5')).toEqual(5);
+        expect(field.transformValue(5)).toEqual(5);
         expect(field.key).toMatch('key');
         expect(field.label).toMatch('Label');
         expect(field.datatype).toMatch(DataTypes.INTEGER);

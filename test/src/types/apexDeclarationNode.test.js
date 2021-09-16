@@ -10,6 +10,8 @@ describe('Testing ./src/types/apexDeclarationNode.js', () => {
         apexDeclarationNode.getChildOrder();
         apexDeclarationNode.getFirstChild();
         apexDeclarationNode.getLastChild();
+        apexDeclarationNode.addChild();
+        apexDeclarationNode.getOrderedChilds();
         expect(apexDeclarationNode.id).toMatch('id');
         expect(apexDeclarationNode.name).toMatch('name');
         expect(apexDeclarationNode.nodeType).toMatch('type');

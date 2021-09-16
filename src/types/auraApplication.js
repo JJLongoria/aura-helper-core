@@ -4,26 +4,28 @@ const AuraNodeType = require('../values/auraNodeType');
 
 class AuraApplication extends AuraRoot {
 
-    constructor(nameOrObject, token) {
-        super(nameOrObject, AuraNodeType.APPLICATION, token);
-        if (Utils.isObject(nameOrObject)) {
-            this.attributes = nameOrObject.attributes;
-            this.controller = nameOrObject.controller;
-            this.extends = nameOrObject.extends;
-            this.implements = nameOrObject.implements;
-            this.template = nameOrObject.template;
-            this.tokens = nameOrObject.tokens;
-            this.useAppcache = nameOrObject.useAppcache;
-            this.dependencies = nameOrObject.dependencies;
+    constructor(quelifiedNameOrObject, token) {
+        super(quelifiedNameOrObject, AuraNodeType.APPLICATION, token);
+        if (Utils.isObject(quelifiedNameOrObject)) {
+            this.attributes = quelifiedNameOrObject.attributes;
+            this.controller = quelifiedNameOrObject.controller;
+            this.extends = quelifiedNameOrObject.extends;
+            this.implements = quelifiedNameOrObject.implements;
+            this.implementsValues = quelifiedNameOrObject.implementsValues;
+            this.template = quelifiedNameOrObject.template;
+            this.useAppcache = quelifiedNameOrObject.useAppcache;
+            this.dependencies = quelifiedNameOrObject.dependencies;
+            this.fileName = quelifiedNameOrObject.fileName;
         } else {
-            this.attributes = {};
+            this.attributes = [];
             this.controller = undefined;
             this.extends = undefined;
-            this.implements = [];
+            this.implements = undefined;
+            this.implementsValues = [];
             this.template = undefined;
-            this.tokens =[];
-            this.useAppcache = false;
+            this.useAppcache = undefined;
             this.dependencies = [];
+            this.fileName = undefined;
         }
     }
 

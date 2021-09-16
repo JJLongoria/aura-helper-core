@@ -60,5 +60,11 @@ class EnumXMLField extends XMLField {
         return undefined;
     }
 
+    transformValue(value) {
+        if (value)
+            value = value.toString();
+        return value;
+    }
+
 }
 module.exports = EnumXMLField;

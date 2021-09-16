@@ -4,32 +4,36 @@ const AuraNodeType = require('../values/auraNodeType');
 
 class AuraComponent extends AuraRoot {
 
-    constructor(nameOrObject, token) {
-        super(nameOrObject, AuraNodeType.COMPONENT, token);
-        if (Utils.isObject(nameOrObject)) {
-            this.attributes = nameOrObject.attributes;
-            this.events = nameOrObject.events;
-            this.handlers = nameOrObject.handlers;
-            this.extends = nameOrObject.extends;
-            this.controller = nameOrObject.controller;
-            this.isTemplate = nameOrObject.isTemplate;
-            this.template = nameOrObject.template;
-            this.implements = nameOrObject.implements;
-            this.controllerFunctions = nameOrObject.controllerFunctions;
-            this.helperFunctions = nameOrObject.helperFunctions;
-            this.apexFunctions = nameOrObject.apexFunctions;
+    constructor(quelifiedNameOrObject, token) {
+        super(quelifiedNameOrObject, AuraNodeType.COMPONENT, token);
+        if (Utils.isObject(quelifiedNameOrObject)) {
+            this.attributes = quelifiedNameOrObject.attributes;
+            this.events = quelifiedNameOrObject.events;
+            this.handlers = quelifiedNameOrObject.handlers;
+            this.extends = quelifiedNameOrObject.extends;
+            this.controller = quelifiedNameOrObject.controller;
+            this.isTemplate = quelifiedNameOrObject.isTemplate;
+            this.template = quelifiedNameOrObject.template;
+            this.implements = quelifiedNameOrObject.implements;
+            this.implementsValues = quelifiedNameOrObject.implementsValues;
+            this.controllerFunctions = quelifiedNameOrObject.controllerFunctions;
+            this.helperFunctions = quelifiedNameOrObject.helperFunctions;
+            this.apexFunctions = quelifiedNameOrObject.apexFunctions;
+            this.fileName = quelifiedNameOrObject.fileName;
         } else {
-            this.attributes = {};
+            this.attributes = [];
             this.events = [];
             this.handlers = [];
             this.extends = undefined;
             this.controller = undefined;
-            this.isTemplate = false;
+            this.isTemplate = undefined;
             this.template = undefined;
-            this.implements = [];
-            this.controllerFunctions = {};
-            this.helperFunctions = {};
+            this.implements = undefined;
+            this.implementsValues = [];
+            this.controllerFunctions = [];
+            this.helperFunctions = [];
             this.apexFunctions = {};
+            this.fileName = undefined;
         }
     }
 }

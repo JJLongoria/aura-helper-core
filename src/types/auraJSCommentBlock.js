@@ -1,12 +1,12 @@
 const StrUtils = require('../utils/strUtils');
-const Utils = require('../utils/utils');
 const AuraNodeType = require('../values/auraNodeType');
+const ApexTokenType = require('../values/apexTokenTypes');
 const AuraJSComment = require('./auraJSComment');
 
 class AuraJSCommentBlock extends AuraJSComment {
 
-    constructor(token) {
-        super(token);
+    constructor() {
+        super();
         this.nodeType = AuraNodeType.JS_COMMENT_BLOCK;
     }
 
@@ -30,7 +30,7 @@ class AuraJSCommentBlock extends AuraJSComment {
             if(token.text === '*/')
                 continue;
             if (lastToken  && lastToken.range.end.line < token.range.start.line) {
-                if((lastToken.text !== '/**' && lastToken.text !== '/*'))
+                if((lastToken.type !== ApexTokenType.COMMENT.BLOCK_START))
                     newLines += StrUtils.getNewLines(token.range.start.line - lastToken.range.end.line);
                 if (token.text === '*')
                     continue;

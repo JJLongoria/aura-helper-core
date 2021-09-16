@@ -5,17 +5,21 @@ describe('Testing ./src/utils/strUtils.js', () => {
         const result = StrUtils.replace('Test replace string', 'string', 'str');
         expect(result).toEqual('Test replace str');
     });
+    test('Testing count()', () => {
+        const result = StrUtils.count('Test string to count string ocurrences', 'string');
+        expect(result).toEqual(2);
+    });
     test('Testing contains()', () => {
         const result = StrUtils.contains('Test replace string', 'string');
         expect(result).toBeTruthy();
     });
     test('Testing containsIgnorecase()', () => {
-        const result = StrUtils.replace('Test replace string', 'STRING');
+        const result = StrUtils.containsIgnorecase('Test replace string', 'STRING');
         expect(result).toBeTruthy();
     });
     test('Testing getStringIndent()', () => {
-        expect(StrUtils.getStringIndent('\t\t')).toEqual('\t\t');
-        expect(StrUtils.getStringIndent(' \t')).toEqual(' \t');
+        expect(StrUtils.getStringIndent('\t\tsdfsaf')).toEqual('\t\t');
+        expect(StrUtils.getStringIndent(' \tsafsf')).toEqual(' \t');
     });
     test('Testing getTabs()', () => {
         expect(StrUtils.getTabs(2)).toEqual('\t\t');
@@ -28,5 +32,8 @@ describe('Testing ./src/utils/strUtils.js', () => {
     });
     test('Testing countStartWhitespaces()', () => {
         expect(StrUtils.countStartWhitespaces('     hola')).toEqual(5);
+    });
+    test('Testing countStartTabs()', () => {
+        expect(StrUtils.countStartTabs('\t\t\t\t\thola')).toEqual(5);
     });
 });

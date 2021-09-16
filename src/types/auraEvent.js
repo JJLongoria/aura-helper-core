@@ -4,18 +4,20 @@ const AuraNodeType = require('../values/auraNodeType');
 
 class AuraEvent extends AuraNode {
 
-    constructor(nameOrObject, token) {
-        super(nameOrObject, AuraNodeType.EVENT, token);
-        if (Utils.isObject(nameOrObject)) {
-            this.attributes = nameOrObject.attributes;
-            this.access = nameOrObject.access;
-            this.extends = nameOrObject.extends;
-            this.type = nameOrObject.type;
+    constructor(quelifiedNameOrObject, token) {
+        super(quelifiedNameOrObject, AuraNodeType.EVENT, token);
+        if (Utils.isObject(quelifiedNameOrObject)) {
+            this.attributes = quelifiedNameOrObject.attributes;
+            this.access = quelifiedNameOrObject.access;
+            this.extends = quelifiedNameOrObject.extends;
+            this.type = quelifiedNameOrObject.type;
+            this.fileName = quelifiedNameOrObject.fileName;
         } else {
-            this.attributes = {};
+            this.attributes = [];
             this.access = undefined;
             this.extends = undefined;
             this.type = undefined;
+            this.fileName = undefined;
         }
     }
 

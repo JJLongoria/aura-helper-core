@@ -1,67 +1,166 @@
+/**
+ * Class with util methods to work with JS Objects, functions...
+ */
 class Utils {
 
+    /**
+     * Method to force to put the data into an array if the data must be an array
+     * @param {Object} data Data to force be an array
+     * 
+     * @returns {Array<Object>} Returns an array with the data or undefined if data is undefined
+     */
     static forceArray(data) {
         if (data === undefined)
             return data;
         return (Array.isArray(data)) ? data : [data];
     }
 
+    /**
+     * Method to clone an object
+     * @param {Object} obj Object to clone
+     * 
+     * @returns {Object} Returns the cloned object
+     */
     static clone(obj) {
         return JSON.parse(JSON.stringify(obj));
     }
 
+    /**
+     * Method to check if the value is an object
+     * @param {Object} value Value to check
+     * 
+     * @returns {Boolean} true if the value is an object, false in otherwise
+     */
     static isObject(value) {
         return !Utils.isArray(value) && typeof value === 'object';
     }
 
+    /**
+     * Method to check if the value is a string
+     * @param {Object} value Value to check
+     * 
+     * @returns {Boolean} true if the value is a string, false in otherwise
+     */
     static isString(value) {
         return !Utils.isNull(value) && typeof value === 'string';
     }
 
+    /**
+     * Method to check if the value is a number
+     * @param {Object} value Value to check
+     * 
+     * @returns {Boolean} true if the value is a number, false in otherwise
+     */
     static isNumber(value) {
         return !Utils.isNull(value) && typeof value === 'number';
     }
 
+    /**
+     * Method to check if the value is a BigInt
+     * @param {Object} value Value to check
+     * 
+     * @returns {Boolean} true if the value is a BigInt, false in otherwise
+     */
     static isBigInt(value) {
         return !Utils.isNull(value) && typeof value === 'bigint';
     }
 
+    /**
+     * Method to check if the value is a symbol
+     * @param {Object} value Value to check
+     * 
+     * @returns {Boolean} true if the value is a symbol, false in otherwise
+     */
     static isSymbol(value) {
         return !Utils.isNull(value) && typeof value === 'symbol';
     }
 
+    /**
+     * Method to check if the value is a boolean
+     * @param {Object} value Value to check
+     * 
+     * @returns {Boolean} true if the value is a boolean, false in otherwise
+     */
     static isBoolean(value) {
         return !Utils.isNull(value) && typeof value === 'boolean';
     }
 
+    /**
+     * Method to check if the value is a function
+     * @param {Object} value Value to check
+     * 
+     * @returns {Boolean} true if the value is a function, false in otherwise
+     */
     static isFunction(value) {
         return !Utils.isNull(value) && typeof value === 'function';
     }
 
+    /**
+     * Method to check if the value is an array
+     * @param {Object} value Value to check
+     * 
+     * @returns {Boolean} true if the value is an array, false in otherwise
+     */
     static isArray(value) {
         return !Utils.isNull(value) && Array.isArray(value);
     }
 
+    /**
+     * Method to check if the value is null or undefined
+     * @param {Object} value Value to check
+     * 
+     * @returns {Boolean} true if the value is null or undefined, false in otherwise
+     */
     static isNull(value) {
         return value === undefined || value === null;
     }
 
+    /**
+     * Method to check if an object has keys
+     * @param {Object} value Object to check
+     * 
+     * @returns {Boolean} true if the object has keys, false in otherwise
+     */
     static hasKeys(value) {
         return !Utils.isNull(value) && Utils.isObject(value) && Object.keys(value).length > 0;
     }
 
+    /**
+     * Method to count the keys from an object
+     * @param {Object} value Object to get the keys
+     * 
+     * @returns {Number} Returns the keys from the object
+     */
     static countKeys(value) {
         return (Utils.hasKeys(value)) ? Object.keys(value).length : 0;
     }
 
+    /**
+     * Method to get the first element from an object
+     * @param {Object} value Object to get the first element
+     * 
+     * @returns {Object} Returns the first element data
+     */
     static getFirstElement(value) {
         return (Utils.hasKeys(value)) ? value[Object.keys(value)[0]] : 0;
     }
 
+    /**
+     * Method to get the last element from an object
+     * @param {Object} value Object to get the last element
+     * 
+     * @returns {Object} Returns the last element data
+     */
     static getLastElement(value) {
         return (Utils.hasKeys(value)) ? value[Object.keys(value)[Object.keys(value).length - 1]] : 0;
     }
 
+    /**
+     * Method to get the callback function from function arguments
+     * @param {arguments} args function arguments to get the callback
+     * 
+     * @returns {Function} Returns a function if exists, or undefined if not exists. 
+     */
     static getCallbackFunction(args) {
         if (Utils.isNull(args) || args.length == 0)
             return undefined;
@@ -72,8 +171,16 @@ class Utils {
         return undefined;
     }
 
+    /**
+     * Method to sort an Array. You can use fields from elements to sort and sort with case sensitive or insensitive
+     * @param {Array<*>} elements Array with the elements to sort
+     * @param {Array<String>} [fields] fields from child to sort
+     * @param {Boolean} [caseSensitive] true if want sort data with case sensitive
+     * 
+     * @returns {Array<Object>} Returns the array sorted
+     */
     static sort(elements, fields, caseSensitive) {
-        if (Array.isArray(elements)) {
+        if (Array.isArray(elements) && elements.length > 0) {
             elements.sort(function (a, b) {
                 if (fields && fields.length > 0) {
                     let nameA = '';
@@ -91,10 +198,22 @@ class Utils {
                         }
                         counter++;
                     }
-                    if (caseSensitive) {
-                        return nameA.localeCompare(nameB);
+                    if (Utils.isNumber(nameA) && Utils.isNumber(nameB)) {
+                        if(nameA > nameB){
+                            return 1;
+                        } else if(nameA < nameB){
+                            return -1;
+                        } else {
+                            return 0;
+                        }
                     } else {
-                        return nameA.toLowerCase().localeCompare(nameB.toLowerCase());
+                        nameA = '' + nameA;
+                        nameB = '' + nameB;
+                        if (caseSensitive) {
+                            return nameA.localeCompare(nameB);
+                        } else {
+                            return nameA.toLowerCase().localeCompare(nameB.toLowerCase());
+                        }
                     }
                 } else {
                     if (caseSensitive) {

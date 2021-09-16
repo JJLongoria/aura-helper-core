@@ -5,14 +5,16 @@ module.exports = {
     PROPERTY: 'property',
     GETTER: 'getter',
     SETTER: 'setter',
-    INITIALIZER: 'init',
+    INITIALIZER: 'initializer',
     METHOD: 'method',
     CONSTRUCTOR: 'constructor',
-    STATIC_CONSTRUCTOR: 'staticConst',
-    VARIABLE: 'var',
+    STATIC_CONSTRUCTOR: 'static_constructor',
+    VARIABLE: 'variable',
     TRIGGER: 'trigger',
     COMMENT: 'comment',
-    BLOCK_COMMENT: 'blockComment',
+    BLOCK_COMMENT: 'block_comment',
     DATATYPE: 'datatype',
-    ANNOTATION: 'annotation'
+    ANNOTATION: 'annotation',
+    SOQL: 'soql',
+    SOQL_FIELD: 'soql_field'
 };

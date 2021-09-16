@@ -6,16 +6,6 @@ describe('Testing ./src/fileSystem/pathUtils.js', () => {
         expect(PathUtils.getBasename('./path/to/file.xml', '.xml')).toEqual('file');
         expect(PathUtils.getBasename('./path/to')).toEqual('to');
     });
-    test('Testing isUri()', () => {
-        expect(PathUtils.isURI()).toBeFalsy();
-        expect(PathUtils.isURI({})).toBeFalsy();
-        expect(PathUtils.isURI('./path')).toBeTruthy();
-        expect(PathUtils.isURI('/path')).toBeTruthy();
-        expect(PathUtils.isURI('\\path')).toBeTruthy();
-        expect(PathUtils.isURI('.\\path')).toBeTruthy();
-        expect(PathUtils.isURI(PathUtils.getAbsolutePath('./'))).toBeTruthy();
-        expect(PathUtils.isURI('sdafsdfsfd')).toBeFalsy();
-    });
     test('Testing getAbsolutePath()', () => {
         expect(PathUtils.getAbsolutePath('./')).toMatch('D:/Workspace/NodeJS/Aura Helper Framework/ah-core');
     });

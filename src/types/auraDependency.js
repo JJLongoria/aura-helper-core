@@ -4,11 +4,11 @@ const AuraNodeType = require('../values/auraNodeType');
 
 class AuraDependency extends AuraNode {
 
-    constructor(nameOrObject, token) {
-        super(nameOrObject, AuraNodeType.DEPENDENCY, token);
-        if (Utils.isObject(nameOrObject)) {
-            this.resource = nameOrObject.resource;
-            this.type = nameOrObject.type;
+    constructor(quelifiedNameOrObject, token) {
+        super(quelifiedNameOrObject, AuraNodeType.DEPENDENCY, token);
+        if (Utils.isObject(quelifiedNameOrObject)) {
+            this.resource = quelifiedNameOrObject.resource;
+            this.type = quelifiedNameOrObject.type;
         } else {
             this.resource = undefined;
             this.type = undefined;

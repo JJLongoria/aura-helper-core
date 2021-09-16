@@ -1,10 +1,13 @@
 const ProcessEvent = require('../values/processEvent');
+const AHCLIProgress = require('../types/auraHelperCLIProgress');
+const Process = require('../types/process');
 const StrUtils = require('../utils/strUtils');
 
 /**
  * Method run system processes and handle it responses
  * @param {Process} process 
- * @returns Return a promise with the response data
+ * 
+ * @returns {Promise<any>} Return a promise with the response data
  */
 function runProcess(process) {
     let stdOut = '';
@@ -23,7 +26,7 @@ function runProcess(process) {
                                 stdOut += strData;
                             } else {
                                 if (process.outputCallback) {
-                                    process.outputCallback.call(this, jsonData);
+                                    process.outputCallback.call(this, new AHCLIProgress(jsonData));
                                 }
                             }
                         } catch (error) {
