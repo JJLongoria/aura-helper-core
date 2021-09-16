@@ -3,17 +3,17 @@ const AuraNode = require('../types/auraNode');
 
 class AuraRoot extends AuraNode {
 
-    constructor(nameOrObject, type, token) {
-        super(nameOrObject, type, token);
-        if (Utils.isObject(nameOrObject)) {
-            this.access = nameOrObject.access;
-            this.abstract = nameOrObject.abstract;
-            this.extensible = nameOrObject.extensible;
-            this.support = nameOrObject.support;
+    constructor(quelifiedNameOrObject, type, token) {
+        super(quelifiedNameOrObject, type, token);
+        if (Utils.isObject(quelifiedNameOrObject)) {
+            this.access = quelifiedNameOrObject.access;
+            this.abstract = quelifiedNameOrObject.abstract;
+            this.extensible = quelifiedNameOrObject.extensible;
+            this.support = quelifiedNameOrObject.support;
         } else {
             this.access = undefined;
-            this.abstract = false;
-            this.extensible = false;
+            this.abstract = undefined;
+            this.extensible = undefined;
             this.support = undefined;
         }
     }

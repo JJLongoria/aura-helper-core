@@ -4,6 +4,9 @@ const DataTypes = require('../../../src/values/datatypes');
 describe('Testing ./src/types/booleanXMLField.js', () => {
     test('Testing instance', () => {
         const field = new BooleanXMLField('key', 'Label');
+        expect(field.transformValue('false')).toEqual(false);
+        expect(field.transformValue()).toEqual(undefined);
+        expect(field.transformValue(false)).toEqual(false);
         expect(field.key).toMatch('key');
         expect(field.label).toMatch('Label');
         expect(field.datatype).toMatch(DataTypes.BOOLEAN);

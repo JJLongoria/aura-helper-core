@@ -15,8 +15,8 @@ class XMLDependencyField {
             this.valueToCompare = Utils.forceArray(valueToCompare);
             this.allowedValues = Utils.forceArray(allowedValues);
             this.forbidenValues = Utils.forceArray(forbidenValues);
-            this.minApi = undefined;
-            this.maxApi = undefined;
+            this.minApi = 1;
+            this.maxApi = -1;
         }
     }
 

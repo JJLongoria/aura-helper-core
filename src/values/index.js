@@ -1,10 +1,13 @@
 exports.ApexNodeTypes = require('./apexNodeTypes');
+exports.ApexTokenTypes = require('./apexTokenTypes');
 exports.AuraNodeTypes = require('./auraNodeType');
+exports.AuraTokenTypes = require('./auraTokenTypes');
 exports.DataTypes = require('./datatypes');
 exports.DataValues = require('./dataValues');
+exports.JSTokenTypes = require('./jsTokenTypes');
 exports.MetadataSuffixByType = require('./metadataSuffixByType');
 exports.MetadataTypes = require('./metadataTypes');
 exports.NotIncludedMetadata = require('./notIncludedMetadata');
 exports.SpecialMetadata = require('./specialMetadata');
-exports.ProgressStages = require('./progressStages');
 exports.ProcessEvent = require('./processEvent');
+exports.TokenTypes = require('./tokenTypes');

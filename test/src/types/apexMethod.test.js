@@ -11,17 +11,28 @@ describe('Testing ./src/types/apexMethod.js', () => {
         expect(apexMethod.getFirstChild()).toEqual(apexMethod.getAbosluteFirstChild());
         expect(apexMethod.getLastChild()).toEqual(apexMethod.getAbsoluteLastChild());
         apexMethod.addChild({
-            type: ApexNodeType.VARIABLE,
+            nodeType: ApexNodeType.VARIABLE,
             name: 'apexVar2'
         });
         apexMethod.addChild({
-            type: ApexNodeType.VARIABLE,
+            nodeType: ApexNodeType.VARIABLE,
             name: 'apexVar1'
         });
         apexMethod.addChild({
-            type: ApexNodeType.VARIABLE,
+            nodeType: ApexNodeType.VARIABLE,
             name: 'apexVar3'
         });
+        apexMethod.addParam({
+            nodeType: ApexNodeType.VARIABLE,
+            name: 'apexVar4'
+        });
+        apexMethod.addParam({
+            nodeType: ApexNodeType.VARIABLE,
+            name: 'apexVar5'
+        });
+        apexMethod.getOrderedChilds();
+        apexMethod.getOrderedParams();
+        apexMethod.getOrderedVariables();
         expect(apexMethod.getFirstChild()).toEqual(apexMethod.getAbosluteFirstChild());
         expect(apexMethod.getLastChild()).toEqual(apexMethod.getAbsoluteLastChild());
         const apexMethod2 = new ApexMethod(apexMethod);

@@ -1,8 +1,19 @@
 const ApexNode = require('./apexNode');
 const Utils = require('../utils/utils');
+const Token = require('./token');
 
+/**
+ * Class to represent an Apex Declaration Node. This class is designed to be a parent of all Declaration nodes like methods or classes
+ */
 class ApexDeclarationNode extends ApexNode {
 
+    /**
+     * Constructor to create an ApexDatatype instance
+     * @param {String | Object} idOrObject Node id or Object with ApexDatatype fields
+     * @param {String} [idOrObject] Declaration node type
+     * @param {String} [name] Node name
+     * @param {Token} [startToken] Node start token
+     */
     constructor(idOrObject, type, name, startToken) {
         super(idOrObject, type, name, startToken);
         if (Utils.isObject(idOrObject)) {
@@ -24,6 +35,7 @@ class ApexDeclarationNode extends ApexNode {
             this.description = idOrObject.description;
             this.scope = idOrObject.scope;
             this.documentation = idOrObject.documentation;
+            this.parentName = idOrObject.parentName;
         } else {
             this.accessModifier = undefined;
             this.definitionModifier = undefined;
@@ -42,7 +54,8 @@ class ApexDeclarationNode extends ApexNode {
             this.comment = undefined;
             this.description = undefined;
             this.scope = undefined;
-            this.documentation = idOrObject.documentation;
+            this.documentation = undefined;
+            this.parentName = undefined;
         }
     };
 
@@ -50,6 +63,10 @@ class ApexDeclarationNode extends ApexNode {
     }
 
     getChildOrder(childOrType){
+
+    }
+
+    getOrderedChilds(childOrType){
 
     }
 

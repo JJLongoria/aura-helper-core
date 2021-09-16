@@ -11,7 +11,8 @@ class FileReader {
     /**
      * Method to read a Document Object and get the entire text
      * @param {TextDocument} document document to read
-     * @returns Return the document content string
+     * 
+     * @returns {String} Return the document content string
      */
     static readDocument(document) {
         var lines = [];
@@ -24,7 +25,8 @@ class FileReader {
     /**
      * Method to read a file synchronously
      * @param {String} filePath file to read
-     * @returns Return the file content
+     * 
+     * @returns {String} Return the file content
      */
     static readFileSync(filePath) {
         return fs.readFileSync(filePath, 'utf8');
@@ -42,8 +44,9 @@ class FileReader {
     /**
      * Method to read an entire directory to get the files and subfolders
      * @param {String} folderPath folder to read 
-     * @param {Object} filters filters to apply
-     * @returns Return an array with the file paths
+     * @param {Object} [filters] filters to apply
+     * 
+     * @returns {Array<String>} Return an array with the file paths
      */
     static readDirSync(folderPath, filters) {
         let folderContent = fs.readdirSync(folderPath);
@@ -52,22 +55,22 @@ class FileReader {
             for (const contentPath of folderContent) {
                 let fullPath = folderPath + '/' + contentPath;
                 if (filters.onlyFolders && FileChecker.isDirectory(fullPath)) {
-                    result.push(contentPath);
+                    result.push((filters && filters.absolutePath) ? fullPath : contentPath);
                 } else if (filters.onlyFiles) {
                     if (FileChecker.isFile(fullPath)) {
                         if (filters.extensions && filters.extensions.length > 0) {
-                            if (filters.extensions.includes(path.extname(contentPath)))
-                                result.push(contentPath);
+                            if (filters.extensions.includes(path.extname((filters && filters.absolutePath) ? fullPath : contentPath)))
+                                result.push((filters && filters.absolutePath) ? fullPath : contentPath);
                         } else {
-                            result.push(contentPath);
+                            result.push((filters && filters.absolutePath) ? fullPath : contentPath);
                         }
                     }
                 } else {
                     if (filters.extensions && filters.extensions.length > 0) {
-                        if (filters.extensions.includes(path.extname(contentPath)))
-                            result.push(contentPath);
+                        if (filters.extensions.includes(path.extname((filters && filters.absolutePath) ? fullPath : contentPath)))
+                            result.push((filters && filters.absolutePath) ? fullPath : contentPath);
                     } else {
-                        result.push(contentPath);
+                        result.push((filters && filters.absolutePath) ? fullPath : contentPath);
                     }
                 }
             }
@@ -80,8 +83,9 @@ class FileReader {
     /**
      * Method to read all files from a folder (including files from subfolders)
      * @param {String} folderPath folder to read
-     * @param {Object} filters filters to apply
-     * @returns Return a Promise with an array with all file paths
+     * @param {Object} [filters] filters to apply
+     * 
+     * @returns {Promise<Array<String>>} Return a Promise with an array with all file paths
      */
     static getAllFiles(folderPath, filters) {
         return new Promise(function (resolve, rejected) {

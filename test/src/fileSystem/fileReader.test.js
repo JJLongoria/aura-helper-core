@@ -63,12 +63,33 @@ describe('Testing ./src/fileSystem/fileReader.js', () => {
         });
         expect(files.length).toBeGreaterThan(0);
     });
+    test('Testing readDirSync() only Files with filter extensions and absolutePath', () => {
+        let files = FileReader.readDirSync('./test/assets', {
+            onlyFolders: false,
+            onlyFiles: true,
+            extensions: [
+                '.json'
+            ],
+            absolutePath: true
+        });
+        expect(files.length).toBeGreaterThan(0);
+    });
     test('Testing readDirSync() filter extensions', () => {
         let files = FileReader.readDirSync('./test/assets', {
             onlyFolders: false,
             extensions: [
                 '.json'
             ]
+        });
+        expect(files.length).toBeGreaterThan(0);
+    });
+    test('Testing readDirSync() filter extensions and absolute path', () => {
+        let files = FileReader.readDirSync('./test/assets', {
+            onlyFolders: false,
+            extensions: [
+                '.json'
+            ],
+            absolutePath: true
         });
         expect(files.length).toBeGreaterThan(0);
     });

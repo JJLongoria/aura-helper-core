@@ -1,6 +1,7 @@
 const Utils = require('../utils/utils');
 const Process = require('./Process');
 const OSUtils = require('../utils/osUtils');
+const OSNotSupportedException = require('../exceptions/osNotSuportedException');
 
 /**
  * Class to represent system command process
@@ -12,6 +13,8 @@ const OSUtils = require('../utils/osUtils');
      * @param {String} command command to execute
      * @param {String} name name of the command to identify
      * @param {Boolean} jsonResponse true if the command response are a JSON, false in otherwise
+     * 
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"
      */
     constructor(commandOrObject, name, jsonResponse) {
         if(Utils.isObject(commandOrObject)){
@@ -40,6 +43,8 @@ const OSUtils = require('../utils/osUtils');
     /**
      * Method to create the base command to the OS
      * @param {String} command 
+     * 
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"
      */
     createBaseCommand(command) {
         this.commandArgs = [];
@@ -50,14 +55,14 @@ const OSUtils = require('../utils/osUtils');
         } else if (OSUtils.isLinux() || OSUtils.isMac()) {
             this.command = command;
         } else {
-            throw new Error('Operative System Not Supported');
+            throw new OSNotSupportedException();
         }
     }
 
     /**
      * Method to add arguments to the command
      * @param {String} argName argument name
-     * @param {*} argValue argument value
+     * @param {String} [argValue] argument value
      */
     addCommandArg(argName, argValue) {
         if (argName !== undefined)

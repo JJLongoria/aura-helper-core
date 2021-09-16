@@ -4,18 +4,20 @@ const AuraNodeType = require('../values/auraNodeType');
 
 class AuraAttribute extends AuraNode {
 
-    constructor(nameOrObject, token) {
-        super(nameOrObject, AuraNodeType.ATTRIBUTE, token);
-        if (Utils.isObject(nameOrObject)) {
-            this.access = nameOrObject.access;
-            this.default = nameOrObject.default;
-            this.type = nameOrObject.type;
-            this.required = nameOrObject.required;
+    constructor(quelifiedNameOrObject, token) {
+        super(quelifiedNameOrObject, AuraNodeType.ATTRIBUTE, token);
+        if (Utils.isObject(quelifiedNameOrObject)) {
+            this.access = quelifiedNameOrObject.access;
+            this.default = quelifiedNameOrObject.default;
+            this.type = quelifiedNameOrObject.type;
+            this.required = quelifiedNameOrObject.required;
+            this.name = quelifiedNameOrObject.name;
         } else {
             this.access = undefined;
             this.default = undefined;
             this.type = undefined;
-            this.required = false;
+            this.required = undefined;
+            this.name;
         }
     }
 

@@ -11,5 +11,12 @@ class IntegerXMLField extends NumberXMLField {
             this.default = 0;
         }
     }
+
+    transformValue(value) {
+        value = super.prepareValue(value);
+        if (value && Utils.isString(value))
+            value = parseInt(value);
+        return value;
+    }
 }
 module.exports = IntegerXMLField;

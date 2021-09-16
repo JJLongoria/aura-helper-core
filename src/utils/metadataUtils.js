@@ -3,9 +3,18 @@ const MetadataObject = require('../types/metadataObject');
 const MetadataItem = require('../types/metadataItem');
 const StrUtils = require('../utils/strUtils');
 
-
+/**
+ * Class with utils methods to work with Aura Helper Metadata JSON Format or other Metadata Types like SObjects or XML Metadata Files
+ */
 class MetadataUtils {
 
+    /**
+     * Method to alphabetic sort a Metadata JSON
+     * @param {Object} metadata Metadata JSON to sort
+     * @param {Boolean} [deserialize] true if want to ensure the response are MetadataType, MetadataObject and MetadataItem instances.
+     * 
+     * @returns {Object} Returns the JSON data sort in alphabetic order 
+     */
     static orderMetadata(metadata, deserialize) {
         let orderedMetadata = {};
         Object.keys(metadata).sort(function (keyA, keyB) {
@@ -21,6 +30,12 @@ class MetadataUtils {
         return deserializeMetadataTypes(orderedMetadata);
     }
 
+    /**
+     * Method to alphabetic sort a SObjects JSON
+     * @param {Object} sObjects SObjects JSON to sort
+     * 
+     * @returns {Object} Returns the JSON data sort in alphabetic order
+     */
     static orderSObjects(sObjects) {
         let orderedSObjects = {};
         Object.keys(sObjects).sort(function (keyA, keyB) {
@@ -34,6 +49,13 @@ class MetadataUtils {
         return orderedSObjects;
     }
 
+    /**
+     * Method to compare the Metadata JSON as source with the Metadata JSON as target with get the data that exists on source but does not exists on target
+     * @param {Object} metadataSource Metadata JSON source to compare
+     * @param {Object} metadataTarget Metadata JSON target to compare
+     * 
+     * @returns {Object} Returns a Metadata JSON with the existing data on source but not exists on target
+     */
     static compareMetadata(metadataSource, metadataTarget) {
         let metadataOnOrg = {};
         Object.keys(metadataSource).forEach(function (key) {
@@ -78,6 +100,12 @@ class MetadataUtils {
         return deserializeMetadataTypes(metadataOnOrg);
     }
 
+    /**
+     * Method to check if has almost one element selected on MetadataTypes, MetadataObjects or MetadataItems
+     * @param {Object} objects MetadataType childs or MetadataObject childs
+     * 
+     * @returns {Boolean} true if has almost one element selected, false in otherwise
+     */
     static isAnyChecked(objects) {
         let nChecked = 0;
         let nUnchecked = 0;
@@ -90,6 +118,11 @@ class MetadataUtils {
         return nChecked > 0 && nUnchecked > 0;
     }
 
+    /**
+     * Method to check if has all elements selected on MetadataTypes, MetadataObjects or MetadataItems
+     * @param {Object} objects MetadataType childs or MetadataObject childs
+     * @returns {Boolean} true if has all elements selected, false in otherwise
+     */
     static isAllChecked(objects) {
         let nChecked = 0;
         Object.keys(objects).forEach(function (key) {
@@ -99,10 +132,22 @@ class MetadataUtils {
         return Object.keys(objects).length === nChecked;
     }
 
+    /**
+     * Method to check if a MetadataType or MetadataObject has childs
+     * @param {MetadataType | MetadataObject | Object} object Element to check if has childs
+     * 
+     * @returns {Boolean} true if has childs, false in otherwise
+     */
     static haveChilds(object) {
         return object && object.childs && Object.keys(object.childs).length > 0;
     }
 
+    /**
+     * Method to get the childs selected data. Count all elements selected and all childs to compare
+     * @param {MetadataType | MetadataObject | Object} object Element to get childs data
+     * 
+     * @returns {Object} Returns an object with the data selected Items and subitems data, and total items and subitems.
+     */
     static getChildsData(object) {
         let nChilds = -1;
         let totalItems = 0;
@@ -134,6 +179,14 @@ class MetadataUtils {
         };
     }
 
+    /**
+     * Method to check if an element or Metadata is available with your or version
+     * @param {Object} elementData Element to check
+     * @param {Number} lastVersion Last version to check if is available
+     * @param {Number} orgVersion Org version to check if is available
+     * 
+     * @returns True if the element is available, false in otherwise
+     */
     static availableOnVersion(elementData, lastVersion, orgVersion) {
         let maxVersion = (elementData.maxApi === -1) ? lastVersion : elementData.maxApi;
         let minVersion = elementData.minApi;
@@ -142,11 +195,12 @@ class MetadataUtils {
         return orgVersion >= minVersion && orgVersion <= maxVersion;
     }
 
+
     static handleUniqueFields(xmlFile, elementData, uniqueFields, xmlElementName, xmlSubelementName) {
         if (uniqueFields.length > 0) {
-            for (let xmlElement of xmlFile[elementData.key]) {
-                if (!xmlSubelementName && xmlElement[elementData.xmlData.fieldKey] !== xmlElementName) {
-                    for (let uniqueField of uniqueFields) {
+            for (const xmlElement of xmlFile[elementData.key]) {
+                if (!xmlSubelementName && xmlElement[elementData.fieldKey] !== xmlElementName) {
+                    for (const uniqueField of uniqueFields) {
                         if (xmlElement[uniqueField.field] === uniqueField.value) {
                             if (uniqueField.datatype === 'boolean') {
                                 xmlElement[uniqueField.field] = !uniqueField.value;
@@ -155,8 +209,8 @@ class MetadataUtils {
                             }
                         }
                     }
-                } else if (xmlSubelementName && xmlElement[elementData.xmlData.fieldKey] !== xmlElementName + elementData.xmlData.fields[elementData.xmlData.fieldKey].separator + xmlSubelementName && xmlElement[elementData.xmlData.fieldKey].startsWith(xmlElementName)) {
-                    for (let uniqueField of uniqueFields) {
+                } else if (xmlSubelementName && xmlElement[elementData.fieldKey] !== xmlElementName + elementData.fields[elementData.fieldKey].separator + xmlSubelementName && xmlElement[elementData.fieldKey].startsWith(xmlElementName)) {
+                    for (const uniqueField of uniqueFields) {
                         if (xmlElement[uniqueField.field] === uniqueField.value) {
                             if (uniqueField.datatype === 'boolean') {
                                 xmlElement[uniqueField.field] = !uniqueField.value;
@@ -172,11 +226,11 @@ class MetadataUtils {
 
     static handleControlledFields(xmlFile, elementData, checkedOrUncheckedItems, xmlElementName, xmlSubelementName) {
         for (let item of checkedOrUncheckedItems) {
-            if (elementData.xmlData.fields[item] && elementData.xmlData.fields[item].controlledFields && elementData.xmlData.fields[item].controlledFields.length > 0) {
+            if (elementData.fields[item] && elementData.fields[item].controlledFields && elementData.fields[item].controlledFields.length > 0) {
                 for (let xmlElement of xmlFile[elementData.key]) {
                     if (!xmlSubelementName) {
-                        if (xmlElement[elementData.xmlData.fieldKey] === xmlElementName) {
-                            for (let controlledField of elementData.xmlData.fields[item].controlledFields) {
+                        if (xmlElement[elementData.fieldKey] === xmlElementName) {
+                            for (let controlledField of elementData.fields[item].controlledFields) {
                                 if (xmlElement[controlledField.field] !== undefined && xmlElement[item] === controlledField.valueToCompare) {
                                     xmlElement[controlledField.field] = controlledField.valueToSet;
                                 }
@@ -184,8 +238,8 @@ class MetadataUtils {
                             break;
                         }
                     } else {
-                        if (xmlElement[elementData.xmlData.fieldKey] === xmlElementName + elementData.xmlData.fields[elementData.xmlData.fieldKey].separator + xmlSubelementName) {
-                            for (let controlledField of elementData.xmlData.fields[item].controlledFields) {
+                        if (xmlElement[elementData.fieldKey] === xmlElementName + elementData.fields[elementData.fieldKey].separator + xmlSubelementName) {
+                            for (let controlledField of elementData.fields[item].controlledFields) {
                                 if (xmlElement[controlledField.field] !== undefined && xmlElement[item] === controlledField.valueToCompare) {
                                     xmlElement[controlledField.field] = controlledField.valueToSet;
                                 }
@@ -198,6 +252,12 @@ class MetadataUtils {
         }
     }
 
+    /**
+     * Method to get the Namespace from the Metadata name
+     * @param {String} objName Object or metadata name to check
+     * 
+     * @returns {String} Return the namespace name or empty string if not has namespace
+     */
     static getNamespaceFromName(objName){
         let ns = '';
         if(StrUtils.contains(objName, '__')){
@@ -209,6 +269,12 @@ class MetadataUtils {
         return ns;
     }
 
+    /**
+     * Method to remove the selected elements from a JSON Metadata Object
+     * @param {Object} metadata JSON Metadata Object
+     * 
+     * @returns {Object} Returns the MetadataJSON without selected data
+     */
     static deleteCheckedMetadata(metadata) {
         Object.keys(metadata).forEach(function (typeKey) {
             Object.keys(metadata[typeKey].childs).forEach(function (objectKey) {
@@ -230,6 +296,10 @@ class MetadataUtils {
         return metadata;
     }
 
+    /**
+     * Method to select all elements (and subelements) from a entire Metadata JSON, MetadataType or MetadataObject
+     * @param {MetadataType | MetadataObject | Object} metadata 
+     */
     static checkAll(metadata){
         Object.keys(metadata).forEach(function (key) {
             metadata[key].checked = true;
@@ -246,6 +316,10 @@ class MetadataUtils {
         });
     }
 
+    /**
+     * Method to unselect all elements (and subelements) from a entire Metadata JSON, MetadataType or MetadataObject
+     * @param {MetadataType | MetadataObject | Object} metadata 
+     */
     static uncheckAll(metadata){
         Object.keys(metadata).forEach(function (key) {
             metadata[key].checked = false;
@@ -262,6 +336,13 @@ class MetadataUtils {
         });
     }
 
+    /**
+     * Method to combine the Metadata source into the Metadata target to create only one Metadata JSON Object
+     * @param {Object} metadataTarget Metadata JSON as target
+     * @param {Object} metadataSource Metadata JSON as source
+     * 
+     * @returns {Object} Returns a single object with the combined data
+     */
     static combineMetadata(metadataTarget, metadataSource) {
         Object.keys(metadataSource).forEach(function (key) {
             const metadataTypeSource = metadataSource[key];

@@ -1,7 +1,18 @@
 const Utils = require('../utils/utils');
+const Token = require('./token');
 
+/**
+ * Class to represent an Apex Node. Designed to be a superclass of all Apex Nodes
+ */
 class ApexNode {
 
+    /**
+     * Constructor to create an ApexNode instance
+     * @param {String | Object} idOrObject Node id or Object with ApexNode fields
+     * @param {String} [idOrObject] Apex node type
+     * @param {String} [name] Node name
+     * @param {Token} [startToken] Node start token
+     */
     constructor(idOrObject, nodeType, name, startToken) {
         if(Utils.isObject(idOrObject)){
             this.id = idOrObject.id;

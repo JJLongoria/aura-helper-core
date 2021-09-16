@@ -10,11 +10,11 @@ describe('Testing ./src/types/apexProperty.js', () => {
         expect(apexProperty.nodeType).toMatch(ApexNodeType.PROPERTY);
         apexProperty.addChild();
         apexProperty.addChild({
-            type: ApexNodeType.GETTER,
+            nodeType: ApexNodeType.GETTER,
             name: 'apexGetter'
         });
         apexProperty.addChild({
-            type: ApexNodeType.SETTER,
+            nodeType: ApexNodeType.SETTER,
             name: 'apexSetter'
         });
         const apexProperty2 = new ApeProperty(apexProperty);

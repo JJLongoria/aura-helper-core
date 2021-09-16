@@ -13,6 +13,8 @@ class XMLDataControlledField {
             this.field = fieldOrObject;
             this.valueToCompare = valueToCompare;
             this.valueToSet = valueToSet;
+            this.minApi = 1;
+            this.maxApi = -1;
         }
     }
 

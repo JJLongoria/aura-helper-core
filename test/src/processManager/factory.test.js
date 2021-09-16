@@ -13,26 +13,26 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.listMetadataTypes('MyOrg', '50.0');
         expect(process.name).toEqual('force:mdapi:describemetadata');
         ProcessFactory.listMetadataTypes('MyOrg');
-        try{
+        try {
             ProcessFactory.listMetadataTypes(undefined, '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        
+
     });
     test('Testing describeMetadataType()', () => {
         const process = ProcessFactory.describeMetadataType('MyOrg', 'Report', 'unfiled$public', '50.0');
         expect(process.name).toEqual('force:mdapi:listmetadata-Report');
         ProcessFactory.describeMetadataType('MyOrg', 'Report', 'unfiled$public');
         ProcessFactory.describeMetadataType('MyOrg', 'CustomObject');
-        try{
+        try {
             ProcessFactory.describeMetadataType(undefined, 'Report', 'unfiled$public', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.describeMetadataType('MyOrg', undefined, 'unfiled$public', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('metadataType is Required.');
         }
     });
@@ -41,9 +41,9 @@ describe('Testing ./src/process/factory.js', () => {
         expect(process.name).toEqual('force:schema:sobject:list');
         ProcessFactory.listSObjects('MyOrg', 'Custom', '50.0');
         ProcessFactory.listSObjects('MyOrg', 'Custom');
-        try{
+        try {
             ProcessFactory.listSObjects(undefined, undefined, '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
     });
@@ -51,14 +51,14 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.getSObjectSchema('MyOrg', 'CustomObject', '50.0');
         ProcessFactory.getSObjectSchema('MyOrg', 'CustomObject');
         expect(process.name).toEqual('force:schema:sobject:describe-CustomObject');
-        try{
+        try {
             ProcessFactory.getSObjectSchema(undefined, undefined, '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.getSObjectSchema('MyOrg', undefined, '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('sObject is Required.');
         }
     });
@@ -68,19 +68,19 @@ describe('Testing ./src/process/factory.js', () => {
         ProcessFactory.sourceRetrievePackage('MyOrg', './manifest/package.xml', './', '50.0', 1);
         ProcessFactory.sourceRetrievePackage('MyOrg', './manifest/package.xml', './', '50.0');
         ProcessFactory.sourceRetrievePackage('MyOrg', './manifest/package.xml', './');
-        try{
+        try {
             ProcessFactory.sourceRetrievePackage(undefined, './manifest/package.xml', './', '50.0', 1);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.sourceRetrievePackage('MyOrg', undefined, './', '50.0', 1);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('packageFile is Required.');
         }
-        try{
+        try {
             ProcessFactory.sourceRetrievePackage('MyOrg', './manifest/package.xml', undefined, '50.0', 1);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });
@@ -91,19 +91,19 @@ describe('Testing ./src/process/factory.js', () => {
         ProcessFactory.sourceValidatePackage('MyOrg', './manifest/package.xml', './', 'runLocalTest', 'ApexClassName');
         ProcessFactory.sourceValidatePackage('MyOrg', './manifest/package.xml', './', 'runLocalTest');
         ProcessFactory.sourceValidatePackage('MyOrg', './manifest/package.xml', './');
-        try{
+        try {
             ProcessFactory.sourceValidatePackage(undefined, './manifest/package.xml', './', 'runLocalTest', 'ApexClassName', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.sourceValidatePackage('MyOrg', undefined, './', 'runLocalTest', 'ApexClassName', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('packageFile is Required.');
         }
-        try{
+        try {
             ProcessFactory.sourceValidatePackage('MyOrg', './manifest/package.xml', undefined, 'runLocalTest', 'ApexClassName', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });
@@ -114,39 +114,62 @@ describe('Testing ./src/process/factory.js', () => {
         ProcessFactory.sourceDeployPackage('MyOrg', './manifest/package.xml', './', 'runLocalTest', 'ApexClassName');
         ProcessFactory.sourceDeployPackage('MyOrg', './manifest/package.xml', './', 'runLocalTest');
         ProcessFactory.sourceDeployPackage('MyOrg', './manifest/package.xml', './');
-        try{
+        try {
             ProcessFactory.sourceDeployPackage(undefined, './manifest/package.xml', './', 'runLocalTest', 'ApexClassName', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.sourceDeployPackage('MyOrg', undefined, './', 'runLocalTest', 'ApexClassName', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('packageFile is Required.');
         }
-        try{
+        try {
             ProcessFactory.sourceDeployPackage('MyOrg', './manifest/package.xml', undefined, 'runLocalTest', 'ApexClassName', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
+        }
+    });
+    test('Testing sourceDeploy()', () => {
+        let process = ProcessFactory.sourceDeploy('MyOrg', './', 'Profile');
+        process = ProcessFactory.sourceDeploy('MyOrg', './', 'Profile', 'testLevel');
+        process = ProcessFactory.sourceDeploy('MyOrg', './', 'Profile', 'testLevel', 'runTest');
+        process = ProcessFactory.sourceDeploy('MyOrg', './', 'Profile', 'testLevel', 'runTest', '50.0');
+        process = ProcessFactory.sourceDeploy('MyOrg', './', 'Profile', 'testLevel', 'runTest', '50.0', 33);
+        expect(process.name).toEqual('force:source:deploy-types');
+        try {
+            ProcessFactory.sourceDeploy(undefined, './', 'Profile', 'testLevel', 'runTest', '50.0', 33);
+        } catch (error) {
+            expect(error.message).toMatch('usernameOrAlias is Required.');
+        }
+        try {
+            ProcessFactory.sourceDeploy('MyOrg', undefined, 'Profile', 'testLevel', 'runTest', '50.0', 33);
+        } catch (error) {
+            expect(error.message).toMatch('projectFolder is Required.');
+        }
+        try {
+            ProcessFactory.sourceDeploy('MyOrg', './', undefined, 'testLevel', 'runTest', '50.0', 33);
+        } catch (error) {
+            expect(error.message).toMatch('types is Required.');
         }
     });
     test('Testing sourceQuickDeploy()', () => {
         const process = ProcessFactory.sourceQuickDeploy('MyOrg', 'deployId', './', '50.0');
         expect(process.name).toEqual('force:source:deploy-quick');
         ProcessFactory.sourceQuickDeploy('MyOrg', 'deployId', './');
-        try{
+        try {
             ProcessFactory.sourceQuickDeploy(undefined, 'deployId', './', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.sourceQuickDeploy('MyOrg', undefined, './', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('deployId is Required.');
         }
-        try{
+        try {
             ProcessFactory.sourceQuickDeploy('MyOrg', 'deployId', undefined, '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });
@@ -154,14 +177,14 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.sourceCancelDeploy('MyOrg', 'deployId', '1');
         expect(process.name).toEqual('force:source:deploy:cancel');
         ProcessFactory.sourceCancelDeploy('MyOrg', 'deployId');
-        try{
+        try {
             ProcessFactory.sourceCancelDeploy(undefined, 'deployId', '1');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.sourceCancelDeploy('MyOrg', undefined, '1');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('deployId is Required.');
         }
     });
@@ -169,14 +192,14 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.sourceDeployReport('MyOrg', 'deployId', '50.0');
         expect(process.name).toEqual('force:source:deploy:report');
         ProcessFactory.sourceDeployReport('MyOrg', 'deployId');
-        try{
+        try {
             ProcessFactory.sourceDeployReport(undefined, 'deployId');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.sourceDeployReport('MyOrg', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('deployId is Required.');
         }
     });
@@ -184,24 +207,24 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.mdapiRetrievePackage('MyOrg', './manifest/package.xml', './', 'target/dir', '50.0', 1);
         expect(process.name).toEqual('force:mdapi:retrieve-package');
         ProcessFactory.mdapiRetrievePackage('MyOrg', './manifest/package.xml', './', 'target/dir');
-        try{
+        try {
             ProcessFactory.mdapiRetrievePackage(undefined, './manifest/package.xml', './', 'target/dir', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.mdapiRetrievePackage('MyOrg', undefined, './', 'target/dir', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('packageFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.mdapiRetrievePackage('MyOrg', './manifest/package.xml', undefined, 'target/dir', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.mdapiRetrievePackage('MyOrg', './manifest/package.xml', './', undefined, '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('targetDir is Required.');
         }
     });
@@ -211,41 +234,41 @@ describe('Testing ./src/process/factory.js', () => {
         ProcessFactory.mdapiValidatePackage('MyOrg', './manifest/package.xml', './', 'runLocalTest', 'ApexClassName');
         ProcessFactory.mdapiValidatePackage('MyOrg', './manifest/package.xml', './', 'runLocalTest');
         ProcessFactory.mdapiValidatePackage('MyOrg', './manifest/package.xml', './');
-        try{
+        try {
             ProcessFactory.mdapiValidatePackage(undefined, './manifest/package.xml', './', 'runLocalTest', 'ApexClassName', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.mdapiValidatePackage('MyOrg', undefined, './', 'runLocalTest', 'ApexClassName', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('packageFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.mdapiValidatePackage('MyOrg', './manifest/package.xml', undefined, 'runLocalTest', 'ApexClassName', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
-    });    test('Testing mdapiDeployPackage()', () => {
+    }); test('Testing mdapiDeployPackage()', () => {
         const process = ProcessFactory.mdapiDeployPackage('MyOrg', './manifest/package.xml', './', 'runLocalTest', 'ApexClassName', '50.0', 1);
         expect(process.name).toEqual('force:mdapi:deploy-package');
         ProcessFactory.mdapiDeployPackage('MyOrg', './manifest/package.xml', './', 'runLocalTest', 'ApexClassName', '50.0');
         ProcessFactory.mdapiDeployPackage('MyOrg', './manifest/package.xml', './', 'runLocalTest', 'ApexClassName');
         ProcessFactory.mdapiDeployPackage('MyOrg', './manifest/package.xml', './', 'runLocalTest');
         ProcessFactory.mdapiDeployPackage('MyOrg', './manifest/package.xml', './');
-        try{
+        try {
             ProcessFactory.mdapiDeployPackage(undefined, './manifest/package.xml', './', 'runLocalTest', 'ApexClassName', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.mdapiDeployPackage('MyOrg', undefined, './', 'runLocalTest', 'ApexClassName', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('packageFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.mdapiDeployPackage('MyOrg', './manifest/package.xml', undefined, 'runLocalTest', 'ApexClassName', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });
@@ -253,38 +276,38 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.mdapiQuickDeploy('MyOrg', 'deployId', ',/', '50.0');
         expect(process.name).toEqual('force:mdapi:deploy-quick');
         ProcessFactory.mdapiQuickDeploy('MyOrg', 'deployId', ',/');
-        try{
+        try {
             ProcessFactory.mdapiQuickDeploy(undefined, 'deployId', ',/', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.mdapiQuickDeploy('MyOrg', undefined, ',/', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('deployId is Required.');
         }
-        try{
-            ProcessFactory.mdapiQuickDeploy('MyOrg','deployId', undefined, '50.0');
-        } catch(error){
+        try {
+            ProcessFactory.mdapiQuickDeploy('MyOrg', 'deployId', undefined, '50.0');
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });
     test('Testing mdapiRetrieveReport()', () => {
         const process = ProcessFactory.mdapiRetrieveReport('MyOrg', 'retrieveId', 'targetDir');
         expect(process.name).toEqual('force:mdapi:retrieve:report');
-        try{
+        try {
             ProcessFactory.mdapiRetrieveReport(undefined, 'deployId', 'targetDir');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.mdapiRetrieveReport('MyOrg', undefined, 'targetDir');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('retrieveId is Required.');
         }
-        try{
+        try {
             ProcessFactory.mdapiRetrieveReport('MyOrg', 'retrieveId', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('targetDir is Required.');
         }
     });
@@ -292,14 +315,14 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.mdapiDeployReport('MyOrg', 'deployId', 1);
         expect(process.name).toEqual('force:mdapi:deploy:report');
         ProcessFactory.mdapiDeployReport('MyOrg', 'deployId');
-        try{
+        try {
             ProcessFactory.mdapiDeployReport(undefined, 'deployId');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.mdapiDeployReport('MyOrg', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('deployId is Required.');
         }
     });
@@ -307,14 +330,14 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.mdapiCancelDeploy('MyOrg', 'deployId', 1);
         expect(process.name).toEqual('mdapi:deploy:cancel');
         ProcessFactory.mdapiCancelDeploy('MyOrg', 'deployId');
-        try{
+        try {
             ProcessFactory.mdapiCancelDeploy(undefined, 'deployId');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.mdapiCancelDeploy('MyOrg', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('deployId is Required.');
         }
     });
@@ -323,14 +346,14 @@ describe('Testing ./src/process/factory.js', () => {
         expect(process.name).toEqual('force:data:soql:query-Select Id from Account');
         ProcessFactory.query('MyOrg', 'Select Id from Account', false);
         ProcessFactory.query('MyOrg', 'Select Id from Account');
-        try{
+        try {
             ProcessFactory.query(undefined, 'deployId');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.query('MyOrg', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('query is Required.');
         }
     });
@@ -338,19 +361,19 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.convertToSFDX('./manifest', './manifest/package.xml', '../convertedProject', '50.0');
         expect(process.name).toEqual('force:mdapi:convert');
         ProcessFactory.convertToSFDX('./manifest', './manifest/package.xml', '../convertedProject');
-        try{
+        try {
             ProcessFactory.convertToSFDX(undefined, './manifest/package.xml', '../convertedProject', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('packageFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.convertToSFDX('./manifest', undefined, '../convertedProject', '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('packageFile is Required.');
         }
-        try{
+        try {
             ProcessFactory.convertToSFDX('./manifest', './manifest/package.xml', undefined, '50.0');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('targetFolder is Required.');
         }
     });
@@ -358,19 +381,19 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.convertToMetadataAPI('./manifest/package.xml', './', '../convertedProject', '50.0');
         expect(process.name).toEqual('force:source:convert');
         ProcessFactory.convertToMetadataAPI('./manifest/package.xml', './', '../convertedProject');
-        try{
+        try {
             ProcessFactory.convertToMetadataAPI(undefined, './', '../convertedProject');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('packageFile is Required.');
         }
-        try{
+        try {
             ProcessFactory.convertToMetadataAPI('./manifest/package.xml', undefined, '../convertedProject');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.convertToMetadataAPI('./manifest/package.xml', './', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('targetFolder is Required.');
         }
     });
@@ -381,28 +404,28 @@ describe('Testing ./src/process/factory.js', () => {
         ProcessFactory.createSFDXProject('MyOrg', './', 'empty', 'acn');
         ProcessFactory.createSFDXProject('MyOrg', './', 'empty');
         ProcessFactory.createSFDXProject('MyOrg', './');
-        try{
+        try {
             ProcessFactory.createSFDXProject(undefined, './', 'empty', 'acn', true);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectName is Required.');
         }
-        try{
+        try {
             ProcessFactory.createSFDXProject('MyOrg', undefined, 'empty', 'acn', true);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });
     test('Testing setAuthOrg()', () => {
         const process = ProcessFactory.setAuthOrg('MyOrg', './');
         expect(process.name).toEqual('force:config:set-defaultusername');
-        try{
+        try {
             ProcessFactory.setAuthOrg(undefined, './');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.setAuthOrg('MyOrg', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });
@@ -411,19 +434,19 @@ describe('Testing ./src/process/factory.js', () => {
         expect(process.name).toEqual('force:data:tree:export-Select Id from Account');
         ProcessFactory.exportTreeData('MyOrg', 'Select Id from Account', './exported', 'prefix');
         ProcessFactory.exportTreeData('MyOrg', 'Select Id from Account', './exported');
-        try{
+        try {
             ProcessFactory.exportTreeData(undefined, 'Select Id from Account', './exported', 'prefix');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.exportTreeData('MyOrg', undefined, './exported', 'prefix');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('query is Required.');
         }
-        try{
+        try {
             ProcessFactory.exportTreeData('MyOrg', 'Select Id from Account', undefined, 'prefix');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('outputPath is Required.');
         }
     });
@@ -431,14 +454,14 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.importTreeData('MyOrg', './exported.json', '50.0');
         expect(process.name).toEqual('force:data:tree:import-./exported.json');
         ProcessFactory.importTreeData('MyOrg', './exported.json');
-        try{
+        try {
             ProcessFactory.importTreeData(undefined, './exported.json');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.importTreeData('MyOrg', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('file is Required.');
         }
     });
@@ -446,24 +469,24 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.bulkDelete('MyOrg', './dataToDelete.csv', 'CustomObject', './', '50.0');
         expect(process.name).toEqual('force:data:bulk:delete-CustomObject');
         ProcessFactory.bulkDelete('MyOrg', './dataToDelete.csv', 'CustomObject', './');
-        try{
+        try {
             ProcessFactory.bulkDelete('MyOrg', './dataToDelete.csv', 'CustomObject', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.bulkDelete(undefined, './dataToDelete.csv', 'CustomObject', './');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.bulkDelete('MyOrg', undefined, 'CustomObject', './');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('csvFile is Required.');
         }
-        try{
+        try {
             ProcessFactory.bulkDelete('MyOrg', './dataToDelete.csv', undefined, './');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('sobject is Required.');
         }
     });
@@ -471,20 +494,30 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.executeApexAnonymous('MyOrg', './scriptFile.apex', './', '50.0');
         expect(process.name).toEqual('force:apex:execute-./scriptFile.apex');
         ProcessFactory.executeApexAnonymous('MyOrg', './scriptFile.apex', './');
-        try{
+        try {
             ProcessFactory.executeApexAnonymous('MyOrg', './scriptFile.apex', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.executeApexAnonymous(undefined, './scriptFile.apex', './');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('usernameOrAlias is Required.');
         }
-        try{
+        try {
             ProcessFactory.executeApexAnonymous('MyOrg', undefined, './');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('scriptFile is Required.');
+        }
+    });
+    test('Testing gitGetConfig()', () => {
+        const process = ProcessFactory.gitGetConfig('./', 'author.name');
+        ProcessFactory.gitGetConfig('./');
+        expect(process.name).toEqual('git:config');
+        try {
+            ProcessFactory.gitGetConfig(undefined, 'author.name');
+        } catch (error) {
+            expect(error.message).toMatch('projectFolder is Required.');
         }
     });
     test('Testing gitLog()', () => {
@@ -492,27 +525,27 @@ describe('Testing ./src/process/factory.js', () => {
         expect(process.name).toEqual('git:log--pretty');
         ProcessFactory.gitLog('./');
         ProcessFactory.gitLog('./');
-        try{
+        try {
             ProcessFactory.gitLog(undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });
     test('Testing gitGetBranches()', () => {
         const process = ProcessFactory.gitGetBranches('./');
         expect(process.name).toEqual('git:branch-a');
-        try{
+        try {
             ProcessFactory.gitGetBranches(undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });
     test('Testing gitFetch()', () => {
         const process = ProcessFactory.gitFetch('./');
         expect(process.name).toEqual('git:fetch');
-        try{
+        try {
             ProcessFactory.gitFetch(undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });
@@ -520,14 +553,14 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.gitDiff('./', 'source', 'target');
         expect(process.name).toEqual('git:diff-source-target');
         ProcessFactory.gitDiff('./', 'source');
-        try{
+        try {
             ProcessFactory.gitDiff(undefined, 'source', 'target');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.gitDiff('./', undefined, 'target');
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('source is Required.');
         }
     });
@@ -540,23 +573,23 @@ describe('Testing ./src/process/factory.js', () => {
             folder: './folder',
             sortOrder: 'order'
         });
-        try{
+        try {
             ProcessFactory.auraHelperCompressFolder(undefined, {
                 folder: './folder',
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.auraHelperCompressFolder('./', {
                 folder: undefined,
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('folder is Required.');
         }
-        try{
+        try {
             ProcessFactory.auraHelperCompressFolder('./', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('options is Required.');
         }
     });
@@ -569,23 +602,23 @@ describe('Testing ./src/process/factory.js', () => {
             sortOrder: 'order'
         });
         expect(process.name).toEqual('ah:compress:file-./file');
-        try{
+        try {
             ProcessFactory.auraHelperCompressFile(undefined, {
                 file: './file',
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.auraHelperCompressFile('./', {
                 file: undefined,
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('file is Required.');
         }
-        try{
+        try {
             ProcessFactory.auraHelperCompressFile('./', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('options is Required.');
         }
     });
@@ -595,11 +628,11 @@ describe('Testing ./src/process/factory.js', () => {
         });
         expect(process.name).toEqual('ah:org:compare');
         ProcessFactory.auraHelperOrgCompare('./', {});
-        try{
+        try {
             ProcessFactory.auraHelperOrgCompare(undefined, {
                 apiVersion: '50.0',
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });
@@ -618,24 +651,24 @@ describe('Testing ./src/process/factory.js', () => {
             source: 'source',
             target: 'target',
         });
-        try{
+        try {
             ProcessFactory.auraHelperOrgCompareBetween(undefined, {
                 apiVersion: '50.0',
                 target: 'target',
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.auraHelperOrgCompareBetween('./', {
                 apiVersion: '50.0',
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('target is Required.');
         }
-        try{
+        try {
             ProcessFactory.auraHelperOrgCompareBetween('./', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('options is Required.');
         }
     });
@@ -668,16 +701,16 @@ describe('Testing ./src/process/factory.js', () => {
             fromOrg: false,
             types: ['CustomObject']
         });
-        try{
+        try {
             ProcessFactory.auraHelperDescribeMetadata(undefined, {
                 apiVersion: '50.0',
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.auraHelperDescribeMetadata('./', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('options is Required.');
         }
     });
@@ -725,16 +758,16 @@ describe('Testing ./src/process/factory.js', () => {
             sortOrder: 'order',
             types: ['CustomObject']
         });
-        try{
+        try {
             ProcessFactory.auraHelperRetrieveSpecial(undefined, {
                 apiVersion: '50.0',
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.auraHelperRetrieveSpecial('./', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('options is Required.');
         }
     });
@@ -744,11 +777,11 @@ describe('Testing ./src/process/factory.js', () => {
         });
         expect(process.name).toEqual('ah:metadata:org:permissions');
         ProcessFactory.auraHelperLoadPermissions('./', {});
-        try{
+        try {
             ProcessFactory.auraHelperLoadPermissions(undefined, {
                 apiVersion: '50.0',
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });
@@ -833,31 +866,31 @@ describe('Testing ./src/process/factory.js', () => {
             ignoreFile: 'file',
             explicit: true
         });
-        try{
+        try {
             ProcessFactory.auraHelperPackageGenerator(undefined, {
                 apiVersion: '50.0',
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
-        try{
+        try {
             ProcessFactory.auraHelperPackageGenerator('./', {
                 apiVersion: '50.0',
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('createFrom is Required.');
         }
-        try{
+        try {
             ProcessFactory.auraHelperPackageGenerator('./', {
                 apiVersion: '50.0',
                 createFrom: 'git'
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('source is Required.');
         }
-        try{
+        try {
             ProcessFactory.auraHelperPackageGenerator('./', undefined);
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('options is Required.');
         }
     });
@@ -917,11 +950,11 @@ describe('Testing ./src/process/factory.js', () => {
             ignoreFile: 'file',
             outputFile: 'output'
         });
-        try{
+        try {
             ProcessFactory.auraHelperRepairDependencies(undefined, {
                 apiVersion: '50.0',
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });
@@ -947,11 +980,11 @@ describe('Testing ./src/process/factory.js', () => {
             compress: true,
             sortOrder: 'order'
         });
-        try{
+        try {
             ProcessFactory.auraHelperIgnore(undefined, {
                 apiVersion: '50.0',
             });
-        } catch(error){
+        } catch (error) {
             expect(error.message).toMatch('projectFolder is Required.');
         }
     });

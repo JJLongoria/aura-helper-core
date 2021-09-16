@@ -95,4 +95,8 @@ describe('Testing ./src/fileSystem/fileChecker.js', () => {
         expect(FileChecker.isSFDXRootPath('folder/permissionsets')).toBeFalsy();
         expect(FileChecker.isSFDXRootPath('./test/assets')).toBeTruthy();
     });
+    test('Testing isSalesforceXML()', () => {
+        expect(FileChecker.isSalesforceXML('folder/permissionsets')).toBeFalsy();
+        expect(FileChecker.isSalesforceXML('./test/assets-meta.xml')).toBeTruthy();
+    });
 });

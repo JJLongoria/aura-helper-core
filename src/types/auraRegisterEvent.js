@@ -4,12 +4,14 @@ const AuraNodeType = require('../values/auraNodeType');
 
 class AuraRegisterEvent extends AuraNode {
 
-    constructor(nameOrObject, token) {
-        super(nameOrObject, AuraNodeType.REGISTER_EVENT, token);
-        if (Utils.isObject(nameOrObject)) {
-            this.type = nameOrObject.type;
+    constructor(quelifiedNameOrObject, token) {
+        super(quelifiedNameOrObject, AuraNodeType.REGISTER_EVENT, token);
+        if (Utils.isObject(quelifiedNameOrObject)) {
+            this.type = quelifiedNameOrObject.type;
+            this.name = quelifiedNameOrObject.name;
         } else {
             this.type = undefined;
+            this.name = undefined;
         }
     }
 

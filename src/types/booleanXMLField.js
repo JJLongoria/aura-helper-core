@@ -11,5 +11,11 @@ class BooleanXMLField extends XMLField {
             this.default = false;
         }
     }
+
+    transformValue(value) {
+        if (value !== undefined && !Utils.isBoolean(value))
+            value = value === 'true';
+        return value;
+    }
 }
 module.exports = BooleanXMLField;

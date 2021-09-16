@@ -8,19 +8,21 @@ class AuraJSFunction {
         if (Utils.isObject(nameOrObject)) {
             this.name = nameOrObject.name;
             this.token = nameOrObject.token;
-            this.variables = nameOrObject.variables;
+            this.params = nameOrObject.params;
             this.comment = nameOrObject.comment;
             this.signature = nameOrObject.signature;
             this.auraSignature = nameOrObject.auraSignature;
+            this.positionData = nameOrObject.positionData;
         } else {
             this.name = nameOrObject;
             this.token = token;
-            this.variables = [];
+            this.params = [];
             this.comment = comment;
             if(!Utils.isNull(comment))
                 this.comment.processComment();
             this.signature = undefined;
             this.auraSignature = undefined;
+            this.positionData = undefined;
         }
     }
 
