@@ -5,6 +5,7 @@ exports.ApexCommentBlock = require('./apexCommentBlock');
 exports.ApexConstructor = require('./apexConstructor');
 exports.ApexDatatype = require('./apexDatatype');
 exports.ApexEnum = require('./apexEnum');
+exports.ApexExceptionThrows = require('./apexExceptionThrows');
 exports.ApexFormatterConfig = require('./apexFormatterConfig');
 exports.ApexGetter = require('./apexGetter');
 exports.ApexInitializer = require('./apexInitializer');

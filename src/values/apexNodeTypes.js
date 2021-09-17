@@ -7,6 +7,7 @@ module.exports = {
     SETTER: 'setter',
     INITIALIZER: 'initializer',
     METHOD: 'method',
+    THROWS: 'throws',
     CONSTRUCTOR: 'constructor',
     STATIC_CONSTRUCTOR: 'static_constructor',
     VARIABLE: 'variable',
