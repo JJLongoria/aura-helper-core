@@ -2,7 +2,7 @@ const ApexInterface = require('../../../src/types/apexInterface');
 const Token = require('../../../src/types/token');
 const ApexNodeType = require('../../../src/values/apexNodeTypes');
 
-describe('Testing ./src/types/apexInitializer.js', () => {
+describe('Testing ./src/types/apexInterface.js', () => {
     test('Testing instance', () => {
         const apexInterface = new ApexInterface('id', 'name', new Token('type', 'text', 1, 0, false));
         expect(apexInterface.id).toMatch('id');

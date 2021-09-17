@@ -23,11 +23,13 @@ class ApexMethod extends ApexDeclarationNode {
             this.variables = serialize(idOrObject.variables);
             this.params = serialize(idOrObject.params);
             this.queries = idOrObject.queries;
+            this.exceptions = idOrObject.exceptions;
         } else {
             this.testMethod = undefined;
             this.variables = {}
             this.params = {};
             this.queries = [];
+            this.exceptions = [];
         }
     }
 
@@ -37,10 +39,14 @@ class ApexMethod extends ApexDeclarationNode {
      * @returns {ApexGetter} Return the ApexMethod instance
      */
     addChild(child) {
-        if (child && child.nodeType === ApexNodeType.VARIABLE) {
+        if (!child)
+            return this;
+        if (child.nodeType === ApexNodeType.VARIABLE) {
             this.variables[child.name.toLowerCase()] = child;
         } else if (child.nodeType === ApexNodeType.SOQL) {
             this.queries.push(child);
+        } else if (child.nodeType === ApexNodeType.THROWS) {
+            this.exceptions.push(child);
         }
         child.order = Utils.countKeys(this.variables);
         child.memberOrder = child.order;
