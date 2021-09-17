@@ -5,15 +5,23 @@ const Utils = require('../utils/utils');
 
 class RetrieveResult {
 
-    constructor(inboundFilesOrObject, packages, warnings){
-        if(Utils.isObject(inboundFilesOrObject)){
-            this.inboundFiles = inboundFilesOrObject.inboundFiles;
-            this.packages = inboundFilesOrObject.packages;
-            this.warnings = inboundFilesOrObject.warnings;
+    constructor(objectOrId, status, done, success){
+        if(Utils.isObject(objectOrId)){
+            this.id = objectOrId.id;
+            this.status = objectOrId.status;
+            this.done = objectOrId.done;
+            this.success = objectOrId.success;
+            this.inboundFiles = objectOrId.inboundFiles;
+            this.packages = objectOrId.packages;
+            this.warnings = objectOrId.warnings;
         } else {
-            this.inboundFiles = inboundFilesOrObject;
-            this.packages = packages;
-            this.warnings = warnings;
+            this.id = objectOrId;
+            this.status = status;
+            this.done = done;
+            this.success = success;
+            this.inboundFiles = undefined;
+            this.packages = undefined;
+            this.warnings = undefined;
         }
     }
 
