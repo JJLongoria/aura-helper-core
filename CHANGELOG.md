@@ -1,6 +1,6 @@
 # Change Log
 All notable changes to this project will be documented in this file.
-## [1.0.0 - 02/02/2021]
+## [1.0.0 - 2021-09-18]
 ### Added
 - Added Utils libraries with Validator, XMLUtils, StrUtils, OSUtils, MathUtils and Utils classes
 - Added Values libraries with Metadata Types Names, Data types and other Data Values utils for @ah libraries
