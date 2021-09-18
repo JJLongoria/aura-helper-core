@@ -17,6 +17,7 @@ class ApexTrigger extends ApexNode{
     constructor(idOrObject, name, startToken){
         super(idOrObject, ApexNodeType.TRIGGER, name, startToken);
         if(Utils.isObject(idOrObject)){
+            this.sObject = idOrObject.sObject;
             this.beforeInsert = idOrObject.beforeInsert;
             this.afterInsert = idOrObject.afterInsert;
             this.beforeUpdate = idOrObject.beforeUpdate;
@@ -36,6 +37,7 @@ class ApexTrigger extends ApexNode{
             this.afterDelete = false;
             this.beforeUndelete = false;
             this.afterUndelete = false;
+            this.sObject = undefined;
             this.variables = {};
             this.queries = [];
         }
