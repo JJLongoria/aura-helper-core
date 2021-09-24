@@ -147,7 +147,7 @@ class SObject {
                         this.fields[fieldKey].referenceTo.push('User');
                 } else if (field.type && (field.type.toLowerCase() === 'number' || field.type.toLowerCase() === 'currency' || field.type.toLowerCase() === 'percent'))
                     this.fields[fieldKey].type = 'Decimal';
-                else if (field.type && field.type.toLowerCase() === 'checkbox' || field.type.toLowerCase() === 'boolean')
+                else if (field.type && (field.type.toLowerCase() === 'checkbox' || field.type.toLowerCase() === 'boolean'))
                     this.fields[fieldKey].type = 'Boolean';
                 else if (field.type && field.type.toLowerCase() === 'datetime')
                     this.fields[fieldKey].type = 'DateTime';
