@@ -83,9 +83,9 @@ class SObject {
                 field.type = 'Lookup';
                 if (!field.referenceTo.includes('User'))
                     field.referenceTo.push('User');
-            } else if (field.type && (field.type.toLowerCase() === 'number' || field.type.toLowerCase() === 'currency'))
+            } else if (field.type && (field.type.toLowerCase() === 'number' || field.type.toLowerCase() === 'currency' || field.type.toLowerCase() === 'percent'))
                 field.type = 'Decimal';
-            else if (field.type && field.type.toLowerCase() === 'checkbox')
+            else if (field.type && (field.type.toLowerCase() === 'checkbox' || field.type.toLowerCase() === 'boolean'))
                 field.type = 'Boolean';
             else if (field.type && field.type.toLowerCase() === 'datetime')
                 field.type = 'DateTime';
@@ -93,10 +93,19 @@ class SObject {
                 field.type = 'Location';
             else if (field.type && field.type.toLowerCase() === 'date')
                 field.type = 'Date';
-            else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference'))
+            else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference')) {
                 field.type = 'Lookup';
-            else if (field.type && field.type.toLowerCase() === 'id')
+                if (field.name.endsWith('Id')) {
+                    let obj = field.name.substring(0, field.name.length - 2);
+                    if (!field.referenceTo.includes(obj))
+                        field.referenceTo.push(obj);
+                }
+            } else if (field.type && field.type.toLowerCase() === 'id')
                 field.type = 'Id';
+            else if (field.type && field.type.toLowerCase() === 'double')
+                field.type = 'Double';
+            else if (field.type && field.type.toLowerCase() === 'int')
+                field.type = 'Integer';
             else
                 field.type = 'String';
         }
@@ -136,9 +145,9 @@ class SObject {
                     this.fields[fieldKey].type = 'Lookup';
                     if (!field.referenceTo.includes('User'))
                         this.fields[fieldKey].referenceTo.push('User');
-                } else if (field.type && (field.type.toLowerCase() === 'number' || field.type.toLowerCase() === 'currency'))
+                } else if (field.type && (field.type.toLowerCase() === 'number' || field.type.toLowerCase() === 'currency' || field.type.toLowerCase() === 'percent'))
                     this.fields[fieldKey].type = 'Decimal';
-                else if (field.type && field.type.toLowerCase() === 'checkbox')
+                else if (field.type && field.type.toLowerCase() === 'checkbox' || field.type.toLowerCase() === 'boolean')
                     this.fields[fieldKey].type = 'Boolean';
                 else if (field.type && field.type.toLowerCase() === 'datetime')
                     this.fields[fieldKey].type = 'DateTime';
@@ -146,10 +155,19 @@ class SObject {
                     this.fields[fieldKey].type = 'Location';
                 else if (field.type && field.type.toLowerCase() === 'date')
                     this.fields[fieldKey].type = 'Date';
-                else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference'))
-                    this.fields[fieldKey].type = 'Lookup';
-                else if (field.type && field.type.toLowerCase() === 'id')
+                else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference')) {
+                    field.type = 'Lookup';
+                    if (field.name.endsWith('Id')) {
+                        let obj = field.name.substring(0, field.name.length - 2);
+                        if (!field.referenceTo.includes(obj))
+                            this.fields[fieldKey].referenceTo.push(obj);
+                    }
+                } else if (field.type && field.type.toLowerCase() === 'id')
                     this.fields[fieldKey].type = 'Id';
+                else if (field.type && field.type.toLowerCase() === 'double')
+                    this.fields[fieldKey].type = 'Double';
+                else if (field.type && field.type.toLowerCase() === 'int')
+                    this.fields[fieldKey].type = 'Integer';
                 else
                     this.fields[fieldKey].type = 'String';
             }
