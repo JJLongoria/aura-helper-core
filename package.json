@@ -2,7 +2,7 @@
   "name": "@aurahelper/core",
   "productName": "Aura Helper Core Libraries",
   "displayName": "Aura Helper Framework Core",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Core libraries for Aura Helper CLI, Aura Helper Extension and the rest of @ah libraries. Contain Util classes, Aura Helper Datatypes, Process Manages and Utils values",
   "main": "index.js",
   "scripts": {
