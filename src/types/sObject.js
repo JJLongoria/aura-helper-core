@@ -71,21 +71,21 @@ class SObject {
     }
 
     addField(name, field) {
-        this.fields[name] = field;
+        this.fields[name.toLowerCase()] = field;
         return this;
     }
 
     getField(name) {
-        return new SObjectField(this.fields[name]);
+        return new SObjectField(this.fields[name.toLowerCase()]);
     }
 
     addRecordType(devName, recordType) {
-        this.recordTypes[devName] = recordType;
+        this.recordTypes[devName.toLowerCase()] = recordType;
         return this;
     }
 
     getRecordType(devName) {
-        return new RecordType(this.recordTypes[devName]);
+        return new RecordType(this.recordTypes[devName.toLowerCase()]);
     }
 }
 module.exports = SObject;
