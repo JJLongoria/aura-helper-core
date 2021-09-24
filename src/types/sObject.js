@@ -71,33 +71,35 @@ class SObject {
     }
 
     addField(name, field) {
-        if (field.type && field.type.toLowerCase() === 'hierarchy') {
-            if (!field.referenceTo.includes(this.name))
+        if (this.name) {
+            if (field.type && field.type.toLowerCase() === 'hierarchy') {
+                if (!field.referenceTo.includes(this.name))
+                    field.referenceTo.push(this.name);
+                field.type = 'Lookup';
+            } else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference') && !field.name === 'ParentId') {
+                field.type = 'Lookup';
                 field.referenceTo.push(this.name);
-            field.type = 'Lookup';
-        } else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference') && !field.name === 'ParentId') {
-            field.type = 'Lookup';
-            field.referenceTo.push(this.name);
-        } else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference') && !field.name === 'OwnerId') {
-            field.type = 'Lookup';
-            if (!field.referenceTo.includes('User'))
-                field.referenceTo.push('User');
-        } else if (field.type && (field.type.toLowerCase() === 'number' || field.type.toLowerCase() === 'currency'))
-            field.type = 'Decimal';
-        else if (field.type && field.type.toLowerCase() === 'checkbox')
-            field.type = 'Boolean';
-        else if (field.type && field.type.toLowerCase() === 'datetime')
-            field.type = 'DateTime';
-        else if (field.type && field.type.toLowerCase() === 'location')
-            field.type = 'Location';
-        else if (field.type && field.type.toLowerCase() === 'date')
-            field.type = 'Date';
-        else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference'))
-            field.type = 'Lookup';
-        else if (field.type && field.type.toLowerCase() === 'id')
-            field.type = 'Id';
-        else
-            field.type = 'String';
+            } else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference') && !field.name === 'OwnerId') {
+                field.type = 'Lookup';
+                if (!field.referenceTo.includes('User'))
+                    field.referenceTo.push('User');
+            } else if (field.type && (field.type.toLowerCase() === 'number' || field.type.toLowerCase() === 'currency'))
+                field.type = 'Decimal';
+            else if (field.type && field.type.toLowerCase() === 'checkbox')
+                field.type = 'Boolean';
+            else if (field.type && field.type.toLowerCase() === 'datetime')
+                field.type = 'DateTime';
+            else if (field.type && field.type.toLowerCase() === 'location')
+                field.type = 'Location';
+            else if (field.type && field.type.toLowerCase() === 'date')
+                field.type = 'Date';
+            else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference'))
+                field.type = 'Lookup';
+            else if (field.type && field.type.toLowerCase() === 'id')
+                field.type = 'Id';
+            else
+                field.type = 'String';
+        }
         this.fields[name.toLowerCase()] = field;
         return this;
     }
