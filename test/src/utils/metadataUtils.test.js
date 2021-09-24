@@ -41,13 +41,13 @@ describe('Testing ./src/utils/utils.js', () => {
         expect(keys[0]).toMatch('Account');
         expect(keys[1]).toMatch('Case');
         let accFieldKeys = Object.keys(sObjects['Account'].fields);
-        expect(accFieldKeys[0]).toMatch('Acc__c');
-        expect(accFieldKeys[1]).toMatch('Name');
-        expect(accFieldKeys[2]).toMatch('Zip');
+        expect(accFieldKeys[0]).toMatch('acc__c');
+        expect(accFieldKeys[1]).toMatch('name');
+        expect(accFieldKeys[2]).toMatch('zip');
         let caseFieldKeys = Object.keys(sObjects['Case'].fields);
-        expect(caseFieldKeys[0]).toMatch('CaseNumber');
-        expect(caseFieldKeys[1]).toMatch('Description');
-        expect(caseFieldKeys[2]).toMatch('Subject');
+        expect(caseFieldKeys[0]).toMatch('casenumber');
+        expect(caseFieldKeys[1]).toMatch('description');
+        expect(caseFieldKeys[2]).toMatch('subject');
     });
     test('Testing compareMetadata()', () => {
         const metadataTarget = {};
