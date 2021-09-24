@@ -76,10 +76,10 @@ class SObject {
                 if (!field.referenceTo.includes(this.name))
                     field.referenceTo.push(this.name);
                 field.type = 'Lookup';
-            } else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference') && !field.name === 'ParentId') {
+            } else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference') && field.name === 'ParentId') {
                 field.type = 'Lookup';
                 field.referenceTo.push(this.name);
-            } else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference') && !field.name === 'OwnerId') {
+            } else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference') && field.name === 'OwnerId') {
                 field.type = 'Lookup';
                 if (!field.referenceTo.includes('User'))
                     field.referenceTo.push('User');
@@ -129,10 +129,10 @@ class SObject {
                     if (!field.referenceTo.includes(this.name))
                         field.referenceTo.push(this.name);
                     this.fields[fieldKey].type = 'Lookup';
-                } else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference') && !field.name === 'ParentId') {
+                } else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference') && field.name === 'ParentId') {
                     this.fields[fieldKey].type = 'Lookup';
                     this.fields[fieldKey].referenceTo.push(this.name);
-                } else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference') && !field.name === 'OwnerId') {
+                } else if (field.type && (field.type.toLowerCase() === 'lookup' || field.type.toLowerCase() === 'reference') && field.name === 'OwnerId') {
                     this.fields[fieldKey].type = 'Lookup';
                     if (!field.referenceTo.includes('User'))
                         this.fields[fieldKey].referenceTo.push('User');
