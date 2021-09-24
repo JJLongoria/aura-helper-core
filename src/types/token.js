@@ -55,7 +55,7 @@ class Token {
                 text += StrUtils.getWhitespaces(token.range.start.character);
             if (newLine && addWs && text.length > 0)
                 text += ' ';
-            text += token.content;
+            text += token.text;
             if (nextToken && token && token.range.start.line === nextToken.range.start.line)
                 text += StrUtils.getWhitespaces(nextToken.range.start.character - token.range.end.character);
             if (nextToken && token && token.line < nextToken.line && !onOneLine)
