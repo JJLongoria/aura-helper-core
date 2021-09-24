@@ -16,6 +16,7 @@ class PositionData {
             this.tagData = startPartOrObject.tagData;
             this.query = startPartOrObject.query;
             this.source = startPartOrObject.source;
+            this.parentName = startPartOrObject.parentName;
         } else {
             this.startPart = startPartOrObject;
             this.endPart = endPart;
@@ -29,6 +30,7 @@ class PositionData {
             this.tagData = undefined;
             this.query = undefined;
             this.source = source;
+            this.parentName = undefined;
         }
     }
 }
