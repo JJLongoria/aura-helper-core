@@ -224,4 +224,20 @@ function addSystemFieldsToSObject(sObject) {
         sObject.fields['systemmodstamp'].custom = false;
         sObject.fields['systemmodstamp'].type = 'DateTime';
     }
+    if (!sObject.fields['recordtypeid']) {
+        sObject.fields['recordtypeid'] = new SObjectField('RecordTypeId');
+        sObject.fields['recordtypeid'].label = 'Record Type';
+        sObject.fields['recordtypeid'].custom = false;
+        sObject.fields['recordtypeid'].type = 'Lookup';
+        sObject.fields['recordtypeid'].referenceTo = ['RecordType'];
+        sObject.fields['recordtypeid'].nillable = false;
+    }
+    if (!sObject.fields['ownerid']) {
+        sObject.fields['ownerid'] = new SObjectField('OwnerId');
+        sObject.fields['ownerid'].label = 'Owner';
+        sObject.fields['ownerid'].custom = false;
+        sObject.fields['ownerid'].nillable = false;
+        sObject.fields['ownerid'].referenceTo = ['User'];
+        sObject.fields['ownerid'].type = 'Lookup';
+    }
 }
