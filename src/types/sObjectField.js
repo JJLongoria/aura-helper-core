@@ -11,6 +11,7 @@ class SObjectField {
             this.picklistValues = nameOrObject.picklistValues;
             this.referenceTo = nameOrObject.referenceTo;
             this.namespace = nameOrObject.namespace;
+            this.description = nameOrObject.description;
         } else {
             this.name = nameOrObject;
             this.label = label;
@@ -22,6 +23,7 @@ class SObjectField {
             this.nillable = true;
             this.picklistValues = [];
             this.referenceTo = [];
+            this.description = '';
         }
     }
 

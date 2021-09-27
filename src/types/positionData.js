@@ -17,6 +17,11 @@ class PositionData {
             this.query = startPartOrObject.query;
             this.source = startPartOrObject.source;
             this.parentName = startPartOrObject.parentName;
+            this.token = startPartOrObject.token;
+            this.lastToken = startPartOrObject.lastToken;
+            this.twoLastToken = startPartOrObject.twoLastToken;
+            this.nextToken = startPartOrObject.nextToken;
+            this.twoNextToken = startPartOrObject.twoNextToken;
         } else {
             this.startPart = startPartOrObject;
             this.endPart = endPart;
@@ -31,6 +36,11 @@ class PositionData {
             this.query = undefined;
             this.source = source;
             this.parentName = undefined;
+            this.token = undefined;
+            this.lastToken = undefined;
+            this.twoLastToken = undefined;
+            this.nextToken = undefined;
+            this.twoNextToken = undefined;
         }
     }
 }

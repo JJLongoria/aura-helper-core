@@ -15,6 +15,7 @@ class SObject {
             this.namespace = nameOrObject.namespace;
             this.fields = nameOrObject.fields;
             this.recordTypes = nameOrObject.recordTypes;
+            this.description = nameOrObject.description;
         } else {
             this.name = nameOrObject;
             this.label = label;
@@ -26,6 +27,7 @@ class SObject {
             this.namespace = '';
             this.fields = {};
             this.recordTypes = {};
+            this.description = '';
         }
     }
 
