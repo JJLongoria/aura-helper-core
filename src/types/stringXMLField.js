@@ -48,7 +48,7 @@ class StringXMLField extends XMLField {
     }
 
     transformValue(value) {
-        super.prepareValue(value);
+        return super.prepareValue(value);
     }
 
     validate(value, fieldName) {
