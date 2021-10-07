@@ -63,7 +63,10 @@ class ProjectUtils {
      */
     static getOrgAlias(projectFolder) {
         projectFolder = Validator.validateFolderPath(projectFolder, 'projectFolder');
-        return JSON.parse(FileReader.readFileSync(projectFolder + '/.sfdx/' + CONFIG_FILE)).defaultusername;
+        if (FileChecker.isExists(projectFolder + '/.sfdx/' + CONFIG_FILE)) {
+            return JSON.parse(FileReader.readFileSync(projectFolder + '/.sfdx/' + CONFIG_FILE)).defaultusername;
+        }
+        return undefined;
     }
 
     /**
@@ -73,7 +76,10 @@ class ProjectUtils {
      * @returns Returns the Org Namespace
      */
     static getOrgNamespace(projectFolder) {
-        return ProjectUtils.getProjectConfig(projectFolder).namespace;
+        const config = ProjectUtils.getProjectConfig(projectFolder);
+        if (config)
+            return ProjectUtils.getProjectConfig(projectFolder).namespace;
+        return '';
     }
 
     /**
