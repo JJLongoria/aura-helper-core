@@ -1061,6 +1061,7 @@ class ProcessFactory {
         command.addCommandArg((options.types) ? '-t' : '-a', (options.types) ? options.types.join(',') : undefined);
         command.addCommandArg((options.fromOrg && !options.downloadAll) ? '-o' : undefined);
         command.addCommandArg((options.apiVersion) ? '--api-version' : undefined, (options.apiVersion) ? ProjectUtils.getApiAsString(options.apiVersion) : undefined);
+        command.addCommandArg((options.groupGlobalActions) ? '--group' : undefined);
         command.addCommandArg('-p', 'json');
         return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(Utils.getCallbackFunction(arguments)).setHandleProgress(true);
     }
