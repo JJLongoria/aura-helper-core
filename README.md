@@ -111,7 +111,7 @@ Command Line Interface to work with Salesforce Projects. This application are en
 # [**Metadata JSON Format**](#metadata-json-format)
 
 The Metadata JSON Format used by Aura Helper Framework and modules have the next structure. Some fields are required and the datatypes checked to ensure the correct file structure. 
-
+```json
     {
         "MetadataAPIName": {
             "name": "MetadataAPIName",                                  // Required (String). Contains the Metadata Type API Name (like object Key)
@@ -146,9 +146,9 @@ The Metadata JSON Format used by Aura Helper Framework and modules have the next
             }
         }
     }
-
+```
 ### **Example**:
-
+```json
     {
         "CustomObject": {
             "name": "CustomObject",
@@ -215,13 +215,13 @@ The Metadata JSON Format used by Aura Helper Framework and modules have the next
             }
         }
     }
-
+```
 # [**Ignore File**](#ignore-file)
 
 The ignore file is a JSON file used on ignore, create package or dependencies manager modules. On this file you can specify metadata types, objects and elements for ignore or delete from your local project, package files or ignore when check dependencies.
 
 The ignore file have the next structure
-
+```json
     {
         // Basic structure
         "MetadataTypeAPIName": {
@@ -245,9 +245,9 @@ The ignore file have the next structure
             "UserPermission:*:PermissionName"
         }
     }
-
+```
 *Example*:
-
+```json
     {
         "CustomLabels": {
             "labelName1",                   // Ignore or remove the custom label "labelName1"
@@ -287,7 +287,7 @@ The ignore file have the next structure
             "*"                             // Ignore or remove all profiles
         }
     }
-
+```
 
 
 
