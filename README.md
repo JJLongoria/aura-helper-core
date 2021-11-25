@@ -1,4 +1,15 @@
 # [**Aura Helper Framework**](#aura-helper-framework)
+
+[![Version](https://img.shields.io/npm/v/@aurahelper/core?logo=npm)](https://www.npmjs.com/package/@aurahelper/core)
+[![Total Downloads](https://img.shields.io/npm/dt/@aurahelper/core?logo=npm)](https://www.npmjs.com/package/@aurahelper/core)
+[![Downloads/Month](https://img.shields.io/npm/dm/@aurahelper/core?logo=npm)](https://www.npmjs.com/package/@aurahelper/core)
+[![Issues](https://img.shields.io/github/issues/jjlongoria/aura-helper-core)](https://github.com/JJLongoria/aura-helper-core/issues)
+[![Known Vulnerabilities](https://snyk.io/test/github/JJLongoria/aura-helper-core/badge.svg)](https://snyk.io/test/github/JJLongoria/aura-helper-core)
+[![Code Size](https://img.shields.io/github/languages/code-size/jjlongoria/aura-helper-core)](https://github.com/JJLongoria/aura-helper-core)
+[![License](https://img.shields.io/github/license/jjlongoria/aura-helper-core?logo=github)](https://github.com/JJLongoria/aura-helper-core/blob/master/LICENSE)
+
+
+
 Aura Helper Framework is a Node JS Framwork developed in JavaScript to able to all developers to create their own application to work with Salesforce. This Framework has to many modules to combine it to create powerfull tools. To Learn more about the framework, go to the [**Aura Helper Framework Documentation**](https://github.com/JJLongoria/aura-helper-core/wiki)
 
 Aura Helper Framwork has his own JSON Format files to work with all modules. See the [Metadata JSON Format](#metadata-json-format) section to learn and understand the Metadata JSON Object used by the framwork to create packages, describe metadata types or create metadata types from other sources like file system. See the [Ignore File](#ignore-file) section to lear and understund the ignore file used by Aura Helper Framework to support some operations like Create Package or Repair dependencies to avoid some metadata types or objects.
