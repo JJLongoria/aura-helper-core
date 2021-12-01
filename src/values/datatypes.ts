@@ -9,4 +9,4 @@ export const Datatypes: any = {
     DATE_TIME: 'datetime',
     DATE: 'date',
     TIME: 'time'
-}
+};
