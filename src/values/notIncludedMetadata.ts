@@ -1,4 +1,4 @@
-module.exports = {
+export const NotIncludedMetadata: any = {
     StandardValueSet: {
         xmlName: "StandardValueSet",
         suffix: "standardValueSet",
@@ -58,4 +58,4 @@ module.exports = {
             "WorkOrderStatus",
         ]
     }
-}
+};
