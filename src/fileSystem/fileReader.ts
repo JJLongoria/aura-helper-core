@@ -19,7 +19,7 @@ export class FileReader {
      * 
      * @returns {string} Return the document content string
      */
-    static readDocument(document: TextDocument) {
+    static readDocument(document: TextDocument): string {
         var lines = [];
         for (var i = 0; i < document.lineCount; i++) {
             const line = document.lineAt(i);
@@ -45,7 +45,7 @@ export class FileReader {
      * @param {string} filePath file to read
      * @param {Function} callback callback function to call when read operation finish. Use it to get the file content
      */
-    static readFile(filePath: string, callback: (err?: Error | any, data?: string | Buffer) => void) {
+    static readFile(filePath: string, callback: (err?: Error | any, data?: string | Buffer) => void): void {
         fs.readFile(filePath, 'utf8', callback);
     }
 
