@@ -1,6 +1,7 @@
-const MetadataTypes = require('./metadataTypes');
+import { MetadataTypes } from "./metadataTypes";
 
-module.exports = {
+
+export const SpecialMetadata: any = {
     Profile: [
         MetadataTypes.CUSTOM_APPLICATION,
         MetadataTypes.APEX_CLASS,
@@ -46,4 +47,4 @@ module.exports = {
         MetadataTypes.BUSINESS_PROCESS
     ],
     CustomObject: []
-}
+};
