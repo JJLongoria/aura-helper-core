@@ -1,4 +1,4 @@
-module.exports = {
+export const AuraTokenTypes: any = {
     UNKNOWN: "token.type.unknown",
     IDENTIFIER: "token.type.identifier",
     BRACKET: {
@@ -66,4 +66,4 @@ module.exports = {
             NAME: 'entity.xmlEntity.name'
         },
     }
-}
+};
