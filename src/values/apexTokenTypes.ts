@@ -236,4 +236,4 @@ export const ApexTokenTypes: any = {
             ASSIGN: "operator.assign"
         },
     }
-}
+};
