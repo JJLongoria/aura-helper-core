@@ -3,46 +3,46 @@ const os = require('os');
 /**
  * Class with util methods to work with the Operative System
  */
-class OSUtils {
+export class OSUtils {
 
     /**
      * Method to check if is the operative system is Linux
      * 
-     * @returns {Boolean} true if is Linux, false in otherwiese
+     * @returns {boolean} true if is Linux, false in otherwiese
      */
-    static isLinux(){
+    static isLinux(): boolean {
         return os.platform() === 'linux';
     }
 
     /**
      * Method to check if is the operative system is Windows
      * 
-     * @returns {Boolean} true if is Windows, false in otherwiese
+     * @returns {boolean} true if is Windows, false in otherwiese
      */
-    static isWindows(){
+    static isWindows(): boolean {
         return os.platform() === 'win32';
     }
 
     /**
      * Method to check if is the operative system is Mac
      * 
-     * @returns {Boolean} true if is Mac, false in otherwiese
+     * @returns {boolean} true if is Mac, false in otherwiese
      */
-    static isMac(){
+    static isMac(): boolean {
         return os.platform() === 'darwin';
     }
 
     /**
      * Method to get the available CPUs to run parallel processes
      * 
-     * @returns {Number} Returns the available processes
+     * @returns {number} Returns the available processes
      */
-    static getAvailableCPUs(){
+    static getAvailableCPUs(): number {
         let cpus = os.cpus().length;
-        if(cpus > 1)
+        if (cpus > 1) {
             cpus -= 1;
+        }
         return cpus;
     }
 
 }
-module.exports = OSUtils;
