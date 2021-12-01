@@ -3,206 +3,205 @@ const fs = require('fs');
 /**
  * Class to check all about files. If is Apex Class, Apex Trigger, Aura Component... or check if exists or is a File or Directorty
  */
-class FileChecker {
+export class FileChecker {
 
     /**
      * Method to check if the file path is an Apex Class file path (check .cls extension)
-     * @param {String} filePath path to check
+     * @param {string} filePath path to check
      * 
-     * @returns {Boolean} true if is Apex Class file, false in otherwise
+     * @returns {boolean} true if is Apex Class file, false in otherwise
      */
-    static isApexClass(filePath) {
+    static isApexClass(filePath: string): boolean {
         return filePath.endsWith('.cls');
     }
 
     /**
      * Method to check if the file path is an Apex Trigger file path (check .trigger extension)
-     * @param {String} filePath path to check
+     * @param {string} filePath path to check
      * 
-     * @returns {Boolean} true if is Apex Trigger file, false in otherwise
+     * @returns {boolean} true if is Apex Trigger file, false in otherwise
      */
-    static isApexTrigger(filePath) {
+    static isApexTrigger(filePath: string): boolean {
         return filePath.endsWith('.trigger');
     }
 
     /**
      * Method to check if the file path is a JavaScript file path (check .js extension)
-     * @param {String} filePath path to check
+     * @param {string} filePath path to check
      * 
-     * @returns {Boolean} true if is JavaScript file, false in otherwise
+     * @returns {boolean} true if is JavaScript file, false in otherwise
      */
-    static isJavaScript(filePath) {
+    static isJavaScript(filePath: string): boolean {
         return filePath.endsWith('.js');
     }
 
     /**
      * Method to check if the file path is an Aura JavaScript Helper file path (check ends with Helper.js)
-     * @param {String} filePath path to check
+     * @param {string} filePath path to check
      * 
-     * @returns {Boolean} true if is Aura JavaScript Helper file, false in otherwise
+     * @returns {boolean} true if is Aura JavaScript Helper file, false in otherwise
      */
-    static isAuraHelperJS(filePath) {
+    static isAuraHelperJS(filePath: string): boolean {
         return filePath.endsWith('Helper.js');
     }
 
     /**
      * Method to check if the file path is an Aura JavaScript Controller file path (check ends with Controller.js)
-     * @param {String} filePath path to check
+     * @param {string} filePath path to check
      * 
-     * @returns {Boolean} true if is Aura JavaScript Controller file, false in otherwise
+     * @returns {boolean} true if is Aura JavaScript Controller file, false in otherwise
      */
-    static isAuraControllerJS(filePath) {
+    static isAuraControllerJS(filePath: string): boolean {
         return filePath.endsWith('Controller.js');
     }
 
     /**
      * Method to check if the file path is an Aura Documentation file path (check .auradoc extension)
-     * @param {String} filePath path to check
+     * @param {string} filePath path to check
      * 
-     * @returns {Boolean} true if is Aura Documentation file, false in otherwise
+     * @returns {boolean} true if is Aura Documentation file, false in otherwise
      */
-    static isAuraDoc(filePath) {
+    static isAuraDoc(filePath: string): boolean {
         return filePath.endsWith('.auradoc');
     }
 
     /**
      * Method to check if the file path is an Aura Component file path (check .cmp extension)
-     * @param {String} filePath path to check
+     * @param {string} filePath path to check
      * 
-     * @returns {Boolean} true if is Aura Component file, false in otherwise
+     * @returns {boolean} true if is Aura Component file, false in otherwise
      */
-    static isAuraComponent(filePath) {
+    static isAuraComponent(filePath: string): boolean {
         return filePath.endsWith('.cmp');
     }
 
     /**
      * Method to check if the file path is an Aura Application file path (check .app extension)
-     * @param {String} filePath path to check
+     * @param {string} filePath path to check
      * 
-     * @returns {Boolean} true if is Aura Application file, false in otherwise
+     * @returns {boolean} true if is Aura Application file, false in otherwise
      */
-    static isAuraApplication(filePath) {
+    static isAuraApplication(filePath: string): boolean {
         return filePath.endsWith('.app');
     }
 
     /**
      * Method to check if the file path is an Aura Event file path (check .evt extension)
-     * @param {String} filePath path to check
+     * @param {string} filePath path to check
      * 
-     * @returns {Boolean} true if is Aura Event file, false in otherwise
+     * @returns {boolean} true if is Aura Event file, false in otherwise
      */
-    static isAuraEvent(filePath) {
+    static isAuraEvent(filePath: string): boolean {
         return filePath.endsWith('.evt');
     }
 
     /**
      * Method to check if the file path is the Aura Components folder
-     * @param {String} folderPath path to check
+     * @param {string} folderPath path to check
      * 
-     * @returns {Boolean} true if is Aura Components folder, false in otherwise
+     * @returns {boolean} true if is Aura Components folder, false in otherwise
      */
-    static isAuraComponentFolder(folderPath) {
+    static isAuraComponentFolder(folderPath: string): boolean {
         return folderPath.indexOf('/aura/') !== -1 || folderPath.indexOf('\\aura\\') !== -1;
     }
 
     /**
      * Method to check if the file path is an Aura file path (Event, Application or Component)
-     * @param {String} filePath path to check
+     * @param {string} filePath path to check
      * 
-     * @returns {Boolean} true if is Aura file, false in otherwise
+     * @returns {boolean} true if is Aura file, false in otherwise
      */
-    static isAuraFile(filePath) {
+    static isAuraFile(filePath: string): boolean {
         return FileChecker.isAuraComponentFolder(filePath) && (FileChecker.isAuraComponent(filePath) || FileChecker.isAuraApplication(filePath) || FileChecker.isAuraEvent(filePath));
     }
 
     /**
      * Method to check if the file path is Salesforce XML File (check ends with -meta.xml)
-     * @param {String} filePath path to check
+     * @param {string} filePath path to check
      * 
-     * @returns {Boolean} true if is Salesforce Profile file, false in otherwise
+     * @returns {boolean} true if is Salesforce Profile file, false in otherwise
      */
-    static isSalesforceXML(filePath) {
+    static isSalesforceXML(filePath: string): boolean {
         return filePath.endsWith('-meta.xml');
     }
 
     /**
      * Method to check if the file path is Salesforce Profile file (check .profile-meta.xml extension)
-     * @param {String} filePath path to check
+     * @param {string} filePath path to check
      * 
-     * @returns {Boolean} true if is Salesforce Profile file, false in otherwise
+     * @returns {boolean} true if is Salesforce Profile file, false in otherwise
      */
-    static isProfile(filePath) {
+    static isProfile(filePath: string): boolean {
         return filePath.endsWith('.profile-meta.xml');
     }
 
     /**
      * Method to check if the file path is Salesforce Permission Set file (check .permissionset-meta.xml extension)
-     * @param {String} filePath path to check
+     * @param {string} filePath path to check
      * 
-     * @returns {Boolean} true if is Salesforce Permission Set file, false in otherwise
+     * @returns {boolean} true if is Salesforce Permission Set file, false in otherwise
      */
-    static isPermissionSet(filePath) {
+    static isPermissionSet(filePath: string): boolean {
         return filePath.endsWith('.permissionset-meta.xml');
     }
 
     /**
      * Method to check if the file path is the Salesforce Profile folder
-     * @param {String} folderPath path to check
+     * @param {string} folderPath path to check
      * 
-     * @returns {Boolean} true if is Salesforce Profile folder, false in otherwise
+     * @returns {boolean} true if is Salesforce Profile folder, false in otherwise
      */
-    static isProfileFolder(folderPath) {
+    static isProfileFolder(folderPath: string): boolean {
         return folderPath.endsWith('/profiles') || folderPath.endsWith('\\profiles');
     }
 
     /**
      * Method to check if the file path is the Salesforce Permission Set folder
-     * @param {String} folderPath path to check
+     * @param {string} folderPath path to check
      * 
-     * @returns {Boolean} true if is Salesforce Permission Set folder, false in otherwise
+     * @returns {boolean} true if is Salesforce Permission Set folder, false in otherwise
      */
-    static isPermissionSetFolder(folderPath) {
+    static isPermissionSetFolder(folderPath: string): boolean {
         return folderPath.endsWith('/permissionsets') || folderPath.endsWith('\\permissionsets');
     }
 
     /**
      * Method to check if file or folder exists on the system
-     * @param {String} fileOFolderPath path to check
+     * @param {string} fileOFolderPath path to check
      * 
-     * @returns {Boolean} true if exists, false in otherwise
+     * @returns {boolean} true if exists, false in otherwise
      */
-    static isExists(fileOFolderPath) {
+    static isExists(fileOFolderPath: string): boolean {
         return fs.existsSync(fileOFolderPath);
     }
 
     /**
      * Method to check if the path is a Directory path (and exists)
-     * @param {String} folderPath path to check
+     * @param {string} folderPath path to check
      * 
-     * @returns {Boolean} true if is a directory, false in otherwise
+     * @returns {boolean} true if is a directory, false in otherwise
      */
-    static isDirectory(folderPath) {
+    static isDirectory(folderPath: string): boolean {
         return FileChecker.isExists(folderPath) && fs.statSync(folderPath).isDirectory();
     }
 
     /**
      * Method to check if the path is a File path (and exists)
-     * @param {String} filePath path to check
+     * @param {string} filePath path to check
      * 
-     * @returns {Boolean} true if is a file, false in otherwise
+     * @returns {boolean} true if is a file, false in otherwise
      */
-    static isFile(filePath) {
+    static isFile(filePath: string): boolean {
         return FileChecker.isExists(filePath) && fs.statSync(filePath).isFile();
     }
 
     /**
      * Method to check if the folder is a SFDX Salesforce project folder (check if sfdx-project.json or /manifest/package.xml exists on folder)
-     * @param {String} folderPath path to check
+     * @param {string} folderPath path to check
      * 
-     * @returns {Boolean} true if is a SFDX Salesforce project folder, false in otherwise
+     * @returns {boolean} true if is a SFDX Salesforce project folder, false in otherwise
      */
-    static isSFDXRootPath(folderPath) {
+    static isSFDXRootPath(folderPath: string): boolean {
         return FileChecker.isExists(folderPath + '/sfdx-project.json') || FileChecker.isExists(folderPath + '/manifest/package.xml');
     }
 }
-module.exports = FileChecker;
