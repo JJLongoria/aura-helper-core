@@ -1,4 +1,4 @@
-module.exports = {
+export const JSTokenTypes: any = {
     UNKNOWN: "token.type.unknown",
     IDENTIFIER: "token.type.identifier",
     DATATYPE: {
@@ -183,4 +183,4 @@ module.exports = {
             ASSIGN: "operator.assign"
         },
     }
-}
+};
