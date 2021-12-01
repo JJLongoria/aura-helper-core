@@ -2,3 +2,7 @@
 .gitignore
 .vscode
 /coverage
+/src
+/dist/test
+.tsconfig.json
+.eslintrc.json
