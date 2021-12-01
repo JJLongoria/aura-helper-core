@@ -4,9 +4,14 @@
   "displayName": "Aura Helper Framework Core",
   "version": "1.0.13",
   "description": "Core libraries for Aura Helper CLI, Aura Helper Extension and the rest of @ah libraries. Contain Util classes, Aura Helper Datatypes, Process Manages and Utils values",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "jest --coverage --runInBand"
+    "compile": "tsc -p ./ ",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"test": "jest --coverage --runInBand"
   },
   "keywords": [
     "aura-helper-framework",

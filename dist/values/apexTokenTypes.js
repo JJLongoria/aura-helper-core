@@ -1,4 +1,7 @@
-module.exports = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ApexTokenTypes = void 0;
+exports.ApexTokenTypes = {
     UNKNOWN: "token.type.unknown",
     IDENTIFIER: "token.type.identifier",
     ANNOTATION: {
@@ -236,4 +239,5 @@ module.exports = {
             ASSIGN: "operator.assign"
         },
     }
-}
+};
+//# sourceMappingURL=apexTokenTypes.js.map
