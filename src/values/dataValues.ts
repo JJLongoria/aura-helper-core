@@ -1,4 +1,4 @@
-module.exports = {
+export const DataValues: any = {
     DEFAULT_TEXT: '{!value}',
     NOT_NULL: '{!notnull}',
     AVAILABLE: '{!available}',
