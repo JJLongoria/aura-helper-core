@@ -1,4 +1,4 @@
-module.exports = {
+export const MetadataSuffixByType: any = {
     CustomField: 'field',
     BusinessProcess: 'businessProcess',
     RecordType: 'recordType',
@@ -8,4 +8,4 @@ module.exports = {
     SharingReason: 'sharingReason',
     ListView: 'listView',
     FieldSet: 'fieldSet'
-}
+};
