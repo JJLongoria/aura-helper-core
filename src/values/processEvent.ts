@@ -1,4 +1,4 @@
-module.exports = {
+export const ProcessEvent: any = {
     STD_OUT: 'out',
     ERR_OUT: 'errorOut',
     ERROR: 'error',
