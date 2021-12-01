@@ -1,4 +1,4 @@
-module.exports = {
+export const TokenTypes: any = {
     UNKNOWN: "token.type.unknown",
     IDENTIFIER: "token.type.identifier",
     LITERAL: {
@@ -104,4 +104,4 @@ module.exports = {
             ASSIGN: "operator.assign"
         },
     }
-}
+};
