@@ -1,4 +1,4 @@
-module.exports = {
+export const MetadataTypes: any = {
   ACCOUNT_RELATIONSHIP_SHARE_RULE: 'AccountRelationshipShareRule',
   ACTION_LINK_GROUP_TEMPLATE: 'ActionLinkGroupTemplate',
   ACTION_OVERRIDE: 'ActionOverride',
