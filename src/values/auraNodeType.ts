@@ -1,4 +1,4 @@
-module.exports = {
+export const AuraNodeTypes: any = {
     APPLICATION: 'application',
     COMPONENT: 'component',
     ATTRIBUTE: 'attribute',
