@@ -1,15 +1,14 @@
 /**
  * Class to handle and throw errors when exceute not allowed operations
  */
-class OperationNotAllowedException extends Error {
+export class OperationNotAllowedException extends Error {
 
 	/**
 	 * Constructor to create the exception
-	 * @param {String} message Exception message
+	 * @param {string} message Exception message
 	 */
-	constructor(message) {
+	constructor(message: string) {
 		super(message);
 		this.name = "OperationNotAllowedException";
 	}
 }
-module.exports = OperationNotAllowedException;
