@@ -1,54 +1,62 @@
+import { Stats } from "fs";
+import { FileFilters } from "../types/fileFilter";
+import { TextDocument } from "../types/textDocument";
+import { StrUtils } from "../utils/strUtils";
+import { FileChecker } from "./fileChecker";
 const fs = require('fs');
 const path = require('path');
-const StrUtils = require('../utils/strUtils');
-const FileChecker = require('./fileChecker');
+
+
 
 /**
  * Class to read files, documents and folders from file system
  */
-class FileReader {
+export class FileReader {
 
     /**
      * Method to read a Document Object and get the entire text
      * @param {TextDocument} document document to read
      * 
-     * @returns {String} Return the document content string
+     * @returns {string} Return the document content string
      */
-    static readDocument(document) {
+    static readDocument(document: TextDocument) {
         var lines = [];
         for (var i = 0; i < document.lineCount; i++) {
-            lines.push(document.lineAt(i).text);
+            const line = document.lineAt(i);
+            if (line) {
+                lines.push(line.text);
+            }
         }
         return lines.join('\n');
     }
 
     /**
      * Method to read a file synchronously
-     * @param {String} filePath file to read
+     * @param {string} filePath file to read
      * 
-     * @returns {String} Return the file content
+     * @returns {string} Return the file content
      */
-    static readFileSync(filePath) {
+    static readFileSync(filePath: string): string {
         return fs.readFileSync(filePath, 'utf8');
     }
 
     /**
      * Method to read a file asynchronously
-     * @param {String} filePath file to read
+     * @param {string} filePath file to read
      * @param {Function} callback callback function to call when read operation finish. Use it to get the file content
      */
-    static readFile(filePath, callback) {
+    static readFile(filePath: string, callback: (err?: Error | any, data?: string | Buffer) => void) {
         fs.readFile(filePath, 'utf8', callback);
     }
 
     /**
      * Method to read an entire directory to get the files and subfolders
-     * @param {String} folderPath folder to read 
-     * @param {Object} [filters] filters to apply
+     * @param {string} folderPath folder to read 
+     * @param {FileFilters} [filters] filters to apply
      * 
-     * @returns {Array<String>} Return an array with the file paths
+     * @returns {Array<string>} Return an array with the file paths
      */
-    static readDirSync(folderPath, filters) {
+    static readDirSync(folderPath: string, filters?: FileFilters): string[] {
         let folderContent = fs.readdirSync(folderPath);
         if (filters) {
             let result = [];
@@ -59,16 +67,18 @@ class FileReader {
                 } else if (filters.onlyFiles) {
                     if (FileChecker.isFile(fullPath)) {
                         if (filters.extensions && filters.extensions.length > 0) {
-                            if (filters.extensions.includes(path.extname((filters && filters.absolutePath) ? fullPath : contentPath)))
+                            if (filters.extensions.includes(path.extname((filters && filters.absolutePath) ? fullPath : contentPath))) {
                                 result.push((filters && filters.absolutePath) ? fullPath : contentPath);
+                            }
                         } else {
                             result.push((filters && filters.absolutePath) ? fullPath : contentPath);
                         }
                     }
                 } else {
                     if (filters.extensions && filters.extensions.length > 0) {
-                        if (filters.extensions.includes(path.extname((filters && filters.absolutePath) ? fullPath : contentPath)))
+                        if (filters.extensions.includes(path.extname((filters && filters.absolutePath) ? fullPath : contentPath))) {
                             result.push((filters && filters.absolutePath) ? fullPath : contentPath);
+                        }
                     } else {
                         result.push((filters && filters.absolutePath) ? fullPath : contentPath);
                     }
@@ -82,40 +92,43 @@ class FileReader {
 
     /**
      * Method to read all files from a folder (including files from subfolders)
-     * @param {String} folderPath folder to read
-     * @param {Object} [filters] filters to apply
+     * @param {string} folderPath folder to read
+     * @param {string[]} [filters] filters to apply
      * 
-     * @returns {Promise<Array<String>>} Return a Promise with an array with all file paths
+     * @returns {Promise<string[]>} Return a Promise with an array with all file paths
      */
-    static getAllFiles(folderPath, filters) {
-        return new Promise(function (resolve, rejected) {
-            let results = [];
-            fs.readdir(folderPath, function (err, list) {
-                if (err){
+    static getAllFiles(folderPath: string, filters?: string[]): Promise<string[]> {
+        return new Promise<string[]>(function (resolve, rejected) {
+            let results: string[] = [];
+            fs.readdir(folderPath, function (err: Error, list: string[]) {
+                if (err) {
                     rejected(err);
                     return;
                 }
 
                 var pending = list.length;
-                if (!pending)
+                if (!pending) {
                     resolve(results);
+                }
                 list.forEach(function (file) {
                     file = path.resolve(folderPath, file);
-                    fs.stat(file, async function (err, stat) {
+                    fs.stat(file, async function (err: Error, stat: Stats) {
                         if (stat && stat.isDirectory()) {
                             let res = await FileReader.getAllFiles(file, filters);
                             results = results.concat(res);
-                            if (!--pending){
+                            if (!--pending) {
                                 resolve(results);
                                 return;
                             }
                         } else {
                             if (filters && filters.length > 0) {
-                                if (filters.includes(path.extname(file)))
+                                if (filters.includes(path.extname(file))) {
                                     results.push(StrUtils.replace(file, '\\', '/'));
-                            } else
+                                }
+                            } else {
                                 results.push(StrUtils.replace(file, '\\', '/'));
-                            if (!--pending){
+                            }
+                            if (!--pending) {
                                 resolve(results);
                                 return;
                             }
@@ -126,4 +139,3 @@ class FileReader {
         });
     }
 }
-module.exports = FileReader;
