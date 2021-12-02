@@ -1,18 +1,20 @@
-const Utils = require("../utils/utils");
-
 /**
  * Class to represent an Apex Formatter Configuration object to format apex classes with the desired format
  */
-class ApexFormatterConfig {
+export class ApexFormatterConfig {
+
+    punctuation: ApexFormatterPunctuationConfig;
+    operator: ApexFormatterOperatorConfig;
+    classMembers: ApexFormatterMembersConfig;
+    comment: ApexFormatterCommentConfig;
+    query: ApexFormatterQueryConfig;
 
     /**
      * Constructor to create an ApexFormatterConfig instance
-     * @param {Object} [configObj] Object with the same fields of Apex Formatter or VScode Config object
+     * @param {ApexFormatterConfig} [configObj] Object with the same fields of Apex Formatter or VScode Config object
      */
-    constructor(configObj) {
-        if (Utils.isObject(configObj)) {
-            if (!Utils.isNull(configObj.apexFormat))
-                configObj = configObj.apexFormat;
+    constructor(configObj?: ApexFormatterConfig) {
+        if (configObj instanceof ApexFormatterConfig) {
             this.punctuation = configObj.punctuation;
             this.operator = configObj.operator;
             this.classMembers = configObj.classMembers;
@@ -29,9 +31,9 @@ class ApexFormatterConfig {
 
     /**
      * Method to create the default format config to puctuation options
-     * @returns {Object} Return the default config
+     * @returns {ApexFormatterPunctuationConfig} Return the default config
      */
-    static punctuationConfig(){
+    static punctuationConfig(): ApexFormatterPunctuationConfig {
         return {
             maxBlankLines: 2,
             openCurlyBracketOnNewLine: false,
@@ -49,9 +51,9 @@ class ApexFormatterConfig {
 
     /**
      * Method to create the default format config to operators options
-     * @returns {Object} Return the default config
+     * @returns {ApexFormatterOperatorConfig} Return the default config
      */
-    static operatorConfig(){
+    static operatorConfig(): ApexFormatterOperatorConfig {
         return {
             addWhitespaceBeforeOperator: true,
             addWhitespaceAfterOperator: true,
@@ -62,9 +64,9 @@ class ApexFormatterConfig {
 
     /**
      * Method to create the default format config to class members options
-     * @returns {Object} Return the default config
+     * @returns {ApexFormatterMembersConfig} Return the default config
      */
-    static classMembersConfig(){
+    static classMembersConfig(): ApexFormatterMembersConfig {
         return {
             newLinesBetweenCodeBlockMembers: 1,
             newLinesBetweenGetterAndSetterAccessor: 1,
@@ -75,9 +77,9 @@ class ApexFormatterConfig {
 
     /**
      * Method to create the default format config to comments options
-     * @returns {Object} Return the default config
+     * @returns {ApexFormatterCommentConfig} Return the default config
      */
-    static commentConfig(){
+    static commentConfig(): ApexFormatterCommentConfig {
         return {
             holdBeforeWhitespacesOnLineComment: true,
             holdAfterWhitespacesOnLineComment: true,
@@ -87,9 +89,9 @@ class ApexFormatterConfig {
 
     /**
      * Method to create the default format config to queries options
-     * @returns {Object} Return the default config
+     * @returns {ApexFormatterQueryConfig} Return the default config
      */
-    static queryConfig(){
+    static queryConfig(): ApexFormatterQueryConfig {
         return {
             oneClausePerLine: true,
             oneProjectionFieldPerLine: false,
@@ -98,4 +100,42 @@ class ApexFormatterConfig {
     }
 
 }
-module.exports = ApexFormatterConfig;
+
+export interface ApexFormatterPunctuationConfig {
+    maxBlankLines: number;
+    openCurlyBracketOnNewLine: boolean;
+    addNewLineAfterCloseCurlyBracket: boolean;
+    addWhitespaceAfterCloseCurlyBracket: boolean;
+    addWhitespaceBeforeOpenCurlyBracket: boolean;
+    addWhitespaceBeforeOpenGuardParenthesis: boolean;
+    addWhitespaceAfterOpenGuardParenthesis: boolean;
+    addWhitespaceBeforeCloseGuardParenthesis: boolean;
+    addWhiteSpaceAfterComma: boolean;
+    addWhitespaceBeforeOpenTriggerEvents: boolean;
+}
+
+export interface ApexFormatterOperatorConfig {
+    addWhitespaceBeforeOperator: boolean;
+    addWhitespaceAfterOperator: boolean;
+    addWhitespaceAfterOpenParenthesisOperator: boolean;
+    addWhitespaceBeforeCloseParenthesisOperator: boolean;
+}
+
+export interface ApexFormatterMembersConfig {
+    newLinesBetweenCodeBlockMembers: number;
+    newLinesBetweenGetterAndSetterAccessor: number;
+    singleLineProperties: boolean;
+    newLinesBetweenClassFields: number;
+}
+
+export interface ApexFormatterCommentConfig {
+    holdBeforeWhitespacesOnLineComment: boolean;
+    holdAfterWhitespacesOnLineComment: boolean;
+    newLinesBewteenComments: number;
+}
+
+export interface ApexFormatterQueryConfig {
+    oneClausePerLine: boolean;
+    oneProjectionFieldPerLine: boolean;
+    maxProjectionFieldPerLine: number;
+}
