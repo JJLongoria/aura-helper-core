@@ -10,10 +10,10 @@ export class RetrieveInboundFile {
 
     /**
      * Create new Retrieve Inbound File instance
-     * @param nameOrInboundFile Inbound file name or Inbound File instance
-     * @param type file type
-     * @param state state value
-     * @param filePath file path value
+     * @param {string | RetrieveInboundFile} nameOrInboundFile Inbound file name or Inbound File instance
+     * @param {string} [type] file type
+     * @param {string} [state] state value
+     * @param {string} [filePath] file path value
      */
     constructor(nameOrInboundFile: string | RetrieveInboundFile, type?: string, state?: string, filePath?: string){
         if(nameOrInboundFile instanceof RetrieveInboundFile){
