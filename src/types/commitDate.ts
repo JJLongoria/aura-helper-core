@@ -13,25 +13,25 @@ export class CommitDate {
 
     /**
      * Create new Commit Date instance
-     * @param dayNameOrObject 
-     * @param monthName 
-     * @param day 
-     * @param time 
-     * @param year 
-     * @param timeoffset 
-     * @param dateStr 
+     * @param {string | CommitDate} dayNameOrCommitDate Commit date day name or Commit Date instance
+     * @param {string} [monthName] Commit date month name
+     * @param {number | string} [day] Commit date day
+     * @param {number | string} [time] Commit date time
+     * @param {number | string} [year] Commit date year
+     * @param {number | string} [timeoffset] Commit date time offset
+     * @param {string} [dateStr] Commit date formated as string
      */
-    constructor(dayNameOrObject: string | CommitDate, monthName?: string, day?: number | string, time?: number | string, year?: number | string, timeoffset?: number | string, dateStr?: string){
-        if(dayNameOrObject instanceof CommitDate){
-            this.dayName = dayNameOrObject.dayName;
-            this.monthName = dayNameOrObject.monthName;
-            this.day = dayNameOrObject.day;
-            this.time = dayNameOrObject.time;
-            this.year = dayNameOrObject.year;
-            this.timeoffset = dayNameOrObject.timeoffset;
-            this.dateStr = dayNameOrObject.dateStr;
+    constructor(dayNameOrCommitDate: string | CommitDate, monthName?: string, day?: number | string, time?: number | string, year?: number | string, timeoffset?: number | string, dateStr?: string){
+        if(dayNameOrCommitDate instanceof CommitDate){
+            this.dayName = dayNameOrCommitDate.dayName;
+            this.monthName = dayNameOrCommitDate.monthName;
+            this.day = dayNameOrCommitDate.day;
+            this.time = dayNameOrCommitDate.time;
+            this.year = dayNameOrCommitDate.year;
+            this.timeoffset = dayNameOrCommitDate.timeoffset;
+            this.dateStr = dayNameOrCommitDate.dateStr;
         } else {
-            this.dayName = dayNameOrObject;
+            this.dayName = dayNameOrCommitDate;
             this.monthName = monthName;
             this.day = day;
             this.time = time;
