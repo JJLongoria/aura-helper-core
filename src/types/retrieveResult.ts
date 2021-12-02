@@ -18,9 +18,9 @@ export class RetrieveResult {
     /**
      * Create new Retrieve Result intance
      * @param {string | RetrieveResult} idOrResult Retrieve Id or Retrieve Result instance
-     * @param {string} status 
-     * @param {boolean} done 
-     * @param {boolean} success 
+     * @param {string} [status] 
+     * @param {boolean} [done] 
+     * @param {boolean} [success] 
      */
     constructor(idOrResult: string | RetrieveResult, status?: string, done?: boolean, success?: boolean) {
         if (idOrResult instanceof RetrieveResult) {
