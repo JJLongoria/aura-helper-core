@@ -3,7 +3,7 @@ import { ApexNode } from "./apexNode";
 import { Token } from "./token";
 
 /**
- * Class to represent an Apex Interface Node when Parsing Apex Code
+ * Class to represent an Apex Exception throws Node when Parsing Apex Code
  */
 export class ApexExceptionThrows extends ApexNode {
 
