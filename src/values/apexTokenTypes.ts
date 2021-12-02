@@ -1,4 +1,4 @@
-export const ApexTokenTypes: any = {
+export const ApexTokenTypes = {
     UNKNOWN: "token.type.unknown",
     IDENTIFIER: "token.type.identifier",
     ANNOTATION: {

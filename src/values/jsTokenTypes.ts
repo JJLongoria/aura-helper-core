@@ -1,4 +1,4 @@
-export const JSTokenTypes: any = {
+export const JSTokenTypes = {
     UNKNOWN: "token.type.unknown",
     IDENTIFIER: "token.type.identifier",
     DATATYPE: {

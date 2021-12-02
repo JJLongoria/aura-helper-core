@@ -1,4 +1,4 @@
-export const ApexNodeTypes: any = {
+export const ApexNodeTypes = {
     CLASS: 'class',
     INTERFACE: 'interface',
     ENUM: 'enum',

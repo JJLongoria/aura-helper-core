@@ -1,7 +1,7 @@
 import { MetadataTypes } from "./metadataTypes";
 
 
-export const SpecialMetadata: any = {
+export const SpecialMetadata = {
     Profile: [
         MetadataTypes.CUSTOM_APPLICATION,
         MetadataTypes.APEX_CLASS,
