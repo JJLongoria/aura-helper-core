@@ -5,7 +5,7 @@ import { Range } from "./range";
 /**
  * Class to represent a Language Token
  */
-class Token {
+export class Token {
 
     id: string;
     type: string;
@@ -92,4 +92,3 @@ class Token {
         return text;
     }
 }
-module.exports = Token;
