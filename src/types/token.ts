@@ -45,7 +45,7 @@ export class Token {
             if (startIndex === undefined) {
                 startIndex = 0;
             } else {
-                endIndex = startIndex + this.text.length
+                endIndex = startIndex + this.text.length;
             }
             this.range = new Range(new Position(line || 0, startIndex), new Position(line || 0, endIndex));
             if (this.range.start) {
