@@ -1,4 +1,4 @@
-import { MathUtils, Utils } from "../utils";
+import { MathUtils } from "../utils";
 
 /**
  * Class to represent a Callback progress status
