@@ -10,8 +10,8 @@ export class SFDXProjectResult {
     /**
      * 
      * @param {string | SFDXProjectResult} outputDirOrResult Output directory or Project Result instance
-     * @param {boolean} created True if project are created, false in otherwise
-     * @param  {string}rawOutput Project Raw Output
+     * @param {boolean} [created] True if project are created, false in otherwise
+     * @param {string} [rawOutput] Project Raw Output
      */
     constructor(outputDirOrResult: string | SFDXProjectResult, created?: boolean, rawOutput?: string) {
         if (outputDirOrResult instanceof SFDXProjectResult) {
