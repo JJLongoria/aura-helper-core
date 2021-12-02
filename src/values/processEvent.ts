@@ -1,4 +1,4 @@
-export const ProcessEvent: any = {
+export const ProcessEvent = {
     STD_OUT: 'out',
     ERR_OUT: 'errorOut',
     ERROR: 'error',

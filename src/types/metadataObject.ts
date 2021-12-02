@@ -56,7 +56,7 @@ export class MetadataObject {
      * @returns {MetadataItem | undefined} Return the selected Metadata Item or undefined if not exists
      */
     getChild(name: string): MetadataItem | undefined {
-        if (this.childs[name]){
+        if (this.childs[name]) {
             return new MetadataItem(this.childs[name]);
         }
         return undefined;
@@ -75,7 +75,7 @@ export class MetadataObject {
      * @returns {string[]}
      */
     getChildKeys(): string[] {
-        return (this.haveChilds()) ? Object.keys(this.childs) : [];
+        return (this.hasChilds()) ? Object.keys(this.childs) : [];
     }
 
     /**
@@ -90,7 +90,7 @@ export class MetadataObject {
      * Method to check if the Metadata Object has childs
      * @returns {boolean}
      */
-    haveChilds(): boolean {
+    hasChilds(): boolean {
         return Object.keys(this.childs).length > 0;
     }
 
@@ -102,7 +102,7 @@ export class MetadataObject {
         let nChecked = 0;
         const keys = Object.keys(this.childs);
         keys.forEach((key) => {
-            if (this.childs[key].checked){
+            if (this.childs[key].checked) {
                 nChecked++;
             }
         });

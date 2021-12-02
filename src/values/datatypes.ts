@@ -1,4 +1,4 @@
-export const Datatypes: any = {
+export const Datatypes = {
     STRING: 'string',
     BOOLEAN: 'boolean',
     ARRAY: 'array',

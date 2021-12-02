@@ -1,4 +1,4 @@
-export const DataValues: any = {
+export const DataValues = {
     DEFAULT_TEXT: '{!value}',
     NOT_NULL: '{!notnull}',
     AVAILABLE: '{!available}',

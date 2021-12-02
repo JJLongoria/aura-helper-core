@@ -80,7 +80,7 @@ export class MetadataType {
      * @returns {string[]}
      */
     getChildKeys() {
-        return (this.haveChilds()) ? Object.keys(this.childs) : [];
+        return (this.hasChilds()) ? Object.keys(this.childs) : [];
     }
 
     /**
@@ -95,7 +95,7 @@ export class MetadataType {
      * Method to check if the Metadata Type has childs
      * @returns {boolean}
      */
-    haveChilds() {
+    hasChilds() {
         return this.childs && Object.keys(this.childs).length > 0;
     }
 

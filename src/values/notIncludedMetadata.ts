@@ -1,4 +1,4 @@
-export const NotIncludedMetadata: any = {
+export const NotIncludedMetadata = {
     StandardValueSet: {
         xmlName: "StandardValueSet",
         suffix: "standardValueSet",

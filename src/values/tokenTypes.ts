@@ -1,4 +1,4 @@
-export const TokenTypes: any = {
+export const TokenTypes = {
     UNKNOWN: "token.type.unknown",
     IDENTIFIER: "token.type.identifier",
     LITERAL: {
