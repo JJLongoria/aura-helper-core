@@ -6,9 +6,9 @@
     /**
      * Constructor to create the exception
      * @param {string} folderPath Invalid folder path
-     * @param {string} folderName Optional folder name to show
+     * @param {string} [folderName] Optional folder name to show
      */
-    constructor(folderPath: string, folderName: string) {
+    constructor(folderPath: string, folderName?: string) {
         super(((folderName) ? (folderName + ' folder') : 'Folder') + ' ' + folderPath + ' is not a valid directory path');
         this.name = "InvalidDirectoryPathException";
     }
