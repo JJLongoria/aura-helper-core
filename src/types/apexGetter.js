@@ -1,9 +1,3 @@
-const ApexNode = require('./apexNode');
-const ApexVariable = require('./apexVariable');
-const ApexNodeType = require('../values/apexNodeTypes');
-const Token = require('./token');
-const Utils = require('../utils/utils');
-
 /**
  * Class to represent a Property Apex Getter Node when Parsing Apex Code
  */
@@ -11,15 +5,15 @@ class ApexGetter extends ApexNode {
 
     /**
      * Constructor to create an ApexGetter instance
-     * @param {String | Object} idOrObject Node id or Object with ApexGetter fields
-     * @param {String} [name] Node name
+     * @param {string | ApexGetter} idOrGetter Node id or Object with ApexGetter fields
+     * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrObject, name, startToken) {
-        super(idOrObject, ApexNodeType.GETTER, name, startToken);
-        if (Utils.isObject(idOrObject)) {
-            this.variables = serialize(idOrObject.variables);
-            this.queries = idOrObject.queries;
+    constructor(idOrGetter: string | ApexGetter, name?: string, startToken?: Token) {
+        super(idOrGetter, ApexNodeType.GETTER, name, startToken);
+        if (Utils.isObject(idOrGetter)) {
+            this.variables = serialize(idOrGetter.variables);
+            this.queries = idOrGetter.queries;
         } else {
             this.variables = {};
             this.queries = [];
