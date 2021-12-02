@@ -1,19 +1,19 @@
 /**
  * Class to represent a Retrieve Package section on Retrieve Result JSON response
  */
-class RetrievePackage {
+export class RetrievePackage {
 
     name: string;
 
     /**
      * Create new Retrieve Package instance
-     * @param nameOrObject Package name or Retrive Pacakge instance
+     * @param nameOrPackage Package name or Retrive Pacakge instance
      */
-    constructor(nameOrObject: string | RetrievePackage) {
-        if (nameOrObject instanceof RetrievePackage) {
-            this.name = nameOrObject.name;
+    constructor(nameOrPackage: string | RetrievePackage) {
+        if (nameOrPackage instanceof RetrievePackage) {
+            this.name = nameOrPackage.name;
         } else {
-            this.name = nameOrObject;
+            this.name = nameOrPackage;
         }
     }
 }
