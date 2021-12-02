@@ -1,7 +1,7 @@
 /**
  * Class to create Utils Mathematics methods
  */
-export class MathUils {
+export class MathUtils {
 
     /**
      * Method to round a number with a selected decimal precission. By default, round with two decimals
