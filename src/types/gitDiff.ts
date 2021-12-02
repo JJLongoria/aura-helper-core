@@ -10,10 +10,10 @@ export class GitDiff {
 
     /**
      * Create new GitDiff instance
-     * @param pathOrGitDiff File path or Git Diff instance
-     * @param mode Diff mode
-     * @param removeChanges Remove changes lines
-     * @param addChanges Added changes lines
+     * @param {string | GitDiff} pathOrGitDiff File path or Git Diff instance
+     * @param {string} [mode] Diff mode
+     * @param {string[]} [removeChanges] Remove changes lines
+     * @param {string[]} [addChanges] Added changes lines
      */
     constructor(pathOrGitDiff: string | GitDiff, mode?: string, removeChanges?: string[], addChanges?: string[]) {
         if (pathOrGitDiff instanceof GitDiff) {
