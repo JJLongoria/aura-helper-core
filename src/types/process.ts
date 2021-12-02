@@ -39,7 +39,7 @@ export class Process {
      * @param {(data: any) => void} outputCallback output callback to handle process progress
      * @returns {Process} Return Process instance
      */
-    setOutputCallback(outputCallback: (data: any) => void): Process {
+    setOutputCallback(outputCallback?: (data: any) => void): Process {
         this.outputCallback = outputCallback;
         return this;
     }
