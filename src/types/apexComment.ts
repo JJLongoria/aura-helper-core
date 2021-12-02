@@ -14,15 +14,15 @@ export class ApexComment extends ApexNode {
 
     /**
      * Constructor to create an ApexComment instance
-     * @param {string | ApexComment} idOrObject Node id or Object with ApexComment fields
+     * @param {string | ApexComment} idOrComment Node id or Object with ApexComment fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrObject: string | ApexComment, name?: string, startToken?: Token) {
-        super(idOrObject, ApexNodeTypes.COMMENT, name, startToken);
-        if (idOrObject instanceof ApexComment) {
-            this.tokens = idOrObject.tokens;
-            this.description = idOrObject.description;
+    constructor(idOrComment: string | ApexComment, name?: string, startToken?: Token) {
+        super(idOrComment, ApexNodeTypes.COMMENT, name, startToken);
+        if (idOrComment instanceof ApexComment) {
+            this.tokens = idOrComment.tokens;
+            this.description = idOrComment.description;
         } else {
             this.tokens = [];
             this.description = '';
