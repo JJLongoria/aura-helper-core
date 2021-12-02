@@ -5,7 +5,7 @@ import { Token } from "./token";
 /**
  * Class to represent an Apex Annotation Node when Parsing Apex Code
  */
-class ApexAnnotation extends ApexNode {
+export class ApexAnnotation extends ApexNode {
 
     tokens: Token[];
 
@@ -35,4 +35,3 @@ class ApexAnnotation extends ApexNode {
         return this;
     }
 }
-module.exports = ApexAnnotation;
