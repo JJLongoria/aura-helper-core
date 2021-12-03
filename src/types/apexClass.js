@@ -19,7 +19,7 @@ class ApexClass extends ApexDeclarationNode {
     /**
      * Constructor to create an ApexClass instance
      * @param {String | Object} idOrObject Node id or Object with ApexClass fields
-     * @param {String} [name] Node name
+     * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
     constructor(idOrObject, name, startToken) {

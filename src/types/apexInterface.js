@@ -10,7 +10,7 @@ class ApexInterface extends ApexClass {
     /**
      * Constructor to create an ApexInterface instance
      * @param {String | Object} idOrObject Node id or Object with ApexInterface fields
-     * @param {String} [name] Node name
+     * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
     constructor(id, name, startToken) {

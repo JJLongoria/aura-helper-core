@@ -13,7 +13,7 @@ class ApexCommentBlock extends ApexComment {
     /**
      * Constructor to create an ApexCommentBlock instance
      * @param {String | Object} idOrObject Node id or Object with ApexCommentBlock fields
-     * @param {String} [name] Node name
+     * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
     constructor(idOrObject, name, startToken) {
