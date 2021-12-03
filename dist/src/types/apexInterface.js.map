@@ -1,1 +1,0 @@
-{"version":3,"file":"apexInterface.js","sourceRoot":"","sources":["../../../src/types/apexInterface.ts"],"names":[],"mappings":";;;AAAA,sCAA0C;AAC1C,2CAAwC;AAGxC;;GAEG;AACH,MAAa,aAAc,SAAQ,qBAAS;IAExC;;;;;OAKG;IACH,YAAY,aAAqC,EAAE,IAAa,EAAE,UAAkB;QAChF,KAAK,CAAC,aAAa,EAAE,IAAI,EAAE,UAAU,CAAC,CAAC;QACvC,IAAI,CAAC,QAAQ,GAAG,sBAAa,CAAC,SAAS,CAAC;IAC5C,CAAC;CACJ;AAZD,sCAYC"}
