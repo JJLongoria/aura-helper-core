@@ -80,7 +80,7 @@ export class ApexDeclarationNode extends ApexNode {
         }
     };
 
-    addChild(child: ApexNode) {
+    addChild(child: ApexNode | Token) {
     }
 
     getChildOrder(childOrType: ApexNode | string){
