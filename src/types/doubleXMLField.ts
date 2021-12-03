@@ -9,13 +9,13 @@ export class DoubleXMLField extends NumberXMLField {
 
     /**
      * Create new Double XML Field instance
-     * @param {string | DoubleXMLField} keyOrObject XML tag name or DoubleXMLField instance
+     * @param {string | DoubleXMLField} keyOrDoubleField XML tag name or DoubleXMLField instance
      * @param {string} [label] XML tag label
      */
-    constructor(keyOrObject: string | DoubleXMLField, label?: string) {
-        super(keyOrObject, label, Datatypes.DOUBLE);
-        if (keyOrObject instanceof DoubleXMLField) {
-            this.default = keyOrObject.default;
+    constructor(keyOrDoubleField: string | DoubleXMLField, label?: string) {
+        super(keyOrDoubleField, label, Datatypes.DOUBLE);
+        if (keyOrDoubleField instanceof DoubleXMLField) {
+            this.default = keyOrDoubleField.default;
         } else {
             this.default = 0.0;
         }

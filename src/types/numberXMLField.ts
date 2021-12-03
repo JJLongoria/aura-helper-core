@@ -35,7 +35,7 @@ export class NumberXMLField extends XMLField {
     /**
      * Method to set the default field value
      * @param defaultValue Default field value
-     * @returns Returns the NmberXMLField instance
+     * @returns Returns the NumberXMLField instance
      */
     setDefaultValue(defaultValue: number): NumberXMLField {
         this.default = defaultValue;
@@ -45,7 +45,7 @@ export class NumberXMLField extends XMLField {
     /**
      * Method to set the minimum field value
      * @param minValue Mimimum field value
-     * @returns Returns the NmberXMLField instance
+     * @returns Returns the NumberXMLField instance
      */
     setMinValue(minValue: number): NumberXMLField {
         this.minValue = minValue;
@@ -55,7 +55,7 @@ export class NumberXMLField extends XMLField {
     /**
      * Method to set the maximum field value
      * @param minValue Maximum field value
-     * @returns Returns the NmberXMLField instance
+     * @returns Returns the NumberXMLField instance
      */
     setMaxValue(maxValue: number): NumberXMLField {
         this.maxValue = maxValue;
@@ -65,7 +65,7 @@ export class NumberXMLField extends XMLField {
     /**
      * Method to set the allowed values to the field
      * @param minValue Allowed field values
-     * @returns Returns the NmberXMLField instance
+     * @returns Returns the NumberXMLField instance
      */
     setAllowedValues(allowedValues: number | number[]): NumberXMLField {
         this.allowedValues = Utils.forceArray(allowedValues) as number[];
