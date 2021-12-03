@@ -1,15 +1,20 @@
-const StrUtils = require('../utils/strUtils');
-const AuraNodeType = require('../values/auraNodeType');
-const ApexTokenType = require('../values/apexTokenTypes');
-const AuraJSComment = require('./auraJSComment');
+import { StrUtils } from "../utils";
+import { ApexTokenTypes, AuraNodeTypes } from "../values";
+import { AuraJSComment } from "./auraJSComment";
 
-class AuraJSCommentBlock extends AuraJSComment {
+/**
+ * Class to represent an Aura JavaScript Comment Block Node on Aura JavaScript when analize and parse Aura Components
+ */
+export class AuraJSCommentBlock extends AuraJSComment {
 
-    constructor() {
-        super();
-        this.nodeType = AuraNodeType.JS_COMMENT_BLOCK;
+    constructor(commentObject?: AuraJSCommentBlock) {
+        super(commentObject);
+        this.nodeType = AuraNodeTypes.JS_COMMENT_BLOCK;
     }
 
+    /**
+     * Method to process comment tokens to extract data
+     */
     processComment() {
         const len = this.tokens.length;
         let newLines = '';
@@ -27,13 +32,16 @@ class AuraJSCommentBlock extends AuraJSComment {
             const lastToken = (i >= 1) ? this.tokens[i - 1] : undefined;
             const token = this.tokens[i];
             const nextToken = ((i + 1) <= (this.tokens.length - 1)) ? this.tokens[i + 1] : undefined;
-            if(token.text === '*/')
+            if (token.text === '*/') {
                 continue;
-            if (lastToken  && lastToken.range.end.line < token.range.start.line) {
-                if((lastToken.type !== ApexTokenType.COMMENT.BLOCK_START))
+            }
+            if (lastToken && lastToken.range.end.line < token.range.start.line) {
+                if ((lastToken.type !== ApexTokenTypes.COMMENT.BLOCK_START)) {
                     newLines += StrUtils.getNewLines(token.range.start.line - lastToken.range.end.line);
-                if (token.text === '*')
+                }
+                if (token.text === '*') {
                     continue;
+                }
             }
             if (!onParams && token.text === '@' && nextToken && nextToken.text === 'param' && newLines.length > 0) {
                 onParams = true;
@@ -71,27 +79,28 @@ class AuraJSCommentBlock extends AuraJSComment {
                         paramType = undefined;
                         paramDesc = '';
                     }
-                } else if(lastToken.text === '@' && token.text === 'param' && nextToken && nextToken.text !== '{'){
+                } else if (lastToken && lastToken.text === '@' && token.text === 'param' && nextToken && nextToken.text !== '{') {
                     onParamDesc = true;
                     paramType = 'any';
-                }  else if (lastToken.text === '{') {
+                } else if (lastToken && lastToken.text === '{') {
                     newLines = '';
                     paramType = token.text;
-                    if (paramType === '*')
+                    if (paramType === '*') {
                         paramType = 'any';
-                } else if (paramType && lastToken.text === '}') {
+                    }
+                } else if (paramType && lastToken && lastToken.text === '}') {
                     newLines = '';
                     paramName = token.text;
                     onParamDesc = true;
                 } else if (onParamDesc) {
-                    if(lastToken.text === 'param' && !paramName){
+                    if (lastToken && lastToken.text === 'param' && !paramName) {
                         paramName = token.text;
                         continue;
                     }
                     let ws = '';
-                    if (lastToken.text === '*' && newLines.length > 0) {
+                    if (lastToken && lastToken.text === '*' && newLines.length > 0) {
                         ws = StrUtils.getWhitespaces((token.range.start.character - lastToken.range.end.character) - 1);
-                    } else {
+                    } else if (lastToken) {
                         ws = StrUtils.getWhitespaces(token.range.start.character - lastToken.range.end.character);
                     }
                     paramDesc += newLines + ws + token.text;
@@ -112,22 +121,23 @@ class AuraJSCommentBlock extends AuraJSComment {
                         paramType = undefined;
                         paramDesc = '';
                     }
-                } else if(lastToken.text === '@' && (token.text === 'return' || token.text === 'returns') && nextToken && nextToken.text !== '{'){
+                } else if (lastToken && lastToken.text === '@' && (token.text === 'return' || token.text === 'returns') && nextToken && nextToken.text !== '{') {
                     onReturnDesc = true;
                     returnType = 'any';
-                } else if(lastToken.text === '{') {
+                } else if (lastToken && lastToken.text === '{') {
                     newLines = '';
                     returnType = token.text;
-                    if (returnType === '*')
+                    if (returnType === '*'){
                         returnType = 'any';
-                } else if (returnType && lastToken.text === '}') {
+                    }
+                } else if (returnType && lastToken && lastToken.text === '}') {
                     newLines = '';
                     onReturnDesc = true;
                 } else if (onReturnDesc) {
                     let ws = '';
-                    if (lastToken.text === '*' && newLines.length > 0) {
+                    if (lastToken && lastToken.text === '*' && newLines.length > 0) {
                         ws = StrUtils.getWhitespaces((token.range.start.character - lastToken.range.end.character) - 1);
-                    } else {
+                    } else if (lastToken) {
                         ws = StrUtils.getWhitespaces(token.range.start.character - lastToken.range.end.character);
                     }
                     returnDesc += newLines + ws + token.text;
@@ -149,11 +159,10 @@ class AuraJSCommentBlock extends AuraJSComment {
             this.return = {
                 datatype: returnType,
                 description: returnDesc.trim()
-            }
+            };
             returnType = undefined;
             returnDesc = '';
         }
         this.description = this.description.trim();
     }
 }
-module.exports = AuraJSCommentBlock;
