@@ -1,7 +1,17 @@
+import { Utils } from "../utils";
+import { ApexNodeTypes } from "../values";
+import { ApexNode } from "./apexNode";
+import { ApexVariable } from "./apexVariable";
+import { SOQLQuery } from "./soqlQuery";
+import { Token } from "./token";
+
 /**
  * Class to represent a Property Apex Getter Node when Parsing Apex Code
  */
-class ApexGetter extends ApexNode {
+export class ApexGetter extends ApexNode {
+
+    variables: { [key: string]: ApexVariable };
+    queries: SOQLQuery[];
 
     /**
      * Constructor to create an ApexGetter instance
@@ -10,8 +20,8 @@ class ApexGetter extends ApexNode {
      * @param {Token} [startToken] Node start token
      */
     constructor(idOrGetter: string | ApexGetter, name?: string, startToken?: Token) {
-        super(idOrGetter, ApexNodeType.GETTER, name, startToken);
-        if (Utils.isObject(idOrGetter)) {
+        super(idOrGetter, ApexNodeTypes.GETTER, name, startToken);
+        if (idOrGetter instanceof ApexGetter) {
             this.variables = serialize(idOrGetter.variables);
             this.queries = idOrGetter.queries;
         } else {
@@ -25,12 +35,12 @@ class ApexGetter extends ApexNode {
      * @param {ApexVariable} child ApexVariable child to add 
      * @returns {ApexGetter} Return the ApexGetter instance
      */
-    addChild(child) {
-        if (child && child.nodeType === ApexNodeType.VARIABLE) {
+    addChild(child: ApexVariable | SOQLQuery): ApexGetter {
+        if (child && child.nodeType === ApexNodeTypes.VARIABLE && child instanceof ApexVariable) {
             this.variables[child.name.toLowerCase()] = child;
             child.order = Utils.countKeys(this.variables);
             child.memberOrder = child.order;
-        } else if (child && child.nodeType === ApexNodeType.SOQL) {
+        } else if (child && child.nodeType === ApexNodeTypes.SOQL) {
             this.queries.push(child);
         }
         return this;
@@ -38,11 +48,12 @@ class ApexGetter extends ApexNode {
 
     /**
      * Method to get the last child into the getter body
-     * @returns {ApexVariable} Return the last ApexVariable declared or undefined if not found any variables
+     * @returns {ApexVariable | undefined} Return the last ApexVariable declared or undefined if not found any variables
      */
-    getLastChild() {
-        if (!Utils.hasKeys(this.variables))
+    getLastChild(): ApexVariable | undefined {
+        if (!Utils.hasKeys(this.variables)) {
             return undefined;
+        }
         let child = Utils.getFirstElement(this.variables);
         for (const key of Object.keys(this.variables)) {
             const node = this.variables[key];
@@ -55,11 +66,12 @@ class ApexGetter extends ApexNode {
 
     /**
      * Method to get the first child into the getter body
-     * @returns {ApexVariable} Return the first ApexVariable declared or undefined if not found any variables
+     * @returns {ApexVariable | undefined} Return the first ApexVariable declared or undefined if not found any variables
      */
-    getFirstChild() {
-        if (!Utils.hasKeys(this.variables))
+    getFirstChild(): ApexVariable | undefined {
+        if (!Utils.hasKeys(this.variables)) {
             return undefined;
+        }
         let child = Utils.getFirstElement(this.variables);
         for (const key of Object.keys(this.variables)) {
             const node = this.variables[key];
@@ -72,25 +84,25 @@ class ApexGetter extends ApexNode {
 
     /**
      * Method to get the first child into the getter body (Equals to getFirstChild())
-     * @returns {ApexVariable} Return the first ApexVariable declared or undefined if not found any variables
+     * @returns {ApexVariable | undefined} Return the first ApexVariable declared or undefined if not found any variables
      */
-    getAbosluteFirstChild() {
+    getAbosluteFirstChild(): ApexVariable | undefined {
         return this.getFirstChild();
     }
 
     /**
      * Method to get the last child into the getter body (Equals to getLastChild())
-     * @returns {ApexVariable} Return the first ApexVariable declared or undefined if not found any variables
+     * @returns {ApexVariable | undefined} Return the first ApexVariable declared or undefined if not found any variables
      */
-    getAbsoluteLastChild() {
+    getAbsoluteLastChild(): ApexVariable | undefined {
         return this.getLastChild();
     }
 }
-module.exports = ApexGetter;
 
-function serialize(objects) {
-    if (!objects)
+function serialize(objects: any) {
+    if (!objects) {
         return objects;
+    }
     for (const objKey of Object.keys(objects)) {
         const child = objects[objKey];
         objects[objKey] = serializeChild(child);
@@ -98,10 +110,11 @@ function serialize(objects) {
     return objects;
 }
 
-function serializeChild(child) {
-    if (!child)
+function serializeChild(child: any) {
+    if (!child) {
         return child;
-    if (child.nodeType === ApexNodeType.VARIABLE) {
+    }
+    if (child.nodeType === ApexNodeTypes.VARIABLE) {
         return new ApexVariable(child);
     }
     return child;
