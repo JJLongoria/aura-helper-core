@@ -15,7 +15,7 @@ import { Token } from "./token";
 /**
  * Class to represent an Apex Class Node when Parsing Apex Code
  */
-class ApexClass extends ApexDeclarationNode {
+export class ApexClass extends ApexDeclarationNode {
 
     initializer?: ApexInitializer;
     staticConstructor?: ApexStaticConstructor;
