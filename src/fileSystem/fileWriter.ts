@@ -23,7 +23,7 @@ export class FileWriter {
                     callback.call(this, path, undefined);
                 }
             }
-        })
+        });
     }
 
     /**

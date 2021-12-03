@@ -1,0 +1,1 @@
+{"version":3,"file":"connectionException.js","sourceRoot":"","sources":["../../src/exceptions/connectionException.ts"],"names":[],"mappings":";;;AAAA;;GAEG;AACF,MAAa,mBAAoB,SAAQ,KAAK;IAE3C;;;OAGG;IACH,YAAY,OAAe;QACvB,KAAK,CAAC,OAAO,CAAC,CAAC;QACf,IAAI,CAAC,IAAI,GAAG,qBAAqB,CAAC;IACtC,CAAC;CACJ;AAVA,kDAUA"}

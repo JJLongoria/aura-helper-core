@@ -1,0 +1,1 @@
+{"version":3,"file":"operationNotSupportedException.js","sourceRoot":"","sources":["../../src/exceptions/operationNotSupportedException.ts"],"names":[],"mappings":";;;AAAA;;GAEG;AACH,MAAa,8BAA+B,SAAQ,KAAK;IAExD;;;OAGG;IACH,YAAY,OAAe;QAC1B,KAAK,CAAC,OAAO,CAAC,CAAC;QACf,IAAI,CAAC,IAAI,GAAG,gCAAgC,CAAC;IAC9C,CAAC;CACD;AAVD,wEAUC"}

@@ -126,7 +126,7 @@ export class Validator {
      * @throws {InvalidFilePathException} If the path is not a file
      * @throws {WrongFormatException} If file is not a JSON file
      */
-    static validateJSONFile(filePath: string, fileName?: string) {
+    static validateJSONFile(filePath: string, fileName?: string): any {
         let content;
         try {
             filePath = PathUtils.getAbsolutePath(filePath);
@@ -161,13 +161,19 @@ export class Validator {
      */
     static validateMetadataJSON(metadataOrPath: string | { [key: string]: MetadataType }) {
         let metadata: { [key: string]: MetadataType };
-        if (Utils.isString(metadataOrPath)) {
-            metadataOrPath = metadataOrPath as string;
-            metadata = Validator.validateJSONFile(metadataOrPath);
-        } else {
-            metadataOrPath = metadataOrPath as { [key: string]: MetadataType };
-            metadata = metadataOrPath;
+        try {
+            if (Utils.isString(metadataOrPath)) {
+                metadataOrPath = metadataOrPath as string;
+                metadata = Validator.validateJSONFile(metadataOrPath);
+            } else {
+                metadataOrPath = metadataOrPath as { [key: string]: MetadataType };
+                metadata = metadataOrPath;
+            }
+        } catch (error) {
+            const errData = error as Error;
+            throw new WrongFormatException("Wrong JSON Format file: " + errData.message);
         }
+
         if (Utils.isNull(metadata)) {
             throw new DataRequiredException("You must to provied a Metadata JSON file path or Metadata JSON Object");
         }
@@ -207,10 +213,10 @@ function validateMetadataType(metadataType: MetadataType, key: string): void {
     if (!Utils.isBoolean(metadataType.checked)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Type with key " + key + ". checked field must be a boolean, not a " + typeof metadataType.checked);
     }
-    if (!Utils.isString(metadataType.path)) {
+    if (metadataType.path && !Utils.isString(metadataType.path)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Type with key " + key + ". path field must be a string, not a " + typeof metadataType.path);
     }
-    if (!Utils.isString(metadataType.suffix)) {
+    if (metadataType.suffix && !Utils.isString(metadataType.suffix)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Type with key " + key + ". suffix field must be a string, not a " + typeof metadataType.suffix);
     }
     if (Utils.isNull(metadataType.childs)) {
@@ -225,46 +231,46 @@ function validateMetadataType(metadataType: MetadataType, key: string): void {
 }
 
 function validateMetadataObject(metadataObject: MetadataObject, key: string, type: string): void {
-    if (Utils.isNull(metadataObject.name)){
+    if (Utils.isNull(metadataObject.name)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Object with key " + key + " (" + type + "). Missing name field");
     }
-    if (!Utils.isString(metadataObject.name)){
+    if (!Utils.isString(metadataObject.name)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Object with key " + key + " (" + type + "). name field must be a string, not a " + typeof metadataObject.name);
     }
-    if (Utils.isNull(metadataObject.checked)){
+    if (Utils.isNull(metadataObject.checked)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Object with key " + key + " (" + type + "). Missing checked field");
     }
-    if (!Utils.isBoolean(metadataObject.checked)){
+    if (!Utils.isBoolean(metadataObject.checked)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Object with key " + key + " (" + type + "). checked field must be a boolean, not a " + typeof metadataObject.checked);
     }
-    if (!Utils.isString(metadataObject.path)){
+    if (metadataObject.path && !Utils.isString(metadataObject.path)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Object with key " + key + " (" + type + "). path field must be a string, not a " + typeof metadataObject.path);
     }
-    if (Utils.isNull(metadataObject.childs)){
+    if (Utils.isNull(metadataObject.childs)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Object with key " + key + " (" + type + "). Missing childs field");
     }
-    if (Utils.isArray(metadataObject.childs)){
+    if (Utils.isArray(metadataObject.childs)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Object with key " + key + " (" + type + "). childs field must be a JSON Object, not an Array");
     }
-    if (!Utils.isObject(metadataObject.childs)){
+    if (!Utils.isObject(metadataObject.childs)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Object with key " + key + " (" + type + "). childs field must be a JSON Object, not a " + typeof metadataObject.childs);
     }
 }
 
 function validateMetadataItem(metadataItem: MetadataItem, key: string, object: string, type: string) {
-    if (Utils.isNull(metadataItem.name)){
+    if (Utils.isNull(metadataItem.name)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Item with key " + key + " (" + type + ": " + object + "). Missing name field");
     }
-    if (!Utils.isString(metadataItem.name)){
+    if (!Utils.isString(metadataItem.name)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Item with key " + key + " (" + type + ": " + object + "). name field must be a string, not a " + typeof metadataItem.name);
     }
-    if (!Utils.isString(metadataItem.path)){
+    if (metadataItem.path && !Utils.isString(metadataItem.path)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Item with key " + key + " (" + type + ": " + object + "). path field must be a string, not a " + typeof metadataItem.path);
     }
-    if (Utils.isNull(metadataItem.checked)){
+    if (Utils.isNull(metadataItem.checked)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Item with key " + key + " (" + type + ": " + object + "). Missing checked field");
     }
-    if (!Utils.isBoolean(metadataItem.checked)){
+    if (!Utils.isBoolean(metadataItem.checked)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Item with key " + key + " (" + type + ": " + object + "). checked field must be a boolean, not a " + typeof metadataItem.checked);
     }
 }

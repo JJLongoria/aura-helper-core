@@ -163,7 +163,7 @@ export class Utils {
      * @returns {Function | undefined} Returns a function if exists, or undefined if not exists. 
      */
     static getCallbackFunction(args: any[]): Function | undefined {
-        if (Utils.isNull(args) || args.length === 0) {
+        if (args.length === 0) {
             return undefined;
         }
         for (let i = 0; i < args.length; i++) {

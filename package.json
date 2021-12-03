@@ -4,14 +4,13 @@
   "displayName": "Aura Helper Framework Core",
   "version": "2.0.0",
   "description": "Core libraries for Aura Helper CLI, Aura Helper Extension and the rest of @ah libraries. Contain Util classes, Aura Helper Datatypes, Process Manages and Utils values",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "compile": "tsc -p ./ ",
-		"lint": "eslint src --ext ts",
-		"watch": "tsc -watch -p ./",
-		"pretest": "npm run compile && npm run lint",
-		"test": "jest --coverage --runInBand"
+    "lint": "eslint src --ext ts",
+    "watch": "tsc -watch -p ./",
+    "test": "jest --coverage --runInBand"
   },
   "keywords": [
     "aura-helper-framework",
@@ -56,14 +55,15 @@
     "email": "juanjoselongoria@gmail.com"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.20",
+    "@types/jest": "^27.0.3",
     "@types/mocha": "^5.2.6",
-		"@types/node": "^12.12.47",
-		"@types/vscode": "^1.46.0",
-		"@typescript-eslint/eslint-plugin": "^5.4.0",
-		"@typescript-eslint/parser": "^5.4.0",
-    "jest": "^26.6.3",
+    "@types/node": "^12.12.47",
+    "@types/vscode": "^1.46.0",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
     "eslint": "^8.3.0",
+    "jest": "^27.4.3",
+    "ts-jest": "^27.0.7",
     "typescript": "^3.9.6"
   },
   "dependencies": {

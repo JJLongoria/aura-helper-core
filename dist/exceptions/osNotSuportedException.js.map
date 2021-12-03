@@ -1,0 +1,1 @@
+{"version":3,"file":"osNotSuportedException.js","sourceRoot":"","sources":["../../src/exceptions/osNotSuportedException.ts"],"names":[],"mappings":";;;AAAA;;GAEG;AACH,MAAa,uBAAwB,SAAQ,KAAK;IAE9C;;OAEG;IACH;QACI,KAAK,CAAC,gCAAgC,CAAC,CAAC;QACxC,IAAI,CAAC,IAAI,GAAG,yBAAyB,CAAC;IAC1C,CAAC;CAEJ;AAVD,0DAUC"}
