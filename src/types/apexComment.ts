@@ -44,7 +44,7 @@ export class ApexComment extends ApexNode {
      * Method to process comment tokens to extract data
      * @param {ApexCommentTemplate} template Apex Comment Template to process
      */
-    processComment(template: ApexCommentTemplate): void {
+    processComment(_template: ApexCommentTemplate): void {
         const len = this.tokens.length;
         for (let i = 1; i < len; i++) {
             const lastToken = (i >= 1) ? this.tokens[i - 1] : undefined;

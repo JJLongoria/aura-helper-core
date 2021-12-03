@@ -17,14 +17,18 @@
 		"noUnusedParameters": true,
 		"esModuleInterop": true,
 		"declaration": true,
+		"skipLibCheck": true
 	},
 	"include": [
 		"./**/*"
 	],
 	"exclude": [
 		"node_modules",
-		".vscode-test",
+		"./node_modules/**/*",
+		"./coverage/**/*",
+		"./src/test",
 		"./dist",
-		"./dist/**/*"
+		"./dist/**/*",
+		"**/*.test.ts"
 	]
 }

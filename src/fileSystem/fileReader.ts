@@ -112,7 +112,7 @@ export class FileReader {
                 }
                 list.forEach(function (file) {
                     file = path.resolve(folderPath, file);
-                    fs.stat(file, async function (err: Error, stat: Stats) {
+                    fs.stat(file, async function (_err: Error, stat: Stats) {
                         if (stat && stat.isDirectory()) {
                             let res = await FileReader.getAllFiles(file, filters);
                             results = results.concat(res);

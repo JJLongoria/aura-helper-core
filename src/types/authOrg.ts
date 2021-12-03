@@ -26,7 +26,7 @@ export class AuthOrg {
             this.orgId = aliasOrAuthOrg.orgId;
             this.instanceUrl = aliasOrAuthOrg.instanceUrl;
             this.accessToken = aliasOrAuthOrg.accessToken;
-            this.oauthMethod = aliasOrAuthOrg.oauthMethod
+            this.oauthMethod = aliasOrAuthOrg.oauthMethod;
         } else {
             this.alias = aliasOrAuthOrg;
             this.username = username;
