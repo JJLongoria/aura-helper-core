@@ -5,7 +5,7 @@ import { XMLDependencyField } from "./xmlDependencyField";
 import { XMLFieldSObjectRelationship } from "./xmlFieldSObjectRelationship";
 
 /**
- * Method to represent XML Fields on XML Metadata files
+ * Class to represent XML Fields on XML Metadata files
  */
 export class XMLField {
 
