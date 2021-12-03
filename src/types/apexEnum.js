@@ -11,7 +11,7 @@ class ApexEnum extends ApexDeclarationNode {
     /**
      * Constructor to create an ApexEnum instance
      * @param {String | Object} idOrObject Node id or Object with ApexEnum fields
-     * @param {String} [name] Node name
+     * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
     constructor(idOrObject, name, startToken) {

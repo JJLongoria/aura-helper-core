@@ -10,7 +10,7 @@ class ApexConstructor extends ApexMethod{
     /**
      * Constructor to create an ApexConstructor instance
      * @param {String | Object} idOrObject Node id or Object with ApexConstructor fields
-     * @param {String} [name] Node name
+     * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
     constructor(idOrObject, name, startToken){

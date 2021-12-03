@@ -10,7 +10,7 @@ class ApexInitializer extends ApexMethod{
     /**
      * Constructor to create an ApexInitializer instance
      * @param {String | Object} idOrObject Node id or Object with ApexInitializer fields
-     * @param {String} [name] Node name
+     * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
     constructor(id, name, startToken){
