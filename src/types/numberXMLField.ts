@@ -9,18 +9,37 @@ export class NumberXMLField extends XMLField {
     minValue?: number;
     maxValue?: number;
     allowedValues?: number[];
+    default?: number;
 
-    constructor(keyOrObject: string | NumberXMLField, label?: string, datatype?: string) {
-        super(keyOrObject, label, datatype);
-        if (keyOrObject instanceof NumberXMLField) {
-            this.minValue = keyOrObject.minValue;
-            this.maxValue = keyOrObject.maxValue;
-            this.allowedValues = keyOrObject.allowedValues;
+    /**
+     * Create new Number XML Field instance
+     * @param {string | NumberXMLField} keyOrNumberField XML tag name or NumberXMLField instance
+     * @param {string} [label] XML tag label
+     * @param {string} [datatype] Field datatype
+     */
+    constructor(keyOrNumberField: string | NumberXMLField, label?: string, datatype?: string) {
+        super(keyOrNumberField, label, datatype);
+        if (keyOrNumberField instanceof NumberXMLField) {
+            this.minValue = keyOrNumberField.minValue;
+            this.maxValue = keyOrNumberField.maxValue;
+            this.allowedValues = keyOrNumberField.allowedValues;
+            this.default = keyOrNumberField.default;
         } else {
             this.minValue = undefined;
             this.maxValue = undefined;
             this.allowedValues = undefined;
+            this.default = 0;
         }
+    }
+
+    /**
+     * Method to set the default field value
+     * @param defaultValue Default field value
+     * @returns Returns the NmberXMLField instance
+     */
+    setDefaultValue(defaultValue: number): NumberXMLField {
+        this.default = defaultValue;
+        return this;
     }
 
     /**
