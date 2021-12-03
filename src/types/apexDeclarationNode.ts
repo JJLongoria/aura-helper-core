@@ -15,8 +15,8 @@ export class ApexDeclarationNode extends ApexNode {
     override?: Token;
     webservice?: Token;
     static?: Token;
-    final?: string;
-    transient?: string;
+    final?: Token;
+    transient?: Token;
     signature?: string;
     overrideSignature?: string;
     simplifiedSignature?: string;
@@ -80,22 +80,22 @@ export class ApexDeclarationNode extends ApexNode {
         }
     };
 
-    addChild(child: ApexNode | Token) {
+    addChild(_child?: ApexNode | Token) {
     }
 
-    getChildOrder(childOrType: ApexNode | string){
-
-    }
-
-    getOrderedChilds(childOrType: ApexNode | string){
+    getChildOrder(_childOrType?: ApexNode | string){
 
     }
 
-    getLastChild(childOrType: ApexNode | string){
+    getOrderedChilds(_childOrType?: ApexNode | string){
+
+    }
+
+    getLastChild(_childOrType?: ApexNode | string){
         
     }
 
-    getFirstChild(childOrType: ApexNode | string){
+    getFirstChild(_childOrType?: ApexNode | string){
 
     }
 
