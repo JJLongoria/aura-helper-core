@@ -3,6 +3,9 @@ import { Datatypes, DataValues } from "../values";
 import { EnumXMLFieldValue } from "./enumXMLFieldValue";
 import { XMLField } from "./xmlField";
 
+/**
+ * Class to represent XML Enum Fields on XML Metadata files
+ */
 export class EnumXMLField extends XMLField {
 
     multichoice: boolean;
