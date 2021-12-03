@@ -1,19 +1,19 @@
-export interface ApexCommentTagKeyword {
+export interface ApexCommentTemplateTagKeyword {
     name: string;
     source?: string;
     message?: string;
 }
 
-export interface ApexCommentTagData {
-    tagData: ApexCommentTag;
-    tag: ApexCommentTag;
+export interface ApexCommentTemplateTagData {
+    tagData: ApexCommentTemplateTag;
+    tag: ApexCommentTemplateTag;
     tagName: string;
 }
 
-export interface ApexCommentTag {
+export interface ApexCommentTemplateTag {
     equalsTo?: string;
     symbol?: string;
-    keywords?: ApexCommentTagKeyword[];
+    keywords?: ApexCommentTemplateTagKeyword[];
     template?: string;
     multiple?: boolean;
     anywhere?: boolean;
