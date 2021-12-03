@@ -254,7 +254,7 @@ export class XMLField {
         return this;
     }
 
-    prepareValue(value: any, originalValue: any): any {
+    prepareValue(value: any, originalValue?: any): any {
         let empty = value === undefined || value === null || value === '';
         if (!empty){
             value = Utils.clone(value);
