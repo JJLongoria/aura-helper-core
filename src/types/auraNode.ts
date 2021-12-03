@@ -1,5 +1,6 @@
 import { Token } from "./token";
 import { PositionData } from "./positionData";
+import { AuraNodeTypes } from "../values";
 
 /**
  * Class to represent an Aura Node on XML language when analize and parse Aura XML Files
@@ -9,15 +10,15 @@ export class AuraNode {
     nodeType: string;
     qualifiedName: string;
     tagName: string;
-    token: Token;
-    namespace: string;
-    description: string;
-    positionData: PositionData;
-    file: string;
+    token?: Token;
+    namespace?: string;
+    description?: string;
+    positionData?: PositionData;
+    file?: string;
     name: string;
 
     /**
-     * 
+     * Create nenw Aura node instance
      * @param {string | AuraNode} qualifiedNameOrNode Qualified XML tag or Aura Node instance
      * @param {string} [nodeType] Aura node type
      * @param {string} [token] Tag first token
@@ -34,9 +35,8 @@ export class AuraNode {
             this.file = qualifiedNameOrNode.file;
             this.name = qualifiedNameOrNode.name;
         } else {
-            this.nodeType = nodeType;
+            this.nodeType = nodeType || AuraNodeTypes.COMPONENT;
             this.qualifiedName = qualifiedNameOrNode;
-            this.tagName = undefined;
             this.token = token;
             this.namespace = undefined;
             this.description = undefined;
