@@ -24,7 +24,7 @@ export class BooleanXMLField extends XMLField {
     }
 
     /**
-     * Method to tranform value to boolean
+     * Method to transform value to boolean
      * @param {any} value value to transform 
      * @returns {boolean} Returns the transformed value
      */
