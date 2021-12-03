@@ -19,7 +19,7 @@ export class ApexProperty extends ApexVariable {
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrObject: string | ApexVariable, name: string, startToken: Token) {
+    constructor(idOrObject: string | ApexVariable, name?: string, startToken?: Token) {
         super(idOrObject, name, startToken);
         this.nodeType = ApexNodeTypes.PROPERTY;
         if (idOrObject instanceof ApexProperty) {
