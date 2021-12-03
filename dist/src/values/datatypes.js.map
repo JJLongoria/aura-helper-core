@@ -1,1 +1,0 @@
-{"version":3,"file":"datatypes.js","sourceRoot":"","sources":["../../../src/values/datatypes.ts"],"names":[],"mappings":";;;AAAa,QAAA,SAAS,GAAG;IACrB,MAAM,EAAE,QAAQ;IAChB,OAAO,EAAE,SAAS;IAClB,KAAK,EAAE,OAAO;IACd,IAAI,EAAE,MAAM;IACZ,MAAM,EAAE,QAAQ;IAChB,OAAO,EAAE,KAAK;IACd,MAAM,EAAE,QAAQ;IAChB,SAAS,EAAE,UAAU;IACrB,IAAI,EAAE,MAAM;IACZ,IAAI,EAAE,MAAM;CACf,CAAC"}

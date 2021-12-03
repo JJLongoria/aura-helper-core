@@ -2,5 +2,5 @@
 /coverage
 /test/assets/SFDXProject
 /test/assets/folderToCreate
-dist/test
+dist
 src/test

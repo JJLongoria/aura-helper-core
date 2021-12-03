@@ -1,1 +1,0 @@
-{"version":3,"file":"metadataSuffixByType.js","sourceRoot":"","sources":["../../src/values/metadataSuffixByType.ts"],"names":[],"mappings":";;;AAAa,QAAA,oBAAoB,GAAG;IAChC,WAAW,EAAE,OAAO;IACpB,eAAe,EAAE,iBAAiB;IAClC,UAAU,EAAE,YAAY;IACxB,aAAa,EAAE,eAAe;IAC9B,OAAO,EAAE,SAAS;IAClB,cAAc,EAAE,gBAAgB;IAChC,aAAa,EAAE,eAAe;IAC9B,QAAQ,EAAE,UAAU;IACpB,QAAQ,EAAE,UAAU;CACvB,CAAC"}

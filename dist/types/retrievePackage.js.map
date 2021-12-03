@@ -1,1 +1,0 @@
-{"version":3,"file":"retrievePackage.js","sourceRoot":"","sources":["../../src/types/retrievePackage.ts"],"names":[],"mappings":";;;AAAA;;GAEG;AACH,MAAa,eAAe;IAIxB;;;OAGG;IACH,YAAY,aAAuC;QAC/C,IAAI,aAAa,YAAY,eAAe,EAAE;YAC1C,IAAI,CAAC,IAAI,GAAG,aAAa,CAAC,IAAI,CAAC;SAClC;aAAM;YACH,IAAI,CAAC,IAAI,GAAG,aAAa,CAAC;SAC7B;IACL,CAAC;CACJ;AAfD,0CAeC"}
