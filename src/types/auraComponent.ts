@@ -1,4 +1,5 @@
 import { AuraNodeTypes } from "../values";
+import { ApexMethod } from "./apexMethod";
 import { AuraAttribute } from "./auraAttribute";
 import { AuraEvent } from "./auraEvent";
 import { AuraHandler } from "./auraHandler";
@@ -23,7 +24,7 @@ export class AuraComponent extends AuraRoot {
     implementsValues?: string[];
     controllerFunctions?: AuraJSFunction[];
     helperFunctions?: AuraJSFunction[];
-    apexFunctions?: any;
+    apexFunctions?: { [key: string]: ApexMethod };
     fileName?: string;
 
     /**
@@ -31,7 +32,7 @@ export class AuraComponent extends AuraRoot {
      * @param {string | AuraComponent} quelifiedNameOrNode Qualified XML tag or Aura Node instance
      * @param {Token} [token] Tag first token
      */
-     constructor(quelifiedNameOrNode: string | AuraComponent, token?: Token) {
+    constructor(quelifiedNameOrNode: string | AuraComponent, token?: Token) {
         super(quelifiedNameOrNode, AuraNodeTypes.COMPONENT, token);
         if (quelifiedNameOrNode instanceof AuraComponent) {
             this.attributes = quelifiedNameOrNode.attributes;

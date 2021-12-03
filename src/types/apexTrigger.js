@@ -10,7 +10,7 @@ class ApexTrigger extends ApexNode{
 
     /**
      * Constructor to create an ApexTrigger instance
-     * @param {String | Object} idOrObject Node id or Object with ApexTrigger fields
+     * @param {string | Object} idOrObject Node id or Object with ApexTrigger fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */

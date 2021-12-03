@@ -18,7 +18,7 @@ class ApexClass extends ApexDeclarationNode {
 
     /**
      * Constructor to create an ApexClass instance
-     * @param {String | Object} idOrObject Node id or Object with ApexClass fields
+     * @param {string | Object} idOrObject Node id or Object with ApexClass fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
@@ -98,7 +98,7 @@ class ApexClass extends ApexDeclarationNode {
 
     /**
      * Method to get the child order by type to the specified child type (You can pass a child directly to analize the node type)
-     * @param {String | Object} childOrType Node type or node to extract the type
+     * @param {string | Object} childOrType Node type or node to extract the type
      * @returns {Number} Return the child order number. 0 if not exist any child. The first child number is 1.
      */
     getChildOrder(childOrType) {
@@ -172,7 +172,7 @@ class ApexClass extends ApexDeclarationNode {
 
     /**
      * Method to get the last child by type. (You can pass a child directly to analize the node type)
-     * @param {String | Object} childOrType Node type or node to extract the type
+     * @param {string | Object} childOrType Node type or node to extract the type
      * @returns {Number} Return the last child by type (undefined if not exists childs of the selected type)
      */
     getLastChild(childOrType) {
@@ -243,7 +243,7 @@ class ApexClass extends ApexDeclarationNode {
 
     /**
      * Method to get the first child by type. (You can pass a child directly to analize the node type)
-     * @param {String | Object} childOrType Node type or node to extract the type
+     * @param {string | Object} childOrType Node type or node to extract the type
      * @returns {Number} Return the first child by type (undefined if not exists childs of the selected type)
      */
     getFirstChild(childOrType) {
