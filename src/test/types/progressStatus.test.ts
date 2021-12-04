@@ -1,4 +1,4 @@
-const ProgressStatus = require('../../../src/types/progressStatus');
+import { ProgressStatus } from "../../types";
 
 describe('Testing ./src/types/progressStatus.js', () => {
     test('Testing instance', () => {
