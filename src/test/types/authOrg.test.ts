@@ -1,4 +1,4 @@
-const AuthOrg = require('../../../src/types/authOrg');
+import { AuthOrg } from "../../types";
 
 describe('Testing ./src/types/authOrg.js', () => {
     test('Testing instance', () => {
