@@ -1,12 +1,10 @@
-const FileReader = require('../../../src/fileSystem/fileReader');
-const ApexCommentBlock = require('../../../src/types/apexCommentBlock');
-const Token = require('../../../src/types/token');
-const ApexNodeType = require('../../../src/values/apexNodeTypes');
-const ApexTokenTypes = require('../../../src/values/apexTokenTypes');
+import { FileReader } from "../../fileSystem";
+import { ApexCommentBlock, Token } from "../../types";
+import { ApexNodeTypes, ApexTokenTypes } from "../../values";
 
 describe('Testing ./src/types/apexCommentBlock.js', () => {
     test('Testing instance', () => {
-        const template = JSON.parse(FileReader.readFileSync('./test/assets/apexCommentTemplate.json'));
+        const template = JSON.parse(FileReader.readFileSync('./src/test/assets/apexCommentTemplate.json'));
         const apexCommentBlock = new ApexCommentBlock('id', 'name', new Token('type', 'text', 1, 0, false));
         // linea 1
         apexCommentBlock.addToken(new Token(ApexTokenTypes.COMMENT.BLOCK_START, '/**', 0, 0, false));
@@ -49,10 +47,10 @@ describe('Testing ./src/types/apexCommentBlock.js', () => {
         expect(apexCommentBlock.description).toMatch('esto es un comentario de bloque');
         expect(apexCommentBlock.id).toMatch('id');
         expect(apexCommentBlock.name).toMatch('name');
-        expect(apexCommentBlock.nodeType).toMatch(ApexNodeType.BLOCK_COMMENT);
+        expect(apexCommentBlock.nodeType).toMatch(ApexNodeTypes.BLOCK_COMMENT);
         const apexCommentBlock2 = new ApexCommentBlock(apexCommentBlock);
         expect(apexCommentBlock2.id).toMatch('id');
         expect(apexCommentBlock2.name).toMatch('name');
-        expect(apexCommentBlock2.nodeType).toMatch(ApexNodeType.BLOCK_COMMENT);
+        expect(apexCommentBlock2.nodeType).toMatch(ApexNodeTypes.BLOCK_COMMENT);
     });
 });
