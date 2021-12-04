@@ -28,7 +28,7 @@ export class BooleanXMLField extends XMLField {
      * @param {any} value value to transform 
      * @returns {boolean} Returns the transformed value
      */
-    transformValue(value: any): boolean {
+    transformValue(value?: any): boolean {
         if (value !== undefined && !Utils.isBoolean(value)){
             value = value === 'true';
         }
