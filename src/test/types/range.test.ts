@@ -1,4 +1,4 @@
-import { Position } from "vscode";
+import { Position } from "../../types";
 import { Range } from "../../types";
 
 describe('Testing ./src/types/range.js', () => {

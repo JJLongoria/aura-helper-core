@@ -20,7 +20,7 @@ export class ApexSetter extends ApexNode {
      * @param {Token} [startToken] Node start token
      */
     constructor(idOrGetter: string | ApexSetter, name?: string, startToken?: Token) {
-        super(idOrGetter, ApexNodeTypes.GETTER, name, startToken);
+        super(idOrGetter, ApexNodeTypes.SETTER, name, startToken);
         if (idOrGetter instanceof ApexSetter) {
             this.variables = serialize(idOrGetter.variables);
             this.queries = idOrGetter.queries;

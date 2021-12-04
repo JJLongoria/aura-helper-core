@@ -48,7 +48,7 @@ export class RetrieveResult {
      * @returns {RetrieveInboundFile | undefined} Returns the selected inbound file data
      */
     getInboundFile(index: number): RetrieveInboundFile | undefined {
-        if (this.inboundFiles && this.inboundFiles.length < index) {
+        if (this.inboundFiles && this.inboundFiles.length > index) {
             return new RetrieveInboundFile(this.inboundFiles[index]);
         }
         return undefined;
@@ -60,7 +60,7 @@ export class RetrieveResult {
      * @returns {RetrievePackage | undefined} Returns the selected package data
      */
     getPackage(index: number): RetrievePackage | undefined {
-        if (this.packages && this.packages.length < index) {
+        if (this.packages && this.packages.length > index) {
             return new RetrievePackage(this.packages[index]);
         }
         return undefined;
@@ -72,7 +72,7 @@ export class RetrieveResult {
      * @returns {RetrieveWarning | undefined} Returns the selected warning data
      */
     getWarning(index: number): RetrieveWarning | undefined {
-        if (this.warnings && this.warnings.length < index) {
+        if (this.warnings && this.warnings.length > index) {
             return new RetrieveWarning(this.warnings[index]);
         }
         return undefined;

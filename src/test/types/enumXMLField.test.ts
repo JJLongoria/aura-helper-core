@@ -8,13 +8,13 @@ describe('Testing ./src/types/enumXMLField.js', () => {
         field.setMaxApi(20);
         field.setMultiChoice(true);
         field.addEnumValue('label3', 'value3', 5, 15);
-        field.setEnumValues(undefined);
         field.setEnumValues([{
             label: 'label',
             value: 'value',
             minApi: 5,
             maxApi: 15
-        },{
+        },
+        {
             label: 'label1',
             value: 'value1',
             minApi: 5,

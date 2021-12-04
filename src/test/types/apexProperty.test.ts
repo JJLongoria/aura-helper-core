@@ -1,4 +1,4 @@
-import { ApexGetter, ApexProperty, Token } from "../../types";
+import { ApexGetter, ApexProperty, ApexSetter, Token } from "../../types";
 import { ApexNodeTypes } from "../../values";
 
 describe('Testing ./src/types/apexProperty.js', () => {
@@ -8,7 +8,7 @@ describe('Testing ./src/types/apexProperty.js', () => {
         expect(apexProperty.name).toMatch('name');
         expect(apexProperty.nodeType).toMatch(ApexNodeTypes.PROPERTY);
         apexProperty.addChild(new ApexGetter('id', 'apexGetter'));
-        apexProperty.addChild(new ApexGetter('id', 'apexSetter'));
+        apexProperty.addChild(new ApexSetter('id', 'apexSetter'));
         const apexProperty2 = new ApexProperty(apexProperty);
         expect(apexProperty2.id).toMatch('id');
         expect(apexProperty2.name).toMatch('name');
