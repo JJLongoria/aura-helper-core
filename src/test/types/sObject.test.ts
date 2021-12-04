@@ -1,6 +1,4 @@
-const SObject = require('../../../src/types/sObject');
-const SObjectField = require('../../../src/types/sObjectField');
-const RecordType = require('../../../src/types/recordType');
+import { RecordType, SObject, SObjectField } from "../../types";
 
 describe('Testing ./src/types/sObject.js', () => {
     test('Testing instance', () => {
