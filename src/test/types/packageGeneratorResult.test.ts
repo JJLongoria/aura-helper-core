@@ -1,4 +1,4 @@
-const PackageGeneratorResult = require('../../../src/types/packageGeneratorResult');
+import { PackageGeneratorResult } from "../../types";
 
 describe('Testing ./src/types/packageGeneratorResult.js', () => {
     test('Testing instance', () => {
