@@ -1,4 +1,4 @@
-const RecordType = require('../../../src/types/recordType');
+import { RecordType } from "../../types";
 
 describe('Testing ./src/types/recordType.js', () => {
     test('Testing instance', () => {
