@@ -1,5 +1,5 @@
-const EnumXMLField = require('../../../src/types/enumXMLField');
-const DataTypes = require('../../../src/values/datatypes');
+import { EnumXMLField } from "../../types";
+import { Datatypes } from "../../values";
 
 describe('Testing ./src/types/enumXMLField.js', () => {
     test('Testing instance', () => {
@@ -26,10 +26,10 @@ describe('Testing ./src/types/enumXMLField.js', () => {
         expect(field.getLabel('label3')).toBeUndefined();
         expect(field.key).toMatch('key');
         expect(field.label).toMatch('Label');
-        expect(field.datatype).toMatch(DataTypes.ENUM);
+        expect(field.datatype).toMatch(Datatypes.ENUM);
         const field2 = new EnumXMLField(field);
         expect(field2.key).toMatch('key');
         expect(field2.label).toMatch('Label');
-        expect(field2.datatype).toMatch(DataTypes.ENUM);
+        expect(field2.datatype).toMatch(Datatypes.ENUM);
     });
 });
