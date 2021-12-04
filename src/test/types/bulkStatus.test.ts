@@ -1,4 +1,4 @@
-const BulkStatus = require('../../../src/types/bulkStatus');
+import { BulkStatus } from "../../types";
 
 describe('Testing ./src/types/bulkStatus.js', () => {
     test('Testing instance', () => {
