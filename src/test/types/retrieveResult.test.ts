@@ -1,7 +1,4 @@
-const RetrieveResult = require('../../../src/types/retrieveResult');
-const RetrieveInboundFile = require('../../../src/types/retrieveInboundFile');
-const RetrievePackage = require('../../../src/types/retrievePackage');
-const RetrieveWarning = require('../../../src/types/retrieveWarning');
+import { RetrieveInboundFile, RetrievePackage, RetrieveResult, RetrieveWarning } from "../../types";
 
 describe('Testing ./src/types/retrieveResult.js', () => {
     test('Testing instance', () => {
