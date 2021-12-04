@@ -17,8 +17,8 @@ export class ProjectConfig {
      * @param {string} sourceApiVersion Source API Verion (50.0 by default)
      * @param {ProjectConfigPackageDirectory[]} packageDirectories List of PackageDirectories
      */
-    constructor(namespaceOrProjectConfig: string | ProjectConfig, sfdcLoginUrl?: string, sourceApiVersion?: string, packageDirectories?: ProjectConfigPackageDirectory[]) {
-        if (namespaceOrProjectConfig instanceof ProjectConfig) {
+    constructor(namespaceOrProjectConfig: string | ProjectConfig | any, sfdcLoginUrl?: string, sourceApiVersion?: string, packageDirectories?: ProjectConfigPackageDirectory[]) {
+        if (namespaceOrProjectConfig instanceof ProjectConfig || namespaceOrProjectConfig instanceof Object) {
             this.namespace = namespaceOrProjectConfig.namespace;
             this.sfdcLoginUrl = namespaceOrProjectConfig.sfdcLoginUrl;
             this.sourceApiVersion = namespaceOrProjectConfig.sourceApiVersion;

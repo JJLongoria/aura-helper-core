@@ -10,7 +10,7 @@ export class MathUtils {
      * 
      * @returns {number} Returns a rounded number with the specified decimals
      */
-    static round(number: number, decimalNumbers: number): number {
+    static round(number: number, decimalNumbers?: number): number {
         if (!decimalNumbers) {
             decimalNumbers = 2;
         }
