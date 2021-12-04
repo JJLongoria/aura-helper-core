@@ -1,5 +1,4 @@
-const SOQLQuery = require('../../../src/types/soqlQuery');
-const Token = require('../../../src/types/token');
+import { SOQLQuery, Token } from "../../types";
 
 describe('Testing ./src/types/soqlQuery.js', () => {
     test('Testing instance', () => {
