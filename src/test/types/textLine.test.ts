@@ -1,4 +1,4 @@
-const TextLine = require('../../../src/types/textLine');
+import { TextLine } from "../../types";
 
 describe('Testing ./src/types/textLine.js', () => {
     test('Testing instance', () => {
