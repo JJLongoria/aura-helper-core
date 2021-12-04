@@ -11,7 +11,7 @@ export class ApexFormatterConfig {
 
     /**
      * Constructor to create an ApexFormatterConfig instance
-     * @param {ApexFormatterConfig} [configObj] Object with the same fields of Apex Formatter or VScode Config object
+     * @param {ApexFormatterConfig | Object} [configObj] Object with the same fields of Apex Formatter or VScode Config object
      */
     constructor(configObj?: ApexFormatterConfig) {
         if (configObj instanceof ApexFormatterConfig) {
