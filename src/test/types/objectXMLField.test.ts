@@ -1,5 +1,5 @@
-const ObjectXMLField = require('../../../src/types/objectXMLField');
-const DataTypes = require('../../../src/values/datatypes');
+import { ObjectXMLField } from "../../types";
+import { Datatypes } from "../../values";
 
 describe('Testing ./src/types/objectXMLField.js', () => {
     test('Testing instance', () => {
@@ -11,11 +11,11 @@ describe('Testing ./src/types/objectXMLField.js', () => {
         field.addField('field', new ObjectXMLField('field', 'Field').setMinApi(5));
         expect(field.key).toMatch('key');
         expect(field.label).toMatch('Label');
-        expect(field.datatype).toMatch(DataTypes.OBJECT);
+        expect(field.datatype).toMatch(Datatypes.OBJECT);
         const field2 = new ObjectXMLField(field);
         field2.setFields({});
         expect(field2.key).toMatch('key');
         expect(field2.label).toMatch('Label');
-        expect(field2.datatype).toMatch(DataTypes.OBJECT);
+        expect(field2.datatype).toMatch(Datatypes.OBJECT);
     });
 });
