@@ -38,11 +38,11 @@ export class ArrayXMLField extends ObjectXMLField {
      * Method to add enum values
      * @param {string} label Enum value label
      * @param {string} value Enum value
-     * @param {number} [minApi] Minimum API Version
-     * @param {number} [maxApi] Maximum API Version
+     * @param {number | string} [minApi] Minimum API Version
+     * @param {number | string} [maxApi] Maximum API Version
      * @returns {ArrayXMLField} Returns the ArrayXMLField instance
      */
-    addAllowedValue(label: string, value: string, minApi?: number, maxApi?: number) {
+    addAllowedValue(label: string, value: string, minApi?: number | string, maxApi?: number | string) {
         if (this.allowedValues === undefined) {
             this.allowedValues = [];
         }
