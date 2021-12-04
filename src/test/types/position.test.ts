@@ -1,4 +1,4 @@
-const Position = require('../../../src/types/position');
+import { Position } from "../../types";
 
 describe('Testing ./src/types/position.js', () => {
     test('Testing instance', () => {
