@@ -1,5 +1,4 @@
-const Commit = require('../../../src/types/commit');
-const CommitDate = require('../../../src/types/commitDate');
+import { Commit, CommitDate } from "../../types";
 
 describe('Testing ./src/types/commit.js and ./src/types/commitDate.js', () => {
     test('Testing instance', () => {
