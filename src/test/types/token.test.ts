@@ -1,5 +1,5 @@
-const Token = require('../../../src/types/token');
-const ApexTokenTypes = require('../../../src/values/apexTokenTypes');
+import { Token } from "../../types";
+import { ApexTokenTypes } from "../../values";
 
 describe('Testing ./src/types/token.js', () => {
     test('Testing instance', () => {
