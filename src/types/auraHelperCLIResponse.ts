@@ -9,11 +9,11 @@ export class AuraHelperCLIResponse {
 
     /**
      * Create new Aura Helper CLI Response
-     * @param {string | AuraHelperCLIResponse} statusOrResponse Response status or Response instance
+     * @param {number | string | AuraHelperCLIResponse} statusOrResponse Response status or Response instance
      * @param {string} [message] Response message
      * @param {any} [result] Response result data
      */
-    constructor(statusOrResponse: number | AuraHelperCLIResponse, message?: string, result?: any) {
+    constructor(statusOrResponse: number | string | AuraHelperCLIResponse, message?: string, result?: any) {
         if (statusOrResponse instanceof AuraHelperCLIResponse) {
             this.status = statusOrResponse.status;
             this.message = statusOrResponse.message;

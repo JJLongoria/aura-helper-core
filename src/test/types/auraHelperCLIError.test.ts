@@ -1,4 +1,4 @@
-const AuraHelperCLIError = require('../../../src/types/auraHelperCLIError');
+import { AuraHelperCLIError } from "../../types";
 
 describe('Testing ./src/types/auraHelperCLIError.js', () => {
     test('Testing instance', () => {

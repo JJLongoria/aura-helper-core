@@ -1,4 +1,5 @@
-const AuraHelperCLIProgress = require('../../../src/types/auraHelperCLIProgress');
+import { AuraHelperCLIProgress } from "../../types";
+
 
 describe('Testing ./src/types/auraHelperCLIProgress.js', () => {
     test('Testing instance', () => {
