@@ -1,6 +1,5 @@
 /node_modules
 /coverage
-/test/assets/SFDXProject
-/test/assets/folderToCreate
 dist
-src/test
+src/test/assets/SFDXProject
+src/test/assets/folderToCreate
