@@ -1,4 +1,4 @@
-const RetrieveInboundFile = require('../../../src/types/retrieveInboundFile');
+import { RetrieveInboundFile } from "../../types";
 
 describe('Testing ./src/types/retrieveInboundFile.js', () => {
     test('Testing instance', () => {
