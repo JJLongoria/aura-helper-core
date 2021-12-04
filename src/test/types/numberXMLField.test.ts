@@ -1,4 +1,4 @@
-const NumberXMLField = require('../../../src/types/numberXMLField');
+import { NumberXMLField } from "../../types";
 
 describe('Testing ./src/types/numberXMLField.js', () => {
     test('Testing instance', () => {
