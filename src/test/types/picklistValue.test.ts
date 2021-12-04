@@ -1,4 +1,4 @@
-const PicklistValue = require('../../../src/types/picklistValue');
+import { PicklistValue } from "../../types";
 
 describe('Testing ./src/types/picklistValue.js', () => {
     test('Testing instance', () => {
