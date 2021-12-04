@@ -1,4 +1,4 @@
-const MetadataItem = require('../../../src/types/metadataItem');
+import { MetadataItem } from "../../types";
 
 describe('Testing ./src/types/metadataItem.js', () => {
     test('Testing instance', () => {
