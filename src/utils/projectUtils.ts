@@ -7,7 +7,6 @@ import { Validator } from "./validator";
 
 const PROJECT_FILE = 'sfdx-project.json';
 const CONFIG_FILE = 'sfdx-config.json';
-let projectConfig;
 
 /**
  * Class with util methods to work with a Salesforce Project
@@ -24,8 +23,7 @@ export class ProjectUtils {
         projectFolder = Validator.validateFolderPath(projectFolder, 'projectFolder');
         const filePath = projectFolder + '/' + PROJECT_FILE;
         if (FileChecker.isExists(filePath)) {
-            projectConfig = new ProjectConfig(JSON.parse(FileReader.readFileSync(filePath)));
-            return projectConfig;
+            return new ProjectConfig(JSON.parse(FileReader.readFileSync(filePath)));
         }
         return undefined;
     }
@@ -39,7 +37,7 @@ export class ProjectUtils {
     static getOrgAvailableVersions(instance: string): Promise<OrgAvailableVersion[]> {
         return new Promise<OrgAvailableVersion[]>(async function (resolve) {
             let data = await HTTPConnection.getRequest(instance + '/services/data');
-            resolve(JSON.parse(data) as OrgAvailableVersion[]);
+            resolve(JSON.parse(data));
         });
     }
 
