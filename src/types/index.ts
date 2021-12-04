@@ -8,7 +8,6 @@ export * from './apexConstructor';
 export * from './apexDatatype';
 export * from './apexDeclarationNode';
 export * from './apexEnum';
-
 export * from './apexExceptionThrows';
 export * from './apexFormatterConfig';
 export * from './apexGetter';
