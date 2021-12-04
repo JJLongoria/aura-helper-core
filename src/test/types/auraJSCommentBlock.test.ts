@@ -1,4 +1,4 @@
-import { AuraJSComment, AuraJSCommentBlock, Token } from "../../types";
+import { AuraJSCommentBlock, Token } from "../../types";
 import { AuraNodeTypes } from "../../values";
 
 
