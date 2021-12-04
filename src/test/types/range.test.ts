@@ -1,5 +1,5 @@
-const Range = require('../../../src/types/range');
-const Position = require('../../../src/types/position');
+import { Position } from "vscode";
+import { Range } from "../../types";
 
 describe('Testing ./src/types/range.js', () => {
     test('Testing instance', () => {
