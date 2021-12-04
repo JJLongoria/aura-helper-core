@@ -1,5 +1,6 @@
-const DoubleXMLField = require('../../../src/types/doubleXMLField');
-const DataTypes = require('../../../src/values/datatypes');
+import { DoubleXMLField } from "../../types";
+import { Datatypes } from "../../values";
+
 
 describe('Testing ./src/types/doubleXMLField.js', () => {
     test('Testing instance', () => {
@@ -10,10 +11,10 @@ describe('Testing ./src/types/doubleXMLField.js', () => {
         expect(field.transformValue(5.5)).toEqual(5.5);
         expect(field.key).toMatch('key');
         expect(field.label).toMatch('Label');
-        expect(field.datatype).toMatch(DataTypes.DOUBLE);
+        expect(field.datatype).toMatch(Datatypes.DOUBLE);
         const field2 = new DoubleXMLField(field);
         expect(field2.key).toMatch('key');
         expect(field2.label).toMatch('Label');
-        expect(field2.datatype).toMatch(DataTypes.DOUBLE);
+        expect(field2.datatype).toMatch(Datatypes.DOUBLE);
     });
 });
