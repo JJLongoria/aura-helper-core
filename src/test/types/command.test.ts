@@ -1,4 +1,5 @@
-const Command = require('../../../src/types/command');
+import { Command } from "../../types";
+
 
 describe('Testing ./src/types/bulkStatus.js', () => {
     test('Testing instance', () => {
