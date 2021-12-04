@@ -1,4 +1,5 @@
-const GitDiff = require('../../../src/types/gitDiff');
+import { GitDiff } from "../../types";
+
 
 describe('Testing ./src/types/gitDiff.js', () => {
     test('Testing instance', () => {
