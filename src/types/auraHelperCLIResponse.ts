@@ -3,7 +3,7 @@
  */
 export class AuraHelperCLIResponse {
 
-    status: number;
+    status: number | string;
     message?: string;
     result: any;
 
