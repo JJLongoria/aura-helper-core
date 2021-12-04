@@ -1,5 +1,4 @@
-const SOQLField = require('../../../src/types/soqlField');
-const Token = require('../../../src/types/token');
+import { SOQLField, Token } from "../../types";
 
 describe('Testing ./src/types/soqlField.js', () => {
     test('Testing instance', () => {
