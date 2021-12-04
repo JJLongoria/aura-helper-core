@@ -16,7 +16,7 @@ export class AuraNode {
     description?: string;
     positionData?: PositionData;
     file?: string;
-    name?: AuraTagData;
+    name?: AuraTagData | string;
 
     /**
      * Create nenw Aura node instance
