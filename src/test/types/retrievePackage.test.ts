@@ -1,4 +1,4 @@
-const RetrievePackage = require('../../../src/types/retrievePackage');
+import { RetrievePackage } from "../../types";
 
 describe('Testing ./src/types/retrievePackage.js', () => {
     test('Testing instance', () => {
