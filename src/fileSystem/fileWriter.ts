@@ -12,9 +12,9 @@ export class FileWriter {
      * Method to create files asynchronously
      * @param {string} path path to save the file
      * @param {string} content content to write into the file
-     * @param {Function} callback callback function to handle the end of write
+     * @param {Function} [callback] callback function to handle the end of write
      */
-    static createFile(path: string, content: string, callback: (path?: string, err?: Error) => void): void {
+    static createFile(path: string, content: string, callback?: (path?: string, err?: Error) => void): void {
         fs.writeFile(path, content, (error: Error) => {
             if (callback) {
                 if (error) {
@@ -77,9 +77,9 @@ export class FileWriter {
      * Method to copy an entire folder into another synchronously
      * @param {string} source source folder
      * @param {string} target target folder
-     * @param {boolean} overwrite true to overwrite target files
+     * @param {boolean} [overwrite] true to overwrite target files
      */
-    static copyFolderSync(source: string, target: string, overwrite: boolean) {
+    static copyFolderSync(source: string, target: string, overwrite?: boolean) {
         fsExtra.copySync(source, target, { overwrite: overwrite });
     }
 
@@ -111,7 +111,7 @@ export class FileWriter {
      * @param {string} targetPath target folder to uncrompress
      * @param {Function} callback callback function to handle the end of uncrompression
      */
-    static async unzip(zipFile: string, targetPath: string, callback: (fd?: string) => void) {
+    static async unzip(zipFile: string, targetPath: string, callback?: (fd?: string) => void) {
         let rstream = fs.createReadStream(zipFile).pipe(unzipper.Extract({
             path: targetPath
         }));

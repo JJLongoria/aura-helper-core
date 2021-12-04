@@ -15,6 +15,7 @@ export class SOQLQuery extends ApexNode {
     projection?: SOQLField[];
     isDinamyc?: boolean;
     limit?: number;
+    parentName?: string;
 
     /**
      * Method to create new SOQL Query
