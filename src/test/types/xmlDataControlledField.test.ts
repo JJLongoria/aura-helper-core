@@ -1,4 +1,4 @@
-const XMLDataControlledField = require('../../../src/types/xmlDataControlledField');
+import { XMLDataControlledField } from "../../types";
 
 describe('Testing ./src/types/xmlDataControlledField.js', () => {
     test('Testing instance', () => {
