@@ -1,4 +1,4 @@
-const DeployStatus = require('../../../src/types/deployStatus');
+import { DeployStatus } from "../../types";
 
 describe('Testing ./src/types/deployStatus.js', () => {
     test('Testing instance', () => {
