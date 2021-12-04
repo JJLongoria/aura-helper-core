@@ -6,9 +6,9 @@ import { Utils } from "../utils/utils";
 export class XMLDependencyField {
 
     field: string;
-    valueToCompare: any[];
-    allowedValues: any[];
-    forbidenValues: any[];
+    valueToCompare: any[] | any;
+    allowedValues: any[] | any;
+    forbidenValues: any[] | any;
     minApi: number;
     maxApi: number;
 
@@ -19,7 +19,7 @@ export class XMLDependencyField {
      * @param {any[]} [allowedValues] Allowed values
      * @param {any[]} [forbidenValues] Forbiden values
      */
-    constructor(fieldOrDependency: string | XMLDependencyField, valueToCompare?: any[], allowedValues?: any[], forbidenValues?: any[]) {
+    constructor(fieldOrDependency: string | XMLDependencyField, valueToCompare?: any[] | any, allowedValues?: any[] | any, forbidenValues?: any[] | any) {
         if (fieldOrDependency instanceof XMLDependencyField) {
             this.field = fieldOrDependency.field;
             this.valueToCompare = fieldOrDependency.valueToCompare;
