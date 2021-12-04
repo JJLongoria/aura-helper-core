@@ -21,19 +21,19 @@ describe('Testing ./src/fileSystem/fileWriter.js', () => {
         FileWriter.createFolderSync('./src/test/assets/folderToCreate/subFolder');
         FileWriter.delete('./src/test/assets/folderToCreate/subFolder');
     });
+    test('Testing copyFileSync()', () => {
+        FileWriter.copyFileSync('./src/test/assets/testWriteFile.txt', './src/test/assets/testWriteFileCopy.txt');
+    });
     test('Testing copyFile()', async () => {
         FileWriter.copyFile('./src/test/assets/testWriteFile.txt', './src/test/assets/testWriteFileCopy.txt', () => {
         });
     });
-    test('Testing copyFileSync()', () => {
-        FileWriter.copyFileSync('./src/test/assets/testWriteFile.txt', './src/test/assets/testWriteFileCopy.txt');
+    test('Testing copyFolderSync()', () => {
+        FileWriter.copyFolderSync('./src/test/assets/packages', './src/test/assets/packagesCopy', true);
     });
     test('Testing copyFolder()', async () => {
         FileWriter.copyFolder('./src/test/assets/packages', './src/test/assets/packagesCopy', true, () => {
         });
-    });
-    test('Testing copyFolderSync()', () => {
-        FileWriter.copyFolderSync('./src/test/assets/packages', './src/test/assets/packagesCopy', true);
     });
     test('Testing unzip()', async () => {
         FileWriter.unzip('./src/test/assets/testZip.zip', './src/test/assets/folderToCreate/subFolder', () => {

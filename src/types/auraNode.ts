@@ -48,6 +48,7 @@ export class AuraNode {
             } else {
                 this.tagName = this.qualifiedName;
             }
+            this.name = this.tagName;
             this.positionData = undefined;
             this.file = undefined;
         }

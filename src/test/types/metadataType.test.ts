@@ -7,7 +7,7 @@ describe('Testing ./src/types/metadataType.js', () => {
         let type2 = new MetadataType(type1);
         expect(type2.name).toEqual('CustomObject');
         type2.addChild('name', new MetadataObject('test'));
-        expect(type2.getChild('name').name).toEqual('test');
+        expect(type2.getChild('name')!.name).toEqual('test');
         expect(type2.childsCount()).toEqual(1);
         expect(type2.hasChilds()).toBeTruthy();
         expect(type2.allChildsChecked()).toBeFalsy();
