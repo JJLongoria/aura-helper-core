@@ -1,4 +1,4 @@
-const RetrieveStatus = require('../../../src/types/retrieveStatus');
+import { RetrieveStatus } from "../../types";
 
 describe('Testing ./src/types/retrieveStatus.js', () => {
     test('Testing instance', () => {
