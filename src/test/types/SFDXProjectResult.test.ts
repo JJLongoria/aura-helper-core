@@ -1,4 +1,4 @@
-const SFDXProjectResult = require('../../../src/types/sfdxProjectResult');
+import { SFDXProjectResult } from "../../types";
 
 describe('Testing ./src/types/sfdxProjectResult.js', () => {
     test('Testing instance', () => {
