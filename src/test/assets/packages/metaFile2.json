@@ -1,0 +1,18 @@
+{
+    "CustomField": {
+        "checked": false,
+        "childs": {
+            "Account": {
+                "name": "Account",
+                "checked": true,
+                "childs": {
+                    "Name": {
+                        "name": "Name",
+                        "checked": false,
+                        "path": ""
+                    }
+                }
+            }
+        }
+    }
+}

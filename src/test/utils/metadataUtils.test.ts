@@ -1,0 +1,235 @@
+import { MetadataType, MetadataObject, MetadataItem, SObject, SObjectField, XMLField } from "../../types";
+import { MetadataUtils } from "../../utils";
+import { Datatypes } from "../../values";
+
+describe('Testing ./src/utils/utils.js', () => {
+    test('Testing orderMetadata()', () => {
+        const metadata: { [key: string]: MetadataType } = {};
+        metadata['Workflow'] = new MetadataType('Workflow');
+        metadata['Workflow'].addChild('Account', new MetadataObject('Account'));
+        metadata['Workflow'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'] = new MetadataType('CustomField');
+        metadata['CustomField'].addChild('Account', new MetadataObject('Account'));
+        metadata['CustomField'].getChild('Account')!.addChild('Name', new MetadataItem('Name'));
+        metadata['CustomField'].getChild('Account')!.addChild('Id', new MetadataItem('Id'));
+        metadata['CustomField'].getChild('Account')!.addChild('FirstName', new MetadataItem('FirstName'));
+        metadata['CustomField'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'].getChild('Case')!.addChild('Subject', new MetadataItem('Subject'));
+        metadata['CustomField'].getChild('Case')!.addChild('Description', new MetadataItem('Description'));
+        metadata['CustomField'].getChild('Case')!.addChild('CaseNumber', new MetadataItem('CaseNumber'));
+        let orderedMetadata = MetadataUtils.orderMetadata(metadata);
+        orderedMetadata = MetadataUtils.orderMetadata(metadata, true);
+        let keys = Object.keys(orderedMetadata);
+        expect(keys[0]).toMatch('CustomField');
+        expect(keys[1]).toMatch('Workflow');
+    });
+    test('Testing orderSObjects()', () => {
+        const sObjects: { [key: string]: SObject } = {};
+        sObjects['Case'] = new SObject('Case', 'Case', 'Cases', '500', false);
+        sObjects['Case'].addField('Subject', new SObjectField('Subject', 'Subject', 'string', false));
+        sObjects['Case'].addField('Description', new SObjectField('Description', 'Description', 'string', false));
+        sObjects['Case'].addField('CaseNumber', new SObjectField('CaseNumber', 'Case Number', 'string', false));
+        sObjects['Account'] = new SObject('Account', 'Account', 'Accounts', '001', false);
+        sObjects['Account'].addField('Zip', new SObjectField('Zip', 'Zip', 'string', false));
+        sObjects['Account'].addField('Acc__c', new SObjectField('Acc__c', 'Account', 'string', true));
+        sObjects['Account'].addField('Name', new SObjectField('Name', 'Name', 'string', false));
+        let orderedSObject = MetadataUtils.orderSObjects(sObjects);
+        let keys = Object.keys(orderedSObject);
+        expect(keys[0]).toMatch('Account');
+        expect(keys[1]).toMatch('Case');
+        let accFieldKeys = Object.keys(sObjects['Account'].fields);
+        expect(accFieldKeys[0]).toMatch('acc__c');
+        expect(accFieldKeys[1]).toMatch('name');
+        expect(accFieldKeys[2]).toMatch('zip');
+        let caseFieldKeys = Object.keys(sObjects['Case'].fields);
+        expect(caseFieldKeys[0]).toMatch('casenumber');
+        expect(caseFieldKeys[1]).toMatch('description');
+        expect(caseFieldKeys[2]).toMatch('subject');
+    });
+    test('Testing compareMetadata()', () => {
+        const metadataTarget: { [key: string]: MetadataType } = {};
+        metadataTarget['Workflow'] = new MetadataType('Workflow');
+        metadataTarget['Workflow'].addChild('Account', new MetadataObject('Account'));
+        metadataTarget['Workflow'].addChild('Case', new MetadataObject('Case'));
+        metadataTarget['CustomField'] = new MetadataType('CustomField');
+        metadataTarget['CustomField'].addChild('Account', new MetadataObject('Account'));
+        metadataTarget['CustomField'].getChild('Account')!.addChild('Name', new MetadataItem('Name'));
+        metadataTarget['CustomField'].getChild('Account')!.addChild('Id', new MetadataItem('Id'));
+        metadataTarget['CustomField'].getChild('Account')!.addChild('FirstName', new MetadataItem('FirstName'));
+        metadataTarget['CustomField'].addChild('Case', new MetadataObject('Case'));
+        metadataTarget['CustomField'].getChild('Case')!.addChild('Subject', new MetadataItem('Subject'));
+        metadataTarget['CustomField'].getChild('Case')!.addChild('Description', new MetadataItem('Description'));
+        metadataTarget['CustomField'].getChild('Case')!.addChild('CaseNumber', new MetadataItem('CaseNumber'));
+
+        const metadataSource: { [key: string]: MetadataType } = {};
+        metadataSource['Workflow'] = new MetadataType('Workflow');
+        metadataSource['Workflow'].addChild('Account', new MetadataObject('Account'));
+        metadataSource['CustomField'] = new MetadataType('CustomField');
+        metadataSource['CustomField'].addChild('Account', new MetadataObject('Account'));
+        metadataSource['CustomField'].getChild('Account')!.addChild('Name', new MetadataItem('Name'));
+        metadataSource['CustomField'].addChild('Case', new MetadataObject('Case'));
+        metadataSource['CustomField'].getChild('Case')!.addChild('Subject', new MetadataItem('Subject'));
+        metadataSource['CustomField'].getChild('Case')!.addChild('Description', new MetadataItem('Description'));
+        let metadataOnSource = MetadataUtils.compareMetadata(metadataSource, metadataTarget);
+        expect(metadataOnSource['Workflow'].getChild('Case')!.name).toMatch('Case');
+        expect(metadataOnSource['CustomField'].getChild('Account')!.getChild('Id')!.name).toMatch('Id');
+        expect(metadataOnSource['CustomField'].getChild('Account')!.getChild('FirstName')!.name).toMatch('FirstName');
+        expect(metadataOnSource['CustomField'].getChild('Case')!.getChild('CaseNumber')!.name).toMatch('CaseNumber');
+    });
+    test('Testing isAnyChecked()', () => {
+        const metadata: { [key: string]: MetadataType } = {};
+        metadata['Workflow'] = new MetadataType('Workflow', true);
+        metadata['Workflow'].addChild('Account', new MetadataObject('Account'));
+        metadata['Workflow'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'] = new MetadataType('CustomField');
+        metadata['CustomField'].addChild('Account', new MetadataObject('Account'));
+        metadata['CustomField'].getChild('Account')!.addChild('Name', new MetadataItem('Name'));
+        metadata['CustomField'].getChild('Account')!.addChild('Id', new MetadataItem('Id'));
+        metadata['CustomField'].getChild('Account')!.addChild('FirstName', new MetadataItem('FirstName'));
+        metadata['CustomField'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'].getChild('Case')!.addChild('Subject', new MetadataItem('Subject'));
+        metadata['CustomField'].getChild('Case')!.addChild('Description', new MetadataItem('Description'));
+        metadata['CustomField'].getChild('Case')!.addChild('CaseNumber', new MetadataItem('CaseNumber'));
+        expect(MetadataUtils.isAnyChecked(metadata)).toBeTruthy();
+    });
+    test('Testing isAllChecked()', () => {
+        const metadata: { [key: string]: MetadataType } = {};
+        metadata['Workflow'] = new MetadataType('Workflow', true);
+        metadata['Workflow'].addChild('Account', new MetadataObject('Account'));
+        metadata['Workflow'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'] = new MetadataType('CustomField');
+        metadata['CustomField'].addChild('Account', new MetadataObject('Account'));
+        metadata['CustomField'].getChild('Account')!.addChild('Name', new MetadataItem('Name'));
+        metadata['CustomField'].getChild('Account')!.addChild('Id', new MetadataItem('Id'));
+        metadata['CustomField'].getChild('Account')!.addChild('FirstName', new MetadataItem('FirstName'));
+        metadata['CustomField'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'].getChild('Case')!.addChild('Subject', new MetadataItem('Subject'));
+        metadata['CustomField'].getChild('Case')!.addChild('Description', new MetadataItem('Description'));
+        metadata['CustomField'].getChild('Case')!.addChild('CaseNumber', new MetadataItem('CaseNumber'));
+        expect(MetadataUtils.isAllChecked(metadata)).toBeFalsy();
+    });
+    test('Testing haveChilds()', () => {
+        const metadata: { [key: string]: MetadataType } = {};
+        metadata['Workflow'] = new MetadataType('Workflow', true);
+        metadata['Workflow'].addChild('Account', new MetadataObject('Account'));
+        metadata['Workflow'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'] = new MetadataType('CustomField');
+        metadata['CustomField'].addChild('Account', new MetadataObject('Account'));
+        metadata['CustomField'].getChild('Account')!.addChild('Name', new MetadataItem('Name'));
+        metadata['CustomField'].getChild('Account')!.addChild('Id', new MetadataItem('Id'));
+        metadata['CustomField'].getChild('Account')!.addChild('FirstName', new MetadataItem('FirstName'));
+        metadata['CustomField'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'].getChild('Case')!.addChild('Subject', new MetadataItem('Subject'));
+        metadata['CustomField'].getChild('Case')!.addChild('Description', new MetadataItem('Description'));
+        metadata['CustomField'].getChild('Case')!.addChild('CaseNumber', new MetadataItem('CaseNumber'));
+        expect(MetadataUtils.haveChilds(metadata['Workflow'])).toBeTruthy();
+    });
+    test('Testing getChildsData()', () => {
+        const metadata: { [key: string]: MetadataType } = {};
+        metadata['Workflow'] = new MetadataType('Workflow', true);
+        metadata['Workflow'].addChild('Account', new MetadataObject('Account'));
+        metadata['Workflow'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'] = new MetadataType('CustomField');
+        metadata['CustomField'].addChild('Account', new MetadataObject('Account', true));
+        metadata['CustomField'].getChild('Account')!.addChild('Name', new MetadataItem('Name', true));
+        metadata['CustomField'].getChild('Account')!.addChild('Id', new MetadataItem('Id'));
+        metadata['CustomField'].getChild('Account')!.addChild('FirstName', new MetadataItem('FirstName'));
+        metadata['CustomField'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'].getChild('Case')!.addChild('Subject', new MetadataItem('Subject'));
+        metadata['CustomField'].getChild('Case')!.addChild('Description', new MetadataItem('Description'));
+        metadata['CustomField'].getChild('Case')!.addChild('CaseNumber', new MetadataItem('CaseNumber'));
+        expect(MetadataUtils.getChildsData(metadata['CustomField'])).toEqual({
+            selectedItems: 1,
+            selectedSubItems: 1,
+            totalItems: 2,
+            totalSubItems: 6
+        });
+    });
+    test('Testing availableOnVersion()', () => {
+        const field = new XMLField('field', 'Field', Datatypes.STRING);
+        field.minApi = -1;
+        field.maxApi = 30;
+        expect(MetadataUtils.availableOnVersion(field, 50, 50)).toBeFalsy();
+        expect(MetadataUtils.availableOnVersion(field, 28, 28)).toBeTruthy();
+    });
+    test('Testing getNamespaceFromName()', () => {
+        expect(MetadataUtils.getNamespaceFromName('namespace__objectName__c')).toEqual('namespace');
+    });
+    test('Testing deleteCheckedMetadata()', () => {
+        const metadata: { [key: string]: MetadataType } = {};
+        metadata['Workflow'] = new MetadataType('Workflow', true);
+        metadata['Workflow'].addChild('Account', new MetadataObject('Account', true));
+        metadata['Workflow'].addChild('Case', new MetadataObject('Case', true));
+        metadata['CustomField'] = new MetadataType('CustomField');
+        metadata['CustomField'].addChild('Account', new MetadataObject('Account'));
+        metadata['CustomField'].getChild('Account')!.addChild('Name', new MetadataItem('Name'));
+        metadata['CustomField'].getChild('Account')!.addChild('Id', new MetadataItem('Id'));
+        metadata['CustomField'].getChild('Account')!.addChild('FirstName', new MetadataItem('FirstName'));
+        metadata['CustomField'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'].getChild('Case')!.addChild('Subject', new MetadataItem('Subject', true));
+        metadata['CustomField'].getChild('Case')!.addChild('Description', new MetadataItem('Description'));
+        metadata['CustomField'].getChild('Case')!.addChild('CaseNumber', new MetadataItem('CaseNumber'));
+        const result = MetadataUtils.deleteCheckedMetadata(metadata);
+        expect(result['Workflow']).toBeUndefined();
+    });
+    test('Testing checkAll()', () => {
+        const metadata: { [key: string]: MetadataType } = {};
+        metadata['Workflow'] = new MetadataType('Workflow', true);
+        metadata['Workflow'].addChild('Account', new MetadataObject('Account'));
+        metadata['Workflow'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'] = new MetadataType('CustomField');
+        metadata['CustomField'].addChild('Account', new MetadataObject('Account', true));
+        metadata['CustomField'].getChild('Account')!.addChild('Name', new MetadataItem('Name'));
+        metadata['CustomField'].getChild('Account')!.addChild('Id', new MetadataItem('Id'));
+        metadata['CustomField'].getChild('Account')!.addChild('FirstName', new MetadataItem('FirstName'));
+        metadata['CustomField'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'].getChild('Case')!.addChild('Subject', new MetadataItem('Subject'));
+        metadata['CustomField'].getChild('Case')!.addChild('Description', new MetadataItem('Description'));
+        metadata['CustomField'].getChild('Case')!.addChild('CaseNumber', new MetadataItem('CaseNumber'));
+        MetadataUtils.checkAll(metadata);
+        expect(metadata['CustomField'].checked).toBeTruthy();
+    });
+    test('Testing uncheckAll()', () => {
+        const metadata: { [key: string]: MetadataType } = {};
+        metadata['Workflow'] = new MetadataType('Workflow', true);
+        metadata['Workflow'].addChild('Account', new MetadataObject('Account'));
+        metadata['Workflow'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'] = new MetadataType('CustomField');
+        metadata['CustomField'].addChild('Account', new MetadataObject('Account'));
+        metadata['CustomField'].getChild('Account')!.addChild('Name', new MetadataItem('Name'));
+        metadata['CustomField'].getChild('Account')!.addChild('Id', new MetadataItem('Id'));
+        metadata['CustomField'].getChild('Account')!.addChild('FirstName', new MetadataItem('FirstName'));
+        metadata['CustomField'].addChild('Case', new MetadataObject('Case'));
+        metadata['CustomField'].getChild('Case')!.addChild('Subject', new MetadataItem('Subject'));
+        metadata['CustomField'].getChild('Case')!.addChild('Description', new MetadataItem('Description'));
+        metadata['CustomField'].getChild('Case')!.addChild('CaseNumber', new MetadataItem('CaseNumber'));
+        MetadataUtils.uncheckAll(metadata);
+        expect(metadata['Workflow'].checked).toBeFalsy();
+    });
+    test('Testing combineMetadata()', () => {
+        const metadataTarget: { [key: string]: MetadataType } = {};
+        metadataTarget['Workflow'] = new MetadataType('Workflow');
+        metadataTarget['Workflow'].addChild('Account', new MetadataObject('Account'));
+        metadataTarget['Workflow'].addChild('Case', new MetadataObject('Case'));
+        metadataTarget['CustomField'] = new MetadataType('CustomField');
+        metadataTarget['CustomField'].addChild('Account', new MetadataObject('Account'));
+        metadataTarget['CustomField'].getChild('Account')!.addChild('Name', new MetadataItem('Name'));
+        metadataTarget['CustomField'].getChild('Account')!.addChild('Id', new MetadataItem('Id'));
+        metadataTarget['CustomField'].getChild('Account')!.addChild('FirstName', new MetadataItem('FirstName'));
+
+        const metadataSource: { [key: string]: MetadataType } = {};
+        metadataSource['Workflow'] = new MetadataType('Workflow');
+        metadataSource['Workflow'].addChild('Account', new MetadataObject('Account'));
+        metadataSource['CustomField'] = new MetadataType('CustomField');
+        metadataSource['CustomField'].addChild('Account', new MetadataObject('Account'));
+        metadataSource['CustomField'].getChild('Account')!.addChild('Name', new MetadataItem('Name', true));
+        metadataSource['CustomField'].addChild('Case', new MetadataObject('Case'));
+        metadataSource['CustomField'].getChild('Case')!.addChild('Subject', new MetadataItem('Subject'));
+        metadataSource['CustomField'].getChild('Case')!.addChild('Description', new MetadataItem('Description'));
+        const result = MetadataUtils.combineMetadata(metadataTarget, metadataSource);
+        expect(result['Workflow'].getChild('Case')!.name).toMatch('Case');
+        expect(result['CustomField'].getChild('Account')!.getChild('Id')!.name).toMatch('Id');
+        expect(result['CustomField'].getChild('Account')!.getChild('FirstName')!.name).toMatch('FirstName');
+        expect(result['CustomField'].getChild('Case')!.getChild('Subject')!.name).toMatch('Subject');
+    });
+});
