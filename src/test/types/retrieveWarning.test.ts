@@ -1,4 +1,4 @@
-const RetrieveWarning = require('../../../src/types/retrieveWarning');
+import { RetrieveWarning } from "../../types";
 
 describe('Testing ./src/types/retrieveWarning.js', () => {
     test('Testing instance', () => {
