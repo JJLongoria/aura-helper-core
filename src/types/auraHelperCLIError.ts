@@ -7,12 +7,12 @@ export class AuraHelperCLIError extends AuraHelperCLIResponse {
 
     /**
      * Create new Aura Helper CLI Error JSON Object
-     * @param {number | AuraHelperCLIError} statusOrError Error status or Error instance
+     * @param {number | string | AuraHelperCLIError} statusOrError Error status or Error instance
      * @param {string} [name] Error name
      * @param {string} [code] Error code
      * @param {string} [message] Error message
      */
-    constructor(statusOrError: number | AuraHelperCLIError, name?: string, code?: string, message?: string) {
+    constructor(statusOrError: number | string | AuraHelperCLIError, name?: string, code?: string, message?: string) {
         super(statusOrError, message, undefined);
         if (statusOrError instanceof AuraHelperCLIError) {
             this.code = statusOrError.code;
