@@ -1,4 +1,4 @@
-const ProjectConfig = require('../../../src/types/projectConfig');
+import { ProjectConfig } from "../../types";
 
 describe('Testing ./src/types/progressStatus.js', () => {
     test('Testing instance', () => {
