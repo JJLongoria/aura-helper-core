@@ -64,7 +64,7 @@ export class ProcessFactory {
      * Method to create the SFDX process to describe the selected Metadata Type from the org 
      * @param {string} usernameOrAlias Username or Org Alias to connect (Required)
      * @param {string} metadataType Metadata Type to describe (CustomObject, CustomField, ApexClass...) (Required)
-     * @param {string} folderName Folder name for Metadata Types with folders (Reports, Documents, EmailTemplates...)
+     * @param {string} [folderName] Folder name for Metadata Types with folders (Reports, Documents, EmailTemplates...)
      * @param {string | number} [apiVersion] API version number to use custom API version. By default use the latest API version (Optional)
      * 
      * @returns {Process} Returns the process to run
@@ -73,7 +73,7 @@ export class ProcessFactory {
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"
      * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined
      */
-    static describeMetadataType(usernameOrAlias: string, metadataType: string, folderName: string, apiVersion?: string | number): Process {
+    static describeMetadataType(usernameOrAlias: string, metadataType: string, folderName?: string, apiVersion?: string | number): Process {
         if (Utils.isNull(usernameOrAlias)) {
             throw new DataRequiredException('usernameOrAlias');
         }
@@ -93,7 +93,7 @@ export class ProcessFactory {
     /**
      * Method to create the SFDX process to list the SObjects Available in the org
      * @param {string} usernameOrAlias Username or Org Alias to connect (Required)
-     * @param {string} objectCategory Object Category to list (Standard, Custom or All). All by default (Optional)
+     * @param {string} [objectCategory] Object Category to list (Standard, Custom or All). All by default (Optional)
      * @param {string | number} [apiVersion] API version number to use custom API version. By default use the latest API version (Optional)
      * 
      * @returns {Process} Returns the process to run
@@ -102,7 +102,7 @@ export class ProcessFactory {
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"
      * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined
      */
-    static listSObjects(usernameOrAlias: string, objectCategory: string, apiVersion?: string | number): Process {
+    static listSObjects(usernameOrAlias: string, objectCategory?: string, apiVersion?: string | number): Process {
         if (Utils.isNull(usernameOrAlias)) {
             throw new DataRequiredException('usernameOrAlias');
         }

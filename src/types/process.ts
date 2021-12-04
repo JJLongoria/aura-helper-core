@@ -1,6 +1,6 @@
 import { ProcessEvent } from "../values";
 import { ProcessOptions } from "./processOptions";
-const { ChildProcess } = require('child_process');
+import * as ChildProcess from "child_process";
 
 /**
  * Class to handle and execute system processes
@@ -31,6 +31,9 @@ export class Process {
         this.options = options || {};
         this.jsonResponse = true;
         this.outputCallback = outputCallback;
+        if(!this.options.cwd){
+            this.options.cwd = './';
+        }
 
     }
 
