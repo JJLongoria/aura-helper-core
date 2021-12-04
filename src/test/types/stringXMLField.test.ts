@@ -1,5 +1,5 @@
-const StringXMLField = require('../../../src/types/stringXMLField');
-const DataTypes = require('../../../src/values/datatypes');
+import { StringXMLField } from "../../types";
+import { Datatypes } from "../../values";
 
 describe('Testing ./src/types/stringXMLField.js', () => {
     test('Testing instance', () => {
@@ -14,10 +14,10 @@ describe('Testing ./src/types/stringXMLField.js', () => {
         field.validate('matchPattern', 'fieldName');
         expect(field.key).toMatch('key');
         expect(field.label).toMatch('Label');
-        expect(field.datatype).toMatch(DataTypes.STRING);
+        expect(field.datatype).toMatch(Datatypes.STRING);
         const field2 = new StringXMLField(field);
         expect(field2.key).toMatch('key');
         expect(field2.label).toMatch('Label');
-        expect(field2.datatype).toMatch(DataTypes.STRING);
+        expect(field2.datatype).toMatch(Datatypes.STRING);
     });
 });
