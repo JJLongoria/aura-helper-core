@@ -1,4 +1,4 @@
-const SObjectField = require('../../../src/types/sObjectField');
+import { PicklistValue, SObjectField } from "../../types";
 
 describe('Testing ./src/types/sObjectField.js', () => {
     test('Testing instance', () => {
@@ -11,7 +11,7 @@ describe('Testing ./src/types/sObjectField.js', () => {
         sObjectField.setNamespace('ns');
         sObjectField.setNillable(false);
         sObjectField.setRelationshipName('name');
-        sObjectField.addPicklistValue('pickval');
+        sObjectField.addPicklistValue(new PicklistValue('pickval', 'pickval', false, true));
         sObjectField.addReferenceTo('ref');
         expect(sObjectField.name).toEqual('name');
         const sObjectField2 = new SObjectField(sObjectField);
