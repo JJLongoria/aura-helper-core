@@ -1,6 +1,4 @@
-const ApexDeclarationNode = require('../../../src/types/apexDeclarationNode');
-const Token = require('../../../src/types/token');
-const ApexNodeType = require('../../../src/values/apexNodeTypes');
+import {  ApexDeclarationNode, Token } from "../../types";
 
 describe('Testing ./src/types/apexDeclarationNode.js', () => {
     test('Testing instance', () => {
