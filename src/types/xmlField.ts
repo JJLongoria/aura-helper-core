@@ -230,7 +230,7 @@ export class XMLField {
         if (this.fieldDependencies === undefined) {
             this.fieldDependencies = [];
         }
-        if (fieldDependency.minApi < this.minApi) {
+        if (this.minApi && fieldDependency.minApi && fieldDependency.minApi < this.minApi) {
             fieldDependency.minApi = this.minApi;
         }
         if (this.maxApi !== -1 && !fieldDependency.maxApi) {
@@ -249,7 +249,7 @@ export class XMLField {
         if (this.controlledFields === undefined){
             this.controlledFields = [];
         }
-        if (controlledField.minApi < this.minApi){
+        if (this.minApi && controlledField.minApi && controlledField.minApi < this.minApi){
             controlledField.minApi = this.minApi;
         }
         if (this.maxApi !== -1 && !controlledField.maxApi){
