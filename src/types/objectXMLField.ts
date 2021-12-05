@@ -48,7 +48,7 @@ export class ObjectXMLField extends XMLField {
      * @param {string | string[]} sortOrder Sort order field(s)
      * @returns {ObjectXMLField} Returns the ObjectXMLField instance
      */
-    setSortOrder(sortOrder: string | string[]) {
+    setSortOrder(sortOrder?: string | string[]) {
         this.sortOrder = Utils.forceArray(sortOrder) as string[];
         return this;
     }
@@ -73,7 +73,7 @@ export class ObjectXMLField extends XMLField {
         if (this.fields === undefined){
             this.fields = {};
         }
-        if (xmlField.minApi < this.minApi){
+        if (xmlField.minApi && this.minApi && xmlField.minApi < this.minApi){
             xmlField.minApi = this.minApi;
         }
         if (this.maxApi !== -1 && xmlField.maxApi === -1){
