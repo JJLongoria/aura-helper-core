@@ -12,8 +12,8 @@ export class XMLField {
     key: string;
     label: string;
     datatype: string;
-    minApi: number;
-    maxApi: number;
+    minApi: number | string;
+    maxApi: number | string;
     creatable: boolean;
     editable: boolean;
     merge: boolean;
@@ -106,80 +106,80 @@ export class XMLField {
 
     /**
      * Method to set XML field as reserved
-     * @param {boolean} value true to set XML field as reserved
+     * @param {boolean} [value] true to set XML field as reserved, false in otherwise. If value are undefined or not provided, value set to true.
      * @returns {XMLField} Return the XML Field instance
      */
-    setReserved(value: boolean): XMLField {
+    setReserved(value?: boolean): XMLField {
         this.reserved = (value !== undefined) ? value : true;
         return this;
     }
 
     /**
      * Method to set XML field as editable
-     * @param {boolean} value true to set XML field as editable
+     * @param {boolean} [value] true to set XML field as editable, false in otherwise. If value are undefined or not provided, value set to true.
      * @returns {XMLField} Return the XML Field instance
      */
-    setEditable(value: boolean): XMLField {
+    setEditable(value?: boolean): XMLField {
         this.editable = (value !== undefined) ? value : true;
         return this;
     }
 
     /**
      * Method to set XML field as required
-     * @param {boolean} value true to set XML field as required
+     * @param {boolean} [value] true to set XML field as required, false in otherwise. If value are undefined or not provided, value set to true.
      * @returns {XMLField} Return the XML Field instance
      */
-    setRequired(value: boolean): XMLField {
+    setRequired(value?: boolean): XMLField {
         this.required = (value !== undefined) ? value : true;
         return this;
     }
 
     /**
      * Method to set XML field as mergeable (For aura-helper internal porpuses)
-     * @param {boolean} value true to set XML field as mergeable
+     * @param {boolean} [value] true to set XML field as mergeable, false in otherwise. If value are undefined or not provided, value set to true.
      * @returns {XMLField} Return the XML Field instance
      */
-    setMergeable(value: boolean): XMLField {
+    setMergeable(value?: boolean): XMLField {
         this.merge = (value !== undefined) ? value : true;
         return this;
     }
 
     /**
      * Method to set XML field as unique
-     * @param {boolean} value true to set XML field as unique
+     * @param {boolean} [value] true to set XML field as unique, false in otherwise. If value are undefined or not provided, value set to true.
      * @returns {XMLField} Return the XML Field instance
      */
-    setUnique(value: boolean): XMLField {
+    setUnique(value?: boolean): XMLField {
         this.unique = (value !== undefined) ? value : true;
         return this;
     }
 
     /**
      * Method to set if this XML must to compress
-     * @param {boolean} value true to set field to compress
+     * @param {boolean} [value] true to set field to compress, false in otherwise. If value are undefined or not provided, value set to true.
      * @returns {XMLField} Return the XML Field instance
      */
-    setCompress(value: boolean): XMLField {
+    setCompress(value?: boolean): XMLField {
         this.compress = (value !== undefined) ? value : true;
         return this;
     }
 
     /**
      * Method to set XML field minimum api. Minimum value: 1
-     * @param {number} minApi API Version minimum value
+     * @param {number | string} minApi API Version minimum value
      * @returns {XMLField} Return the XML Field instance
      */
-    setMinApi(minApi: number): XMLField {
+    setMinApi(minApi: number | string): XMLField {
         this.minApi = (minApi !== undefined && minApi >= 1) ? minApi : 1;
         return this;
     }
 
     /**
      * Method to set XML field maximum api. Use -1 to set available to the latest api
-     * @param {number} maxApi API Version maximum value
+     * @param {number | string} maxApi API Version maximum value
      * @returns {XMLField} Return the XML Field instance
      */
-    setMaxApi(maxApi: number): XMLField {
+    setMaxApi(maxApi: number | string): XMLField {
         this.maxApi = (maxApi !== undefined && maxApi >= 1) ? maxApi : -1;
         return this;
     }
@@ -240,6 +240,11 @@ export class XMLField {
         return this;
     }
 
+    /**
+     * Method to add new XML Field controlled field by another field
+     * @param {XMLDataControlledField} fieldDependency XML field dependency
+     * @returns {XMLField} Return the XML Field instance
+     */
     addControlledField(controlledField: XMLDataControlledField): XMLField {
         if (this.controlledFields === undefined){
             this.controlledFields = [];
@@ -254,6 +259,12 @@ export class XMLField {
         return this;
     }
 
+    /**
+     * Method to prepare value
+     * @param {any} value Value to prepare
+     * @param {any} originalValue original value
+     * @returns {any} Returns the prepared value
+     */
     prepareValue(value: any, originalValue?: any): any {
         let empty = value === undefined || value === null || value === '';
         if (!empty){
@@ -274,10 +285,20 @@ export class XMLField {
         return value;
     }
 
+    /**
+     * Method to transform value
+     * @param {any} value Value to transform
+     * @returns {any} Return the transforme value
+     */
     transformValue(value: any): any {
         return this.prepareValue(value, true);
     }
 
+    /**
+     * Method to validate a value
+     * @param {any} _value Value to validate
+     * @returns {any} Return the validation message or undefined if all are correct.
+     */
     validate(_value: any): any {
         return undefined;
     }

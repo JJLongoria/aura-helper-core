@@ -9,8 +9,8 @@ export class XMLDependencyField {
     valueToCompare: any[] | any;
     allowedValues: any[] | any;
     forbidenValues: any[] | any;
-    minApi: number;
-    maxApi: number;
+    minApi: number | string;
+    maxApi: number | string;
 
     /**
      * Create new XML Field dependency
@@ -39,20 +39,20 @@ export class XMLDependencyField {
 
     /**
      * Method to set XML dependency minimum api. Minimum value: 1
-     * @param {number} minApi API Version minimum value
+     * @param {number | string} minApi API Version minimum value
      * @returns {XMLDependencyField} Return the XMLDependencyField instance
      */
-     setMinApi(minApi: number): XMLDependencyField {
+     setMinApi(minApi: number | string): XMLDependencyField {
         this.minApi = (minApi !== undefined && minApi >= 1) ? minApi : 1;
         return this;
     }
 
     /**
      * Method to set XML dependency maximum api. Use -1 to set available to the latest api
-     * @param {number} maxApi API Version maximum value
+     * @param {number | string} maxApi API Version maximum value
      * @returns {XMLDependencyField} Return the XMLDependencyField instance
      */
-    setMaxApi(maxApi: number): XMLDependencyField {
+    setMaxApi(maxApi: number | string): XMLDependencyField {
         this.maxApi = (maxApi !== undefined && maxApi >= 1) ? maxApi : -1;
         return this;
     }
