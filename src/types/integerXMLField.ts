@@ -112,7 +112,7 @@ export class IntegerXMLField extends NumberXMLField {
      * @param {number | string} minApi API Version minimum value
      * @returns {IntegerXMLField} Return the IntegerXMLField instance
      */
-    setMinApi(minApi: number | string): IntegerXMLField {
+    setMinApi(minApi?: number | string): IntegerXMLField {
         super.setMinApi(minApi);
         return this;
     }
@@ -122,7 +122,7 @@ export class IntegerXMLField extends NumberXMLField {
      * @param {number | string} maxApi API Version maximum value
      * @returns {IntegerXMLField} Return the IntegerXMLField instance
      */
-    setMaxApi(maxApi: number | string): IntegerXMLField {
+    setMaxApi(maxApi?: number | string): IntegerXMLField {
         super.setMaxApi(maxApi);
         return this;
     }

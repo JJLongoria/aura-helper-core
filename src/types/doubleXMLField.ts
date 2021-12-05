@@ -117,7 +117,7 @@ export class DoubleXMLField extends NumberXMLField {
      * @param {number | string} minApi API Version minimum value
      * @returns {DoubleXMLField} Return the DoubleXMLField instance
      */
-    setMinApi(minApi: number | string): DoubleXMLField {
+    setMinApi(minApi?: number | string): DoubleXMLField {
         super.setMinApi(minApi);
         return this;
     }
@@ -127,7 +127,7 @@ export class DoubleXMLField extends NumberXMLField {
      * @param {number | string} maxApi API Version maximum value
      * @returns {DoubleXMLField} Return the DoubleXMLField instance
      */
-    setMaxApi(maxApi: number | string): DoubleXMLField {
+    setMaxApi(maxApi?: number | string): DoubleXMLField {
         super.setMaxApi(maxApi);
         return this;
     }

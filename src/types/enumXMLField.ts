@@ -203,7 +203,7 @@ export class EnumXMLField extends XMLField {
      * @param {number | string} minApi API Version minimum value
      * @returns {EnumXMLField} Return the EnumXMLField instance
      */
-    setMinApi(minApi: number | string): EnumXMLField {
+    setMinApi(minApi?: number | string): EnumXMLField {
         super.setMinApi(minApi);
         return this;
     }
@@ -213,7 +213,7 @@ export class EnumXMLField extends XMLField {
      * @param {number | string} maxApi API Version maximum value
      * @returns {EnumXMLField} Return the EnumXMLField instance
      */
-    setMaxApi(maxApi: number | string): EnumXMLField {
+    setMaxApi(maxApi?: number | string): EnumXMLField {
         super.setMaxApi(maxApi);
         return this;
     }

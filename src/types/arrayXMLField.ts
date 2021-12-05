@@ -151,7 +151,7 @@ export class ArrayXMLField extends ObjectXMLField {
      * @param {number | string} minApi API Version minimum value
      * @returns {ArrayXMLField} Return the ArrayXMLField instance
      */
-    setMinApi(minApi: number | string): ArrayXMLField {
+    setMinApi(minApi?: number | string): ArrayXMLField {
         super.setMinApi(minApi);
         return this;
     }
@@ -161,7 +161,7 @@ export class ArrayXMLField extends ObjectXMLField {
      * @param {number | string} maxApi API Version maximum value
      * @returns {ArrayXMLField} Return the ArrayXMLField instance
      */
-    setMaxApi(maxApi: number | string): ArrayXMLField {
+    setMaxApi(maxApi?: number | string): ArrayXMLField {
         super.setMaxApi(maxApi);
         return this;
     }

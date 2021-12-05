@@ -199,7 +199,7 @@ export class StringXMLField extends XMLField {
      * @param {number | string} minApi API Version minimum value
      * @returns {StringXMLField} Return the StringXMLField instance
      */
-    setMinApi(minApi: number | string): StringXMLField {
+    setMinApi(minApi?: number | string): StringXMLField {
         super.setMinApi(minApi);
         return this;
     }
@@ -209,7 +209,7 @@ export class StringXMLField extends XMLField {
      * @param {number | string} maxApi API Version maximum value
      * @returns {StringXMLField} Return the StringXMLField instance
      */
-    setMaxApi(maxApi: number | string): StringXMLField {
+    setMaxApi(maxApi?: number | string): StringXMLField {
         super.setMaxApi(maxApi);
         return this;
     }

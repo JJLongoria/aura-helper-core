@@ -6,8 +6,8 @@ export class XMLDataControlledField {
     field: string;
     valueToCompare: any;
     valueToSet: any;
-    minApi: number | string;
-    maxApi: number | string;
+    minApi?: number | string;
+    maxApi?: number | string;
 
     /**
      * Create new XML Controlled field
@@ -36,7 +36,7 @@ export class XMLDataControlledField {
      * @param {number | string} minApi API Version minimum value
      * @returns {XMLDataControlledField} Return the XMLDataControlledField instance
      */
-    setMinApi(minApi: number | string): XMLDataControlledField {
+    setMinApi(minApi?: number | string): XMLDataControlledField {
         this.minApi = (minApi !== undefined && minApi >= 1) ? minApi : 1;
         return this;
     }
@@ -46,7 +46,7 @@ export class XMLDataControlledField {
      * @param {number | string} maxApi API Version maximum value
      * @returns {XMLDataControlledField} Return the XMLDataControlledField instance
      */
-    setMaxApi(maxApi: number | string): XMLDataControlledField {
+    setMaxApi(maxApi?: number | string): XMLDataControlledField {
         this.maxApi = (maxApi !== undefined && maxApi >= 1) ? maxApi : -1;
         return this;
     }

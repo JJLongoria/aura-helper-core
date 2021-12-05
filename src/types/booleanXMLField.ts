@@ -119,7 +119,7 @@ export class BooleanXMLField extends XMLField {
      * @param {number | string} minApi API Version minimum value
      * @returns {BooleanXMLField} Return the BooleanXMLField instance
      */
-    setMinApi(minApi: number | string): BooleanXMLField {
+    setMinApi(minApi?: number | string): BooleanXMLField {
         super.setMinApi(minApi);
         return this;
     }
@@ -129,7 +129,7 @@ export class BooleanXMLField extends XMLField {
      * @param {number | string} maxApi API Version maximum value
      * @returns {BooleanXMLField} Return the BooleanXMLField instance
      */
-    setMaxApi(maxApi: number | string): BooleanXMLField {
+    setMaxApi(maxApi?: number | string): BooleanXMLField {
         super.setMaxApi(maxApi);
         return this;
     }
