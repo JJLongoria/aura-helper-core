@@ -166,20 +166,20 @@ export class XMLField {
 
     /**
      * Method to set XML field minimum api. Minimum value: 1
-     * @param {number | string} minApi API Version minimum value
+     * @param {number | string} [minApi] API Version minimum value
      * @returns {XMLField} Return the XML Field instance
      */
-    setMinApi(minApi: number | string): XMLField {
+    setMinApi(minApi?: number | string): XMLField {
         this.minApi = (minApi !== undefined && minApi >= 1) ? minApi : 1;
         return this;
     }
 
     /**
      * Method to set XML field maximum api. Use -1 to set available to the latest api
-     * @param {number | string} maxApi API Version maximum value
+     * @param {number | string} [maxApi] API Version maximum value
      * @returns {XMLField} Return the XML Field instance
      */
-    setMaxApi(maxApi: number | string): XMLField {
+    setMaxApi(maxApi?: number | string): XMLField {
         this.maxApi = (maxApi !== undefined && maxApi >= 1) ? maxApi : -1;
         return this;
     }
