@@ -128,7 +128,7 @@ export class DateTimeXMLField extends XMLField {
      * @param {number | string} minApi API Version minimum value
      * @returns {DateTimeXMLField} Return the DateTimeXMLField instance
      */
-    setMinApi(minApi: number | string): DateTimeXMLField {
+    setMinApi(minApi?: number | string): DateTimeXMLField {
         super.setMinApi(minApi);
         return this;
     }
@@ -138,7 +138,7 @@ export class DateTimeXMLField extends XMLField {
      * @param {number | string} maxApi API Version maximum value
      * @returns {DateTimeXMLField} Return the DateTimeXMLField instance
      */
-    setMaxApi(maxApi: number | string): DateTimeXMLField {
+    setMaxApi(maxApi?: number | string): DateTimeXMLField {
         super.setMaxApi(maxApi);
         return this;
     }

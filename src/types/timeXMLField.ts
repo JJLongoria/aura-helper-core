@@ -127,7 +127,7 @@ export class TimeXMLField extends DateTimeXMLField {
      * @param {number | string} minApi API Version minimum value
      * @returns {TimeXMLField} Return the TimeXMLField instance
      */
-    setMinApi(minApi: number | string): TimeXMLField {
+    setMinApi(minApi?: number | string): TimeXMLField {
         super.setMinApi(minApi);
         return this;
     }
@@ -137,7 +137,7 @@ export class TimeXMLField extends DateTimeXMLField {
      * @param {number | string} maxApi API Version maximum value
      * @returns {TimeXMLField} Return the TimeXMLField instance
      */
-    setMaxApi(maxApi: number | string): TimeXMLField {
+    setMaxApi(maxApi?: number | string): TimeXMLField {
         super.setMaxApi(maxApi);
         return this;
     }

@@ -12,8 +12,8 @@ export class XMLField {
     key: string;
     label: string;
     datatype: string;
-    minApi: number | string;
-    maxApi: number | string;
+    minApi?: number | string;
+    maxApi?: number | string;
     creatable: boolean;
     editable: boolean;
     merge: boolean;
