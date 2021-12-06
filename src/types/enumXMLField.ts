@@ -48,7 +48,7 @@ export class EnumXMLField extends XMLField {
      * @param {number} [maxApi] Maximum API Version
      * @returns {EnumXMLField} Returns the StringXMLField instance
      */
-    setEnumValues(values: EnumXMLFieldValue[], minApi?: number, maxApi?: number) {
+    setEnumValues(values: EnumXMLFieldValue[] | any[], minApi?: number, maxApi?: number) {
         this.values = Utils.forceArray(values) as EnumXMLFieldValue[];
         if (this.values !== undefined) {
             for (let value of this.values) {
@@ -62,12 +62,12 @@ export class EnumXMLField extends XMLField {
     /**
      * Method to add enum values
      * @param {string} label Enum value label
-     * @param {string} value Enum value
-     * @param {number} [minApi] Minimum API Version
-     * @param {number} [maxApi] Maximum API Version
+     * @param {string} [value] Enum value
+     * @param {number | string} [minApi] Minimum API Version
+     * @param {number | string} [maxApi] Maximum API Version
      * @returns {EnumXMLField} Returns the StringXMLField instance
      */
-    addEnumValue(label: string, value: string, minApi?: number, maxApi?: number) {
+    addEnumValue(label: string, value?: string | number, minApi?: number | string, maxApi?: number | string) {
         if (this.values === undefined) {
             this.values = [];
         }
@@ -83,9 +83,9 @@ export class EnumXMLField extends XMLField {
     /**
      * Method to get enum value using label
      * @param {string} label label to get value
-     * @returns {string | undefined} Returns the selected value or undefined if not exists
+     * @returns {string | number | undefined} Returns the selected value or undefined if not exists
      */
-    getValue(label: string): string | undefined {
+    getValue(label: string): string | number | undefined {
         for (let enumVal of this.values) {
             if (enumVal.label === label) {
                 return enumVal.value;
@@ -113,7 +113,7 @@ export class EnumXMLField extends XMLField {
      * @param {string} definitionRef Definition Reference (formats: keyName || mainKey>definitionToReference || mainKey>childKey>definitionToReference...) 
      * @returns {EnumXMLField} Return the EnumXMLField instance
      */
-     setDefinitionReference(definitionRef: string): EnumXMLField {
+    setDefinitionReference(definitionRef: string): EnumXMLField {
         super.setDefinitionReference(definitionRef);
         return this;
     }

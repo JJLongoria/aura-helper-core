@@ -1,4 +1,4 @@
-import { XMLDataControlledField, XMLDependencyField } from ".";
+import { XMLDataControlledField, XMLDependencyField, XMLField } from ".";
 import { Datatypes } from "../values";
 import { EnumXMLFieldValue } from "./enumXMLFieldValue";
 import { ObjectXMLField } from "./objectXMLField";
@@ -23,6 +23,47 @@ export class ArrayXMLField extends ObjectXMLField {
             this.allowedValues = keyOrArrayField.allowedValues;
         }
         this.datatype = Datatypes.ARRAY;
+    }
+
+    /**
+     * Method to set the field key of the object, that is, the main object field
+     * @param {string | string[]} fieldKey Field key tag name
+     * @returns {ArrayXMLField} Returns the ArrayXMLField instance
+     */
+     setFieldKey(fieldKey: string | string[]): ArrayXMLField {
+        super.setFieldKey(fieldKey);
+        return this;
+    }
+
+    /**
+     * Method to set the sort order field(s) to sort fields on XML
+     * @param {string | string[]} sortOrder Sort order field(s)
+     * @returns {ArrayXMLField} Returns the ArrayXMLField instance
+     */
+    setSortOrder(sortOrder?: string | string[]): ArrayXMLField {
+        super.setSortOrder(sortOrder);
+        return this;
+    }
+
+    /**
+     * Method to set the XML Object fields
+     * @param {{ [key: string]: XMLField }} fields fields to set
+     * @returns {ArrayXMLField} Returns the ArrayXMLField instance
+     */
+    setFields(fields: { [key: string]: XMLField }): ArrayXMLField {
+        super.setFields(fields);
+        return this;
+    }
+
+    /**
+     * Method to add field to XML Object field
+     * @param {string} fieldName Field tag name 
+     * @param {XMLField} xmlField XML Field to add
+     * @returns {ArrayXMLField} Returns the ArrayXMLField instance
+     */
+    addField(fieldName: string, xmlField: XMLField): ArrayXMLField {
+        super.addField(fieldName, xmlField);
+        return this;
     }
 
     /**

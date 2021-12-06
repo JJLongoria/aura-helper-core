@@ -18,6 +18,36 @@ export class IntegerXMLField extends NumberXMLField {
     }
 
     /**
+     * Method to set the minimum field value
+     * @param minValue Mimimum field value
+     * @returns Returns the IntegerXMLField instance
+     */
+     setMinValue(minValue: number): IntegerXMLField {
+        super.setMinValue(minValue);
+        return this;
+    }
+
+    /**
+     * Method to set the maximum field value
+     * @param minValue Maximum field value
+     * @returns Returns the IntegerXMLField instance
+     */
+    setMaxValue(maxValue: number): IntegerXMLField {
+        super.setMaxValue(maxValue);
+        return this;
+    }
+
+    /**
+     * Method to set the allowed values to the field
+     * @param minValue Allowed field values
+     * @returns Returns the IntegerXMLField instance
+     */
+    setAllowedValues(allowedValues: number | number[]): IntegerXMLField {
+        super.setAllowedValues(allowedValues);
+        return this;
+    }
+
+    /**
      * Method to set the XML Definition Reference when has the Same reference that other type in the same XML file
      * @param {string} definitionRef Definition Reference (formats: keyName || mainKey>definitionToReference || mainKey>childKey>definitionToReference...) 
      * @returns {IntegerXMLField} Return the IntegerXMLField instance

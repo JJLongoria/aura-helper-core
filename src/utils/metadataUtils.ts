@@ -225,7 +225,7 @@ export class MetadataUtils {
         if (!maxVersion) {
             maxVersion = orgVersion;
         }
-        return orgVersion >= minVersion && orgVersion <= maxVersion;
+        return Number(orgVersion) >= Number(minVersion) && Number(orgVersion) <= Number(maxVersion);
     }
 
     /**

@@ -23,6 +23,36 @@ export class DoubleXMLField extends NumberXMLField {
     }
 
     /**
+     * Method to set the minimum field value
+     * @param minValue Mimimum field value
+     * @returns Returns the DoubleXMLField instance
+     */
+     setMinValue(minValue: number): DoubleXMLField {
+        super.setMinValue(minValue);
+        return this;
+    }
+
+    /**
+     * Method to set the maximum field value
+     * @param minValue Maximum field value
+     * @returns Returns the DoubleXMLField instance
+     */
+    setMaxValue(maxValue: number): DoubleXMLField {
+        super.setMaxValue(maxValue);
+        return this;
+    }
+
+    /**
+     * Method to set the allowed values to the field
+     * @param minValue Allowed field values
+     * @returns Returns the DoubleXMLField instance
+     */
+    setAllowedValues(allowedValues: number | number[]): DoubleXMLField {
+        super.setAllowedValues(allowedValues);
+        return this;
+    }
+
+    /**
      * Method to set the XML Definition Reference when has the Same reference that other type in the same XML file
      * @param {string} definitionRef Definition Reference (formats: keyName || mainKey>definitionToReference || mainKey>childKey>definitionToReference...) 
      * @returns {DoubleXMLField} Return the DoubleXMLField instance
