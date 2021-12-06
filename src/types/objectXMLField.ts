@@ -8,7 +8,7 @@ import { XMLField } from "./xmlField";
  */
 export class ObjectXMLField extends XMLField {
 
-    fieldKey: string;
+    fieldKey: string | string[];
     sortOrder?: string[];
     fields: { [key: string]: XMLField };
 
@@ -32,10 +32,10 @@ export class ObjectXMLField extends XMLField {
 
     /**
      * Method to set the field key of the object, that is, the main object field
-     * @param {string} fieldKey Field key tag name
+     * @param {string | string[]} fieldKey Field key tag name
      * @returns {ObjectXMLField} Returns the ObjectXMLField instance
      */
-    setFieldKey(fieldKey: string): ObjectXMLField {
+    setFieldKey(fieldKey: string | string[]): ObjectXMLField {
         this.fieldKey = fieldKey;
         if (this.sortOrder === undefined) {
             this.sortOrder = Utils.forceArray(this.fieldKey) as string[];
@@ -48,7 +48,7 @@ export class ObjectXMLField extends XMLField {
      * @param {string | string[]} sortOrder Sort order field(s)
      * @returns {ObjectXMLField} Returns the ObjectXMLField instance
      */
-    setSortOrder(sortOrder?: string | string[]) {
+    setSortOrder(sortOrder?: string | string[]): ObjectXMLField {
         this.sortOrder = Utils.forceArray(sortOrder) as string[];
         return this;
     }
@@ -58,7 +58,7 @@ export class ObjectXMLField extends XMLField {
      * @param {{ [key: string]: XMLField }} fields fields to set
      * @returns {ObjectXMLField} Returns the ObjectXMLField instance
      */
-    setFields(fields: { [key: string]: XMLField }) {
+    setFields(fields: { [key: string]: XMLField }): ObjectXMLField {
         this.fields = fields;
         return this;
     }
@@ -69,7 +69,7 @@ export class ObjectXMLField extends XMLField {
      * @param {XMLField} xmlField XML Field to add
      * @returns {ObjectXMLField} Returns the ObjectXMLField instance
      */
-    addField(fieldName: string, xmlField: XMLField) {
+    addField(fieldName: string, xmlField: XMLField): ObjectXMLField {
         if (this.fields === undefined){
             this.fields = {};
         }

@@ -1,3 +1,5 @@
+import { EnumXMLField } from "..";
+
 export const DataValues = {
     DEFAULT_TEXT: '{!value}',
     NOT_NULL: '{!notnull}',
@@ -7,14 +9,11 @@ export const DataValues = {
     API_VALUE: '{!apiValue}',
     METADATA_TYPE: '{!metadataType:{0}}',
     NULL: '{!null}',
+    ANY_VALUE: '{!anyValue}',
     DASH: '-',
     POINT: '.',
     SLASH: '/',
     LOGIN_HOURS_VALUES: [
-        {
-            label: "-- None --",
-            value: undefined,
-        },
         {
             label: "12:00 AM",
             value: 0,
