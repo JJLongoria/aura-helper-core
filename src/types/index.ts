@@ -94,4 +94,5 @@ export * from './xmlDataControlledField';
 export * from './xmlDependencyField';
 export * from './xmlField';
 export * from './xmlFieldSObjectRelationship';
+export * from './xmlSortOrder';
 export * from './xmlUniqueFieldData';
