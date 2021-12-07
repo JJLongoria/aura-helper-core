@@ -13,10 +13,10 @@ export class AuraNode {
     tagName: string;
     token?: Token;
     namespace?: string;
-    description?: string;
+    description?: AuraTagData;
     positionData?: PositionData;
     file?: string;
-    name?: AuraTagData | string;
+    name?: AuraTagData;
 
     /**
      * Create nenw Aura node instance
@@ -48,7 +48,6 @@ export class AuraNode {
             } else {
                 this.tagName = this.qualifiedName;
             }
-            this.name = this.tagName;
             this.positionData = undefined;
             this.file = undefined;
         }

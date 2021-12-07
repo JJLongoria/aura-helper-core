@@ -11,6 +11,7 @@ export const AuraNodeTypes = {
     DEPENDENCY: 'dependency',
     FUNCTION: 'function',
     JS_COMMENT: 'jsComment',
+    JS_FILE: 'jsFile',
     JS_COMMENT_BLOCK: 'jsCommentBlock',
     SOQL: 'soql',
     SOQL_FIELD: 'soql_field'

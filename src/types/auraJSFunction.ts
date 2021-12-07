@@ -10,7 +10,7 @@ export class AuraJSFunction {
 
     nodeType: string;
     token?: Token;
-    params: string[];
+    params: Token[];
     name: string;
     comment?: AuraJSComment;
     signature?: string;

@@ -1,6 +1,6 @@
+import { ApexDeclarationNode } from ".";
 import { Utils } from "../utils";
 import { ApexNodeTypes } from "../values";
-import { ApexNode } from "./apexNode";
 import { ApexVariable } from "./apexVariable";
 import { SOQLQuery } from "./soqlQuery";
 import { Token } from "./token";
@@ -8,7 +8,7 @@ import { Token } from "./token";
 /**
  * Class to represent an Apex Trigger Node when Parsing Apex Code
  */
-export class ApexTrigger extends ApexNode {
+export class ApexTrigger extends ApexDeclarationNode {
 
     sObject?: string;
     beforeInsert: boolean;
@@ -67,7 +67,7 @@ export class ApexTrigger extends ApexNode {
             this.variables[child.name.toLowerCase()] = child;
             child.order = Utils.countKeys(this.variables);
             child.memberOrder = child.order;
-        } else if (child.nodeType === ApexNodeTypes.SOQL) {
+        } else if (child.nodeType === ApexNodeTypes.SOQL && child instanceof SOQLQuery) {
             this.queries.push(child);
         }
         return this;

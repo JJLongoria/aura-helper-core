@@ -2,12 +2,12 @@ import { FileWriter } from '../../fileSystem';
 
 describe('Testing ./src/fileSystem/fileWriter.js', () => {
     test('Testing createFile()', async () => {
-        FileWriter.createFile('./src/test/assets/testWriteFile.txt', 'file content', (path, _error) => {
-            expect(path).toMatch('./src/test/assets/testWriteFile.txt');
+        FileWriter.createFile('./src/test/assets/testWriteFile.txt', 'file content', (_error) => {
+            expect(_error).toBeUndefined();
         });
     });
     test('Testing createFile() With error', async () => {
-        FileWriter.createFile('./src/test/assetsss/testWriteFile.txt', 'file content', (_path, error) => {
+        FileWriter.createFile('./src/test/assetsss/testWriteFile.txt', 'file content', (error) => {
             expect(error).toBeDefined();
         });
     });

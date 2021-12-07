@@ -14,16 +14,8 @@ export class FileWriter {
      * @param {string} content content to write into the file
      * @param {Function} [callback] callback function to handle the end of write
      */
-    static createFile(path: string, content: string, callback?: (path?: string, err?: Error) => void): void {
-        fs.writeFile(path, content, (error: Error) => {
-            if (callback) {
-                if (error) {
-                    callback.call(this, undefined, error);
-                } else {
-                    callback.call(this, path, undefined);
-                }
-            }
-        });
+    static createFile(path: string, content: string, callback?: (err?: Error) => void): void {
+        fs.writeFile(path, content, callback);
     }
 
     /**

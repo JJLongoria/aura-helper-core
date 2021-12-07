@@ -5,8 +5,8 @@ import { Token } from "./token";
  */
 export class PositionData {
 
-    startPart: string;
-    endPart: string;
+    startPart?: string;
+    endPart?: string;
     nodeType?: string;
     nodeId?: string;
     onText: boolean;
@@ -23,8 +23,10 @@ export class PositionData {
     twoLastToken?: Token;
     nextToken?: Token;
     twoNextToken?: Token;
+    strQueryStartIndex?: number;
+    strQueryEndIndex?: number;
 
-    constructor(startPartOrPositionData: string | PositionData, endPart?: string, nodeType?: string, nodeId?: string, source?: string) {
+    constructor(startPartOrPositionData?: string | PositionData, endPart?: string, nodeType?: string, nodeId?: string, source?: string) {
         if (startPartOrPositionData instanceof PositionData) {
             this.startPart = startPartOrPositionData.startPart;
             this.endPart = startPartOrPositionData.endPart;

@@ -1,3 +1,4 @@
+import { ApexCommentBlock } from ".";
 import { ApexAnnotation } from "./apexAnnotation";
 import { ApexComment } from "./apexComment";
 import { ApexDatatype } from "./apexDatatype";
@@ -22,9 +23,9 @@ export class ApexDeclarationNode extends ApexNode {
     simplifiedSignature?: string;
     annotation?: ApexAnnotation;
     datatype?: ApexDatatype;
-    comment?: ApexComment;
+    comment?: ApexComment | ApexCommentBlock;
     description?: string;
-    scope?: number;
+    scope: number;
     documentation?: string;
     parentName?: string;
 
@@ -74,7 +75,7 @@ export class ApexDeclarationNode extends ApexNode {
             this.annotation = undefined;
             this.comment = undefined;
             this.description = undefined;
-            this.scope = undefined;
+            this.scope = 0;
             this.documentation = undefined;
             this.parentName = undefined;
         }

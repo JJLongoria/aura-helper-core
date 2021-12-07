@@ -1,3 +1,4 @@
+import { ApexInterface } from ".";
 import { Utils } from "../utils";
 import { ApexNodeTypes } from "../values";
 import { ApexConstructor } from "./apexConstructor";
@@ -26,9 +27,9 @@ export class ApexClass extends ApexDeclarationNode {
     methods: { [key: string]: ApexMethod };
     constructors: { [key: string]: ApexConstructor };
     extendsType?: string;
-    extends?: ApexClass;
+    extends?: ApexClass | ApexInterface;
     implementTypes: string[];
-    implements: { [key: string]: ApexClass };
+    implements: { [key: string]: ApexInterface };
     totalMembers: number;
     queries: SOQLQuery[];
 

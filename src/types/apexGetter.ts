@@ -1,3 +1,4 @@
+import { ApexComment, ApexCommentBlock } from ".";
 import { Utils } from "../utils";
 import { ApexNodeTypes } from "../values";
 import { ApexNode } from "./apexNode";
@@ -12,6 +13,7 @@ export class ApexGetter extends ApexNode {
 
     variables: { [key: string]: ApexVariable };
     queries: SOQLQuery[];
+    comment?: ApexComment | ApexCommentBlock;
 
     /**
      * Constructor to create an ApexGetter instance
@@ -40,7 +42,7 @@ export class ApexGetter extends ApexNode {
             this.variables[child.name.toLowerCase()] = child;
             child.order = Utils.countKeys(this.variables);
             child.memberOrder = child.order;
-        } else if (child && child.nodeType === ApexNodeTypes.SOQL) {
+        } else if (child && child.nodeType === ApexNodeTypes.SOQL && child instanceof SOQLQuery) {
             this.queries.push(child);
         }
         return this;
