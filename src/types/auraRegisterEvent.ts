@@ -19,10 +19,8 @@ export class AuraRegisterEvent extends AuraNode {
         super(quelifiedNameOrNode, AuraNodeTypes.REGISTER_EVENT, token);
         if (quelifiedNameOrNode instanceof AuraRegisterEvent) {
             this.type = quelifiedNameOrNode.type;
-            this.name = quelifiedNameOrNode.name;
         } else {
             this.type = undefined;
-            this.name = undefined;
         }
     }
 

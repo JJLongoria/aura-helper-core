@@ -8,7 +8,7 @@ import { Token } from "./token";
  */
 export class SOQLQuery extends ApexNode {
 
-    from?: string;
+    from?: Token;
     where?: any;
     orderBy?: any;
     groupBy?: any;

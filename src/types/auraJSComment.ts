@@ -1,7 +1,7 @@
 import { StrUtils } from "../utils";
 import { AuraNodeTypes, JSTokenTypes } from "../values";
-import { AuraJSFunctionParam } from "./auraJSFunctionParam";
-import { AuraJSFunctionReturn } from "./auraJSFunctionReturn";
+import { AuraJSFunctionCommentParam } from "./auraJSFunctionCommentParam";
+import { AuraJSFunctionCommentReturn } from "./auraJSFunctionCommentReturn";
 import { Token } from "./token";
 
 /**
@@ -12,8 +12,8 @@ export class AuraJSComment {
     nodeType: string;
     tokens: Token[];
     description: string;
-    params: { [key: string]: AuraJSFunctionParam };
-    return: AuraJSFunctionReturn;
+    params: { [key: string]: AuraJSFunctionCommentParam };
+    return: AuraJSFunctionCommentReturn;
 
     /**
      * Create new Aura Javascript comment

@@ -1,7 +1,7 @@
 import { AuraNodeTypes } from "../values";
 import { ApexMethod } from "./apexMethod";
 import { AuraAttribute } from "./auraAttribute";
-import { AuraEvent } from "./auraEvent";
+import { AuraRegisterEvent } from "./auraRegisterEvent";
 import { AuraHandler } from "./auraHandler";
 import { AuraJSFunction } from "./auraJSFunction";
 import { AuraRoot } from "./auraRoot";
@@ -14,7 +14,7 @@ import { Token } from "./token";
 export class AuraComponent extends AuraRoot {
 
     attributes: AuraAttribute[];
-    events: AuraEvent[];
+    events: AuraRegisterEvent[];
     handlers: AuraHandler[];
     extends?: AuraTagData;
     controller?: AuraTagData;

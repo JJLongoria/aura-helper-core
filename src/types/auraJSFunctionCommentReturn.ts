@@ -1,4 +1,4 @@
-export interface AuraJSFunctionReturn {
+export interface AuraJSFunctionCommentReturn {
     datatype?: string;
     description?: string;
 }

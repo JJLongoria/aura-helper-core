@@ -9,6 +9,7 @@
   "scripts": {
     "compile": "tsc -p ./ ",
     "lint": "eslint src --ext ts",
+    "lint-fix": "eslint src --ext ts --fix",
     "watch": "tsc -watch -p ./",
     "test": "jest --coverage --runInBand"
   },
