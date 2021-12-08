@@ -159,7 +159,7 @@ export class Validator {
      * @throws {InvalidFilePathException} If the path is not a file
      * @throws {WrongFormatException} If file is not a JSON file or not have the correct Metadata JSON format
      */
-    static validateMetadataJSON(metadataOrPath: string | { [key: string]: MetadataType }): any {
+    static validateMetadataJSON(metadataOrPath: string | any): any {
         let metadata: any;
         try {
             if (Utils.isString(metadataOrPath)) {
@@ -199,7 +199,7 @@ export class Validator {
     }
 }
 
-function validateMetadataType(metadataType: MetadataType, key: string): void {
+function validateMetadataType(metadataType: any, key: string): void {
     if (Utils.isNull(metadataType.name)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Type with key " + key + ". Missing name field");
     }
@@ -229,7 +229,7 @@ function validateMetadataType(metadataType: MetadataType, key: string): void {
     }
 }
 
-function validateMetadataObject(metadataObject: MetadataObject, key: string, type: string): void {
+function validateMetadataObject(metadataObject: any, key: string, type: string): void {
     if (Utils.isNull(metadataObject.name)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Object with key " + key + " (" + type + "). Missing name field");
     }
@@ -256,7 +256,7 @@ function validateMetadataObject(metadataObject: MetadataObject, key: string, typ
     }
 }
 
-function validateMetadataItem(metadataItem: MetadataItem, key: string, object: string, type: string) {
+function validateMetadataItem(metadataItem: any, key: string, object: string, type: string) {
     if (Utils.isNull(metadataItem.name)) {
         throw new WrongFormatException("Wrong JSON Format for Metadata Item with key " + key + " (" + type + ": " + object + "). Missing name field");
     }

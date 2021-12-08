@@ -48,6 +48,8 @@ export * from './command';
 export * from './commit';
 export * from './commitDate';
 export * from './dateTimeXMLField';
+export * from './dependenciesCheckResponse';
+export * from './DependenciesRepairResponse';
 export * from './deployStatus';
 export * from './doubleXMLField';
 export * from './enumXMLField';
