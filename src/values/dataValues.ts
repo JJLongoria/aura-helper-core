@@ -1,6 +1,6 @@
 import { EnumXMLField } from "..";
 
-export const DataValues = {
+export const DataValues: { [key: string]: any } = {
     DEFAULT_TEXT: '{!value}',
     NOT_NULL: '{!notnull}',
     AVAILABLE: '{!available}',

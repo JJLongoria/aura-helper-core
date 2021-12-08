@@ -25,7 +25,7 @@ export class SObjectField {
      * @param {string} [type] SObject field datatype
      * @param {boolean} [custom] true to check as custom field
      */
-    constructor(nameOrSObjectField: string | SObjectField, label?: string, type?: string, custom?: boolean) {
+    constructor(nameOrSObjectField?: string | SObjectField, label?: string, type?: string, custom?: boolean) {
         if (typeof nameOrSObjectField === 'object') {
             this.name = nameOrSObjectField.name;
             this.label = nameOrSObjectField.label;
@@ -41,7 +41,7 @@ export class SObjectField {
             this.inlineHelpText = nameOrSObjectField.inlineHelpText;
         } else {
             this.namespace = undefined;
-            this.name = nameOrSObjectField;
+            this.name = nameOrSObjectField || '';
             if (this.name) {
                 let splits = this.name.split('__');
                 if (splits.length > 2) {
@@ -164,7 +164,7 @@ export class SObjectField {
      * @returns {SObjectField} Return sobject field instance
      */
     addPicklistValue(pickVal: PicklistValue): SObjectField {
-        if(!this.picklistValues){
+        if (!this.picklistValues) {
             this.picklistValues = [];
         }
         this.picklistValues.push(pickVal);

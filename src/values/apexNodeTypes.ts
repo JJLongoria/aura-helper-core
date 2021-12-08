@@ -1,4 +1,4 @@
-export const ApexNodeTypes = {
+export const ApexNodeTypes: { [key: string]: string } = {
     CLASS: 'class',
     INTERFACE: 'interface',
     ENUM: 'enum',

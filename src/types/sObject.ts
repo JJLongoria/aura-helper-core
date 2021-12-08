@@ -27,7 +27,7 @@ export class SObject {
      * @param {string} [keyPrefix] SObject key prefix
      * @param {boolean} [custom] True to set SObject as custom
      */
-    constructor(nameOrObject: string | SObject, label?: string, labelPlural?: string, keyPrefix?: string, custom?: boolean) {
+    constructor(nameOrObject?: string | SObject, label?: string, labelPlural?: string, keyPrefix?: string, custom?: boolean) {
         if (nameOrObject instanceof SObject) {
             this.name = nameOrObject.name;
             this.label = nameOrObject.label;
@@ -42,7 +42,7 @@ export class SObject {
             this.description = nameOrObject.description;
         } else {
             this.namespace = undefined;
-            this.name = nameOrObject;
+            this.name = nameOrObject || '';
             if (this.name) {
                 let splits = this.name.split('__');
                 if (splits.length > 2) {

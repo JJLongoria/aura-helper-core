@@ -90,6 +90,7 @@ export * from './textDocument';
 export * from './textLine';
 export * from './timeXMLField';
 export * from './token';
+export * from './typesFromGit';
 export * from './xmlDataControlledField';
 export * from './xmlDependencyField';
 export * from './xmlField';

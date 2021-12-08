@@ -150,23 +150,22 @@ export class Validator {
 
     /**
      * Method to validate a Metadata JSON File or Object
-     * @param {string | { [key: string]: MetadataType }} metadataOrPath Metadata file path or JSON Object to validate
+     * @param {string | any} metadataOrPath Metadata file path or JSON Object to validate
      * 
-     * @returns {{ [key: string]: MetadataType }} Returns the validated Metadata object
+     * @returns {any} Returns the validated Metadata object
      * 
      * @throws {WrongFilePathException} If the filePath is not a String or can't convert to absolute path
      * @throws {FileNotFoundException} If the file not exists or not have access to it
      * @throws {InvalidFilePathException} If the path is not a file
      * @throws {WrongFormatException} If file is not a JSON file or not have the correct Metadata JSON format
      */
-    static validateMetadataJSON(metadataOrPath: string | { [key: string]: MetadataType }) {
-        let metadata: { [key: string]: MetadataType };
+    static validateMetadataJSON(metadataOrPath: string | { [key: string]: MetadataType }): any {
+        let metadata: any;
         try {
             if (Utils.isString(metadataOrPath)) {
                 metadataOrPath = metadataOrPath as string;
                 metadata = Validator.validateJSONFile(metadataOrPath);
             } else {
-                metadataOrPath = metadataOrPath as { [key: string]: MetadataType };
                 metadata = metadataOrPath;
             }
         } catch (error) {

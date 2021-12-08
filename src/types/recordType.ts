@@ -15,14 +15,14 @@ export class RecordType {
      * @param {boolean} [isDefault] true to set as default
      * @param {boolean} [isMaster] true to set as master
      */
-    constructor(devNameOrRecordType: string | RecordType, name?: string, isDefault?: boolean, isMaster?: boolean) {
+    constructor(devNameOrRecordType?: string | RecordType, name?: string, isDefault?: boolean, isMaster?: boolean) {
         if (devNameOrRecordType instanceof RecordType) {
             this.developerName = devNameOrRecordType.developerName;
             this.name = devNameOrRecordType.name;
             this.default = devNameOrRecordType.default;
             this.master = devNameOrRecordType.master;
         } else {
-            this.developerName = devNameOrRecordType;
+            this.developerName = devNameOrRecordType || '';
             this.name = name || this.developerName;
             this.default = (isDefault !== undefined) ? isDefault : false;
             this.master = (isMaster !== undefined) ? isMaster : false;
