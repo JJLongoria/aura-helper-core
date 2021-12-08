@@ -21,7 +21,7 @@ export class ProgressStatus {
      * @param {string} entityItem Progress Entity Item
      * @param {any} data Related progress data
      */
-    constructor(incrementOrStatus: number | ProgressStatus, percentage?: number, entityType?: string, entityObject?: string, entityItem?: string, data?: any){
+    constructor(incrementOrStatus?: number | ProgressStatus, percentage?: number, entityType?: string, entityObject?: string, entityItem?: string, data?: any){
         if(incrementOrStatus instanceof ProgressStatus){
             this.increment = incrementOrStatus.increment;
             this.percentage = incrementOrStatus.percentage;
