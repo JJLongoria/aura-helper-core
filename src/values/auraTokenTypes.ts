@@ -1,4 +1,4 @@
-export const AuraTokenTypes = {
+export const AuraTokenTypes: { [key: string]: any } = {
     UNKNOWN: "token.type.unknown",
     IDENTIFIER: "token.type.identifier",
     BRACKET: {

@@ -1,4 +1,4 @@
-export const AuraNodeTypes = {
+export const AuraNodeTypes: { [key: string]: string } = {
     APPLICATION: 'application',
     COMPONENT: 'component',
     ATTRIBUTE: 'attribute',

@@ -1,4 +1,4 @@
-export const MetadataSuffixByType = {
+export const MetadataSuffixByType: { [key: string]: string } = {
     CustomField: 'field',
     BusinessProcess: 'businessProcess',
     RecordType: 'recordType',

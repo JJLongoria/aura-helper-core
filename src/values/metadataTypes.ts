@@ -1,4 +1,4 @@
-export const MetadataTypes = {
+export const MetadataTypes: { [key: string]: string } = {
   ACCOUNT_RELATIONSHIP_SHARE_RULE: 'AccountRelationshipShareRule',
   ACTION_LINK_GROUP_TEMPLATE: 'ActionLinkGroupTemplate',
   ACTION_OVERRIDE: 'ActionOverride',

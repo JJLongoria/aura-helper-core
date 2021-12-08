@@ -1,4 +1,4 @@
-export const Datatypes = {
+export const Datatypes: { [key: string]: string } = {
     STRING: 'string',
     BOOLEAN: 'boolean',
     ARRAY: 'array',
