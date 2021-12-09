@@ -1,3 +1,4 @@
+import { Utils } from "../utils";
 import { PicklistValue } from "./picklistValue";
 
 /**
@@ -20,13 +21,13 @@ export class SObjectField {
 
     /**
      * Create a SObject Field instance
-     * @param {string | SObjectField} nameOrSObjectField SObject field name or SObject Field instance
+     * @param {string | { [key: string]: any }} nameOrSObjectField SObject field name or SObject Field instance
      * @param {string} [label] SObject field label
      * @param {string} [type] SObject field datatype
      * @param {boolean} [custom] true to check as custom field
      */
-    constructor(nameOrSObjectField?: string | SObjectField, label?: string, type?: string, custom?: boolean) {
-        if (typeof nameOrSObjectField === 'object') {
+    constructor(nameOrSObjectField?: string | { [key: string]: any }, label?: string, type?: string, custom?: boolean) {
+        if (nameOrSObjectField && typeof nameOrSObjectField !== 'string') {
             this.name = nameOrSObjectField.name;
             this.label = nameOrSObjectField.label;
             this.type = nameOrSObjectField.type;
@@ -34,7 +35,7 @@ export class SObjectField {
             this.length = nameOrSObjectField.length;
             this.relationshipName = nameOrSObjectField.relationshipName;
             this.nillable = nameOrSObjectField.nillable;
-            this.picklistValues = nameOrSObjectField.picklistValues;
+            this.picklistValues = serializePicklist(nameOrSObjectField.picklistValues);
             this.referenceTo = nameOrSObjectField.referenceTo;
             this.namespace = nameOrSObjectField.namespace;
             this.description = nameOrSObjectField.description;
@@ -181,4 +182,15 @@ export class SObjectField {
         this.referenceTo.push(ref);
         return this;
     }
+}
+
+function serializePicklist(objects: any): PicklistValue[] {
+    const result: PicklistValue[] = [];
+    objects = Utils.forceArray(objects);
+    if (objects) {
+        for (const obj of objects) {
+            result.push(new PicklistValue(obj));
+        }
+    }
+    return result;
 }

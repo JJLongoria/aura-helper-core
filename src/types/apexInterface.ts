@@ -9,11 +9,11 @@ export class ApexInterface extends ApexClass {
 
     /**
      * Constructor to create an ApexInterface instance
-     * @param {string | ApexInterface} idOrInterface Node id or Object with ApexInterface fields
+     * @param {string | { [key: string]: any }} idOrInterface Node id or Object with ApexInterface fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrInterface: string | ApexInterface, name?: string, startToken?: Token) {
+    constructor(idOrInterface: string | { [key: string]: any }, name?: string, startToken?: Token) {
         super(idOrInterface, name, startToken);
         this.nodeType = ApexNodeTypes.INTERFACE;
     }

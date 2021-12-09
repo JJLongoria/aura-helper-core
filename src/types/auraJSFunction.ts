@@ -1,3 +1,4 @@
+import { AuraJSCommentBlock } from ".";
 import { AuraNodeTypes } from "../values";
 import { AuraJSComment } from "./auraJSComment";
 import { PositionData } from "./positionData";
@@ -19,17 +20,17 @@ export class AuraJSFunction {
 
     /**
      * Create new Aura JS Function instance
-     * @param {string | AuraJSFunction} nameOrObject JS function name or JSFunction instance
+     * @param {string | { [key: string]: any }} nameOrObject JS function name or JSFunction instance
      * @param {Token} [token] Node initial token
      * @param {AuraJSComment} [comment] Function comment
      */
-    constructor(nameOrObject: string | AuraJSFunction, token?: Token, comment?: AuraJSComment) {
+    constructor(nameOrObject: string | { [key: string]: any }, token?: Token, comment?: AuraJSComment) {
         this.nodeType = AuraNodeTypes.FUNCTION;
-        if (nameOrObject instanceof AuraJSFunction) {
+        if (nameOrObject && typeof nameOrObject !== 'string') {
             this.name = nameOrObject.name;
             this.token = nameOrObject.token;
             this.params = nameOrObject.params;
-            this.comment = nameOrObject.comment;
+            this.comment = (nameOrObject.comment && nameOrObject.comment.nodeType === AuraNodeTypes.JS_COMMENT_BLOCK) ? new AuraJSCommentBlock(nameOrObject.comment) : new AuraJSComment(nameOrObject.comment);
             this.signature = nameOrObject.signature;
             this.auraSignature = nameOrObject.auraSignature;
             this.positionData = nameOrObject.positionData;

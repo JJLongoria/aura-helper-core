@@ -9,11 +9,11 @@ export class ApexVariable extends ApexDeclarationNode{
 
     /**
      * Constructor to create an ApexVariable instance
-     * @param {string | ApexVariable} idOrAnnotation Node id or Object with ApexVariable fields
+     * @param {string | { [key: string]: any }} idOrAnnotation Node id or Object with ApexVariable fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrVariable: string | ApexVariable, name?: string, startToken?: Token){
+    constructor(idOrVariable: string | { [key: string]: any }, name?: string, startToken?: Token){
         super(idOrVariable, ApexNodeTypes.VARIABLE, name, startToken);
     }
 }

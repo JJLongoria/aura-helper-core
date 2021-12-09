@@ -13,7 +13,7 @@ export class CommitDate {
 
     /**
      * Create new Commit Date instance
-     * @param {string | CommitDate} dayNameOrCommitDate Commit date day name or Commit Date instance
+     * @param {string | { [key: string]: any }} dayNameOrCommitDate Commit date day name or Commit Date instance
      * @param {string} [monthName] Commit date month name
      * @param {number | string} [day] Commit date day
      * @param {number | string} [time] Commit date time
@@ -21,8 +21,8 @@ export class CommitDate {
      * @param {number | string} [timeoffset] Commit date time offset
      * @param {string} [dateStr] Commit date formated as string
      */
-    constructor(dayNameOrCommitDate: string | CommitDate, monthName?: string, day?: number | string, time?: number | string, year?: number | string, timeoffset?: number | string, dateStr?: string){
-        if(dayNameOrCommitDate instanceof CommitDate){
+    constructor(dayNameOrCommitDate: string | { [key: string]: any }, monthName?: string, day?: number | string, time?: number | string, year?: number | string, timeoffset?: number | string, dateStr?: string){
+        if(dayNameOrCommitDate && typeof dayNameOrCommitDate !== 'string'){
             this.dayName = dayNameOrCommitDate.dayName;
             this.monthName = dayNameOrCommitDate.monthName;
             this.day = dayNameOrCommitDate.day;

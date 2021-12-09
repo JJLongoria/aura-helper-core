@@ -5,10 +5,10 @@
 
     /**
      * Constructor to create the exception
-     * @param {string} folderPath Wrong folder path
+     * @param {string} [folderPath] Wrong folder path
      * @param {string} [folderName] Optional folder name to show
      */
-    constructor(folderPath: string, folderName?: string) {
+    constructor(folderPath?: string, folderName?: string) {
         super('Wrong ' + ((folderName) ? (folderName) : 'folder') + ' path. Expect a folder path and receive ' + folderPath);
         this.name = "WrongDirectoryPathException";
     }

@@ -7,7 +7,11 @@ import { AuraJSComment } from "./auraJSComment";
  */
 export class AuraJSCommentBlock extends AuraJSComment {
 
-    constructor(commentObject?: AuraJSCommentBlock) {
+    /**
+     * Create new Aura Javascript comment block
+     * @param {{ [key: string]: any }} [commentObject] Comment instance 
+     */
+    constructor(commentObject?: { [key: string]: any }) {
         super(commentObject);
         this.nodeType = AuraNodeTypes.JS_COMMENT_BLOCK;
     }

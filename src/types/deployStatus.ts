@@ -19,14 +19,14 @@ export class DeployStatus {
 
     /**
      * Create new Deploy Status instance
-     * @param {string | DeployStatus} idOrDeployStatus Deploy Id or Deploy Status instance
+     * @param {string | { [key: string]: any }} idOrDeployStatus Deploy Id or Deploy Status instance
      * @param {string} [status] Deploy status value
      * @param {boolean} [done] true if deploy is done
      * @param {boolean} [success] true if deploy is success
      * @param {string} [zipFilePath] deployed zip file path 
      */
-    constructor(idOrDeployStatus: string | DeployStatus, status?: string, done?: boolean, success?: boolean, zipFilePath?: string){
-        if(idOrDeployStatus instanceof DeployStatus){
+    constructor(idOrDeployStatus: string | { [key: string]: any }, status?: string, done?: boolean, success?: boolean, zipFilePath?: string){
+        if(idOrDeployStatus && typeof idOrDeployStatus !== 'string'){
             this.id = idOrDeployStatus.id;
             this.status = idOrDeployStatus.status;
             this.done = idOrDeployStatus.done;

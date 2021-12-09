@@ -15,16 +15,16 @@ export class ApexProperty extends ApexVariable {
 
     /**
      * Constructor to create an ApexProperty instance
-     * @param {string | ApexVariable} idOrAnnotation Node id or Object with ApexProperty fields
+     * @param {string | { [key: string]: any }} idOrProperty Node id or Object with ApexProperty fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrObject: string | ApexVariable, name?: string, startToken?: Token) {
-        super(idOrObject, name, startToken);
+    constructor(idOrProperty: string | { [key: string]: any }, name?: string, startToken?: Token) {
+        super(idOrProperty, name, startToken);
         this.nodeType = ApexNodeTypes.PROPERTY;
-        if (idOrObject instanceof ApexProperty) {
-            this.getter = serializeChild(idOrObject.getter);
-            this.setter = serializeChild(idOrObject.setter);
+        if (idOrProperty && typeof idOrProperty !== 'string') {
+            this.getter = serializeChild(idOrProperty.getter);
+            this.setter = serializeChild(idOrProperty.setter);
         } else {
             this.getter = undefined;
             this.setter = undefined;

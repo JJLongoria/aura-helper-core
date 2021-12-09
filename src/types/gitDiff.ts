@@ -10,13 +10,13 @@ export class GitDiff {
 
     /**
      * Create new GitDiff instance
-     * @param {string | GitDiff} pathOrGitDiff File path or Git Diff instance
+     * @param {string | { [key: string]: any }} pathOrGitDiff File path or Git Diff instance
      * @param {string} [mode] Diff mode
      * @param {string[]} [removeChanges] Remove changes lines
      * @param {string[]} [addChanges] Added changes lines
      */
-    constructor(pathOrGitDiff?: string | GitDiff, mode?: string, removeChanges?: string[], addChanges?: string[]) {
-        if (pathOrGitDiff instanceof GitDiff) {
+    constructor(pathOrGitDiff?: string | { [key: string]: any }, mode?: string, removeChanges?: string[], addChanges?: string[]) {
+        if (pathOrGitDiff && typeof pathOrGitDiff !== 'string') {
             this.path = pathOrGitDiff.path;
             this.mode = pathOrGitDiff.mode;
             this.removeChanges = (pathOrGitDiff.removeChanges !== undefined) ? pathOrGitDiff.removeChanges : [];

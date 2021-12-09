@@ -15,12 +15,12 @@ export class AuraHandler extends AuraNode {
 
     /**
      * Create new Aura Handler instance
-     * @param {string | AuraHandler} quelifiedNameOrNode Qualified XML tag or Aura Node instance
+     * @param {string | { [key: string]: any }} quelifiedNameOrNode Qualified XML tag or Aura Node instance
      * @param {Token} [token] Tag first token
      */
-    constructor(quelifiedNameOrNode: string | AuraHandler, token?: Token) {
+    constructor(quelifiedNameOrNode: string | { [key: string]: any }, token?: Token) {
         super(quelifiedNameOrNode, AuraNodeTypes.HANDLER, token);
-        if (quelifiedNameOrNode instanceof AuraHandler) {
+        if (quelifiedNameOrNode && typeof quelifiedNameOrNode !== 'string') {
             this.action = quelifiedNameOrNode.action;
             this.event = quelifiedNameOrNode.event;
             this.phase = quelifiedNameOrNode.phase;

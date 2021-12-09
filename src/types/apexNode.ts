@@ -20,13 +20,13 @@ export class ApexNode {
 
     /**
      * Constructor to create an ApexNode instance
-     * @param {string | ApexNode} idOrNode Node id or Object with ApexNode fields
+     * @param {string | { [key: string]: any }} idOrNode Node id or Object with ApexNode fields
      * @param {string} [nodeType] Apex node type
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrNode: string | ApexNode, nodeType?: string, name?: string, startToken?: Token) {
-        if(idOrNode instanceof ApexNode){
+    constructor(idOrNode: string | { [key: string]: any }, nodeType?: string, name?: string, startToken?: Token) {
+        if(idOrNode && typeof idOrNode !== 'string'){
             this.id = idOrNode.id;
             this.nodeType = idOrNode.nodeType;
             this.name = idOrNode.name;

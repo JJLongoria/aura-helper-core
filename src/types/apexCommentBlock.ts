@@ -15,14 +15,14 @@ export class ApexCommentBlock extends ApexComment {
 
     /**
      * Constructor to create an ApexCommentBlock instance
-     * @param {string | ApexCommentBlock} idOrComment Node id or Object with ApexCommentBlock fields
+     * @param {string | { [key: string]: any }} idOrComment Node id or Object with ApexCommentBlock fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrComment: string | ApexCommentBlock, name?: string, startToken?: Token) {
+    constructor(idOrComment: string | { [key: string]: any }, name?: string, startToken?: Token) {
         super(idOrComment, name, startToken);
         this.nodeType = ApexNodeTypes.BLOCK_COMMENT;
-        if (idOrComment instanceof ApexCommentBlock) {
+        if (idOrComment && typeof idOrComment !== 'string') {
             this.tags = idOrComment.tags;
             this.startWithAsterisk = idOrComment.startWithAsterisk;
         } else {

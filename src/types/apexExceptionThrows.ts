@@ -9,11 +9,11 @@ export class ApexExceptionThrows extends ApexNode {
 
     /**
      * Constructor to create an ApexExceptionThrows instance
-     * @param {string | ApexExceptionThrows} idOrException Node id or Object with ApexInterface fields
+     * @param {string | { [key: string]: any }} idOrException Node id or Object with ApexInterface fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrException: string | ApexExceptionThrows, name?: string, startToken?: Token) {
+    constructor(idOrException: string | { [key: string]: any }, name?: string, startToken?: Token) {
         super(idOrException, ApexNodeTypes.THROWS, name, startToken);
     }
 }

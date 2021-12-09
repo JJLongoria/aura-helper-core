@@ -17,15 +17,15 @@ export class ApexSetter extends ApexNode {
 
     /**
      * Constructor to create an ApexSetter instance
-     * @param {string | ApexSetter} idOrGetter Node id or Object with ApexSetter fields
+     * @param {string | { [key: string]: any }} idOrSetter Node id or Object with ApexSetter fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrGetter: string | ApexSetter, name?: string, startToken?: Token) {
-        super(idOrGetter, ApexNodeTypes.SETTER, name, startToken);
-        if (idOrGetter instanceof ApexSetter) {
-            this.variables = serialize(idOrGetter.variables);
-            this.queries = idOrGetter.queries;
+    constructor(idOrSetter: string | { [key: string]: any }, name?: string, startToken?: Token) {
+        super(idOrSetter, ApexNodeTypes.SETTER, name, startToken);
+        if (idOrSetter && typeof idOrSetter !== 'string') {
+            this.variables = serialize(idOrSetter.variables) || {};
+            this.queries = idOrSetter.queries || [];
         } else {
             this.variables = {};
             this.queries = [];

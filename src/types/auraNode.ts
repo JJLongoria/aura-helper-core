@@ -20,19 +20,19 @@ export class AuraNode {
 
     /**
      * Create nenw Aura node instance
-     * @param {string | AuraNode} qualifiedNameOrNode Qualified XML tag or Aura Node instance
+     * @param {string | { [key: string]: any }} qualifiedNameOrNode Qualified XML tag or Aura Node instance
      * @param {string} [nodeType] Aura node type
      * @param {string} [token] Tag first token
      */
-    constructor(qualifiedNameOrNode: string | AuraNode, nodeType?: string, token?: Token) {
-        if (qualifiedNameOrNode instanceof AuraNode) {
+    constructor(qualifiedNameOrNode: string | { [key: string]: any }, nodeType?: string, token?: Token) {
+        if (qualifiedNameOrNode && typeof qualifiedNameOrNode !== 'string') {
             this.nodeType = qualifiedNameOrNode.nodeType;
             this.qualifiedName = qualifiedNameOrNode.qualifiedName;
             this.tagName = qualifiedNameOrNode.tagName;
             this.token = qualifiedNameOrNode.token;
             this.namespace = qualifiedNameOrNode.namespace;
             this.description = qualifiedNameOrNode.description;
-            this.positionData = qualifiedNameOrNode.positionData;
+            this.positionData = new PositionData(qualifiedNameOrNode.positionData);
             this.file = qualifiedNameOrNode.file;
             this.name = qualifiedNameOrNode.name;
         } else {

@@ -15,12 +15,12 @@ export class AuraAttribute extends AuraNode {
 
     /**
      * Create new Aura Attribute instance
-     * @param {string | AuraAttribute} quelifiedNameOrNode Qualified XML tag or Aura Node instance
+     * @param {string | { [key: string]: any }} quelifiedNameOrNode Qualified XML tag or Aura Node instance
      * @param {Token} [token] Tag first token
      */
-    constructor(quelifiedNameOrNode: string | AuraAttribute, token?: Token) {
+    constructor(quelifiedNameOrNode: string | { [key: string]: any }, token?: Token) {
         super(quelifiedNameOrNode, AuraNodeTypes.ATTRIBUTE, token);
-        if (quelifiedNameOrNode instanceof AuraAttribute) {
+        if (quelifiedNameOrNode && typeof quelifiedNameOrNode !== 'string') {
             this.access = quelifiedNameOrNode.access;
             this.default = quelifiedNameOrNode.default;
             this.type = quelifiedNameOrNode.type;

@@ -1,3 +1,4 @@
+import { Utils } from "../utils";
 import { ProjectConfigPackageDirectory } from "./projectConfigpackageDirectory";
 
 /**
@@ -12,13 +13,13 @@ export class ProjectConfig {
 
     /**
      * Create new Project Config
-     * @param {string | ProjectConfig} namespaceOrProjectConfig Namespace or ProjectConfig instance
+     * @param {string | { [key: string]: any }} namespaceOrProjectConfig Namespace or ProjectConfig instance
      * @param {string} sfdcLoginUrl Login URL (https://login.salesforce.com by default)
      * @param {string} sourceApiVersion Source API Verion (50.0 by default)
      * @param {ProjectConfigPackageDirectory[]} packageDirectories List of PackageDirectories
      */
-    constructor(namespaceOrProjectConfig: string | ProjectConfig | any, sfdcLoginUrl?: string, sourceApiVersion?: string, packageDirectories?: ProjectConfigPackageDirectory[]) {
-        if (namespaceOrProjectConfig instanceof ProjectConfig || namespaceOrProjectConfig instanceof Object) {
+    constructor(namespaceOrProjectConfig: string | { [key: string]: any }, sfdcLoginUrl?: string, sourceApiVersion?: string, packageDirectories?: ProjectConfigPackageDirectory[]) {
+        if (namespaceOrProjectConfig && typeof namespaceOrProjectConfig !== 'string') {
             this.namespace = namespaceOrProjectConfig.namespace;
             this.sfdcLoginUrl = namespaceOrProjectConfig.sfdcLoginUrl;
             this.sourceApiVersion = namespaceOrProjectConfig.sourceApiVersion;

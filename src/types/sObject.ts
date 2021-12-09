@@ -21,14 +21,14 @@ export class SObject {
 
     /**
      * Create a SObject instance
-     * @param {string | SObject} nameOrObject SObject API Name or SObject instance
+     * @param {string | { [key: string]: any }} nameOrObject SObject API Name or SObject instance
      * @param {string} [label] SObject label
      * @param {string} [labelPlural] SObject plural label
      * @param {string} [keyPrefix] SObject key prefix
      * @param {boolean} [custom] True to set SObject as custom
      */
-    constructor(nameOrObject?: string | SObject, label?: string, labelPlural?: string, keyPrefix?: string, custom?: boolean) {
-        if (nameOrObject instanceof SObject) {
+    constructor(nameOrObject?: string | { [key: string]: any }, label?: string, labelPlural?: string, keyPrefix?: string, custom?: boolean) {
+        if (nameOrObject && typeof nameOrObject !== 'string') {
             this.name = nameOrObject.name;
             this.label = nameOrObject.label;
             this.labelPlural = nameOrObject.labelPlural;
@@ -37,8 +37,8 @@ export class SObject {
             this.queryable = (nameOrObject.queryable !== undefined) ? nameOrObject.queryable : true;
             this.customSetting = (nameOrObject.customSetting !== undefined) ? nameOrObject.customSetting : false;
             this.namespace = nameOrObject.namespace;
-            this.fields = nameOrObject.fields;
-            this.recordTypes = nameOrObject.recordTypes;
+            this.fields = serializeFields(nameOrObject.fields);
+            this.recordTypes = serializeRecordTypes(nameOrObject.recordTypes);
             this.description = nameOrObject.description;
         } else {
             this.namespace = undefined;
@@ -372,4 +372,26 @@ function addSystemFieldsToSObject(sObject: SObject): void {
         sObject.fields['ownerid'].referenceTo = ['User'];
         sObject.fields['ownerid'].type = 'Lookup';
     }
+}
+
+function serializeFields(objects: any): { [key: string]: SObjectField } {
+    const result: { [key: string]: SObjectField } = {};
+    if (objects) {
+        for (const objKey of Object.keys(objects)) {
+            const item = new SObjectField(objects[objKey]);
+            result[item.name] = item;
+        }
+    }
+    return result;
+}
+
+function serializeRecordTypes(objects: any): { [key: string]: RecordType } {
+    const result: { [key: string]: RecordType } = {};
+    if (objects) {
+        for (const objKey of Object.keys(objects)) {
+            const item = new RecordType(objects[objKey]);
+            result[item.name] = item;
+        }
+    }
+    return result;
 }

@@ -17,11 +17,11 @@ export class AuraJSComment {
 
     /**
      * Create new Aura Javascript comment
-     * @param {AuraJSComment} [commentObject] Comment instance 
+     * @param {{ [key: string]: any }} [commentObject] Comment instance 
      */
-    constructor(commentObject?: AuraJSComment) {
+    constructor(commentObject?: { [key: string]: any }) {
         this.nodeType = AuraNodeTypes.JS_COMMENT;
-        if (commentObject instanceof AuraJSComment) {
+        if (commentObject && typeof commentObject === 'object') {
             this.tokens = commentObject.tokens;
             this.description = commentObject.description;
             this.params = commentObject.params;

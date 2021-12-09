@@ -11,14 +11,14 @@ export class MetadataDetail {
 
     /**
      * Create new Metadata Detail instance
-     * @param {string | MetadataDetail} xmlNameOrMetadataDetail Metadata Detail XML Name or Metadata Detail instance
+     * @param {string | { [key: string]: any }} xmlNameOrMetadataDetail Metadata Detail XML Name or Metadata Detail instance
      * @param {string} [directoryName] Metadata Type directory name
      * @param {string} [suffix] Metadata type file suffix
      * @param {boolean} [inFolder] True if is in folder
      * @param {boolean} [metaFile] True if has meta file
      */
-    constructor(xmlNameOrMetadataDetail: string | MetadataDetail, directoryName?: string, suffix?: string, inFolder?: boolean, metaFile?: boolean) {
-        if (xmlNameOrMetadataDetail instanceof MetadataDetail) {
+    constructor(xmlNameOrMetadataDetail: string | { [key: string]: any }, directoryName?: string, suffix?: string, inFolder?: boolean, metaFile?: boolean) {
+        if (xmlNameOrMetadataDetail && typeof xmlNameOrMetadataDetail !== 'string') {
             this.directoryName = xmlNameOrMetadataDetail.directoryName;
             this.inFolder = xmlNameOrMetadataDetail.inFolder;
             this.metaFile = xmlNameOrMetadataDetail.metaFile;

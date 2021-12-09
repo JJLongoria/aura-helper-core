@@ -1,3 +1,4 @@
+import { Utils } from "../utils";
 import { RetrieveInboundFile } from "./retrieveInboundFile";
 import { RetrievePackage } from "./retrievePackage";
 import { RetrieveWarning } from "./retrieveWarning";
@@ -17,20 +18,20 @@ export class RetrieveResult {
 
     /**
      * Create new Retrieve Result intance
-     * @param {string | RetrieveResult} idOrResult Retrieve Id or Retrieve Result instance
+     * @param {string | { [key: string]: any }} idOrResult Retrieve Id or Retrieve Result instance
      * @param {string} [status] 
      * @param {boolean} [done] 
      * @param {boolean} [success] 
      */
-    constructor(idOrResult: string | RetrieveResult, status?: string, done?: boolean, success?: boolean) {
-        if (idOrResult instanceof RetrieveResult) {
+    constructor(idOrResult: string | { [key: string]: any }, status?: string, done?: boolean, success?: boolean) {
+        if (idOrResult && typeof idOrResult !== 'string') {
             this.id = idOrResult.id;
             this.status = idOrResult.status;
-            this.done = idOrResult.done;
-            this.success = idOrResult.success;
-            this.inboundFiles = idOrResult.inboundFiles;
-            this.packages = idOrResult.packages;
-            this.warnings = idOrResult.warnings;
+            this.done = (idOrResult.done === undefined) ? false : idOrResult.done;
+            this.success = (idOrResult.success === undefined) ? false : idOrResult.success;
+            this.inboundFiles = serializeInbounds(idOrResult.inboundFiles);
+            this.packages = serializePackages(idOrResult.packages);
+            this.warnings = serializeWarnings(idOrResult.warnings);
         } else {
             this.id = idOrResult;
             this.status = status;
@@ -77,4 +78,37 @@ export class RetrieveResult {
         }
         return undefined;
     }
+}
+
+function serializeInbounds(objects: any): RetrieveInboundFile[] {
+    const result: RetrieveInboundFile[] = [];
+    objects = Utils.forceArray(objects);
+    if (objects) {
+        for (const obj of objects) {
+            result.push(new RetrieveInboundFile(obj));
+        }
+    }
+    return result;
+}
+
+function serializePackages(objects: any): RetrievePackage[] {
+    const result: RetrievePackage[] = [];
+    objects = Utils.forceArray(objects);
+    if (objects) {
+        for (const obj of objects) {
+            result.push(new RetrievePackage(obj));
+        }
+    }
+    return result;
+}
+
+function serializeWarnings(objects: any): RetrieveWarning[] {
+    const result: RetrieveWarning[] = [];
+    objects = Utils.forceArray(objects);
+    if (objects) {
+        for (const obj of objects) {
+            result.push(new RetrieveWarning(obj));
+        }
+    }
+    return result;
 }

@@ -31,14 +31,14 @@ export class ApexDeclarationNode extends ApexNode {
 
     /**
      * Constructor to create an ApexDatatype instance
-     * @param {string | ApexDeclarationNode} idOrDeclaration Node id or Object with ApexDatatype fields
+     * @param {string | { [key: string]: any }} idOrDeclaration Node id or Object with ApexDatatype fields
      * @param {string} [idOrDeclaration] Declaration node type
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrDeclaration: string | ApexDeclarationNode, type?: string, name?: string, startToken?: Token) {
+    constructor(idOrDeclaration: string | { [key: string]: any }, type?: string, name?: string, startToken?: Token) {
         super(idOrDeclaration, type, name, startToken);
-        if (idOrDeclaration instanceof ApexDeclarationNode) {
+        if (idOrDeclaration && typeof idOrDeclaration !== 'string') {
             this.accessModifier = idOrDeclaration.accessModifier;
             this.definitionModifier = idOrDeclaration.definitionModifier;
             this.sharingModifier = idOrDeclaration.sharingModifier;

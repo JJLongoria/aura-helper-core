@@ -10,17 +10,17 @@ export class RecordType {
 
     /**
      * Create a Record type instance
-     * @param {string | RecordType} devNameOrRecordType Recordtype developer name or RecordType instance
+     * @param {string | { [key: string]: any }} devNameOrRecordType Recordtype developer name or RecordType instance
      * @param {string} [name] Record type name
      * @param {boolean} [isDefault] true to set as default
      * @param {boolean} [isMaster] true to set as master
      */
-    constructor(devNameOrRecordType?: string | RecordType, name?: string, isDefault?: boolean, isMaster?: boolean) {
-        if (devNameOrRecordType instanceof RecordType) {
+    constructor(devNameOrRecordType?: string | { [key: string]: any }, name?: string, isDefault?: boolean, isMaster?: boolean) {
+        if (devNameOrRecordType && typeof devNameOrRecordType !== 'string') {
             this.developerName = devNameOrRecordType.developerName;
             this.name = devNameOrRecordType.name;
-            this.default = devNameOrRecordType.default;
-            this.master = devNameOrRecordType.master;
+            this.default = (devNameOrRecordType.default === undefined) ? false : devNameOrRecordType.default;
+            this.master = (devNameOrRecordType.master === undefined) ? false : devNameOrRecordType.master;
         } else {
             this.developerName = devNameOrRecordType || '';
             this.name = name || this.developerName;

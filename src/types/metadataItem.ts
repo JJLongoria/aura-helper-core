@@ -9,12 +9,12 @@ export class MetadataItem {
 
     /**
      * Create a Metadata item Instance
-     * @param {string | MetadataItem} nameOrMetadataItem Metadata Item API Name or Metadata Item instance
+     * @param {string | { [key: string]: any }} nameOrMetadataItem Metadata Item API Name or Metadata Item instance
      * @param {boolean} [checked] true to mark as checked, false in otherwise
      * @param {string} [path] Metadata item file path
      */
-    constructor(nameOrMetadataItem: string | MetadataItem, checked?: boolean, path?: string) {
-        if (nameOrMetadataItem instanceof MetadataItem) {
+    constructor(nameOrMetadataItem: string | { [key: string]: any }, checked?: boolean, path?: string) {
+        if (nameOrMetadataItem && typeof nameOrMetadataItem !== 'string') {
             this.name = nameOrMetadataItem.name;
             this.checked = nameOrMetadataItem.checked;
             this.path = nameOrMetadataItem.path;

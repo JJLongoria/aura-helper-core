@@ -10,13 +10,13 @@ export class PicklistValue {
 
     /**
      * 
-     * @param {string | PicklistValue} labelOrPickValue Picklist label or PicklistValue instance
+     * @param {string | { [key: string]: any }} labelOrPickValue Picklist label or PicklistValue instance
      * @param {string} [value] Picklist value (API Name)
      * @param {boolean} [defaultValue] true to set as default value (false by default)
      * @param {boolean} [active] tru to set active (true by default)
      */
-    constructor(labelOrPickValue?: string | PicklistValue, value?: string, defaultValue?: boolean, active?: boolean) {
-        if (labelOrPickValue instanceof PicklistValue) {
+    constructor(labelOrPickValue?: string | { [key: string]: any }, value?: string, defaultValue?: boolean, active?: boolean) {
+        if (labelOrPickValue && typeof labelOrPickValue !== 'string') {
             this.label = labelOrPickValue.label;
             this.value = labelOrPickValue.value;
             this.defaultValue = labelOrPickValue.defaultValue;
