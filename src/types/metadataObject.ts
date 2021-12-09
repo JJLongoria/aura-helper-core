@@ -42,7 +42,7 @@ export class MetadataObject {
             if (!this.childs[childOrName.name]) {
                 this.childs[childOrName.name] = childOrName;
             }
-        } else if (Utils.isString(childOrName) && child) {
+        } else if (typeof childOrName === 'string' && child) {
             childOrName = childOrName as string;
             if (!this.childs[childOrName]) {
                 this.childs[childOrName] = child;
