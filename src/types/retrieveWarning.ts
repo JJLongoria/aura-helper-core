@@ -8,11 +8,11 @@ export class RetrieveWarning {
 
     /**
      * Create new Retrieve Warning instance
-     * @param {string | RetrieveWarning} fileNameOrWarning Retrieve file name or Warning instance
+     * @param {string | { [key: string]: any }} fileNameOrWarning Retrieve file name or Warning instance
      * @param {string} [problem] Problem description
      */
-    constructor(fileNameOrWarning: string | RetrieveWarning, problem?: string) {
-        if (fileNameOrWarning instanceof RetrieveWarning) {
+    constructor(fileNameOrWarning: string | { [key: string]: any }, problem?: string) {
+        if (fileNameOrWarning && typeof fileNameOrWarning !== 'string') {
             this.fileName = fileNameOrWarning.fileName;
             this.problem = fileNameOrWarning.problem;
         } else {

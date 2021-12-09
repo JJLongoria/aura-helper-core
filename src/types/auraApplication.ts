@@ -1,3 +1,4 @@
+import { Utils } from "../utils";
 import { AuraNodeTypes } from "../values";
 import { AuraAttribute } from "./auraAttribute";
 import { AuraDependency } from "./auraDependency";
@@ -22,20 +23,20 @@ export class AuraApplication extends AuraRoot {
 
     /**
      * Create new Aura Application instance
-     * @param {string | AuraApplication} quelifiedNameOrNode Qualified XML tag or Aura Node instance
+     * @param {string | { [key: string]: any }} quelifiedNameOrNode Qualified XML tag or Aura Node instance
      * @param {Token} [token] Tag first token
      */
-    constructor(quelifiedNameOrNode: string | AuraApplication, token?: Token) {
+    constructor(quelifiedNameOrNode: string | { [key: string]: any }, token?: Token) {
         super(quelifiedNameOrNode, AuraNodeTypes.APPLICATION, token);
-        if (quelifiedNameOrNode instanceof AuraApplication) {
-            this.attributes = quelifiedNameOrNode.attributes;
+        if (quelifiedNameOrNode && typeof quelifiedNameOrNode !== 'string') {
+            this.attributes = serializeAttributes(quelifiedNameOrNode.attributes);
             this.controller = quelifiedNameOrNode.controller;
             this.extends = quelifiedNameOrNode.extends;
             this.implements = quelifiedNameOrNode.implements;
             this.implementsValues = quelifiedNameOrNode.implementsValues;
             this.template = quelifiedNameOrNode.template;
             this.useAppcache = quelifiedNameOrNode.useAppcache;
-            this.dependencies = quelifiedNameOrNode.dependencies;
+            this.dependencies = serializeDependencies(quelifiedNameOrNode.dependencies);
             this.fileName = quelifiedNameOrNode.fileName;
         } else {
             this.attributes = [];
@@ -50,4 +51,26 @@ export class AuraApplication extends AuraRoot {
         }
     }
 
+}
+
+function serializeAttributes(objects: any): AuraAttribute[] {
+    const result: AuraAttribute[] = [];
+    objects = Utils.forceArray(objects);
+    if (objects) {
+        for (const obj of objects) {
+            result.push(new AuraAttribute(obj));
+        }
+    }
+    return result;
+}
+
+function serializeDependencies(objects: any): AuraDependency[] {
+    const result: AuraDependency[] = [];
+    objects = Utils.forceArray(objects);
+    if (objects) {
+        for (const obj of objects) {
+            result.push(new AuraDependency(obj));
+        }
+    }
+    return result;
 }

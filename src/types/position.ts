@@ -6,8 +6,8 @@ export class Position {
     line: number;
     character: number;
 
-    constructor(lineOrPosition: number | Position, character?: number) {
-        if (lineOrPosition instanceof Position) {
+    constructor(lineOrPosition: number | { [key: string]: any }, character?: number) {
+        if (typeof lineOrPosition !== 'number') {
             this.line = lineOrPosition.line;
             this.character = lineOrPosition.character;
         } else {

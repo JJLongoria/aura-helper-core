@@ -14,15 +14,15 @@ export class ProgressStatus {
 
     /**
      * Create new Progress Status instance
-     * @param {number | ProgressStatus} incrementOrStatus Progress Increment value or Progress Status instance
+     * @param {number | any} incrementOrStatus Progress Increment value or Progress Status instance
      * @param {number} percentage Progress percentage
      * @param {string} entityType Progress Entity Type
      * @param {string} entityObject Progress Entity Object
      * @param {string} entityItem Progress Entity Item
      * @param {any} data Related progress data
      */
-    constructor(incrementOrStatus?: number | ProgressStatus, percentage?: number, entityType?: string, entityObject?: string, entityItem?: string, data?: any){
-        if(incrementOrStatus instanceof ProgressStatus){
+    constructor(incrementOrStatus?: number | { [key: string]: any }, percentage?: number, entityType?: string, entityObject?: string, entityItem?: string, data?: any){
+        if(incrementOrStatus && typeof incrementOrStatus !== 'number'){
             this.increment = incrementOrStatus.increment;
             this.percentage = incrementOrStatus.percentage;
             this.entityType = incrementOrStatus.entityType;

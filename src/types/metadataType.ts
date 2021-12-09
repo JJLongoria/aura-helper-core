@@ -14,19 +14,19 @@ export class MetadataType {
 
     /**
      * Create a Metadata Type instance
-     * @param {string | MetadataType} nameOrMetadataType Metadata type name or MetadataType instance
+     * @param {string | { [key: string]: any }} nameOrMetadataType Metadata type name or MetadataType instance
      * @param {boolean} checked true to mark as checked, false in otherwise
      * @param {string} path Path to the Metadata Type folder
      * @param {string} suffix Metadata type file suffix
      * @param {{ [key: string]: MetadataObject }} childs Metadata objects map with API name as key and Metadata Object as value 
      */
-    constructor(nameOrMetadataType: string | MetadataType, checked?: boolean, path?: string, suffix?: string, childs?: { [key: string]: MetadataObject }) {
-        if (nameOrMetadataType instanceof MetadataType) {
+    constructor(nameOrMetadataType: string | { [key: string]: any }, checked?: boolean, path?: string, suffix?: string, childs?: { [key: string]: MetadataObject }) {
+        if (nameOrMetadataType && typeof nameOrMetadataType !== 'string') {
             this.name = nameOrMetadataType.name;
             this.checked = nameOrMetadataType.checked;
             this.path = nameOrMetadataType.path;
             this.suffix = nameOrMetadataType.suffix;
-            this.childs = (nameOrMetadataType.childs !== undefined) ? nameOrMetadataType.childs : {};
+            this.childs = (nameOrMetadataType.childs !== undefined) ? serializeObjects(nameOrMetadataType.childs) : {};
         } else {
             this.name = nameOrMetadataType;
             this.checked = (checked !== undefined) ? checked : false;
@@ -113,4 +113,15 @@ export class MetadataType {
         });
         return keys.length === nChecked;
     }
+}
+
+function serializeObjects(objects: any): { [key: string]: MetadataObject } {
+    const result: { [key: string]: MetadataObject } = {};
+    if (objects) {
+        for (const objKey of Object.keys(objects)) {
+            const item = new MetadataObject(objects[objKey]);
+            result[item.name] = item;
+        }
+    }
+    return result;
 }

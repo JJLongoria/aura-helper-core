@@ -19,13 +19,13 @@ export class SOQLQuery extends ApexNode {
 
     /**
      * Method to create new SOQL Query
-     * @param {string | SOQLQuery} idOrQuery Node Id or query instance
+     * @param {string | { [key: string]: any }} idOrQuery Node Id or query instance
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrQuery: string | SOQLQuery, name?: string, startToken?: Token) {
+    constructor(idOrQuery: string | { [key: string]: any }, name?: string, startToken?: Token) {
         super(idOrQuery, ApexNodeTypes.SOQL, name, startToken);
-        if (idOrQuery instanceof SOQLQuery) {
+        if (idOrQuery && typeof idOrQuery !== 'string') {
             this.from = idOrQuery.from;
             this.where = idOrQuery.where;
             this.orderBy = idOrQuery.orderBy;

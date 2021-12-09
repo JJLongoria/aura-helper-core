@@ -12,13 +12,13 @@ export class AuraRegisterEvent extends AuraNode {
 
     /**
      * Create new Aura Register Event instance
-     * @param {string | AuraRegisterEvent} quelifiedNameOrNode Qualified XML tag or Aura Node instance
+     * @param {string | { [key: string]: any }} qualifiedNameOrNode Qualified XML tag or Aura Node instance
      * @param {Token} [token] Tag first token
      */
-    constructor(quelifiedNameOrNode: string | AuraRegisterEvent, token?: Token) {
-        super(quelifiedNameOrNode, AuraNodeTypes.REGISTER_EVENT, token);
-        if (quelifiedNameOrNode instanceof AuraRegisterEvent) {
-            this.type = quelifiedNameOrNode.type;
+    constructor(qualifiedNameOrNode: string | { [key: string]: any }, token?: Token) {
+        super(qualifiedNameOrNode, AuraNodeTypes.REGISTER_EVENT, token);
+        if (qualifiedNameOrNode && typeof qualifiedNameOrNode !== 'string') {
+            this.type = qualifiedNameOrNode.type;
         } else {
             this.type = undefined;
         }

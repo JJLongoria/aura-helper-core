@@ -5,10 +5,10 @@
 
     /**
      * Constructor to create the exception
-     * @param {string} filePath Wrong file path
+     * @param {string} [filePath] Wrong file path
      * @param {string} [fileName] Optional file name to show
      */
-    constructor(filePath: string, fileName?: string) {
+    constructor(filePath?: string, fileName?: string) {
         super('Wrong ' + ((fileName) ? (fileName + ' ') : '') + 'file path. Expect a file path and receive ' + filePath);
         this.name = "WrongFilePathException";
     }

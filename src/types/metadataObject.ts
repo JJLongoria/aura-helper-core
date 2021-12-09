@@ -13,17 +13,17 @@ export class MetadataObject {
 
     /**
      * Create a MetadataObject instance
-     * @param {string | MetadataObject} nameOrMetadataObject Metadata Object name or MetadataObject instance
+     * @param {string | { [key: string]: any }} nameOrMetadataObject Metadata Object name or MetadataObject instance
      * @param {boolean} checked true to mark as checked, false in otherwise
      * @param {string} path Metadata Object file or foler path
      * @param {{ [key: string]: MetadataItem }} childs Metadata Items map with Api Name as key and Metadata Item Data as value
      */
-    constructor(nameOrMetadataObject: string | MetadataObject, checked?: boolean, path?: string, childs?: { [key: string]: MetadataItem }) {
-        if (nameOrMetadataObject instanceof MetadataObject) {
+    constructor(nameOrMetadataObject: string | { [key: string]: any }, checked?: boolean, path?: string, childs?: { [key: string]: MetadataItem }) {
+        if (nameOrMetadataObject && typeof nameOrMetadataObject !== 'string') {
             this.name = nameOrMetadataObject.name;
             this.checked = nameOrMetadataObject.checked;
             this.path = nameOrMetadataObject.path;
-            this.childs = (nameOrMetadataObject.childs !== undefined) ? nameOrMetadataObject.childs : {};
+            this.childs = (nameOrMetadataObject.childs !== undefined) ? serializeItems(nameOrMetadataObject.childs) : {};
         } else {
             this.name = nameOrMetadataObject;
             this.checked = (checked !== undefined) ? checked : false;
@@ -108,4 +108,15 @@ export class MetadataObject {
         });
         return keys.length === nChecked;
     }
+}
+
+function serializeItems(objects: any): { [key: string]: MetadataItem } {
+    const result: { [key: string]: MetadataItem } = {};
+    if (objects) {
+        for (const objKey of Object.keys(objects)) {
+            const item = new MetadataItem(objects[objKey]);
+            result[item.name] = item;
+        }
+    }
+    return result;
 }

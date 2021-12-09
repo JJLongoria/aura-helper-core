@@ -9,11 +9,11 @@ export class SOQLField extends ApexNode {
 
     /**
      * Create new SOQL Field instance
-     * @param {string | SOQLField} idOrField Node Id or Field instance
+     * @param {string | { [key: string]: any }} idOrField Node Id or Field instance
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrField: string | SOQLField, name?: string, startToken?: Token) {
+    constructor(idOrField: string | { [key: string]: any }, name?: string, startToken?: Token) {
         super(idOrField, ApexNodeTypes.SOQL_FIELD, name, startToken);
     }
 

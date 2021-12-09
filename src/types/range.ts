@@ -12,15 +12,15 @@ export class Range {
 
     /**
      * Constructor to create a Range using two position or other Range
-     * @param {Position | Range} startPosOrRange Start Position or Range instance
+     * @param {Position | { [key: string]: any }} startPosOrRange Start Position or Range instance
      * @param {Position} [endPosition] End Position instance
      */
     constructor(startPosOrRange: Position | Range, endPosition?: Position) {
-        if (startPosOrRange instanceof Range) {
-            this.start = startPosOrRange.start;
-            this.end = startPosOrRange.end;
-            this.isEmpty = startPosOrRange.isEmpty;
-            this.isSingleLine = startPosOrRange.isSingleLine;
+        if (!(startPosOrRange instanceof Position)) {
+            this.start = new Position(startPosOrRange.start);
+            this.end = new Position(startPosOrRange.end);
+            this.isEmpty = (startPosOrRange.isEmpty === undefined) ? false : startPosOrRange.isEmpty;
+            this.isSingleLine = (startPosOrRange.isSingleLine === undefined) ? false : startPosOrRange.isSingleLine;
         } else {
             this.start = startPosOrRange;
             this.end = endPosition || new Position(startPosOrRange);

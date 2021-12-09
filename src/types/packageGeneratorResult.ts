@@ -9,12 +9,12 @@ export class PackageGeneratorResult {
 
     /**
      * Create new Package Generator Result instance
-     * @param packageFileOrPackageResult Package generated file path or Package Generator Result instance
-     * @param destructiveChanges Destructive changes generated file path
-     * @param destructiveChangesPost Destructive changes post generated file path
+     * @param {string | { [key: string]: any }} packageFileOrPackageResult Package generated file path or Package Generator Result instance
+     * @param {string} [destructiveChanges] Destructive changes generated file path
+     * @param {string} [destructiveChangesPost] Destructive changes post generated file path
      */
-    constructor(packageFileOrPackageResult?: string | PackageGeneratorResult, destructiveChanges?: string, destructiveChangesPost?: string) {
-        if(packageFileOrPackageResult instanceof PackageGeneratorResult){
+    constructor(packageFileOrPackageResult?: string | { [key: string]: any }, destructiveChanges?: string, destructiveChangesPost?: string) {
+        if(packageFileOrPackageResult && typeof packageFileOrPackageResult !== 'string'){
             this.package = packageFileOrPackageResult.package;
             this.destructiveChanges = packageFileOrPackageResult.destructiveChanges;
             this.destructiveChangesPost = packageFileOrPackageResult.destructiveChangesPost;

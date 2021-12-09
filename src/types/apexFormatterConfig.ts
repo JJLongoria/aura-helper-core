@@ -11,15 +11,26 @@ export class ApexFormatterConfig {
 
     /**
      * Constructor to create an ApexFormatterConfig instance
-     * @param {ApexFormatterConfig | Object} [configObj] Object with the same fields of Apex Formatter or VScode Config object
+     * @param {{ [key: string]: any }} [configObj] Object with the same fields of Apex Formatter or VScode Config object
      */
-    constructor(configObj?: ApexFormatterConfig) {
-        if (configObj instanceof ApexFormatterConfig) {
-            this.punctuation = configObj.punctuation;
-            this.operator = configObj.operator;
-            this.classMembers = configObj.classMembers;
-            this.comment = configObj.comment;
-            this.query = configObj.query;
+    constructor(configObj?: { [key: string]: any }) {
+        if (configObj) {
+            if (configObj.apexFormat) {
+                configObj = configObj.apexFormat;
+            }
+            if (configObj) {
+                this.punctuation = configObj.punctuation;
+                this.operator = configObj.operator;
+                this.classMembers = configObj.classMembers;
+                this.comment = configObj.comment;
+                this.query = configObj.query;
+            } else {
+                this.punctuation = ApexFormatterConfig.punctuationConfig();
+                this.operator = ApexFormatterConfig.operatorConfig();
+                this.classMembers = ApexFormatterConfig.classMembersConfig();
+                this.comment = ApexFormatterConfig.commentConfig();
+                this.query = ApexFormatterConfig.queryConfig();
+            }
         } else {
             this.punctuation = ApexFormatterConfig.punctuationConfig();
             this.operator = ApexFormatterConfig.operatorConfig();

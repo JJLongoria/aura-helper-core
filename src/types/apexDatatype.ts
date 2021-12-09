@@ -13,13 +13,13 @@ export class ApexDatatype extends ApexNode {
 
     /**
      * Constructor to create an ApexDatatype instance
-     * @param {string | ApexDatatype} idOrDatatype Node id or Object with ApexDatatype fields
+     * @param {string | { [key: string]: any }} idOrDatatype Node id or Object with ApexDatatype fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrDatatype: string | ApexDatatype, name?: string, startToken?: Token) {
+    constructor(idOrDatatype: string | { [key: string]: any }, name?: string, startToken?: Token) {
         super(idOrDatatype, ApexNodeTypes.DATATYPE, name, startToken);
-        if (idOrDatatype instanceof ApexDatatype) {
+        if (idOrDatatype && typeof idOrDatatype !== 'string') {
             this.type = idOrDatatype.type;
             this.key = idOrDatatype.key;
             this.value = idOrDatatype.value;

@@ -15,12 +15,12 @@ export class BulkStatus {
 
     /**
      * Create new Bulk Status instance
-     * @param {string | BulkStatus} idOrBulkStatus Bulk Job Id or Bulk Status instance
+     * @param {string | { [key: string]: any }} idOrBulkStatus Bulk Job Id or Bulk Status instance
      * @param {string} [jobId] Job Id
      * @param {string} [state] Bulk state
      */
-    constructor(idOrBulkStatus: string | BulkStatus, jobId?: string, state?: string){
-        if(idOrBulkStatus instanceof BulkStatus){
+    constructor(idOrBulkStatus: string | { [key: string]: any }, jobId?: string, state?: string){
+        if(idOrBulkStatus && typeof idOrBulkStatus !== 'string'){
             this.id = idOrBulkStatus.id;
             this.jobId = idOrBulkStatus.jobId;
             this.state = idOrBulkStatus.state;

@@ -9,12 +9,12 @@ export class SFDXProjectResult {
 
     /**
      * 
-     * @param {string | SFDXProjectResult} outputDirOrResult Output directory or Project Result instance
+     * @param {string | { [key: string]: any }} outputDirOrResult Output directory or Project Result instance
      * @param {string[]} [created] List with created files
      * @param {string} [rawOutput] Project Raw Output
      */
-    constructor(outputDirOrResult: string | SFDXProjectResult, created?: string[], rawOutput?: string) {
-        if (outputDirOrResult instanceof SFDXProjectResult) {
+    constructor(outputDirOrResult: string | { [key: string]: any }, created?: string[], rawOutput?: string) {
+        if (outputDirOrResult && typeof outputDirOrResult !== 'string') {
             this.outputDir = outputDirOrResult.outputDir;
             this.created = outputDirOrResult.created;
             this.rawOutput = outputDirOrResult.rawOutput;

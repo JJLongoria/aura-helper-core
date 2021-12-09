@@ -73,10 +73,14 @@ export class Validator {
      * @throws {DirectoryNotFoundException} If the directory not exists or not have access to it
      * @throws {InvalidDirectoryPathException} If the path is not a directory
      */
-    static validateFolderPath(folderPath: string, folderName?: string): string {
-        try {
-            folderPath = PathUtils.getAbsolutePath(folderPath);
-        } catch (error) {
+    static validateFolderPath(folderPath?: string, folderName?: string): string {
+        if(folderPath){
+            try {
+                folderPath = PathUtils.getAbsolutePath(folderPath);
+            } catch (error) {
+                throw new WrongDirectoryPathException(folderPath, folderName);
+            }
+        } else {
             throw new WrongDirectoryPathException(folderPath, folderName);
         }
         if (!FileChecker.isExists(folderPath)) {
@@ -99,10 +103,14 @@ export class Validator {
      * @throws {FileNotFoundException} If the file not exists or not have access to it
      * @throws {InvalidFilePathException} If the path is not a file
      */
-    static validateFilePath(filePath: string, fileName?: string): string {
-        try {
-            filePath = PathUtils.getAbsolutePath(filePath);
-        } catch (error) {
+    static validateFilePath(filePath?: string, fileName?: string): string {
+        if(filePath){
+            try {
+                filePath = PathUtils.getAbsolutePath(filePath);
+            } catch (error) {
+                throw new WrongFilePathException(filePath, fileName);
+            }
+        } else {
             throw new WrongFilePathException(filePath, fileName);
         }
         if (!FileChecker.isExists(filePath)) {

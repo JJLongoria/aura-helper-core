@@ -24,24 +24,24 @@ export class ApexTrigger extends ApexDeclarationNode {
 
     /**
      * Constructor to create an ApexTrigger instance
-     * @param {string | ApexTrigger} idOrTrigger Node id or Object with ApexTrigger fields
+     * @param {string | { [key: string]: any }} idOrTrigger Node id or Object with ApexTrigger fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrTrigger: string | ApexTrigger, name?: string, startToken?: Token) {
+    constructor(idOrTrigger: string | { [key: string]: any }, name?: string, startToken?: Token) {
         super(idOrTrigger, ApexNodeTypes.TRIGGER, name, startToken);
-        if (idOrTrigger instanceof ApexTrigger) {
+        if (idOrTrigger && typeof idOrTrigger !== 'string') {
             this.sObject = idOrTrigger.sObject;
-            this.beforeInsert = idOrTrigger.beforeInsert;
-            this.afterInsert = idOrTrigger.afterInsert;
-            this.beforeUpdate = idOrTrigger.beforeUpdate;
-            this.afterUpdate = idOrTrigger.afterUpdate;
-            this.beforeDelete = idOrTrigger.beforeDelete;
-            this.afterDelete = idOrTrigger.afterDelete;
-            this.beforeUndelete = idOrTrigger.beforeUndelete;
-            this.afterUndelete = idOrTrigger.afterUndelete;
-            this.variables = serialize(idOrTrigger.variables);
-            this.queries = idOrTrigger.queries;
+            this.beforeInsert = idOrTrigger.beforeInsert || false;
+            this.afterInsert = idOrTrigger.afterInsert || false;
+            this.beforeUpdate = idOrTrigger.beforeUpdate || false;
+            this.afterUpdate = idOrTrigger.afterUpdate || false;
+            this.beforeDelete = idOrTrigger.beforeDelete || false;
+            this.afterDelete = idOrTrigger.afterDelete || false;
+            this.beforeUndelete = idOrTrigger.beforeUndelete || false;
+            this.afterUndelete = idOrTrigger.afterUndelete || false;
+            this.variables = serialize(idOrTrigger.variables) || {};
+            this.queries = idOrTrigger.queries || [];
         } else {
             this.beforeInsert = false;
             this.afterInsert = false;

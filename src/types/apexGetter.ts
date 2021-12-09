@@ -17,13 +17,13 @@ export class ApexGetter extends ApexNode {
 
     /**
      * Constructor to create an ApexGetter instance
-     * @param {string | ApexGetter} idOrGetter Node id or Object with ApexGetter fields
+     * @param {string | { [key: string]: any }} idOrGetter Node id or Object with ApexGetter fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrGetter: string | ApexGetter, name?: string, startToken?: Token) {
+    constructor(idOrGetter: string | { [key: string]: any }, name?: string, startToken?: Token) {
         super(idOrGetter, ApexNodeTypes.GETTER, name, startToken);
-        if (idOrGetter instanceof ApexGetter) {
+        if (idOrGetter && typeof idOrGetter !== 'string') {
             this.variables = serialize(idOrGetter.variables);
             this.queries = idOrGetter.queries;
         } else {

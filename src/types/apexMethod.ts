@@ -19,11 +19,11 @@ export class ApexMethod extends ApexDeclarationNode {
 
     /**
      * Constructor to create an ApexMethod instance
-     * @param {String | ApexMethod} idOrMethod Node id or Object with ApexMethod fields
+     * @param {String | { [key: string]: any }} idOrMethod Node id or Object with ApexMethod fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrMethod: string | ApexMethod, name?: string, startToken?: Token) {
+    constructor(idOrMethod: string | { [key: string]: any }, name?: string, startToken?: Token) {
         super(idOrMethod, ApexNodeTypes.METHOD, name, startToken);
         if (idOrMethod instanceof ApexMethod) {
             this.testMethod = idOrMethod.testMethod;

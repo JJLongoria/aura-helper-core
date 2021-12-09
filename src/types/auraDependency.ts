@@ -13,12 +13,12 @@ export class AuraDependency extends AuraNode {
 
     /**
      * Create new Aura Dependency instance
-     * @param {string | AuraDependency} quelifiedNameOrNode Qualified XML tag or Aura Node instance
+     * @param {string | { [key: string]: any }} quelifiedNameOrNode Qualified XML tag or Aura Node instance
      * @param {Token} [token] Tag first token
      */
-    constructor(quelifiedNameOrNode: string | AuraDependency, token?: Token) {
+    constructor(quelifiedNameOrNode: string | { [key: string]: any }, token?: Token) {
         super(quelifiedNameOrNode, AuraNodeTypes.DEPENDENCY, token);
-        if (quelifiedNameOrNode instanceof AuraDependency) {
+        if (quelifiedNameOrNode && typeof quelifiedNameOrNode !== 'string') {
             this.resource = quelifiedNameOrNode.resource;
             this.type = quelifiedNameOrNode.type;
         } else {

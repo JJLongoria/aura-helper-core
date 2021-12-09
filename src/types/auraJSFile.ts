@@ -13,13 +13,13 @@ export class AuraJSFile {
 
     /**
      * Create new AuraJSFile instance
-     * @param {string | AuraJSFile} [nameOrJSFile] File name or AuraJSFile instance
+     * @param {string | { [key: string]: any }} [nameOrJSFile] File name or AuraJSFile instance
      */
-    constructor(nameOrJSFile?: string | AuraJSFile) {
-        if (nameOrJSFile instanceof AuraJSFile) {
+    constructor(nameOrJSFile?: string | { [key: string]: any }) {
+        if (nameOrJSFile && typeof nameOrJSFile !== 'string') {
             this.name = nameOrJSFile.name;
             this.methods = nameOrJSFile.methods;
-            this.positionData = nameOrJSFile.positionData;
+            this.positionData = new PositionData(nameOrJSFile.positionData);
         } else {
             this.name = nameOrJSFile;
             this.methods = [];

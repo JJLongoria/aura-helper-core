@@ -19,14 +19,14 @@ export class TextDocument {
 
     /**
      * Create a TextDocument intance
-     * @param fileNameOrTextDocument 
+     * @param {string | { [key: string]: any }} fileNameOrTextDocument 
      * @param {any} [uri] 
      * @param {TextLine[]} [lines] 
      * @param {string} [languageId] 
      * @param {any} [endOfLine] 
      */
-    constructor(fileNameOrTextDocument: string | TextDocument, uri?: any, lines?: TextLine[], languageId?: string, endOfLine?: any) {
-        if (fileNameOrTextDocument instanceof TextDocument) {
+    constructor(fileNameOrTextDocument: string | { [key: string]: any }, uri?: any, lines?: TextLine[], languageId?: string, endOfLine?: any) {
+        if (fileNameOrTextDocument && typeof fileNameOrTextDocument !== 'string') {
             this.eol = fileNameOrTextDocument.eol;
             this.fileName = fileNameOrTextDocument.fileName;
             this.isClosed = fileNameOrTextDocument.isClosed;

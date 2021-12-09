@@ -1,3 +1,4 @@
+import { Utils } from "../utils";
 import { AuraNodeTypes } from "../values";
 import { AuraAttribute } from "./auraAttribute";
 import { AuraNode } from "./auraNode";
@@ -17,13 +18,13 @@ export class AuraEvent extends AuraNode {
 
     /**
      * Create new Aura Event instance
-     * @param {string | AuraEvent} quelifiedNameOrNode Qualified XML tag or Aura Node instance
+     * @param {string | { [key: string]: any }} quelifiedNameOrNode Qualified XML tag or Aura Node instance
      * @param {Token} [token] Tag first token
      */
-    constructor(quelifiedNameOrNode: string | AuraEvent, token?: Token) {
+    constructor(quelifiedNameOrNode: string | { [key: string]: any }, token?: Token) {
         super(quelifiedNameOrNode, AuraNodeTypes.EVENT, token);
-        if (quelifiedNameOrNode instanceof AuraEvent) {
-            this.attributes = quelifiedNameOrNode.attributes;
+        if (quelifiedNameOrNode && typeof quelifiedNameOrNode !== 'string') {
+            this.attributes = serializeAttributes(quelifiedNameOrNode.attributes);
             this.access = quelifiedNameOrNode.access;
             this.extends = quelifiedNameOrNode.extends;
             this.type = quelifiedNameOrNode.type;
@@ -37,4 +38,15 @@ export class AuraEvent extends AuraNode {
         }
     }
 
+}
+
+function serializeAttributes(objects: any): AuraAttribute[]{
+    const result: AuraAttribute[]  = [];
+    objects = Utils.forceArray(objects);
+    if(objects){
+        for(const obj of objects){
+            result.push(new AuraAttribute(obj));
+        }
+    }
+    return result;
 }

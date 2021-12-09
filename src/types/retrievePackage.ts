@@ -7,10 +7,10 @@ export class RetrievePackage {
 
     /**
      * Create new Retrieve Package instance
-     * @param nameOrPackage Package name or Retrive Pacakge instance
+     * @param {string | { [key: string]: any }} nameOrPackage Package name or Retrive Pacakge instance
      */
-    constructor(nameOrPackage: string | RetrievePackage) {
-        if (nameOrPackage instanceof RetrievePackage) {
+    constructor(nameOrPackage: string | { [key: string]: any }) {
+        if (nameOrPackage && typeof nameOrPackage !== 'string') {
             this.name = nameOrPackage.name;
         } else {
             this.name = nameOrPackage;

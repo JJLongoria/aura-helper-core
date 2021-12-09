@@ -14,12 +14,12 @@ export class TextLine {
 
     /**
      * Constructor to create a TextLine instance
-     * @param {string | TextLine} textOrTextLine Line Text or TextLine instance
+     * @param {string | { [key: string]: any }} textOrTextLine Line Text or TextLine instance
      * @param {number} [lineNumber] TextLine Line number
      * @param {Range} [range] TextLine range
      */
-    constructor(textOrTextLine: string | TextLine, lineNumber?: number, range?: Range){
-        if(textOrTextLine instanceof TextLine){
+    constructor(textOrTextLine: string | { [key: string]: any }, lineNumber?: number, range?: Range){
+        if(textOrTextLine && typeof textOrTextLine !== 'string'){
             this.firstNonWhitespaceCharacterIndex = textOrTextLine.firstNonWhitespaceCharacterIndex;
             this.isEmptyOrWhitespace = textOrTextLine.isEmptyOrWhitespace;
             this.lineNumber = textOrTextLine.lineNumber;

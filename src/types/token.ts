@@ -18,14 +18,14 @@ export class Token {
 
     /**
      * Create new Token instance
-     * @param {string | Token} typeOrObject Token type or Token instance
+     * @param {string | { [key: string]: any }} typeOrObject Token type or Token instance
      * @param {string} [text] Token text
      * @param {number} [line] Token line number
      * @param {number} [startIndex] Token start character
      * @param {boolean} [isAux] True if token is aux token
      */
-    constructor(typeOrObject: string | Token, text?: string, line?: number, startIndex?: number, isAux?: boolean) {
-        if (typeOrObject instanceof Token) {
+    constructor(typeOrObject: string | { [key: string]: any }, text?: string, line?: number, startIndex?: number, isAux?: boolean) {
+        if (typeOrObject && typeof typeOrObject !== 'string') {
             this.id = typeOrObject.id;
             this.type = typeOrObject.type;
             this.text = typeOrObject.text;

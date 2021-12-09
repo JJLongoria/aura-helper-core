@@ -14,17 +14,17 @@ export class AuraRoot extends AuraNode {
 
     /**
      * Create new Aura Root instance
-     * @param {string | AuraRoot} quelifiedNameOrNode Qualified XML tag or Aura Node instance
+     * @param {string | { [key: string]: any }} qualifiedNameOrNode Qualified XML tag or Aura Node instance
      * @param {string} [type] Aura node type
      * @param {Token} [token] Tag first token
      */
-    constructor(quelifiedNameOrNode: string | AuraRoot, type?: string, token?: Token) {
-        super(quelifiedNameOrNode, type, token);
-        if (quelifiedNameOrNode instanceof AuraRoot) {
-            this.access = quelifiedNameOrNode.access;
-            this.abstract = quelifiedNameOrNode.abstract;
-            this.extensible = quelifiedNameOrNode.extensible;
-            this.support = quelifiedNameOrNode.support;
+    constructor(qualifiedNameOrNode: string | { [key: string]: any }, type?: string, token?: Token) {
+        super(qualifiedNameOrNode, type, token);
+        if (qualifiedNameOrNode && typeof qualifiedNameOrNode !== 'string') {
+            this.access = qualifiedNameOrNode.access;
+            this.abstract = qualifiedNameOrNode.abstract;
+            this.extensible = qualifiedNameOrNode.extensible;
+            this.support = qualifiedNameOrNode.support;
         } else {
             this.access = undefined;
             this.abstract = undefined;

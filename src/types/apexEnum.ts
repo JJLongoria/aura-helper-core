@@ -13,13 +13,13 @@ export class ApexEnum extends ApexDeclarationNode {
 
     /**
      * Constructor to create an ApexEnum instance
-     * @param {string | ApexEnum} idOrEnum Node id or Object with ApexEnum fields
+     * @param {string | { [key: string]: any }} idOrEnum Node id or Object with ApexEnum fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrEnum: string | ApexEnum, name?: string, startToken?: Token) {
+    constructor(idOrEnum: string | { [key: string]: any }, name?: string, startToken?: Token) {
         super(idOrEnum, ApexNodeTypes.ENUM, name, startToken);
-        if (idOrEnum instanceof ApexEnum) {
+        if (idOrEnum && typeof idOrEnum !== 'string') {
             this.values = idOrEnum.values;
             this.positionData = idOrEnum.positionData;
         } else {

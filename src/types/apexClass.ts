@@ -35,13 +35,13 @@ export class ApexClass extends ApexDeclarationNode {
 
     /**
      * Constructor to create an ApexClass instance
-     * @param {string | ApexClass} idOrClass Node id or Object with ApexClass fields
+     * @param {string | { [key: string]: any }} idOrClass Node id or Object with ApexClass fields
      * @param {string} [name] Node name
      * @param {Token} [startToken] Node start token
      */
-    constructor(idOrClass: string | ApexClass, name?: string, startToken?: Token) {
+    constructor(idOrClass: string | { [key: string]: any }, name?: string, startToken?: Token) {
         super(idOrClass, ApexNodeTypes.CLASS, name, startToken);
-        if (idOrClass instanceof ApexClass) {
+        if (idOrClass && typeof idOrClass !== 'string') {
             this.initializer = serializeChild(idOrClass.initializer);
             this.staticConstructor = serializeChild(idOrClass.staticConstructor);
             this.classes = serialize(idOrClass.classes);
