@@ -13,7 +13,7 @@ export class PackageGeneratorResult {
      * @param destructiveChanges Destructive changes generated file path
      * @param destructiveChangesPost Destructive changes post generated file path
      */
-    constructor(packageFileOrPackageResult: string | PackageGeneratorResult, destructiveChanges?: string, destructiveChangesPost?: string) {
+    constructor(packageFileOrPackageResult?: string | PackageGeneratorResult, destructiveChanges?: string, destructiveChangesPost?: string) {
         if(packageFileOrPackageResult instanceof PackageGeneratorResult){
             this.package = packageFileOrPackageResult.package;
             this.destructiveChanges = packageFileOrPackageResult.destructiveChanges;
