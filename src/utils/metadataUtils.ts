@@ -190,16 +190,19 @@ export class MetadataUtils {
                 if (object.childs[key].checked) {
                     nChilds++;
                 }
-                if (object instanceof MetadataType && MetadataUtils.haveChilds(object.childs[key])) {
-                    if (nSubChild === -1) {
-                        nSubChild = 0;
-                    }
-                    Object.keys(object.childs[key].childs).forEach(function (childKey) {
-                        totalChilds++;
-                        if (object.childs[key].childs[childKey].checked) {
-                            nSubChild++;
+                if (object instanceof MetadataType) {
+                    const child = object.childs[key];
+                    if (MetadataUtils.haveChilds(child)) {
+                        if (nSubChild === -1) {
+                            nSubChild = 0;
                         }
-                    });
+                        Object.keys(object.childs[key].childs).forEach(function (childKey) {
+                            totalChilds++;
+                            if (object.childs[key].childs[childKey].checked) {
+                                nSubChild++;
+                            }
+                        });
+                    }
                 }
             });
         }

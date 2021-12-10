@@ -1,7 +1,7 @@
 import { StrUtils } from "../utils/strUtils";
 import { FileReader } from "./fileReader";
-const path = require('path');
-const os = require('os');
+import * as path from 'path';
+import * as os from 'os';
 /**
  * Class with Utils methods for handle paths
  */

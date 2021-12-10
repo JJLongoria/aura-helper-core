@@ -1,4 +1,4 @@
-const os = require('os');
+import * as os from 'os';
 
 /**
  * Class with util methods to work with the Operative System

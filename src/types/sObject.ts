@@ -221,7 +221,7 @@ export class SObject {
         if (!this.fields[name.toLowerCase()]) {
             return undefined;
         }
-        return new SObjectField(this.fields[name.toLowerCase()]);
+        return this.fields[name.toLowerCase()];
     }
 
     /**
@@ -246,7 +246,7 @@ export class SObject {
         if (!this.recordTypes[devName.toLowerCase()]) {
             return undefined;
         }
-        return new RecordType(this.recordTypes[devName.toLowerCase()]);
+        return this.recordTypes[devName.toLowerCase()];
     }
 
     /**

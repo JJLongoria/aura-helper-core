@@ -38,7 +38,7 @@ export class MetadataObject {
      * @param {MetadataItem} [child] Metadata Item intance
      */
     addChild(childOrName: string | MetadataItem, child?: MetadataItem): void {
-        if (childOrName instanceof MetadataItem && !Utils.isNull(childOrName.name)) {
+        if (typeof childOrName !== 'string' && childOrName.name) {
             if (!this.childs[childOrName.name]) {
                 this.childs[childOrName.name] = childOrName;
             }
@@ -57,7 +57,7 @@ export class MetadataObject {
      */
     getChild(name: string): MetadataItem | undefined {
         if (this.childs[name]) {
-            return new MetadataItem(this.childs[name]);
+            return this.childs[name];
         }
         return undefined;
     }

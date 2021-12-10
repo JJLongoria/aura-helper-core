@@ -1,8 +1,5 @@
 import { DataRequiredException, DirectoryNotFoundException, FileNotFoundException, InvalidDirectoryPathException, InvalidFilePathException, WrongDirectoryPathException, WrongFilePathException, WrongFormatException } from "../exceptions";
 import { FileChecker, FileReader, PathUtils } from "../fileSystem";
-import { MetadataItem } from "../types/metadataItem";
-import { MetadataObject } from "../types/metadataObject";
-import { MetadataType } from "../types/metadataType";
 import { Utils } from "./utils";
 
 const IPV4_REGEXP = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
