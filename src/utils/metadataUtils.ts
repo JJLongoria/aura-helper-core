@@ -233,10 +233,10 @@ export class MetadataUtils {
      * @param {any} xmlFile XML File content as JSON
      * @param {any} elementData XMLObjectField or XMLArrayField to handle unique fields
      * @param {XMLUniqueFieldData[]} uniqueFields XML Unique fields data to handle it
-     * @param {string} xmlElementName XML Element name to process
-     * @param {string} xmlSubelementName XML Subelement name to process 
+     * @param {string} [xmlElementName] XML Element name to process
+     * @param {string} [xmlSubelementName] XML Subelement name to process 
      */
-    static handleUniqueFields(xmlFile: any, elementData: any, uniqueFields: XMLUniqueFieldData[], xmlElementName: string, xmlSubelementName?: string): void {
+    static handleUniqueFields(xmlFile: any, elementData: any, uniqueFields: XMLUniqueFieldData[], xmlElementName?: string, xmlSubelementName?: string): void {
         if (uniqueFields.length > 0) {
             for (const xmlElement of xmlFile[elementData.key]) {
                 if (!xmlSubelementName && xmlElement[elementData.fieldKey] !== xmlElementName) {
@@ -269,10 +269,10 @@ export class MetadataUtils {
      * @param {any} xmlFile XML File content as JSON
      * @param {any} elementData XMLObjectField or XMLArrayField to handle unique fields
      * @param {string[]} checkedOrUncheckedItems Checked or uncheked element list names
-     * @param {string} xmlElementName XML Element name to process
-     * @param {string} xmlSubelementName XML Subelement name to process  
+     * @param {string} [xmlElementName] XML Element name to process
+     * @param {string} [xmlSubelementName] XML Subelement name to process  
      */
-    static handleControlledFields(xmlFile: any, elementData: any, checkedOrUncheckedItems: string[], xmlElementName: string, xmlSubelementName?: string): void {
+    static handleControlledFields(xmlFile: any, elementData: any, checkedOrUncheckedItems: string[], xmlElementName?: string, xmlSubelementName?: string): void {
         for (let item of checkedOrUncheckedItems) {
             if (elementData.fields[item] && elementData.fields[item].controlledFields && elementData.fields[item].controlledFields.length > 0) {
                 for (let xmlElement of xmlFile[elementData.key]) {

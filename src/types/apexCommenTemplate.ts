@@ -1,11 +1,11 @@
 export interface ApexCommentTemplateTagKeyword {
-    name: string;
+    name?: string;
     source?: string;
     message?: string;
 }
 
 export interface ApexCommentTemplateTagData {
-    tagData: ApexCommentTemplateTag;
+    tagData: ApexCommentTemplateTag[];
     tag: ApexCommentTemplateTag;
     tagName: string;
 }
@@ -37,6 +37,6 @@ export interface ApexCommentsData {
 
 export interface ApexCommentTemplate {
     tagSymbol: string;
-    tags: any;
-    comments: { [key: string]: ApexCommentsObjectData };
+    tags: { [key: string]: ApexCommentTemplateTag };
+    comments: ApexCommentsData;
 }
