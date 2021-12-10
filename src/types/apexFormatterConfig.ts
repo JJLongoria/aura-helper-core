@@ -11,11 +11,11 @@ export class ApexFormatterConfig {
 
     /**
      * Constructor to create an ApexFormatterConfig instance
-     * @param {{ [key: string]: any }} [configObj] Object with the same fields of Apex Formatter or VScode Config object
+     * @param {ApexFormatterConfig | { [key: string]: any }} [configObj] Object with the same fields of Apex Formatter or VScode Config object
      */
-    constructor(configObj?: { [key: string]: any }) {
+    constructor(configObj?: ApexFormatterConfig | { [key: string]: any }) {
         if (configObj) {
-            if (configObj.apexFormat) {
+            if (!(configObj instanceof ApexFormatterConfig) && configObj.apexFormat) {
                 configObj = configObj.apexFormat;
             }
             if (configObj) {

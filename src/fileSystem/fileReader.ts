@@ -15,11 +15,11 @@ export class FileReader {
 
     /**
      * Method to read a Document Object and get the entire text
-     * @param {TextDocument} document document to read
+     * @param {any} document document to read
      * 
      * @returns {string} Return the document content string
      */
-    static readDocument(document: TextDocument): string {
+    static readDocument(document: any): string {
         var lines = [];
         for (var i = 0; i < document.lineCount; i++) {
             const line = document.lineAt(i);

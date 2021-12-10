@@ -31,12 +31,12 @@ export class ApexCommentBlock extends ApexComment {
         }
     }
 
-    processComment(template?: ApexCommentTemplate) {
+    processComment(template?: any) {
         processCommentWithTemplate(this, template);
     }
 }
 
-function processCommentWithTemplate(comment: ApexCommentBlock, template?: ApexCommentTemplate) {
+function processCommentWithTemplate(comment: ApexCommentBlock, template?: any) {
     if (!template) {
         return;
     }
@@ -80,15 +80,17 @@ function processCommentWithTemplate(comment: ApexCommentBlock, template?: ApexCo
             }
             if (tag.keywords) {
                 for (const keyword of tag.keywords) {
-                    const keywordIndexOf = tag.template.indexOf('{!' + keyword.name + '}');
-                    if (keywordIndexOf !== -1) {
-                        if (!keywordOrderByTag[tagName]) {
-                            keywordOrderByTag[tagName] = [];
+                    if (tag.template) {
+                        const keywordIndexOf = tag.template.indexOf('{!' + keyword.name + '}');
+                        if (keywordIndexOf !== -1) {
+                            if (!keywordOrderByTag[tagName]) {
+                                keywordOrderByTag[tagName] = [];
+                            }
+                            keywordOrderByTag[tagName].push({
+                                keyword: keyword,
+                                order: keywordIndexOf
+                            });
                         }
-                        keywordOrderByTag[tagName].push({
-                            keyword: keyword,
-                            order: keywordIndexOf
-                        });
                     }
                 }
                 keywordOrderByTag[tagName] = Utils.sort(keywordOrderByTag[tagName], ['order']);
@@ -135,7 +137,7 @@ function processCommentWithTemplate(comment: ApexCommentBlock, template?: ApexCo
                         });
                         comment.tags[tagName][comment.tags[tagName].length - 1].content += line;
                         let processedLine = line.substring(tagName.length + 1).trim();
-                        let processedTemplate = StrUtils.replace(tag.template, '}{', '} {');
+                        let processedTemplate = StrUtils.replace(tag.template || '', '}{', '} {');
                         for (let index = 0; index < tagKeyords.length; index++) {
                             const keyword = tagKeyords[index].keyword;
                             let dataRegexp;
@@ -182,10 +184,10 @@ function processCommentWithTemplate(comment: ApexCommentBlock, template?: ApexCo
                         }
                     } else if (tagNewLine && tagName) {
                         const keyword = tagKeyords[tagKeyords.length - 1].keyword;
-                        comment.tags[tagName][comment.tags[tagName].length - 1].keywords[keyword.name] += line;
+                        comment.tags[tagName][comment.tags[tagName].length - 1].keywords[keyword.name] = line;
                         comment.tags[tagName][comment.tags[tagName].length - 1].content += line;
                     }
-                } else if(tagName) {
+                } else if (tagName) {
                     if (!comment.tags[tagName]) {
                         comment.tags[tagName] = [];
                     }
