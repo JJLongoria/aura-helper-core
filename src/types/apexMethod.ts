@@ -25,7 +25,7 @@ export class ApexMethod extends ApexDeclarationNode {
      */
     constructor(idOrMethod: string | { [key: string]: any }, name?: string, startToken?: Token) {
         super(idOrMethod, ApexNodeTypes.METHOD, name, startToken);
-        if (idOrMethod instanceof ApexMethod) {
+        if (idOrMethod && typeof idOrMethod !== 'string') {
             this.testMethod = idOrMethod.testMethod;
             this.variables = serialize(idOrMethod.variables);
             this.params = serialize(idOrMethod.params);
