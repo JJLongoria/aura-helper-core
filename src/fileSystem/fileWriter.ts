@@ -1,7 +1,7 @@
-const fs = require('fs');
-const fsExtra = require('fs-extra');
-const path = require('path');
-const unzipper = require('unzipper');
+import * as fs from 'fs';
+import * as path from 'path';
+import * as fsExtra from 'fs-extra';
+import * as unzipper from 'unzipper';
 
 /**
  * Class to create and write files into file system
@@ -15,7 +15,11 @@ export class FileWriter {
      * @param {Function} [callback] callback function to handle the end of write
      */
     static createFile(path: string, content: string, callback?: (err?: Error) => void): void {
-        fs.writeFile(path, content, callback);
+        fs.writeFile(path, content, (err?: any) => {
+            if (callback) {
+                callback.call(this, err);
+            }
+        });
     }
 
     /**
@@ -42,7 +46,11 @@ export class FileWriter {
      * @param {Function} callback callback function to handle the end of copy
      */
     static copyFile(source: string, target: string, callback: (err?: Error) => void): void {
-        fs.copyFile(source, target, callback);
+        fs.copyFile(source, target, (err: any) => {
+            if (callback) {
+                callback.call(this, err);
+            }
+        });
     }
 
     /**
@@ -61,8 +69,12 @@ export class FileWriter {
      * @param {boolean} overwrite true to overwrite target files
      * @param {Function} callback callback function to handle the end of copy
      */
-    static copyFolder(source: string, target: string, overwrite: boolean, callback: (err?: Error) => void): void {
-        fsExtra.copy(source, target, { overwrite: overwrite }, callback);
+    static copyFolder(source: string, target: string, overwrite: boolean, callback?: (err?: Error) => void): void {
+        fsExtra.copy(source, target, { overwrite: overwrite }, (err: any) => {
+            if(callback){
+                callback.call(this, err);
+            }
+        });
     }
 
     /**

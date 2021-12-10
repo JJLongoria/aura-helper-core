@@ -42,7 +42,7 @@ export class MetadataType {
      * @param {MetadataObject} [child] Metadata Object intance
      */
     addChild(childOrName: string | MetadataObject, child?: MetadataObject) {
-        if (childOrName instanceof MetadataObject && !Utils.isNull(childOrName.name)) {
+        if (typeof childOrName !== 'string' && !Utils.isNull(childOrName.name)) {
             if (!this.childs[childOrName.name]) {
                 this.childs[childOrName.name] = childOrName;
             }
@@ -62,7 +62,7 @@ export class MetadataType {
      */
     getChild(name: string) {
         if (this.childs[name]) {
-            return new MetadataObject(this.childs[name]);
+            return this.childs[name];
         }
         return undefined;
     }
