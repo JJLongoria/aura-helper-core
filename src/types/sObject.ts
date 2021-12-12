@@ -1,3 +1,4 @@
+import { SObjectChildRelationship } from ".";
 import { Utils } from "../utils/utils";
 import { RecordType } from "./recordType";
 import { SObjectField } from "./sObjectField";
@@ -15,6 +16,7 @@ export class SObject {
     queryable: boolean;
     customSetting: boolean;
     namespace?: string;
+    childRelationships: SObjectChildRelationship[];
     fields: { [key: string]: SObjectField };
     recordTypes: { [key: string]: RecordType };
     description: string;
@@ -39,6 +41,7 @@ export class SObject {
             this.namespace = nameOrObject.namespace;
             this.fields = serializeFields(nameOrObject.fields);
             this.recordTypes = serializeRecordTypes(nameOrObject.recordTypes);
+            this.childRelationships = serializeChildRelationships(nameOrObject.childRelationships);
             this.description = nameOrObject.description;
         } else {
             this.namespace = undefined;
@@ -57,6 +60,7 @@ export class SObject {
             this.customSetting = false;
             this.fields = {};
             this.recordTypes = {};
+            this.childRelationships = [];
             this.description = '';
         }
     }
@@ -377,9 +381,16 @@ function addSystemFieldsToSObject(sObject: SObject): void {
 function serializeFields(objects: any): { [key: string]: SObjectField } {
     const result: { [key: string]: SObjectField } = {};
     if (objects) {
-        for (const objKey of Object.keys(objects)) {
-            const item = new SObjectField(objects[objKey]);
-            result[item.name] = item;
+        if (Utils.isObject(objects)) {
+            for (const objKey of Object.keys(objects)) {
+                const item = new SObjectField(objects[objKey]);
+                result[item.name.toLowerCase()] = item;
+            }
+        } else if (Utils.isArray(objects)) {
+            for (const obj of objects) {
+                const item = new SObjectField(obj);
+                result[item.name.toLowerCase()] = item;
+            }
         }
     }
     return result;
@@ -388,9 +399,27 @@ function serializeFields(objects: any): { [key: string]: SObjectField } {
 function serializeRecordTypes(objects: any): { [key: string]: RecordType } {
     const result: { [key: string]: RecordType } = {};
     if (objects) {
-        for (const objKey of Object.keys(objects)) {
-            const item = new RecordType(objects[objKey]);
-            result[item.name] = item;
+        if (Utils.isObject(objects)) {
+            for (const objKey of Object.keys(objects)) {
+                const item = new RecordType(objects[objKey]);
+                result[item.developerName.toLowerCase()] = item;
+            }
+        } else if (Utils.isArray(objects)) {
+            for (const obj of objects) {
+                const item = new RecordType(obj);
+                result[item.developerName.toLowerCase()] = item;
+            }
+        }
+    }
+    return result;
+}
+
+function serializeChildRelationships(objects: any): SObjectChildRelationship[] {
+    const result: SObjectChildRelationship[] = [];
+    if (objects) {
+        for (const obj of objects) {
+            const item = new SObjectChildRelationship(obj);
+            result.push(item);
         }
     }
     return result;

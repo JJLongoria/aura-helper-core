@@ -6,6 +6,7 @@ export class MetadataItem {
     name: string;
     checked: boolean;
     path?: string;
+    id?: string;
 
     /**
      * Create a Metadata item Instance
@@ -18,6 +19,7 @@ export class MetadataItem {
             this.name = nameOrMetadataItem.name;
             this.checked = nameOrMetadataItem.checked;
             this.path = nameOrMetadataItem.path;
+            this.id = nameOrMetadataItem.id;
         } else {
             this.name = nameOrMetadataItem;
             this.checked = (checked !== undefined) ? checked : false;

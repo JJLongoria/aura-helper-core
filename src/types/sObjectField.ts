@@ -36,7 +36,7 @@ export class SObjectField {
             this.relationshipName = nameOrSObjectField.relationshipName;
             this.nillable = nameOrSObjectField.nillable;
             this.picklistValues = serializePicklist(nameOrSObjectField.picklistValues);
-            this.referenceTo = nameOrSObjectField.referenceTo;
+            this.referenceTo = nameOrSObjectField.referenceTo || [];
             this.namespace = nameOrSObjectField.namespace;
             this.description = nameOrSObjectField.description;
             this.inlineHelpText = nameOrSObjectField.inlineHelpText;

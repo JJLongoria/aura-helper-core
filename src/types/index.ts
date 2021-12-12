@@ -88,6 +88,7 @@ export * from './retrieveInboundFile';
 export * from './retrievePackage';
 export * from './sfdxProjectResult';
 export * from './sObject';
+export * from './sObjectChildRelationship';
 export * from './sObjectField';
 export * from './soqlField';
 export * from './soqlQuery';
