@@ -10,6 +10,7 @@ export class MetadataObject {
     checked: boolean;
     path?: string;
     childs: { [key: string]: MetadataItem };
+    id?: string;
 
     /**
      * Create a MetadataObject instance
@@ -23,6 +24,7 @@ export class MetadataObject {
             this.name = nameOrMetadataObject.name;
             this.checked = nameOrMetadataObject.checked;
             this.path = nameOrMetadataObject.path;
+            this.id = nameOrMetadataObject.id;
             this.childs = (nameOrMetadataObject.childs !== undefined) ? serializeItems(nameOrMetadataObject.childs) : {};
         } else {
             this.name = nameOrMetadataObject;
