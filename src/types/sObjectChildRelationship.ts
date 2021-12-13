@@ -1,6 +1,6 @@
 export class SObjectChildRelationship {
 
-    relationshipName: string;
+    relationshipName?: string;
     restrictedDelete: boolean;
     cascadeDelete: boolean;
     childSObject: string;
