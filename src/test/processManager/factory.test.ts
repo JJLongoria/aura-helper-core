@@ -193,6 +193,10 @@ describe('Testing ./src/process/factory.js', () => {
         expect(process.name).toEqual('git:diff-source-target');
         ProcessFactory.gitDiff('./', 'source');
     });
+    test('Testing gitListFiles()', () => {
+        const process = ProcessFactory.gitListFiles('./');
+        expect(process.name).toEqual('git ls-files');
+    });
     test('Testing auraHelperCompressFolder()', () => {
         const process = ProcessFactory.auraHelperCompressFolder('./', {
             folder: './folder',

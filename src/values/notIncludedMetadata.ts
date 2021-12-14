@@ -1,4 +1,4 @@
-export const NotIncludedMetadata: { [key: string]: any } = {
+export const NotIncludedMetadata: NotIncludedMetadata = {
     StandardValueSet: {
         xmlName: "StandardValueSet",
         suffix: "standardValueSet",
@@ -57,5 +57,14 @@ export const NotIncludedMetadata: { [key: string]: any } = {
             "WorkOrderPriority",
             "WorkOrderStatus",
         ]
+    }
+};
+
+interface NotIncludedMetadata {
+    StandardValueSet: {
+        xmlName: string;
+        suffix: string;
+        directoryName: string;
+        elements: string[];
     }
 };

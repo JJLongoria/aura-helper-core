@@ -1,6 +1,4 @@
-import { EnumXMLField } from "..";
-
-export const DataValues: { [key: string]: any } = {
+export const DataValues: DataValues = {
     DEFAULT_TEXT: '{!value}',
     NOT_NULL: '{!notnull}',
     AVAILABLE: '{!available}',
@@ -748,3 +746,33 @@ export const DataValues: { [key: string]: any } = {
         }
     ]
 };
+
+interface DataValues {
+    DEFAULT_TEXT: string;
+    NOT_NULL: string;
+    AVAILABLE: string;
+    NOT_AVAILABLE: string;
+    CUSTOM_VALUE: string;
+    API_VALUE: string;
+    METADATA_TYPE: string;
+    NULL: string;
+    ANY_VALUE: string;
+    DASH: string;
+    POINT: string;
+    SLASH: string;
+    LOGIN_HOURS_VALUES: LabelValueNumberPair[];
+    REPORT_SUMMARY_TYPES: LabelValueStringPair[];
+    GENDER: LabelValueStringPair[];
+    STARTS_WITH: LabelValueStringPair[];
+    SF_LANGUAGES: LabelValueStringPair[];
+};
+
+interface LabelValueStringPair {
+    label: string;
+    value: string;
+}
+
+interface LabelValueNumberPair {
+    label: string;
+    value: number;
+}
