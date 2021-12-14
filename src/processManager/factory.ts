@@ -1016,6 +1016,25 @@ export class ProcessFactory {
         return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
     }
 
+
+    /**
+     * Method to create he GIT process to get all files under GIT control
+     * @param {string} projectFolder Project folder path (Required)
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
+     */
+     static gitListFiles(projectFolder: string): Process {
+        if (Utils.isNull(projectFolder)) {
+            throw new DataRequiredException('projectFolder');
+        }
+        const command = new Command('git', 'git ls-files', false);
+        command.addCommandArg('ls-files');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
+    }
+
     /**
      * Method to create the Aura Helper CLI process to compress all XML files from a folder (and subfolders)
      * @param {string} projectFolder Project folder path (Required)

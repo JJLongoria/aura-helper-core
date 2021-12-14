@@ -1,4 +1,4 @@
-export const ApexNodeTypes: { [key: string]: string } = {
+export const ApexNodeTypes: ApexNoteTypes = {
     CLASS: 'class',
     INTERFACE: 'interface',
     ENUM: 'enum',
@@ -19,3 +19,25 @@ export const ApexNodeTypes: { [key: string]: string } = {
     SOQL: 'soql',
     SOQL_FIELD: 'soql_field'
 };
+
+interface ApexNoteTypes {
+    CLASS: string;
+    INTERFACE: string;
+    ENUM: string;
+    PROPERTY: string;
+    GETTER: string;
+    SETTER: string;
+    INITIALIZER: string;
+    METHOD: string;
+    THROWS: string;
+    CONSTRUCTOR: string;
+    STATIC_CONSTRUCTOR: string;
+    VARIABLE: string;
+    TRIGGER: string;
+    COMMENT: string;
+    BLOCK_COMMENT: string;
+    DATATYPE: string;
+    ANNOTATION: string;
+    SOQL: string;
+    SOQL_FIELD: string;
+}

@@ -1,4 +1,4 @@
-export const Datatypes: { [key: string]: string } = {
+export const Datatypes: Datatypes = {
     STRING: 'string',
     BOOLEAN: 'boolean',
     ARRAY: 'array',
@@ -9,4 +9,17 @@ export const Datatypes: { [key: string]: string } = {
     DATE_TIME: 'datetime',
     DATE: 'date',
     TIME: 'time'
+};
+
+interface Datatypes {
+    STRING: string;
+    BOOLEAN: string;
+    ARRAY: string;
+    ENUM: string;
+    OBJECT: string;
+    INTEGER: string;
+    DOUBLE: string;
+    DATE_TIME: string;
+    DATE: string;
+    TIME: string;
 };

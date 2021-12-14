@@ -1,7 +1,6 @@
 import { MetadataTypes } from "./metadataTypes";
 
-
-export const SpecialMetadata: { [key: string]: string[] } = {
+export const SpecialMetadata: SpecialMetadata = {
     Profile: [
         MetadataTypes.CUSTOM_APPLICATION,
         MetadataTypes.APEX_CLASS,
@@ -47,4 +46,12 @@ export const SpecialMetadata: { [key: string]: string[] } = {
         MetadataTypes.BUSINESS_PROCESS
     ],
     CustomObject: []
+};
+
+interface SpecialMetadata {
+    Profile: string[];
+    PermissionSet: string[];
+    Translations: string[];
+    RecordType: string[];
+    CustomObject: string[];
 };
