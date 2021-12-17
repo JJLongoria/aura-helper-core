@@ -78,6 +78,15 @@ export class PathUtils {
     }
 
     /**
+     * Method to get the Aura Helper CLI Temp Files path
+     * 
+     * @returns {string} Returns the Aura Helper CLI Temp files path
+     */
+     static getAuraHelperSFDXTempFilesPath(): string {
+        return StrUtils.replace(os.homedir() + '/.AuraHelperSFDX/TempFiles', "\\", "/");
+    }
+
+    /**
      * Method to remove a file extension from file path
      * @param {string} file file to process
      * 

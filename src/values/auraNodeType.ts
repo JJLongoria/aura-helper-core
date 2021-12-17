@@ -1,4 +1,4 @@
-export const AuraNodeTypes: AuraNodeTypes = {
+export const AuraNodeTypes: AuraNodeTypesDef = {
     APPLICATION: 'application',
     COMPONENT: 'component',
     ATTRIBUTE: 'attribute',
@@ -17,7 +17,7 @@ export const AuraNodeTypes: AuraNodeTypes = {
     SOQL_FIELD: 'soql_field'
 };
 
-interface AuraNodeTypes {
+export interface AuraNodeTypesDef {
     APPLICATION: string;
     COMPONENT: string;
     ATTRIBUTE: string;

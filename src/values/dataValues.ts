@@ -1,4 +1,4 @@
-export const DataValues: DataValues = {
+export const DataValues: DataValuesDef = {
     DEFAULT_TEXT: '{!value}',
     NOT_NULL: '{!notnull}',
     AVAILABLE: '{!available}',
@@ -747,7 +747,7 @@ export const DataValues: DataValues = {
     ]
 };
 
-interface DataValues {
+export interface DataValuesDef {
     DEFAULT_TEXT: string;
     NOT_NULL: string;
     AVAILABLE: string;

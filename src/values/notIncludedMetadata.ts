@@ -1,4 +1,4 @@
-export const NotIncludedMetadata: NotIncludedMetadata = {
+export const NotIncludedMetadata: NotIncludedMetadataDef = {
     StandardValueSet: {
         xmlName: "StandardValueSet",
         suffix: "standardValueSet",
@@ -60,7 +60,7 @@ export const NotIncludedMetadata: NotIncludedMetadata = {
     }
 };
 
-interface NotIncludedMetadata {
+export interface NotIncludedMetadataDef {
     StandardValueSet: {
         xmlName: string;
         suffix: string;

@@ -1,4 +1,4 @@
-export const ProcessEvent: ProcessEvent = {
+export const ProcessEvent: ProcessEventDef = {
     STD_OUT: 'out',
     ERR_OUT: 'errorOut',
     ERROR: 'error',
@@ -6,7 +6,7 @@ export const ProcessEvent: ProcessEvent = {
     KILLED: 'killed'
 };
 
-interface ProcessEvent {
+export interface ProcessEventDef {
     STD_OUT: string;
     ERR_OUT: string;
     ERROR: string;

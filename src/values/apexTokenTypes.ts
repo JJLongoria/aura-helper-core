@@ -1,4 +1,4 @@
-export const ApexTokenTypes: ApexTokenTypes = {
+export const ApexTokenTypes: ApexTokenTypesDef = {
     UNKNOWN: "token.type.unknown",
     IDENTIFIER: "token.type.identifier",
     ANNOTATION: {
@@ -238,7 +238,7 @@ export const ApexTokenTypes: ApexTokenTypes = {
     }
 };
 
-interface ApexTokenTypes {
+export interface ApexTokenTypesDef {
     UNKNOWN: string;
     IDENTIFIER: string;
     ANNOTATION: {
