@@ -1,4 +1,4 @@
-export const Datatypes: Datatypes = {
+export const Datatypes: DatatypesDef = {
     STRING: 'string',
     BOOLEAN: 'boolean',
     ARRAY: 'array',
@@ -11,7 +11,7 @@ export const Datatypes: Datatypes = {
     TIME: 'time'
 };
 
-interface Datatypes {
+export interface DatatypesDef {
     STRING: string;
     BOOLEAN: string;
     ARRAY: string;

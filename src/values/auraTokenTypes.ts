@@ -1,4 +1,4 @@
-export const AuraTokenTypes: AuraTokenTypes = {
+export const AuraTokenTypes: AuraTokenTypesDef = {
     UNKNOWN: "token.type.unknown",
     IDENTIFIER: "token.type.identifier",
     BRACKET: {
@@ -68,7 +68,7 @@ export const AuraTokenTypes: AuraTokenTypes = {
     }
 };
 
-interface AuraTokenTypes {
+export interface AuraTokenTypesDef {
     UNKNOWN: string;
     IDENTIFIER: string;
     BRACKET: {

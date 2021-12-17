@@ -1,4 +1,4 @@
-export const MetadataTypes: MetadataTypes = {
+export const MetadataTypes: MetadataTypesDef = {
   ACCOUNT_RELATIONSHIP_SHARE_RULE: 'AccountRelationshipShareRule',
   ACTION_LINK_GROUP_TEMPLATE: 'ActionLinkGroupTemplate',
   ACTION_OVERRIDE: 'ActionOverride',
@@ -251,7 +251,7 @@ export const MetadataTypes: MetadataTypes = {
   WORK_SKILL_ROUTING: 'WorkSkillRouting',
 };
 
-interface MetadataTypes {
+export interface MetadataTypesDef {
   ACCOUNT_RELATIONSHIP_SHARE_RULE: string;
   ACTION_LINK_GROUP_TEMPLATE: string;
   ACTION_OVERRIDE: string;

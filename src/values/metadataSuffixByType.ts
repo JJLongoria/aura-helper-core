@@ -1,4 +1,4 @@
-export const MetadataSuffixByType: MetadataSuffixByType = {
+export const MetadataSuffixByType: MetadataSuffixByTypeDef = {
     CustomField: 'field',
     BusinessProcess: 'businessProcess',
     RecordType: 'recordType',
@@ -10,7 +10,7 @@ export const MetadataSuffixByType: MetadataSuffixByType = {
     FieldSet: 'fieldSet'
 };
 
-interface MetadataSuffixByType {
+export interface MetadataSuffixByTypeDef {
     CustomField: string;
     BusinessProcess: string;
     RecordType: string;

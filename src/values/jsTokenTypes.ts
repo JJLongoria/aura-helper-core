@@ -1,4 +1,4 @@
-export const JSTokenTypes: JSTokenTypes = {
+export const JSTokenTypes: JSTokenTypesDef = {
     UNKNOWN: "token.type.unknown",
     IDENTIFIER: "token.type.identifier",
     DATATYPE: {
@@ -185,7 +185,7 @@ export const JSTokenTypes: JSTokenTypes = {
     }
 };
 
-interface JSTokenTypes {
+export interface JSTokenTypesDef {
     UNKNOWN: string;
     IDENTIFIER: string;
     DATATYPE: {

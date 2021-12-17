@@ -1,4 +1,4 @@
-export const TokenTypes: TokenTypes = {
+export const TokenTypes: TokenTypesDef = {
     UNKNOWN: "token.type.unknown",
     IDENTIFIER: "token.type.identifier",
     LITERAL: {
@@ -106,7 +106,7 @@ export const TokenTypes: TokenTypes = {
     }
 };
 
-interface TokenTypes {
+interface TokenTypesDef {
     UNKNOWN: string;
     IDENTIFIER: string;
     LITERAL: {
