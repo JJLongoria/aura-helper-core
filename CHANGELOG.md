@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.2.0 - 2021-12-17]
+### Added
+- Added new types to handle Process Options to better use
+- Added new processes to handle and instance Aura Helper SFDX processes
+
 ## [2.1.0 - 2021-12-14]
 ### Added
 - Enhanced values types with interfaces to better use
