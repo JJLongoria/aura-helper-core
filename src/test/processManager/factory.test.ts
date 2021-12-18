@@ -199,16 +199,16 @@ describe('Testing ./src/process/factory.js', () => {
     });
     test('Testing auraHelperCompressFolder()', () => {
         const process = ProcessFactory.auraHelperCompressFolder('./', {
-            folder: './folder',
+            folder: ['./folder'],
         });
         expect(process.name).toEqual('ah:compress:folder-./folder');
         ProcessFactory.auraHelperCompressFolder('./', {
-            folder: './folder',
+            folder: ['./folder'],
             sortOrder: 'order'
         });
         try {
             ProcessFactory.auraHelperCompressFolder('./', {
-                folder: undefined,
+                folder: [''],
             });
         } catch (error) {
             expect(error.message).toMatch('folder is Required.');
@@ -216,16 +216,16 @@ describe('Testing ./src/process/factory.js', () => {
     });
     test('Testing auraHelperCompressFile()', () => {
         const process = ProcessFactory.auraHelperCompressFile('./', {
-            file: './file',
+            file: ['./file'],
         });
         ProcessFactory.auraHelperCompressFile('./', {
-            file: './file',
+            file: ['./file'],
             sortOrder: 'order'
         });
         expect(process.name).toEqual('ah:compress:file-./file');
         try {
             ProcessFactory.auraHelperCompressFile('./', {
-                file: undefined,
+                file: [''],
             });
         } catch (error) {
             expect(error.message).toMatch('file is Required.');
@@ -256,6 +256,7 @@ describe('Testing ./src/process/factory.js', () => {
         try {
             ProcessFactory.auraHelperOrgCompareBetween('./', {
                 apiVersion: '50.0',
+                target: '',
             });
         } catch (error) {
             expect(error.message).toMatch('target is Required.');
@@ -420,6 +421,8 @@ describe('Testing ./src/process/factory.js', () => {
         try {
             ProcessFactory.auraHelperPackageGenerator('./', {
                 apiVersion: '50.0',
+                createFrom: '',
+                source: '',
             });
         } catch (error) {
             expect(error.message).toMatch('createFrom is Required.');
@@ -427,7 +430,8 @@ describe('Testing ./src/process/factory.js', () => {
         try {
             ProcessFactory.auraHelperPackageGenerator('./', {
                 apiVersion: '50.0',
-                createFrom: 'git'
+                createFrom: 'git',
+                source: '',
             });
         } catch (error) {
             expect(error.message).toMatch('source is Required.');
@@ -435,35 +439,29 @@ describe('Testing ./src/process/factory.js', () => {
     });
     test('Testing auraHelperRepairDependencies()', () => {
         const process = ProcessFactory.auraHelperRepairDependencies('./', {
-            apiVersion: '50.0',
         });
         expect(process.name).toEqual('ah:metadata:local:repair');
         ProcessFactory.auraHelperRepairDependencies('./');
         ProcessFactory.auraHelperRepairDependencies('./', {});
         ProcessFactory.auraHelperRepairDependencies('./', {
-            apiVersion: '50.0',
             onlyCheck: true,
         });
         ProcessFactory.auraHelperRepairDependencies('./', {
-            apiVersion: '50.0',
             onlyCheck: true,
             types: ['CustomObject']
         });
         ProcessFactory.auraHelperRepairDependencies('./', {
-            apiVersion: '50.0',
             onlyCheck: true,
             types: ['CustomObject'],
             compress: true
         });
         ProcessFactory.auraHelperRepairDependencies('./', {
-            apiVersion: '50.0',
             onlyCheck: true,
             types: ['CustomObject'],
             compress: true,
             sortOrder: 'order',
         });
         ProcessFactory.auraHelperRepairDependencies('./', {
-            apiVersion: '50.0',
             onlyCheck: true,
             types: ['CustomObject'],
             compress: true,
@@ -471,7 +469,6 @@ describe('Testing ./src/process/factory.js', () => {
             useIgnore: true,
         });
         ProcessFactory.auraHelperRepairDependencies('./', {
-            apiVersion: '50.0',
             onlyCheck: true,
             types: ['CustomObject'],
             compress: true,
@@ -480,7 +477,6 @@ describe('Testing ./src/process/factory.js', () => {
             ignoreFile: 'file'
         });
         ProcessFactory.auraHelperRepairDependencies('./', {
-            apiVersion: '50.0',
             onlyCheck: true,
             types: ['CustomObject'],
             compress: true,
@@ -528,5 +524,527 @@ describe('Testing ./src/process/factory.js', () => {
     test('Testing auraHelperUpdateNPM()', () => {
         const process = ProcessFactory.auraHelperUpdateNPM();
         expect(process.name).toEqual('npm:update');
+    });
+    test('Testing auraHelperSFDXCompressFolder()', () => {
+        const process = ProcessFactory.auraHelperSFDXCompressFolder('./', {
+            folder: ['./folder'],
+        });
+        expect(process.name).toEqual('ah:compress:folder-./folder');
+        ProcessFactory.auraHelperSFDXCompressFolder('./', {
+            folder: ['./folder'],
+            sortOrder: 'order'
+        });
+        try {
+            ProcessFactory.auraHelperSFDXCompressFolder('./', {
+                folder: [''],
+            });
+        } catch (error) {
+            expect(error.message).toMatch('folder is Required.');
+        }
+    });
+    test('Testing auraHelperSFDXCompressFile()', () => {
+        const process = ProcessFactory.auraHelperSFDXCompressFile('./', {
+            file: ['./file'],
+        });
+        ProcessFactory.auraHelperSFDXCompressFile('./', {
+            file: ['./file'],
+            sortOrder: 'order'
+        });
+        expect(process.name).toEqual('ah:metadata:local:compress:file-./file');
+        try {
+            ProcessFactory.auraHelperSFDXCompressFile('./', {
+                file: [''],
+            });
+        } catch (error) {
+            expect(error.message).toMatch('file is Required.');
+        }
+    });
+    test('Testing auraHelperSFDXOrgCompare()', () => {
+        const process = ProcessFactory.auraHelperSFDXOrgCompare('./', {
+            apiVersion: '50.0',
+        });
+        expect(process.name).toEqual('ah:metadata:org:compare');
+        ProcessFactory.auraHelperSFDXOrgCompare('./', {});
+    });
+    test('Testing auraHelperSFDXOrgCompareBetween()', () => {
+        const process = ProcessFactory.auraHelperSFDXOrgCompareBetween('./', {
+            apiVersion: '50.0',
+            target: 'target',
+        });
+        expect(process.name).toEqual('ah:metadata:org:between:compare');
+        ProcessFactory.auraHelperSFDXOrgCompareBetween('./', {
+            apiVersion: '50.0',
+            source: 'source',
+            target: 'target',
+        });
+        ProcessFactory.auraHelperSFDXOrgCompareBetween('./', {
+            source: 'source',
+            target: 'target',
+        });
+        try {
+            ProcessFactory.auraHelperSFDXOrgCompareBetween('./', {
+                apiVersion: '50.0',
+                target: '',
+            });
+        } catch (error) {
+            expect(error.message).toMatch('target is Required.');
+        }
+    });
+    test('Testing auraHelperSFDXDescribeMetadata()', () => {
+        const process = ProcessFactory.auraHelperSFDXDescribeMetadata('./', {
+            apiVersion: '50.0',
+        });
+        expect(process.name).toEqual('ah:metadata:local:describe');
+        ProcessFactory.auraHelperSFDXDescribeMetadata('./', {});
+        ProcessFactory.auraHelperSFDXDescribeMetadata('./', {
+            apiVersion: '50.0',
+            fromOrg: true,
+            downloadAll: true,
+        });
+        ProcessFactory.auraHelperSFDXDescribeMetadata('./', {
+            apiVersion: '50.0',
+            fromOrg: true,
+            downloadAll: false,
+        });
+        ProcessFactory.auraHelperSFDXDescribeMetadata('./', {
+            apiVersion: '50.0',
+            fromOrg: true,
+        });
+        ProcessFactory.auraHelperSFDXDescribeMetadata('./', {
+            apiVersion: '50.0',
+            fromOrg: false,
+        });
+        ProcessFactory.auraHelperSFDXDescribeMetadata('./', {
+            apiVersion: '50.0',
+            fromOrg: false,
+            types: ['CustomObject']
+        });
+    });
+    test('Testing auraHelperSFDXRetrieveSpecial()', () => {
+        const process = ProcessFactory.auraHelperSFDXRetrieveSpecial('./', {
+            apiVersion: '50.0',
+        });
+        expect(process.name).toEqual('ah:metadata:local:special:retrieve');
+        ProcessFactory.auraHelperSFDXRetrieveSpecial('./', {
+            fromOrg: false,
+        });
+        ProcessFactory.auraHelperSFDXRetrieveSpecial('./', {
+            apiVersion: '50.0',
+            fromOrg: true,
+            downloadAll: true,
+        });
+        ProcessFactory.auraHelperSFDXRetrieveSpecial('./', {
+            apiVersion: '50.0',
+            fromOrg: true,
+            downloadAll: false,
+        });
+        ProcessFactory.auraHelperSFDXRetrieveSpecial('./', {
+            apiVersion: '50.0',
+            downloadAll: false,
+            includeOrg: true,
+        });
+        ProcessFactory.auraHelperSFDXRetrieveSpecial('./', {
+            apiVersion: '50.0',
+            downloadAll: false,
+            includeOrg: true,
+            compress: true,
+        });
+        ProcessFactory.auraHelperSFDXRetrieveSpecial('./', {
+            apiVersion: '50.0',
+            downloadAll: false,
+            includeOrg: true,
+            compress: true,
+            sortOrder: 'order'
+        });
+        ProcessFactory.auraHelperSFDXRetrieveSpecial('./', {
+            apiVersion: '50.0',
+            downloadAll: false,
+            includeOrg: true,
+            compress: true,
+            sortOrder: 'order',
+            types: ['CustomObject']
+        });
+    });
+    test('Testing auraHelperSFDXLoadPermissions()', () => {
+        const process = ProcessFactory.auraHelperSFDXLoadPermissions('./', {
+            apiVersion: '50.0',
+        });
+        ProcessFactory.auraHelperSFDXLoadPermissions('./', {
+            apiVersion: '50.0',
+            csv: true,
+        });
+        ProcessFactory.auraHelperSFDXLoadPermissions('./', {
+            apiVersion: '50.0',
+            csv: true,
+            outputFile: 'path',
+        });
+        ProcessFactory.auraHelperSFDXLoadPermissions('./', {
+            apiVersion: '50.0',
+            csv: true,
+            outputFile: 'path',
+            logLevel: 'level'
+        });
+        expect(process.name).toEqual('ah:metadata:org:permissions:get');
+        ProcessFactory.auraHelperSFDXLoadPermissions('./', {});
+    });
+    test('Testing auraHelperSFDXJSONPackage()', () => {
+        const process = ProcessFactory.auraHelperSFDXJSONPackage('./', {
+            source: 'dev',
+        });
+        expect(process.name).toEqual('ah:package:json:create');
+        ProcessFactory.auraHelperSFDXJSONPackage('./', {
+            source: 'dev',
+            toDelete: true,
+        });
+        ProcessFactory.auraHelperSFDXJSONPackage('./', {
+            source: 'dev',
+            toDelete: true,
+            deleteBefore: true,
+        });
+        ProcessFactory.auraHelperSFDXJSONPackage('./', {
+            source: 'dev',
+            toDelete: true,
+            deleteBefore: true,
+        });
+        ProcessFactory.auraHelperSFDXJSONPackage('./', {
+            source: 'dev',
+            toDelete: true,
+            deleteBefore: true,
+            useIgnore: true,
+        });
+        ProcessFactory.auraHelperSFDXJSONPackage('./', {
+            source: 'dev',
+            toDelete: true,
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore'
+        });
+        ProcessFactory.auraHelperSFDXJSONPackage('./', {
+            source: 'dev',
+            toDelete: true,
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            wilcards: true,
+        });
+        ProcessFactory.auraHelperSFDXJSONPackage('./', {
+            source: 'dev',
+            toDelete: true,
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            wilcards: true,
+            outputPath: 'path',
+        });
+        ProcessFactory.auraHelperSFDXJSONPackage('./', {
+            source: 'dev',
+            toDelete: true,
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            wilcards: true,
+            outputPath: 'path',
+            apiVersion: '50.0',
+        });
+        ProcessFactory.auraHelperSFDXJSONPackage('./', {
+            source: 'dev',
+            toDelete: true,
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            wilcards: true,
+            outputPath: 'path',
+            apiVersion: '50.0',
+            logLevel: 'debug'
+        });
+    });
+    test('Testing auraHelperSFDXGitPackage()', () => {
+        const process = ProcessFactory.auraHelperSFDXGitPackage('./', {});
+        expect(process.name).toEqual('ah:package:git:create');
+        ProcessFactory.auraHelperSFDXGitPackage('./');
+        ProcessFactory.auraHelperSFDXGitPackage('./', {
+            source: 'dev',
+        });
+        ProcessFactory.auraHelperSFDXGitPackage('./', {
+            source: 'dev',
+            target: 'master'
+        });
+        ProcessFactory.auraHelperSFDXGitPackage('./', {
+            source: 'dev',
+            target: 'master',
+            fileType: 'both'
+        });
+        ProcessFactory.auraHelperSFDXGitPackage('./', {
+            source: 'dev',
+            target: 'master',
+            fileType: 'both',
+            deleteBefore: true,
+        });
+        ProcessFactory.auraHelperSFDXGitPackage('./', {
+            source: 'dev',
+            target: 'master',
+            fileType: 'both',
+            deleteBefore: true,
+            useIgnore: true,
+        });
+        ProcessFactory.auraHelperSFDXGitPackage('./', {
+            source: 'dev',
+            target: 'master',
+            fileType: 'both',
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore'
+        });
+        ProcessFactory.auraHelperSFDXGitPackage('./', {
+            source: 'dev',
+            target: 'master',
+            fileType: 'both',
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            ignoreDestructive: true,
+        });
+        ProcessFactory.auraHelperSFDXGitPackage('./', {
+            source: 'dev',
+            target: 'master',
+            fileType: 'both',
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            ignoreDestructive: true,
+            destructiveIgnoreFile: 'destructiveIgnore',
+        });
+        ProcessFactory.auraHelperSFDXGitPackage('./', {
+            source: 'dev',
+            target: 'master',
+            fileType: 'both',
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            ignoreDestructive: true,
+            destructiveIgnoreFile: 'destructiveIgnore',
+            raw: true,
+        });
+        ProcessFactory.auraHelperSFDXGitPackage('./', {
+            source: 'dev',
+            target: 'master',
+            fileType: 'both',
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            ignoreDestructive: true,
+            destructiveIgnoreFile: 'destructiveIgnore',
+            raw: true,
+            outputPath: 'path'
+        });
+        ProcessFactory.auraHelperSFDXGitPackage('./', {
+            source: 'dev',
+            target: 'master',
+            fileType: 'both',
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            ignoreDestructive: true,
+            destructiveIgnoreFile: 'destructiveIgnore',
+            raw: true,
+            outputPath: 'path',
+            apiVersion: '50.0',
+        });
+        ProcessFactory.auraHelperSFDXGitPackage('./', {
+            source: 'dev',
+            target: 'master',
+            fileType: 'both',
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            ignoreDestructive: true,
+            destructiveIgnoreFile: 'destructiveIgnore',
+            raw: true,
+            outputPath: 'path',
+            apiVersion: '50.0',
+            logLevel: 'debug'
+        });
+    });
+    test('Testing auraHelperSFDXMergePackage()', () => {
+        const process = ProcessFactory.auraHelperSFDXMergePackage('./', {
+            source: 'dev',
+        });
+        expect(process.name).toEqual('ah:package:merge');
+        ProcessFactory.auraHelperSFDXMergePackage('./', {
+            source: 'dev',
+            bytype: true
+        });
+        ProcessFactory.auraHelperSFDXMergePackage('./', {
+            source: 'dev',
+            onlyPackage: true,
+        });
+        ProcessFactory.auraHelperSFDXMergePackage('./', {
+            source: 'dev',
+            deleteBefore: true,
+        });
+        ProcessFactory.auraHelperSFDXMergePackage('./', {
+            source: 'dev',
+            onlyDestructive: true,
+            deleteBefore: true,
+            useIgnore: true,
+        });
+        ProcessFactory.auraHelperSFDXMergePackage('./', {
+            source: 'dev',
+            fullPackage: true,
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore'
+        });
+        ProcessFactory.auraHelperSFDXMergePackage('./', {
+            source: 'dev',
+            fullDestructive: true,
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            ignoreDestructive: true,
+        });
+        ProcessFactory.auraHelperSFDXMergePackage('./', {
+            source: 'dev',
+            fullDestructive: true,
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            ignoreDestructive: true,
+            destructiveIgnoreFile: 'destructiveIgnore',
+        });
+        ProcessFactory.auraHelperSFDXMergePackage('./', {
+            source: 'dev',
+            fullDestructive: true,
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            ignoreDestructive: true,
+            destructiveIgnoreFile: 'destructiveIgnore',
+        });
+        ProcessFactory.auraHelperSFDXMergePackage('./', {
+            source: 'dev',
+            fullDestructive: true,
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            ignoreDestructive: true,
+            destructiveIgnoreFile: 'destructiveIgnore',
+            outputPath: 'path'
+        });
+        ProcessFactory.auraHelperSFDXMergePackage('./', {
+            source: 'dev',
+            fullDestructive: true,
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            ignoreDestructive: true,
+            destructiveIgnoreFile: 'destructiveIgnore',
+            outputPath: 'path',
+            apiVersion: '50.0',
+        });
+        ProcessFactory.auraHelperSFDXMergePackage('./', {
+            source: 'dev',
+            fullDestructive: true,
+            deleteBefore: true,
+            useIgnore: true,
+            ignoreFile: 'pathToIgnore',
+            ignoreDestructive: true,
+            destructiveIgnoreFile: 'destructiveIgnore',
+            outputPath: 'path',
+            apiVersion: '50.0',
+            logLevel: 'debug'
+        });
+    });
+    test('Testing auraHelperRepairSFDXDependencies()', () => {
+        const process = ProcessFactory.auraHelperSFDXRepairDependencies('./', {
+            apiVersion: '50.0',
+        });
+        expect(process.name).toEqual('ah:metadata:local:repair');
+        ProcessFactory.auraHelperSFDXRepairDependencies('./');
+        ProcessFactory.auraHelperSFDXRepairDependencies('./', {});
+        ProcessFactory.auraHelperSFDXRepairDependencies('./', {
+            apiVersion: '50.0',
+            onlyCheck: true,
+        });
+        ProcessFactory.auraHelperSFDXRepairDependencies('./', {
+            apiVersion: '50.0',
+            onlyCheck: true,
+            types: ['CustomObject']
+        });
+        ProcessFactory.auraHelperSFDXRepairDependencies('./', {
+            apiVersion: '50.0',
+            onlyCheck: true,
+            types: ['CustomObject'],
+            compress: true
+        });
+        ProcessFactory.auraHelperSFDXRepairDependencies('./', {
+            apiVersion: '50.0',
+            onlyCheck: true,
+            types: ['CustomObject'],
+            compress: true,
+            sortOrder: 'order',
+        });
+        ProcessFactory.auraHelperSFDXRepairDependencies('./', {
+            apiVersion: '50.0',
+            onlyCheck: true,
+            types: ['CustomObject'],
+            compress: true,
+            sortOrder: 'order',
+            useIgnore: true,
+        });
+        ProcessFactory.auraHelperSFDXRepairDependencies('./', {
+            apiVersion: '50.0',
+            onlyCheck: true,
+            types: ['CustomObject'],
+            compress: true,
+            sortOrder: 'order',
+            useIgnore: true,
+            ignoreFile: 'file'
+        });
+        ProcessFactory.auraHelperSFDXRepairDependencies('./', {
+            apiVersion: '50.0',
+            onlyCheck: true,
+            types: ['CustomObject'],
+            compress: true,
+            sortOrder: 'order',
+            useIgnore: true,
+            ignoreFile: 'file',
+            outputFile: 'output'
+        });
+    });
+    test('Testing auraHelperSFDXIgnore()', () => {
+        const process = ProcessFactory.auraHelperSFDXIgnore('./', {});
+        expect(process.name).toEqual('ah:metadata:local:ignore');
+        ProcessFactory.auraHelperSFDXIgnore('./');
+        ProcessFactory.auraHelperSFDXIgnore('./', {
+            types: ['CustomObject'],
+        });
+        ProcessFactory.auraHelperSFDXIgnore('./', {
+            types: ['CustomObject'],
+            ignoreFile: 'file'
+        });
+        ProcessFactory.auraHelperSFDXIgnore('./', {
+            types: ['CustomObject'],
+            ignoreFile: 'file',
+            compress: true,
+        });
+        ProcessFactory.auraHelperSFDXIgnore('./', {
+            types: ['CustomObject'],
+            ignoreFile: 'file',
+            compress: true,
+            sortOrder: 'order'
+        });
+    });
+    test('Testing getSFDXPlugins()', () => {
+        const process = ProcessFactory.getSFDXPlugins();
+        expect(process.name).toEqual('sfdx-plugins');
+    });
+    test('Testing auraHelperSFDXVersion()', () => {
+        const process = ProcessFactory.auraHelperSFDXVersion();
+        expect(process.name).toEqual('ah:version');
+    });
+    test('Testing auraHelperSFDXUpdate()', () => {
+        const process = ProcessFactory.auraHelperSFDXUpdate();
+        expect(process.name).toEqual('sfdx-plugins:install');
     });
 });

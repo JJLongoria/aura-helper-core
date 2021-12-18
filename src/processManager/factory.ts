@@ -1,3 +1,4 @@
+import { AuraHelperCLICompareBetweenOptions, AuraHelperCLICompareOptions, AuraHelperCLICompressFolderOptions, AuraHelperCLICompressFileOptions, AuraHelperCLIDependenciesOptions, AuraHelperCLIDescribeOptions, AuraHelperCLIIgnoreOptions, AuraHelperCLIPackageGeneratorOptions, AuraHelperCLIPermissionsOptions, AuraHelperCLIRetrieveSpecialOptions, AuraHelperSFDXCompareBetweenOptions, AuraHelperSFDXCompareOptions, AuraHelperSFDXCompressFileOptions, AuraHelperSFDXDependenciesOptions, AuraHelperSFDXDescribeOptions, AuraHelperSFDXGitPackageOptions, AuraHelperSFDXIgnoreOptions, AuraHelperSFDXJSONPackageOptions, AuraHelperSFDXMergePackageOptions, AuraHelperSFDXPermissionsOptions, AuraHelperSFDXRetrieveSpecialOptions, AuraHelperSFDXCompressFolderOptions } from "..";
 import { DataRequiredException, OSNotSupportedException, WrongDatatypeException } from "../exceptions";
 import { Command } from "../types/command";
 import { Process } from "../types/process";
@@ -1026,7 +1027,7 @@ export class ProcessFactory {
      * @throws {DataRequiredException} Throws exception when required data is not provided
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
      */
-     static gitListFiles(projectFolder: string): Process {
+    static gitListFiles(projectFolder: string): Process {
         if (Utils.isNull(projectFolder)) {
             throw new DataRequiredException('projectFolder');
         }
@@ -1038,7 +1039,7 @@ export class ProcessFactory {
     /**
      * Method to create the Aura Helper CLI process to compress all XML files from a folder (and subfolders)
      * @param {string} projectFolder Project folder path (Required)
-     * @param {any} options Options object to run the command (Required)
+     * @param {AuraHelperCLICompressFolderOptions} options Options object to run the command (Required)
      * @param {(data: any) => void} [callback] Callback to handle progress
      * 
      * @returns {Process} Returns the process to run
@@ -1046,7 +1047,7 @@ export class ProcessFactory {
      * @throws {DataRequiredException} Throws exception when required data is not provided
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
      */
-    static auraHelperCompressFolder(projectFolder: string, options: any, callback?: (data: any) => void): Process {
+    static auraHelperCompressFolder(projectFolder: string, options: AuraHelperCLICompressFolderOptions, callback?: (data: any) => void): Process {
         if (Utils.isNull(projectFolder)) {
             throw new DataRequiredException('projectFolder');
         }
@@ -1056,9 +1057,9 @@ export class ProcessFactory {
         if (Utils.isNull(options.folder)) {
             throw new DataRequiredException('folder');
         }
-        const command = new Command('aura-helper', 'ah:compress:folder-' + options.folder, true);
+        const command = new Command('aura-helper', 'ah:compress:folder-' + options.folder.join(','), true);
         command.addCommandArg('metadata:local:compress');
-        command.addCommandArg('-d', '' + options.folder + '');
+        command.addCommandArg('-d', '' + options.folder.join(',') + '');
         command.addCommandArg((options.sortOrder) ? '-s' : undefined, (options.sortOrder) ? options.sortOrder : undefined);
         command.addCommandArg('-p', 'json');
         return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
@@ -1067,7 +1068,7 @@ export class ProcessFactory {
     /**
      * Method to create the Aura Helper CLI process to one file or a list of files
      * @param {string} projectFolder Project folder path (Required)
-     * @param {any} options Options object to run the command (Required)
+     * @param {AuraHelperCLICompressFileOptions} options Options object to run the command (Required)
      * @param {(data: any) => void} [callback] Callback to handle progress
      * 
      * @returns {Process} Returns the process to run
@@ -1075,7 +1076,7 @@ export class ProcessFactory {
      * @throws {DataRequiredException} Throws exception when required data is not provided
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
      */
-    static auraHelperCompressFile(projectFolder: string, options: any, callback?: (data: any) => void): Process {
+    static auraHelperCompressFile(projectFolder: string, options: AuraHelperCLICompressFileOptions, callback?: (data: any) => void): Process {
         if (Utils.isNull(projectFolder)) {
             throw new DataRequiredException('projectFolder');
         }
@@ -1085,9 +1086,9 @@ export class ProcessFactory {
         if (Utils.isNull(options.file)) {
             throw new DataRequiredException('file');
         }
-        const command = new Command('aura-helper', 'ah:compress:file-' + options.file, true);
+        const command = new Command('aura-helper', 'ah:compress:file-' + options.file.join(','), true);
         command.addCommandArg('metadata:local:compress');
-        command.addCommandArg('-f', '' + options.file + '');
+        command.addCommandArg('-f', '' + options.file.join(',') + '');
         command.addCommandArg((options.sortOrder) ? '-s' : undefined, (options.sortOrder) ? options.sortOrder : undefined);
         command.addCommandArg('-p', 'json');
         return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
@@ -1096,7 +1097,7 @@ export class ProcessFactory {
     /**
      * Method to create the Aura Helper CLI process to compare the the local project with the auth org
      * @param {string} projectFolder Project folder path (Required)
-     * @param {any} options Options object to run the command (Required)
+     * @param {AuraHelperCLICompareOptions} options Options object to run the command (Required)
      * @param {(data: any) => void} [callback] Callback to handle progress
      * 
      * @returns {Process} Returns the process to run
@@ -1105,7 +1106,7 @@ export class ProcessFactory {
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"  
      * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined
      */
-    static auraHelperOrgCompare(projectFolder: string, options: any, callback?: (data: any) => void): Process {
+    static auraHelperOrgCompare(projectFolder: string, options: AuraHelperCLICompareOptions, callback?: (data: any) => void): Process {
         if (Utils.isNull(projectFolder)) {
             throw new DataRequiredException('projectFolder');
         }
@@ -1119,7 +1120,7 @@ export class ProcessFactory {
     /**
      * Method to create the Aura Helper CLI process to compare two orgs between
      * @param {string} projectFolder Project folder path (Required)
-     * @param {any} options Options object to run the command (Required)
+     * @param {AuraHelperCLICompareBetweenOptions} options Options object to run the command (Required)
      * @param {(data: any) => void} [callback] Callback to handle progress
      * 
      * @returns {Process} Returns the process to run
@@ -1128,7 +1129,7 @@ export class ProcessFactory {
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
      * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined
      */
-    static auraHelperOrgCompareBetween(projectFolder: string, options: any, callback?: (data: any) => void): Process {
+    static auraHelperOrgCompareBetween(projectFolder: string, options: AuraHelperCLICompareBetweenOptions, callback?: (data: any) => void): Process {
         if (Utils.isNull(projectFolder)) {
             throw new DataRequiredException('projectFolder');
         }
@@ -1150,7 +1151,7 @@ export class ProcessFactory {
     /**
      * Method to create the Aura Helper CLI process to describe metadata types from your local project or the auth org
      * @param {string} projectFolder Project folder path (Required)
-     * @param {any} options Options object to run the command (Required)
+     * @param {AuraHelperCLIDescribeOptions} options Options object to run the command (Required)
      * @param {(data: any) => void} [callback] Callback to handle progress
      * 
      * @returns {Process} Returns the process to run
@@ -1159,7 +1160,7 @@ export class ProcessFactory {
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"    
      * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined 
      */
-    static auraHelperDescribeMetadata(projectFolder: string, options: any, callback?: (data: any) => void): Process {
+    static auraHelperDescribeMetadata(projectFolder: string, options: AuraHelperCLIDescribeOptions, callback?: (data: any) => void): Process {
         if (Utils.isNull(projectFolder)) {
             throw new DataRequiredException('projectFolder');
         }
@@ -1179,7 +1180,7 @@ export class ProcessFactory {
     /**
      * Method to create the Aura Helper CLI process to Retrieve special types
      * @param {string} projectFolder Project folder path (Required)
-     * @param {any} options Options object to run the command (Required)
+     * @param {AuraHelperCLIRetrieveSpecialOptions} [options] Options object to run the command (Required)
      * @param {(data: any) => void} [callback] Callback to handle progress
      * 
      * @returns {Process} Returns the process to run
@@ -1188,21 +1189,18 @@ export class ProcessFactory {
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"    
      * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined 
      */
-    static auraHelperRetrieveSpecial(projectFolder: string, options: any, callback?: (data: any) => void): Process {
+    static auraHelperRetrieveSpecial(projectFolder: string, options: AuraHelperCLIRetrieveSpecialOptions, callback?: (data: any) => void): Process {
         if (Utils.isNull(projectFolder)) {
             throw new DataRequiredException('projectFolder');
         }
-        if (Utils.isNull(options)) {
-            throw new DataRequiredException('options');
-        }
-        const command = new Command('aura-helper', 'ah:metadata:' + ((options.fromOrg) ? 'org' : 'local') + ':retrieve:special', true);
-        command.addCommandArg('metadata:' + ((options.fromOrg) ? 'org' : 'local') + ':retrieve:special');
-        command.addCommandArg((options.types) ? '-t' : '-a', (options.types) ? options.types.join(',') : undefined);
-        command.addCommandArg((options.fromOrg && !options.downloadAll) ? '-o' : undefined);
-        command.addCommandArg((options.includeOrg) ? '-i' : undefined);
-        command.addCommandArg((options.compress) ? '-c' : undefined);
-        command.addCommandArg((options.sortOrder) ? '-s' : undefined, (options.sortOrder) ? options.sortOrder : undefined);
-        command.addCommandArg((options.apiVersion) ? '--api-version' : undefined, (options.apiVersion) ? ProjectUtils.getApiAsString(options.apiVersion) : undefined);
+        const command = new Command('aura-helper', 'ah:metadata:' + ((options && options.fromOrg) ? 'org' : 'local') + ':retrieve:special', true);
+        command.addCommandArg('metadata:' + ((options && options.fromOrg) ? 'org' : 'local') + ':retrieve:special');
+        command.addCommandArg((options && options.types) ? '-t' : '-a', (options && options.types) ? options.types.join(',') : undefined);
+        command.addCommandArg((options && options.fromOrg && !options.downloadAll) ? '-o' : undefined);
+        command.addCommandArg((options && options.includeOrg) ? '-i' : undefined);
+        command.addCommandArg((options && options.compress) ? '-c' : undefined);
+        command.addCommandArg((options && options.sortOrder) ? '-s' : undefined, (options && options.sortOrder) ? options.sortOrder : undefined);
+        command.addCommandArg((options && options.apiVersion) ? '--api-version' : undefined, (options && options.apiVersion) ? ProjectUtils.getApiAsString(options.apiVersion) : undefined);
         command.addCommandArg('-p', 'json');
         return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
     }
@@ -1210,7 +1208,7 @@ export class ProcessFactory {
     /**
      * Method to create the Aura Helper CLI process to load user premissions from auth org
      * @param {string} projectFolder Project folder path (Required)
-     * @param {any} [options] Options object to run the command
+     * @param {AuraHelperCLIPermissionsOptions} [options] Options object to run the command
      * @param {(data: any) => void} [callback] Callback to handle progress
      * 
      * @returns {Process} Returns the process to run
@@ -1219,7 +1217,7 @@ export class ProcessFactory {
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported" 
      * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined    
      */
-    static auraHelperLoadPermissions(projectFolder: string, options?: any, callback?: (data: any) => void): Process {
+    static auraHelperLoadPermissions(projectFolder: string, options?: AuraHelperCLIPermissionsOptions, callback?: (data: any) => void): Process {
         if (Utils.isNull(projectFolder)) {
             throw new DataRequiredException('projectFolder');
         }
@@ -1233,7 +1231,7 @@ export class ProcessFactory {
     /**
      * Method to create the Aura Helper CLI process to create the package file
      * @param {string} projectFolder Project folder path (Required)
-     * @param {any} options Options object to run the command (Required)
+     * @param {AuraHelperCLIPackageGeneratorOptions} options Options object to run the command (Required)
      * @param {(data: any) => void} [callback] Callback to handle progress
      * 
      * @returns {Process} Returns the process to run
@@ -1242,7 +1240,7 @@ export class ProcessFactory {
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"   
      * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined  
      */
-    static auraHelperPackageGenerator(projectFolder: string, options: any, callback?: (data: any) => void): Process {
+    static auraHelperPackageGenerator(projectFolder: string, options: AuraHelperCLIPackageGeneratorOptions, callback?: (data: any) => void): Process {
         if (Utils.isNull(projectFolder)) {
             throw new DataRequiredException('projectFolder');
         }
@@ -1275,7 +1273,7 @@ export class ProcessFactory {
     /**
      * Method to create the Aura Helper CLI process to repair the project dependencies
      * @param {string} projectFolder Project folder path (Required)
-     * @param {any} [options] Options object to run the command
+     * @param {AuraHelperCLIDependenciesOptions} [options] Options object to run the command
      * @param {(data: any) => void} [callback] Callback to handle progress
      * 
      * @returns {Process} Returns the process to run
@@ -1283,7 +1281,7 @@ export class ProcessFactory {
      * @throws {DataRequiredException} Throws exception when required data is not provided
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
      */
-    static auraHelperRepairDependencies(projectFolder: string, options?: any, callback?: (data: any) => void): Process {
+    static auraHelperRepairDependencies(projectFolder: string, options?: AuraHelperCLIDependenciesOptions, callback?: (data: any) => void): Process {
         if (Utils.isNull(projectFolder)) {
             throw new DataRequiredException('projectFolder');
         }
@@ -1303,7 +1301,7 @@ export class ProcessFactory {
     /**
      * Method to create the Aura Helper CLI process to ignore metadata from your project
      * @param {string} projectFolder Project folder path (Required)
-     * @param {any} [options] Options object to run the command
+     * @param {AuraHelperCLIIgnoreOptions} [options] Options object to run the command
      * @param {(data: any) => void} [callback] Callback to handle progress
      * 
      * @returns {Process} Returns the process to run
@@ -1311,7 +1309,7 @@ export class ProcessFactory {
      * @throws {DataRequiredException} Throws exception when required data is not provided
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"
      */
-    static auraHelperIgnore(projectFolder: string, options?: any, callback?: (data: any) => void): Process {
+    static auraHelperIgnore(projectFolder: string, options?: AuraHelperCLIIgnoreOptions, callback?: (data: any) => void): Process {
         if (Utils.isNull(projectFolder)) {
             throw new DataRequiredException('projectFolder');
         }
@@ -1357,6 +1355,432 @@ export class ProcessFactory {
     static auraHelperUpdate(): Process {
         const command = new Command('aura-helper', 'ah:update', false);
         command.addCommandArg('update');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE);
+    }
+
+    /**
+     * Method to create the Aura Helper SFDX process to compress all XML files from a folder (and subfolders)
+     * @param {string} projectFolder Project folder path (Required)
+     * @param {AuraHelperSFDXCompressFolderOptions} options Options object to run the command (Required)
+     * @param {(data: any) => void} [callback] Callback to handle progress
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
+     */
+     static auraHelperSFDXCompressFolder(projectFolder: string, options: AuraHelperSFDXCompressFolderOptions, callback?: (data: any) => void): Process {
+        if (Utils.isNull(projectFolder)) {
+            throw new DataRequiredException('projectFolder');
+        }
+        if (Utils.isNull(options)) {
+            throw new DataRequiredException('options');
+        }
+        if (Utils.isNull(options.folder)) {
+            throw new DataRequiredException('folder');
+        }
+        const command = new Command('sfdx', 'ah:compress:folder-' + options.folder, true);
+        command.addCommandArg('ah:metadata:local:compress');
+        command.addCommandArg('--directory', '' + options.folder.join(',') + '');
+        command.addCommandArg((options.sortOrder) ? '--sortorder' : undefined, (options.sortOrder) ? options.sortOrder : undefined);
+        command.addCommandArg((options && options.logLevel) ? '--loglevel' : undefined, (options && options.logLevel) ? options.logLevel : undefined);
+        command.addCommandArg('--json');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
+    }
+
+    /**
+     * Method to create the Aura Helper SFDX process to one file or a list of files
+     * @param {string} projectFolder Project folder path (Required)
+     * @param {AuraHelperSFDXCompressFileOptions} options Options object to run the command (Required)
+     * @param {(data: any) => void} [callback] Callback to handle progress
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
+     */
+     static auraHelperSFDXCompressFile(projectFolder: string, options: AuraHelperSFDXCompressFileOptions, callback?: (data: any) => void): Process {
+        if (Utils.isNull(projectFolder)) {
+            throw new DataRequiredException('projectFolder');
+        }
+        if (Utils.isNull(options)) {
+            throw new DataRequiredException('options');
+        }
+        if (Utils.isNull(options.file)) {
+            throw new DataRequiredException('file');
+        }
+        const command = new Command('sfdx', 'ah:metadata:local:compress:file-' + options.file, true);
+        command.addCommandArg('ah:metadata:local:compress');
+        command.addCommandArg('--file', '' + options.file.join(',') + '');
+        command.addCommandArg((options.sortOrder) ? '--sortorder' : undefined, (options.sortOrder) ? options.sortOrder : undefined);
+        command.addCommandArg((options && options.logLevel) ? '--loglevel' : undefined, (options && options.logLevel) ? options.logLevel : undefined);
+        command.addCommandArg('--json');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
+    }
+
+    /**
+    * Method to create the Aura Helper SFDX process to compare the the local project with the auth org
+    * @param {string} projectFolder Project folder path (Required)
+    * @param {AuraHelperSFDXCompareOptions} options Options object to run the command (Required)
+    * @param {(data: any) => void} [callback] Callback to handle progress
+    * 
+    * @returns {Process} Returns the process to run
+    * 
+    * @throws {DataRequiredException} Throws exception when required data is not provided
+    * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"  
+    * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined
+    */
+    static auraHelperSFDXOrgCompare(projectFolder: string, options: AuraHelperSFDXCompareOptions, callback?: (data: any) => void): Process {
+        if (Utils.isNull(projectFolder)) {
+            throw new DataRequiredException('projectFolder');
+        }
+        const command = new Command('sfdx', 'ah:metadata:org:compare', true);
+        command.addCommandArg('ah:metadata:org:compare');
+        command.addCommandArg((options && options.apiVersion) ? '--apiversion' : undefined, (options && options.apiVersion) ? ProjectUtils.getApiAsString(options.apiVersion) : undefined);
+        command.addCommandArg((options && options.outputFile) ? '--outputfile' : undefined, (options && options.outputFile) ? options.outputFile : undefined);
+        command.addCommandArg((options && options.logLevel) ? '--loglevel' : undefined, (options && options.logLevel) ? options.logLevel : undefined);
+        if (options && options.csv) {
+            command.addCommandArg((options && options.csv) ? '--csv' : undefined);
+        } else {
+            command.addCommandArg('--json');
+        }
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
+    }
+
+    /**
+     * Method to create the Aura Helper SFDX process to compare two orgs between
+     * @param {string} projectFolder Project folder path (Required)
+     * @param {AuraHelperCLICompareBetweenOptions} options Options object to run the command (Required)
+     * @param {(data: any) => void} [callback] Callback to handle progress
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
+     * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined
+     */
+    static auraHelperSFDXOrgCompareBetween(projectFolder: string, options: AuraHelperSFDXCompareBetweenOptions, callback?: (data: any) => void): Process {
+        if (Utils.isNull(projectFolder)) {
+            throw new DataRequiredException('projectFolder');
+        }
+        if (Utils.isNull(options)) {
+            throw new DataRequiredException('options');
+        }
+        if (Utils.isNull(options.target)) {
+            throw new DataRequiredException('target');
+        }
+        const command = new Command('sfdx', 'ah:metadata:org:between:compare', true);
+        command.addCommandArg('ah:metadata:org:between:compare');
+        command.addCommandArg((options.source) ? '--source' : undefined, (options.source) ? options.source : undefined);
+        command.addCommandArg('--target', options.target);
+        command.addCommandArg((options.apiVersion) ? '--apiversion' : undefined, (options.apiVersion) ? ProjectUtils.getApiAsString(options.apiVersion) : undefined);
+        command.addCommandArg((options && options.outputFile) ? '--outputfile' : undefined, (options && options.outputFile) ? options.outputFile : undefined);
+        command.addCommandArg((options && options.logLevel) ? '--loglevel' : undefined, (options && options.logLevel) ? options.logLevel : undefined);
+        if (options && options.csv) {
+            command.addCommandArg((options && options.csv) ? '--csv' : undefined);
+        } else {
+            command.addCommandArg('--json');
+        }
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
+    }
+
+    /**
+     * Method to create the Aura Helper SFDX process to describe metadata types from your local project or the auth org
+     * @param {string} projectFolder Project folder path (Required)
+     * @param {AuraHelperSFDXDescribeOptions} options Options object to run the command (Required)
+     * @param {(data: any) => void} [callback] Callback to handle progress
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"    
+     * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined 
+     */
+    static auraHelperSFDXDescribeMetadata(projectFolder: string, options: AuraHelperSFDXDescribeOptions, callback?: (data: any) => void): Process {
+        if (Utils.isNull(projectFolder)) {
+            throw new DataRequiredException('projectFolder');
+        }
+        if (Utils.isNull(options)) {
+            throw new DataRequiredException('options');
+        }
+        const command = new Command('sfdx', 'ah:metadata:' + ((options.fromOrg) ? 'org' : 'local') + ':describe', true);
+        command.addCommandArg('ah:metadata:' + ((options.fromOrg) ? 'org' : 'local') + ':describe');
+        command.addCommandArg((options.types) ? '--type' : '--all', (options.types) ? options.types.join(',') : undefined);
+        command.addCommandArg((options.fromOrg && options.downloadAll) ? '--downloadall' : undefined);
+        command.addCommandArg((options.apiVersion) ? '--apiversion' : undefined, (options.apiVersion) ? ProjectUtils.getApiAsString(options.apiVersion) : undefined);
+        command.addCommandArg((options && options.logLevel) ? '--loglevel' : undefined, (options && options.logLevel) ? options.logLevel : undefined);
+        command.addCommandArg((options.groupGlobalActions) ? '--group' : undefined);
+        command.addCommandArg((options && options.outputFile) ? '--outputfile' : undefined, (options && options.outputFile) ? options.outputFile : undefined);
+        if (options && options.csv) {
+            command.addCommandArg((options && options.csv) ? '--csv' : undefined);
+        } else {
+            command.addCommandArg('--json');
+        }
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
+    }
+
+    /**
+     * Method to create the Aura Helper SFDX process to Retrieve special types
+     * @param {string} projectFolder Project folder path (Required)
+     * @param {AuraHelperSFDXRetrieveSpecialOptions} options Options object to run the command (Required)
+     * @param {(data: any) => void} [callback] Callback to handle progress
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"    
+     * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined 
+     */
+    static auraHelperSFDXRetrieveSpecial(projectFolder: string, options: AuraHelperSFDXRetrieveSpecialOptions, callback?: (data: any) => void): Process {
+        if (Utils.isNull(projectFolder)) {
+            throw new DataRequiredException('projectFolder');
+        }
+        if (Utils.isNull(options)) {
+            throw new DataRequiredException('options');
+        }
+        const command = new Command('sfdx', 'ah:metadata:' + ((options.fromOrg) ? 'org' : 'local') + ':special:retrieve', true);
+        command.addCommandArg('ah:metadata:' + ((options.fromOrg) ? 'org' : 'local') + ':special:retrieve');
+        command.addCommandArg((options.types) ? '--type' : '--all', (options.types) ? options.types.join(',') : undefined);
+        command.addCommandArg((options.fromOrg && options.downloadAll) ? '--downloadall' : undefined);
+        command.addCommandArg((options.includeOrg) ? '--includeorg' : undefined);
+        command.addCommandArg((options.compress) ? '--compress' : undefined);
+        command.addCommandArg((options.sortOrder) ? '--sortorder' : undefined, (options.sortOrder) ? options.sortOrder : undefined);
+        command.addCommandArg((options.apiVersion) ? '--apiversion' : undefined, (options.apiVersion) ? ProjectUtils.getApiAsString(options.apiVersion) : undefined);
+        command.addCommandArg((options && options.logLevel) ? '--loglevel' : undefined, (options && options.logLevel) ? options.logLevel : undefined);
+        command.addCommandArg('--json');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
+    }
+
+    /**
+     * Method to create the Aura Helper SFDX process to load user premissions from auth org
+     * @param {string} projectFolder Project folder path (Required)
+     * @param {any} [options] Options object to run the command
+     * @param {(data: any) => void} [callback] Callback to handle progress
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported" 
+     * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined    
+     */
+    static auraHelperSFDXLoadPermissions(projectFolder: string, options?: AuraHelperSFDXPermissionsOptions, callback?: (data: any) => void): Process {
+        if (Utils.isNull(projectFolder)) {
+            throw new DataRequiredException('projectFolder');
+        }
+        const command = new Command('sfdx', 'ah:metadata:org:permissions:get', true);
+        command.addCommandArg('ah:metadata:org:permissions:get');
+        command.addCommandArg((options && options.apiVersion) ? '--apiversion' : undefined, (options && options.apiVersion) ? ProjectUtils.getApiAsString(options.apiVersion) : undefined);
+        command.addCommandArg((options && options.outputFile) ? '--outputfile' : undefined, (options && options.outputFile) ? options.outputFile : undefined);
+        command.addCommandArg((options && options.logLevel) ? '--loglevel' : undefined, (options && options.logLevel) ? options.logLevel : undefined);
+        if (options && options.csv) {
+            command.addCommandArg((options && options.csv) ? '--csv' : undefined);
+        } else {
+            command.addCommandArg('--json');
+        }
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
+    }
+
+    /**
+     * Method to create the Aura Helper SFDX process to create packages from GIT
+     * @param {string} projectFolder Project folder path (Required)
+     * @param {AuraHelperSFDXGitPackageOptions} [options] Options object to run the command
+     * @param {(data: any) => void} [callback] Callback to handle progress
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
+     */
+    static auraHelperSFDXGitPackage(projectFolder: string, options?: AuraHelperSFDXGitPackageOptions, callback?: (data: any) => void): Process {
+        if (Utils.isNull(projectFolder)) {
+            throw new DataRequiredException('projectFolder');
+        }
+        const command = new Command('sfdx', 'ah:package:git:create', true);
+        command.addCommandArg('ah:package:git:create');
+        command.addCommandArg((options && options.source) ? '--source' : undefined, (options && options.source) ? options.source : undefined);
+        command.addCommandArg((options && options.target) ? '--target' : undefined, (options && options.target) ? options.target : undefined);
+        command.addCommandArg((options && options.fileType) ? '--filetype' : undefined, (options && options.fileType) ? options.fileType : undefined);
+        command.addCommandArg((options && options.deleteBefore) ? '--deletebefore' : undefined);
+        command.addCommandArg((options && options.useIgnore) ? '--useignore' : undefined);
+        command.addCommandArg((options && options.ignoreFile) ? '--ignorefile' : undefined, (options && options.ignoreFile) ? options.ignoreFile : undefined);
+        command.addCommandArg((options && options.ignoreDestructive) ? '--ignoredestructive' : undefined);
+        command.addCommandArg((options && options.destructiveIgnoreFile) ? '--destructiveignorefile' : undefined, (options && options.destructiveIgnoreFile) ? options.destructiveIgnoreFile : undefined);
+        command.addCommandArg((options && options.raw) ? '---raw' : undefined);
+        command.addCommandArg((options && options.outputPath) ? '--outputpath' : undefined, (options && options.outputPath) ? options.outputPath : undefined);
+        command.addCommandArg((options && options.apiVersion) ? '--apiversion' : undefined, (options && options.apiVersion) ? ProjectUtils.getApiAsString(options.apiVersion) : undefined);
+        command.addCommandArg((options && options.logLevel) ? '--loglevel' : undefined, (options && options.logLevel) ? options.logLevel : undefined);
+        command.addCommandArg('--json');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
+    }
+
+    /**
+     * Method to create the Aura Helper SFDX process to create packages from JSON
+     * @param {string} projectFolder Project folder path (Required)
+     * @param {AuraHelperSFDXJSONPackageOptions} options Options object to run the command
+     * @param {(data: any) => void} [callback] Callback to handle progress
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
+     */
+    static auraHelperSFDXJSONPackage(projectFolder: string, options: AuraHelperSFDXJSONPackageOptions, callback?: (data: any) => void): Process {
+        if (Utils.isNull(projectFolder)) {
+            throw new DataRequiredException('projectFolder');
+        }
+        if (Utils.isNull(options)) {
+            throw new DataRequiredException('options');
+        }
+        if (Utils.isNull(options.source)) {
+            throw new DataRequiredException('source');
+        }
+        const command = new Command('sfdx', 'ah:package:json:create', true);
+        command.addCommandArg('ah:package:json:create');
+        command.addCommandArg((options && options.source) ? '--source' : undefined, (options && options.source) ? options.source : undefined);
+        command.addCommandArg((options && options.toDelete) ? '--todelete' : undefined);
+        command.addCommandArg((options && options.deleteBefore) ? '--deletebefore' : undefined);
+        command.addCommandArg((options && options.useIgnore) ? '--useignore' : undefined);
+        command.addCommandArg((options && options.ignoreFile) ? '--ignorefile' : undefined, (options && options.ignoreFile) ? options.ignoreFile : undefined);
+        command.addCommandArg((options && options.wilcards) ? '--wildcards' : undefined);
+        command.addCommandArg((options && options.outputPath) ? '--outputpath' : undefined, (options && options.outputPath) ? options.outputPath : undefined);
+        command.addCommandArg((options && options.apiVersion) ? '--apiversion' : undefined, (options && options.apiVersion) ? ProjectUtils.getApiAsString(options.apiVersion) : undefined);
+        command.addCommandArg((options && options.logLevel) ? '--loglevel' : undefined, (options && options.logLevel) ? options.logLevel : undefined);
+        command.addCommandArg('--json');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
+    }
+
+    /**
+     * Method to create the Aura Helper SFDX process to merge package files
+     * @param {string} projectFolder Project folder path (Required)
+     * @param {AuraHelperSFDXMergePackageOptions} options Options object to run the command
+     * @param {(data: any) => void} [callback] Callback to handle progress
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
+     */
+    static auraHelperSFDXMergePackage(projectFolder: string, options: AuraHelperSFDXMergePackageOptions, callback?: (data: any) => void): Process {
+        if (Utils.isNull(projectFolder)) {
+            throw new DataRequiredException('projectFolder');
+        }
+        if (Utils.isNull(options)) {
+            throw new DataRequiredException('options');
+        }
+        if (Utils.isNull(options.source)) {
+            throw new DataRequiredException('source');
+        }
+        const command = new Command('sfdx', 'ah:package:merge', true);
+        command.addCommandArg('ah:package:merge');
+        command.addCommandArg((options && options.source) ? '-s' : undefined, (options && options.source) ? options.source : undefined);
+        command.addCommandArg((options && options.bytype) ? '--bytype' : undefined);
+        command.addCommandArg((options && options.deleteBefore) ? '--deletebefore' : undefined);
+        command.addCommandArg((options && options.onlyPackage) ? '--onlypackage' : undefined);
+        command.addCommandArg((options && options.onlyDestructive) ? '--onlydestructive' : undefined);
+        command.addCommandArg((options && options.fullPackage) ? '--fullpackage' : undefined);
+        command.addCommandArg((options && options.fullDestructive) ? '--fulldestructive' : undefined);
+        command.addCommandArg((options && options.useIgnore) ? '--useignore' : undefined);
+        command.addCommandArg((options && options.ignoreFile) ? '--ignorefile' : undefined, (options && options.ignoreFile) ? options.ignoreFile : undefined);
+        command.addCommandArg((options && options.ignoreDestructive) ? '--ignoredestructive' : undefined);
+        command.addCommandArg((options && options.destructiveIgnoreFile) ? '--destructiveignorefile' : undefined, (options && options.destructiveIgnoreFile) ? options.destructiveIgnoreFile : undefined);
+        command.addCommandArg((options && options.outputPath) ? '--outputpath' : undefined, (options && options.outputPath) ? options.outputPath : undefined);
+        command.addCommandArg((options && options.apiVersion) ? '--apiversion' : undefined, (options && options.apiVersion) ? ProjectUtils.getApiAsString(options.apiVersion) : undefined);
+        command.addCommandArg((options && options.logLevel) ? '--loglevel' : undefined, (options && options.logLevel) ? options.logLevel : undefined);
+        command.addCommandArg('--json');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
+    }
+
+    /**
+     * Method to create the Aura Helper SFDX process to repair the project dependencies
+     * @param {string} projectFolder Project folder path (Required)
+     * @param {AuraHelperSFDXDependenciesOptions} [options] Options object to run the command
+     * @param {(data: any) => void} [callback] Callback to handle progress
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
+     */
+    static auraHelperSFDXRepairDependencies(projectFolder: string, options?: AuraHelperSFDXDependenciesOptions, callback?: (data: any) => void): Process {
+        if (Utils.isNull(projectFolder)) {
+            throw new DataRequiredException('projectFolder');
+        }
+        const command = new Command('sfdx', 'ah:metadata:local:repair', true);
+        command.addCommandArg('ah:metadata:local:repair');
+        command.addCommandArg((options && options.types) ? '--type' : '--all', (options && options.types) ? options.types.join(',') : undefined);
+        command.addCommandArg((options && options.onlyCheck) ? '--onlycheck' : undefined);
+        command.addCommandArg((options && options.compress) ? '--compress' : undefined);
+        command.addCommandArg((options && options.sortOrder) ? '--sortorder' : undefined, (options && options.sortOrder) ? options.sortOrder : undefined);
+        command.addCommandArg((options && options.useIgnore) ? '--useignore' : undefined);
+        command.addCommandArg((options && options.ignoreFile) ? '--ignorefile' : undefined, (options && options.ignoreFile) ? options.ignoreFile : undefined);
+        command.addCommandArg((options && options.outputFile) ? '--outputfile' : undefined, (options && options.outputFile) ? options.outputFile : undefined);
+        command.addCommandArg((options && options.apiVersion) ? '--apiversion' : undefined, (options && options.apiVersion) ? ProjectUtils.getApiAsString(options.apiVersion) : undefined);
+        command.addCommandArg((options && options.logLevel) ? '--loglevel' : undefined, (options && options.logLevel) ? options.logLevel : undefined);
+        command.addCommandArg('--json');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
+    }
+
+    /**
+     * Method to create the Aura Helper SFDX process to ignore metadata from your project
+     * @param {string} projectFolder Project folder path (Required)
+     * @param {AuraHelperSFDXIgnoreOptions} [options] Options object to run the command
+     * @param {(data: any) => void} [callback] Callback to handle progress
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"
+     */
+    static auraHelperSFDXIgnore(projectFolder: string, options?: AuraHelperSFDXIgnoreOptions, callback?: (data: any) => void): Process {
+        if (Utils.isNull(projectFolder)) {
+            throw new DataRequiredException('projectFolder');
+        }
+        const command = new Command('sfdx', 'ah:metadata:local:ignore', true);
+        command.addCommandArg('ah:metadata:local:ignore');
+        command.addCommandArg((options && options.types) ? '--type' : '--all', (options && options.types) ? options.types.join(',') : undefined);
+        command.addCommandArg((options && options.ignoreFile) ? '--ignorefile' : undefined, (options && options.ignoreFile) ? options.ignoreFile : undefined);
+        command.addCommandArg((options && options.compress) ? '--compress' : undefined);
+        command.addCommandArg((options && options.sortOrder) ? '--sortorder' : undefined, (options && options.sortOrder) ? options.sortOrder : undefined);
+        command.addCommandArg((options && options.logLevel) ? '--loglevel' : undefined, (options && options.logLevel) ? options.logLevel : undefined);
+        command.addCommandArg('--json');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder).setOutputCallback(callback).setHandleProgress(true);
+    }
+
+    /**
+     * Method to create the Aura Helper SFDX process to get the Aura Helper SFDX version
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
+     */
+    static getSFDXPlugins(): Process {
+        const command = new Command('sfdx', 'sfdx-plugins', false);
+        command.addCommandArg('plugins');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE);
+    }
+
+
+    /**
+     * Method to create the Aura Helper SFDX process to get the Aura Helper SFDX version
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
+     */
+    static auraHelperSFDXVersion(): Process {
+        const command = new Command('sfdx', 'ah:version', true);
+        command.addCommandArg('ah:version');
+        command.addCommandArg('--json');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE);
+    }
+
+    /**
+     * Method to create the SFDX process to update Aura Helper SFDX
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
+     */
+    static auraHelperSFDXUpdate(): Process {
+        const command = new Command('sfdx', 'sfdx-plugins:install', false);
+        command.addCommandArg('plugins:install', 'aura-helper-sfdx');
         return command.toProcess().setMaxBuffer(BUFFER_SIZE);
     }
 

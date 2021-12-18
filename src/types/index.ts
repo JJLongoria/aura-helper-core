@@ -76,6 +76,7 @@ export * from './position';
 export * from './positionData';
 export * from './process';
 export * from './processOptions';
+export * from './processesOptions';
 export * from './progressStatus';
 export * from './projectConfig';
 export * from './projectConfigPackageDirectory';
