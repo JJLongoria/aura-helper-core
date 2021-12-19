@@ -1779,7 +1779,10 @@ export class ProcessFactory {
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
      */
     static auraHelperSFDXUpdate(): Process {
-        const command = new Command('sfdx', 'sfdx-plugins:install', false);
+        const command = new Command('echo', 'sfdx-plugins:install', false);
+        command.addCommandArg("y");
+        command.addCommandArg('|');
+        command.addCommandArg('sfdx');
         command.addCommandArg('plugins:install', 'aura-helper-sfdx');
         return command.toProcess().setMaxBuffer(BUFFER_SIZE);
     }

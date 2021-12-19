@@ -1,4 +1,4 @@
-const fs = require('fs');
+import * as fs from "fs";
 
 /**
  * Class to check all about files. If is Apex Class, Apex Trigger, Aura Component... or check if exists or is a File or Directorty
