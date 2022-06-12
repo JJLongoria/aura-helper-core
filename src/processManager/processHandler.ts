@@ -77,7 +77,7 @@ export class ProcessHandler {
                         }
                         break;
                     case ProcessEvent.ERROR:
-                        if (data.toString().indexOf('[EACCES]') !== -1 || data.toString().indexOf('Debugger attached') !== -1 || data.toString().indexOf('Waiting for the debugger') !== -1) {
+                        if (data.toString().indexOf('[EACCES]') !== -1 || data.toString().indexOf('Debugger attached') !== -1 || data.toString().indexOf('Waiting for the debugger') !== -1  || data.toString().indexOf('sfdx-cli update available') !== -1) {
                             excludeError = true;
                         } else if (!excludeError) {
                             stdErr += data;

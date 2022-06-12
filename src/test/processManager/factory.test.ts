@@ -1,4 +1,4 @@
-import { ProcessFactory } from "../../processManager";
+import { ProcessFactory, ProcessHandler } from "../../processManager";
 
 describe('Testing ./src/process/factory.js', () => {
     test('Testing updateNPM()', () => {
@@ -1035,10 +1035,16 @@ describe('Testing ./src/process/factory.js', () => {
             sortOrder: 'order'
         });
     });
-    test('Testing getSFDXPlugins()', () => {
+    test('Testing getSFDXPlugins()', async () => {
         const process = ProcessFactory.getSFDXPlugins();
+        try {
+            const response = await ProcessHandler.runProcess(process);
+            console.log(response);
+        } catch (error) {
+            
+        }
         expect(process.name).toEqual('sfdx-plugins');
-    });
+    }, 500000);
     test('Testing auraHelperSFDXVersion()', () => {
         const process = ProcessFactory.auraHelperSFDXVersion();
         expect(process.name).toEqual('ah:version');

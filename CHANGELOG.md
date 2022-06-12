@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [2.2.2 - 2022-06-12]
+## [2.2.3 - 2022-06-12]
 ### Added
 - Fix error on process Handler when SFDX has an update
 
