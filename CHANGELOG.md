@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.2.2 - 2022-06-12]
+### Added
+- Fix error on process Handler when SFDX has an update
+
 ## [2.2.0 - 2021-12-18]
 ### Added
 - Added new types to handle Process Options to better use
