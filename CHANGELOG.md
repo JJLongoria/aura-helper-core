@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.2.4 - 2022-07-12]
+### Added
+- Added new Apex Token Typess to better languages parser precission to Intellisense and formatter
+
 ## [2.2.3 - 2022-06-12]
 ### Added
 - Fix error on process Handler when SFDX has an update

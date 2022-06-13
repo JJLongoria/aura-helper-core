@@ -71,6 +71,7 @@ export const ApexTokenTypes: ApexTokenTypesDef = {
             FUNCTION: "declaration.entity.name.function",
             CONSTRUCTOR: "declaration.entity.name.constructor",
             PROPERTY: "declaration.entity.name.property",
+            TRIGGER: "declaration.entity.name.trigger",
         }
     },
     ENTITY: {
@@ -311,6 +312,7 @@ export interface ApexTokenTypesDef {
             FUNCTION: string;
             CONSTRUCTOR: string;
             PROPERTY: string;
+            TRIGGER: string;
         }
     },
     ENTITY: {
