@@ -178,7 +178,8 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.gitLog('./', 'medium');
         expect(process.name).toEqual('git:log--pretty');
         ProcessFactory.gitLog('./');
-        ProcessFactory.gitLog('./');
+        ProcessFactory.gitLog('./', 'origin/Desa01');
+        ProcessFactory.gitLog('./', 'origin/Desa01', 'origin/master');
     });
     test('Testing gitGetBranches()', () => {
         const process = ProcessFactory.gitGetBranches('./');

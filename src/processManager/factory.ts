@@ -917,19 +917,26 @@ export class ProcessFactory {
      * Method to create the GIT process to execute a GIT Log with --pretty=medium option
      * @param {string} projectFolder Project folder path (Required)
      * @param {string} [logPrettyLevel] GIT Log pretty level (Medium by default) (Optional)
+     * @param {string} [sourceDiff] Source Commit, Branch, Tag to compare (Optional)
+     * @param {string} [targetDiff] Target Commit, Branch, Tag to compare (Optional)
      * 
      * @returns {Process} Returns the process to run
      * 
      * @throws {DataRequiredException} Throws exception when required data is not provided
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
      */
-    static gitLog(projectFolder: string, logPrettyLevel?: string): Process {
+    static gitLog(projectFolder: string, logPrettyLevel?: string, sourceDiff?: string, targetDiff?: string): Process {
         if (Utils.isNull(projectFolder)) {
             throw new DataRequiredException('projectFolder');
         }
         const command = new Command('git', 'git:log--pretty', false);
         command.addCommandArg('log');
         command.addCommandArg('--pretty=' + ((!logPrettyLevel) ? 'medium' : logPrettyLevel));
+        if(sourceDiff && !targetDiff){
+            command.addCommandArg(sourceDiff);
+        } else if (sourceDiff && targetDiff){
+            command.addCommandArg(sourceDiff + '..' + targetDiff);
+        }
         return command.toProcess().setMaxBuffer(BUFFER_SIZE).setCWD(projectFolder);
     }
 
