@@ -1,5 +1,5 @@
 import { Utils } from "../utils";
-import { ProjectConfigPackageDirectory } from "./projectConfigpackageDirectory";
+import { ProjectConfigPackageDirectory } from "./projectConfigPackageDirectory";
 
 /**
  * Represent a Salesforce Project Config
