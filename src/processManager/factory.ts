@@ -1795,6 +1795,21 @@ export class ProcessFactory {
     }
 
     /**
+     * Method to create the SFDX process to update Aura Helper SFDX
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"     
+     */
+     static installUpdateSFDXScanner(): Process {
+        const command = new Command('echo', 'sfdx-plugins:install @salesforce/sfdx-scanner', false);
+        command.addCommandArg("y");
+        command.addCommandArg('|');
+        command.addCommandArg('sfdx');
+        command.addCommandArg('plugins:install', '@salesforce/sfdx-scanner');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE);
+    }
+
+    /**
      * Method to create the NPM process to update Aura Helper CLI
      * @returns {Process} Returns the process to run
      * 
@@ -1806,6 +1821,28 @@ export class ProcessFactory {
         command.addCommandArg('-g');
         command.addCommandArg('aura-helper-cli');
         return command.toProcess().setMaxBuffer(BUFFER_SIZE);
+    }
+
+    /**
+     * Method to create the SFDX Scanner command
+     * @param {string} target File or folder targe to analize
+     * @param {Array} [categories] Categories to include on analisys
+     * @param {string} [outputFile] Output file to redirect the output
+     * @returns 
+     */
+    static runScanner(target: string, categories?: Array<'Design' | 'Best Practices' | 'Security' | 'Performance' | 'Documentation' | 'Code Style'>, outputFile?: string){
+        const command = new Command('sfdx', 'sfdx:scanner', true);
+        command.addCommandArg('scanner:run');
+        command.addCommandArg('-t', target);
+        command.addCommandArg('--format', 'json');
+        command.addCommandArg(categories ? '--categories' : undefined, categories ? categories.join(',') : undefined);
+        command.addCommandArg(outputFile ? '--o' : undefined, outputFile ? outputFile : undefined);
+        command.addCommandArg('--normalize-severity');
+        command.addCommandArg('--verbose');
+        command.addCommandArg('--verbose-violations');
+        command.addCommandArg('--json');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE);
+
     }
 
 }

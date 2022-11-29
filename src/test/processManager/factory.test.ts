@@ -1054,4 +1054,12 @@ describe('Testing ./src/process/factory.js', () => {
         const process = ProcessFactory.auraHelperSFDXUpdate();
         expect(process.name).toEqual('sfdx-plugins:install');
     });
+    test('Testing runScanner()', () => {
+        const process = ProcessFactory.runScanner('./', ['Best Practices'], './file.txt');
+        expect(process.name).toEqual('sfdx:scanner');
+    });
+    test('Testing installUpdateSFDXScanner()', () => {
+        const process = ProcessFactory.installUpdateSFDXScanner();
+        expect(process.name).toEqual('sfdx-plugins:install @salesforce/sfdx-scanner');
+    });
 });
