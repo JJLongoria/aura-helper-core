@@ -1830,13 +1830,15 @@ export class ProcessFactory {
      * @param {string} [outputFile] Output file to redirect the output
      * @returns 
      */
-    static runScanner(target: string, categories?: Array<'Design' | 'Best Practices' | 'Security' | 'Performance' | 'Documentation' | 'Code Style'>, outputFile?: string){
+    static runScanner(target: string, categories?: Array<'Design' | 'Best Practices' | 'Security' | 'Performance' | 'Documentation' | 'Code Style'>, pmdRuleSetPath?: string, esLintRuleSetPath?: string, outputFile?: string){
         const command = new Command('sfdx', 'sfdx:scanner', true);
         command.addCommandArg('scanner:run');
         command.addCommandArg('-t', target);
         command.addCommandArg('--format', 'json');
-        command.addCommandArg(categories ? '--categories' : undefined, categories ? categories.join(',') : undefined);
-        command.addCommandArg(outputFile ? '--o' : undefined, outputFile ? outputFile : undefined);
+        command.addCommandArg(categories && categories.length ? '-c' : undefined, categories && categories.length ? '' + categories.join(',') + '' : undefined);
+        command.addCommandArg(pmdRuleSetPath ? '--pmdconfig' : undefined, pmdRuleSetPath ? pmdRuleSetPath : undefined);
+        command.addCommandArg(esLintRuleSetPath ? '--eslintconfig' : undefined, esLintRuleSetPath ? esLintRuleSetPath : undefined);
+        command.addCommandArg(outputFile ? '-o' : undefined, outputFile ? outputFile : undefined);
         command.addCommandArg('--normalize-severity');
         command.addCommandArg('--verbose');
         command.addCommandArg('--verbose-violations');
