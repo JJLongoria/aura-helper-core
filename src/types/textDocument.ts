@@ -46,7 +46,7 @@ export class TextDocument {
             this.languageId = languageId;
             this.uri = uri;
             this.version = undefined;
-            this.lines = (!Utils.isNull(lines)) ? Utils.forceArray(lines) : [];
+            this.lines = (!Utils.isNull(lines)) ? Utils.forceArray<TextLine>(lines) : [];
             this.lineCount = this.lines.length;
         }
     }

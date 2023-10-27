@@ -7,11 +7,11 @@ export class Utils {
      * Method to force to put the data into an array if the data must be an array
      * @param {any} data Data to force be an array
      * 
-     * @returns {Array<any>} Returns an array with the data or undefined if data is undefined
+     * @returns {Array<any>} Returns an array with the data or an empty string if the input is undifined or null
      */
-    static forceArray(data: any): any[] {
-        if (data === undefined) {
-            return data;
+    static forceArray<T>(data?: T | T[] | null): T[] {
+        if (data === undefined || data === null) {
+            return [];
         }
         return (Array.isArray(data)) ? data : [data];
     }
