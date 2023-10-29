@@ -452,6 +452,34 @@ export class ProcessFactory {
      * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"
      * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined
      */
+     static mdapiCancelDeploySFDX(usernameOrAlias: string, deployId: string, waitMinutes?: string | number): Process {
+        if (Utils.isNull(usernameOrAlias)) {
+            throw new DataRequiredException('usernameOrAlias');
+        }
+        if (Utils.isNull(deployId)) {
+            throw new DataRequiredException('deployId');
+        }
+        const command = new Command('sfdx', 'force:mdapi:deploy:cancel', true);
+        command.addCommandArg('force:mdapi:deploy:cancel');
+        command.addCommandArg('-u', usernameOrAlias);
+        command.addCommandArg('-i', deployId);
+        command.addCommandArg('-w', (waitMinutes !== undefined) ? waitMinutes.toString() : '33');
+        command.addCommandArg('--json');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE);
+    }
+
+    /**
+     * Method to create the SFDX process to quick cancel a deployment in a Source format
+     * @param {string} usernameOrAlias Username or Org Alias to connect (Required)
+     * @param {string} deployId Deployment Id (Required)
+     * @param {string | number} [waitMinutes] Minutes to wait until command end (33 By default) (Optional)
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"
+     * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined
+     */
     static sourceCancelDeploySFDX(usernameOrAlias: string, deployId: string, waitMinutes?: string | number): Process {
         if (Utils.isNull(usernameOrAlias)) {
             throw new DataRequiredException('usernameOrAlias');
@@ -490,7 +518,37 @@ export class ProcessFactory {
         const command = new Command('sf', 'project:deploy:cancel', true);
         command.addCommandArg('project');
         command.addCommandArg('deploy');
-        command.addCommandArg('report');
+        command.addCommandArg('cancel');
+        command.addCommandArg('-o', usernameOrAlias);
+        command.addCommandArg('-i', deployId);
+        command.addCommandArg('-w', (waitMinutes !== undefined) ? waitMinutes.toString() : '33');
+        command.addCommandArg('--json');
+        return command.toProcess().setMaxBuffer(BUFFER_SIZE);
+    }
+
+    /**
+     * Method to create the SF process to quick cancel a deployment in a Source format
+     * @param {string} usernameOrAlias Username or Org Alias to connect (Required)
+     * @param {string} deployId Deployment Id (Required)
+     * @param {string | number} [waitMinutes] Minutes to wait until command end (33 By default) (Optional)
+     * 
+     * @returns {Process} Returns the process to run
+     * 
+     * @throws {DataRequiredException} Throws exception when required data is not provided
+     * @throws {OSNotSupportedException} Throw exception when create process with not supported Operative System. "Operative System Not Supported"
+     * @throws {WrongDatatypeException} If the api version is not a Number or String. Can be undefined
+     */
+     static mdapiCancelDeploySF(usernameOrAlias: string, deployId: string, waitMinutes?: string | number): Process {
+        if (Utils.isNull(usernameOrAlias)) {
+            throw new DataRequiredException('usernameOrAlias');
+        }
+        if (Utils.isNull(deployId)) {
+            throw new DataRequiredException('deployId');
+        }
+        const command = new Command('sf', 'project:deploy:cancel', true);
+        command.addCommandArg('project');
+        command.addCommandArg('deploy');
+        command.addCommandArg('cancel');
         command.addCommandArg('-o', usernameOrAlias);
         command.addCommandArg('-i', deployId);
         command.addCommandArg('-w', (waitMinutes !== undefined) ? waitMinutes.toString() : '33');
