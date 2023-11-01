@@ -47,6 +47,8 @@ export class ApexFormatterConfig {
     static punctuationConfig(): ApexFormatterPunctuationConfig {
         return {
             maxBlankLines: 2,
+            maxConditionsPerLine: -1,
+            conditionLogicOperatorOnNewLine: false,
             openCurlyBracketOnNewLine: false,
             addNewLineAfterCloseCurlyBracket: false,
             addWhitespaceAfterCloseCurlyBracket: true,
@@ -56,7 +58,7 @@ export class ApexFormatterConfig {
             addWhitespaceBeforeCloseGuardParenthesis: false,
             addWhiteSpaceAfterComma: true,
             addWhitespaceBeforeOpenTriggerEvents: true,
-
+            SObjectFieldsPerLine: 1,
         };
     }
 
@@ -68,8 +70,10 @@ export class ApexFormatterConfig {
         return {
             addWhitespaceBeforeOperator: true,
             addWhitespaceAfterOperator: true,
+            addWhitespaceBeforeOpenParenthesisOperator: false,
             addWhitespaceAfterOpenParenthesisOperator: false,
             addWhitespaceBeforeCloseParenthesisOperator: false,
+            addWhitespaceAfterCloseParenthesisOperator: false,
         };
     }
 
@@ -106,6 +110,7 @@ export class ApexFormatterConfig {
         return {
             oneClausePerLine: true,
             oneProjectionFieldPerLine: false,
+            oneWhereConditionPerLine: false,
             maxProjectionFieldPerLine: 0
         };
     }
@@ -114,6 +119,8 @@ export class ApexFormatterConfig {
 
 export interface ApexFormatterPunctuationConfig {
     maxBlankLines: number;
+    maxConditionsPerLine: number;
+    conditionLogicOperatorOnNewLine: boolean;
     openCurlyBracketOnNewLine: boolean;
     addNewLineAfterCloseCurlyBracket: boolean;
     addWhitespaceAfterCloseCurlyBracket: boolean;
@@ -123,13 +130,16 @@ export interface ApexFormatterPunctuationConfig {
     addWhitespaceBeforeCloseGuardParenthesis: boolean;
     addWhiteSpaceAfterComma: boolean;
     addWhitespaceBeforeOpenTriggerEvents: boolean;
+    SObjectFieldsPerLine: number;
 }
 
 export interface ApexFormatterOperatorConfig {
     addWhitespaceBeforeOperator: boolean;
     addWhitespaceAfterOperator: boolean;
+    addWhitespaceBeforeOpenParenthesisOperator: boolean;
     addWhitespaceAfterOpenParenthesisOperator: boolean;
     addWhitespaceBeforeCloseParenthesisOperator: boolean;
+    addWhitespaceAfterCloseParenthesisOperator: boolean;
 }
 
 export interface ApexFormatterMembersConfig {
@@ -147,6 +157,7 @@ export interface ApexFormatterCommentConfig {
 
 export interface ApexFormatterQueryConfig {
     oneClausePerLine: boolean;
+    oneWhereConditionPerLine: boolean;
     oneProjectionFieldPerLine: boolean;
     maxProjectionFieldPerLine: number;
 }

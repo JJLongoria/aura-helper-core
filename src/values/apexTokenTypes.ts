@@ -165,6 +165,8 @@ export const ApexTokenTypes: ApexTokenTypesDef = {
         INNER_QUERY_END: "bracket.parenthesis.query.close",
         PARENTHESIS_PARAM_OPEN: "bracket.parenthesis.params.open",
         PARENTHESIS_PARAM_CLOSE: "bracket.parenthesis.params.close",
+        PARENTHESIS_SOBJECT_OPEN: "bracket.parenthesis.sobject.open",
+        PARENTHESIS_SOBJECT_CLOSE: "bracket.parenthesis.sobject.close",
         PARENTHESIS_DECLARATION_PARAM_OPEN: "bracket.parenthesis.declaration.params.open",
         PARENTHESIS_DECLARATION_PARAM_CLOSE: "bracket.parenthesis.declaration.params.close",
         PARENTHESIS_GUARD_OPEN: "bracket.parenthesis.guard.open",
@@ -406,6 +408,8 @@ export interface ApexTokenTypesDef {
         INNER_QUERY_END: string;
         PARENTHESIS_PARAM_OPEN: string;
         PARENTHESIS_PARAM_CLOSE: string;
+        PARENTHESIS_SOBJECT_OPEN: string;
+        PARENTHESIS_SOBJECT_CLOSE: string;
         PARENTHESIS_DECLARATION_PARAM_OPEN: string;
         PARENTHESIS_DECLARATION_PARAM_CLOSE: string;
         PARENTHESIS_GUARD_OPEN: string;

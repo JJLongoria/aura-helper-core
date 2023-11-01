@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.6.2 - 2022-07-12]
+### Added
+- Added new Apex Token types and new Apex Formater options
+
 ## [2.2.4 - 2022-07-12]
 ### Added
 - Added new Apex Token Typess to better languages parser precission to Intellisense and formatter
