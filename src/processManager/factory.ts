@@ -2928,7 +2928,7 @@ export class ProcessFactory {
      * @param {string} [outputFile] Output file to redirect the output
      * @returns 
      */
-    static runSFDXScanner(target: string, categories?: Array<'Design' | 'Best Practices' | 'Security' | 'Performance' | 'Documentation' | 'Code Style'>, pmdRuleSetPath?: string, esLintRuleSetPath?: string, outputFile?: string) {
+    static runSFDXScanner(target: string, categories?: string[], pmdRuleSetPath?: string, esLintRuleSetPath?: string, outputFile?: string) {
         const command = new Command('sfdx', 'sfdx:scanner', true);
         command.addCommandArg('scanner:run');
         command.addCommandArg('-t', target);
