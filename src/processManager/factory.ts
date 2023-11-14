@@ -2951,7 +2951,7 @@ export class ProcessFactory {
      * @param {string} [outputFile] Output file to redirect the output
      * @returns 
      */
-     static runSFScanner(target: string, categories?: Array<'Design' | 'Best Practices' | 'Security' | 'Performance' | 'Documentation' | 'Code Style'>, pmdRuleSetPath?: string, esLintRuleSetPath?: string, outputFile?: string) {
+     static runSFScanner(target: string, categories?: string[], pmdRuleSetPath?: string, esLintRuleSetPath?: string, outputFile?: string) {
         const command = new Command('sf', 'sf:scanner', true);
         command.addCommandArg('scanner');
         command.addCommandArg('run');
