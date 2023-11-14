@@ -1,7 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [2.6.2 - 2022-07-12]
+## [2.6.3 - 2023-11-14]
+### Fixed
+- Fixed an error when processing old sfdx processes
+
+## [2.6.2 - 2023-11-01]
 ### Added
 - Added new Apex Token types and new Apex Formater options
 
