@@ -6,3 +6,4 @@ export * from './utils';
 export * from './validator';
 export * from './projectUtils';
 export * from './metadataUtils';
+export * from './dateUtils';
